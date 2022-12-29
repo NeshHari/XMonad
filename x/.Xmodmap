@@ -1,0 +1,9 @@
+! Tab as modifier
+keycode 23 = Tab Hyper_L
+
+! Backslash(\) as modifier + preserve bar(|)
+keycode 51 = backslash bar Hyper_L
+
+add mod4 = Hyper_L
+
+clear lock
