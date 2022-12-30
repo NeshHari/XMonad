@@ -4,5 +4,6 @@ main :: IO ()
 main = do
   xmonad $
     def
-      { terminal = "kitty"
+      { terminal = "kitty --single-instance",
+        modMask = mod4Mask
       }

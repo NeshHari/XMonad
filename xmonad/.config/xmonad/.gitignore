@@ -1,0 +1,6 @@
+stack.yaml
+stack.yaml.lock
+.stack-work/
+.xmonad/
+.xmonad-contrib/
+
