@@ -1,0 +1,8 @@
+cradle:
+  stack:
+    - path : "./xmonad.hs"
+      component: "xmonad:lib"
+    - path : "./xmonad.hs"
+      component: "xmonad-contrib:lib"
+    - path : "./xmonad.hs"
+      component: "xmonad:exe:xmonad"
