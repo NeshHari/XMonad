@@ -79,9 +79,18 @@ _G.packer_plugins = {
     path = "/home/nesh/.local/share/nvim/site/pack/packer/start/LuaSnip",
     url = "https://github.com/L3MON4D3/LuaSnip"
   },
+  ["bufferline.nvim"] = {
+    load_after = {},
+    loaded = true,
+    needs_bufread = false,
+    path = "/home/nesh/.local/share/nvim/site/pack/packer/opt/bufferline.nvim",
+    url = "https://github.com/akinsho/bufferline.nvim"
+  },
   catppuccin = {
+    after = { "bufferline.nvim" },
     config = { "\27LJ\2\nD\0\0\3\0\4\0\0066\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\1K\0\1\0\21catppuccin-mocha\16colorscheme\bcmd\bvim\0" },
     loaded = true,
+    only_config = true,
     path = "/home/nesh/.local/share/nvim/site/pack/packer/start/catppuccin",
     url = "https://github.com/catppuccin/nvim"
   },
@@ -150,6 +159,11 @@ _G.packer_plugins = {
     path = "/home/nesh/.local/share/nvim/site/pack/packer/start/nvim-treesitter",
     url = "https://github.com/nvim-treesitter/nvim-treesitter"
   },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/nesh/.local/share/nvim/site/pack/packer/start/nvim-web-devicons",
+    url = "https://github.com/nvim-tree/nvim-web-devicons"
+  },
   ["packer.nvim"] = {
     loaded = true,
     path = "/home/nesh/.local/share/nvim/site/pack/packer/start/packer.nvim",
@@ -177,6 +191,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for catppuccin]], true)
 try_loadstring("\27LJ\2\nD\0\0\3\0\4\0\0066\0\0\0009\0\1\0009\0\2\0'\2\3\0B\0\2\1K\0\1\0\21catppuccin-mocha\16colorscheme\bcmd\bvim\0", "config", "catppuccin")
 time([[Config for catppuccin]], false)
+-- Load plugins in order defined by `after`
+time([[Sequenced loading]], true)
+vim.cmd [[ packadd bufferline.nvim ]]
+time([[Sequenced loading]], false)
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then
