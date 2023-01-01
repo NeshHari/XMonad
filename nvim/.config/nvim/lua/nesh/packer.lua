@@ -13,6 +13,8 @@ return require('packer').startup(function(use)
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
+    use { "nvim-telescope/telescope-file-browser.nvim" }
+
     use {
         'catppuccin/nvim',
         as = "catppuccin",
@@ -23,7 +25,6 @@ return require('packer').startup(function(use)
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
-    use('nvim-lua/plenary.nvim')
     use('ThePrimeagen/harpoon')
     use('mbbill/undotree')
 
@@ -49,10 +50,15 @@ return require('packer').startup(function(use)
         }
     }
 
-    -- using packer.nvim
     use {
         'akinsho/bufferline.nvim', tag = "v3.*", requires = 'nvim-tree/nvim-web-devicons',
         after = "catppuccin",
     }
 
+    use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
+
+    use { 'nvim-lua/popup.nvim' }
+    use { 'jvgrootveld/telescope-zoxide' }
+
+    use { 'glepnir/dashboard-nvim' }
 end)
