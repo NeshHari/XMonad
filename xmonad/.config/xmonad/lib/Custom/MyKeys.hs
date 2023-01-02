@@ -1,5 +1,6 @@
 module Custom.MyKeys where
 
+import Custom.MyPrompts
 import Custom.MyWorkspaces
 import Data.Map qualified as M
 import System.Exit
@@ -7,11 +8,18 @@ import System.IO
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.PhysicalScreens
+import XMonad.Actions.Search qualified as S
+import XMonad.Actions.Submap qualified as SM
 import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.ResizableTile
+import XMonad.Layout.Spacing
+import XMonad.Prompt.ConfirmPrompt
+import XMonad.Prompt.Man
+import XMonad.Prompt.Shell
+import XMonad.Prompt.XMonad
 import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig
 
@@ -23,6 +31,16 @@ myKeys =
     ("M-b", spawn "microsoft-edge-stable"),
     -- Dmenu
     ("M-p", spawn "dmenu_run"),
+    -- XPrompts
+    ("M-S-p m", manPrompt myPromptConfig),
+    ("M-S-p x", xmonadPrompt myPromptConfig),
+    ("M-S-q", confirmPrompt myPromptConfig "exit" $ io exitSuccess),
+    -- Search commands
+    ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig "microsoft-edge-stable"),
+    ("M-S-s", SM.submap $ searchEngineMap $ S.selectSearchBrowser "microsoft-edge-stable"),
+    -- Bluetooth
+    ("M-C-S-b", spawn "bluetoothctl -- connect 08:EF:3B:2B:B8:5F"),
+    ("M-C-S-d", spawn "bluetoothctl -- disconnect 08:EF:3B:2B:B8:5F"),
     -- Close window(s)
     ("M-c", kill),
     ("M-S-c", killAll),
@@ -64,7 +82,12 @@ myKeys =
     -- Volume
     ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -1%"),
     ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +1%"),
-    ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    ("<XF86AudioMute>", spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
+    -- Spacing
+    ("M-C-S-k", incScreenSpacing 5),
+    ("M-C-S-j", decScreenSpacing 5),
+    ("M-C-S-l", incWindowSpacing 5),
+    ("M-C-S-h", decWindowSpacing 5)
   ]
 
 myAdditionalKeys conf@XConfig {XMonad.modMask = modm} =
@@ -79,3 +102,15 @@ myAdditionalKeys conf@XConfig {XMonad.modMask = modm} =
            | (key, sc) <- zip [xK_w, xK_e, xK_r] [0 ..],
              (f, mask) <- [(viewScreen def, 0), (sendToScreen def, shiftMask)]
          ]
+
+searchEngineMap method =
+  M.fromList
+    [ ((0, xK_a), method $ S.searchEngine "archwiki" "http://wiki.archlinux.org/index.php/Special:Search?search="),
+      ((0, xK_g), method S.google),
+      ((0, xK_h), method S.hoogle),
+      ((0, xK_i), method S.imdb),
+      ((0, xK_p), method S.aur),
+      ((0, xK_s), method $ S.searchEngine "stackoverflow" "https://stackoverflow.com/search?q="),
+      ((0, xK_w), method S.wikipedia),
+      ((0, xK_y), method S.youtube)
+    ]

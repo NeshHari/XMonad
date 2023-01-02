@@ -13,9 +13,10 @@ import XMonad.Hooks.ManageHelpers (doCenterFloat)
 import XMonad.Hooks.OnPropertyChange
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
+import XMonad.Hooks.WindowSwallowing (swallowEventHook)
 import XMonad.StackSet qualified as W
-import XMonad.Util.SpawnOnce
 import XMonad.Util.EZConfig
+import XMonad.Util.SpawnOnce
 
 myTerminal = "kitty"
 
@@ -44,11 +45,8 @@ myStartupHook = do
   spawnOnce "xmodmap ~/.Xmodmap"
   spawn "killall picom; picom -b"
   spawn "~/feh-blur.sh -s; ~/feh-blur.sh -d"
+  spawn "easyeffects --gapplication-service &"
 
--- spawnOnce "eww daemon"
--- spawn "eww close-all"
--- spawn "eww open bar"
---
 myDynamicManageHook :: ManageHook
 myDynamicManageHook =
   composeAll
@@ -70,13 +68,11 @@ main =
         workspaces = myWorkspaces,
         normalBorderColor = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
-        -- key bindings
         keys = myAdditionalKeys,
         mouseBindings = myMouseBindings,
-        -- hooks, layouts
         layoutHook = myLayoutHook,
         manageHook = myManageHook,
-        handleEventHook = onXPropertyChange "WM_NAME" myDynamicManageHook,
+        handleEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myDynamicManageHook,
         logHook = dynamicLog,
         startupHook = myStartupHook
       }
@@ -93,5 +89,3 @@ myPolybarConf =
 
 polybarPPdef =
   def
-    { ppTitle = const ""
-    }
