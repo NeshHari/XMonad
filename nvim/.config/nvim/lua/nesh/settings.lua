@@ -18,7 +18,7 @@ opt.incsearch = true
 opt.termguicolors = true
 
 opt.scrolloff = 8
-opt.signcolumn = "yes"
+opt.signcolumn = 'yes'
 
 opt.updatetime = 50
 
@@ -27,4 +27,6 @@ opt.swapfile = false
 
 opt.lazyredraw = true
 
-opt.completeopt="menu,menuone,noselect,noinsert"
+opt.completeopt='menu,menuone,noselect,noinsert'
+
+opt.clipboard = 'unnamedplus'
