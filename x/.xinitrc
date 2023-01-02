@@ -12,4 +12,6 @@ dunst &
 
 easyeffects --gapplication-service &
 
+~/.screenlayout/pure_landscape.sh &
+
 exec ~/.local/bin/xmonad
