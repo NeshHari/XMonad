@@ -16,7 +16,7 @@ mySpacing i = spacingRaw False (Border 10 10 30 30) True (Border i i i i) True
 tall =
   renamed [XLR.Replace "Tall"] $
     avoidStruts $
-      mySpacing 3 $
+      mySpacing 7 $
         ResizableTall nmaster delta ratio []
   where
     nmaster = 1
@@ -26,7 +26,7 @@ tall =
 column =
   renamed [XLR.Replace "Column"] $
     avoidStruts $
-      mySpacing 3 $
+      mySpacing 7 $
         Column 1.0
 
 full = renamed [XLR.Replace "Monocle"] $ noBorders Full
