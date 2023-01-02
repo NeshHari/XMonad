@@ -9,19 +9,12 @@ return require('packer').startup(function(use)
 
     use {
         'nvim-telescope/telescope.nvim', tag = '0.1.0',
-        -- or                            , branch = '0.1.x',
         requires = { { 'nvim-lua/plenary.nvim' } }
     }
 
     use { "nvim-telescope/telescope-file-browser.nvim" }
 
-    use {
-        'catppuccin/nvim',
-        as = "catppuccin",
-        config = function()
-            vim.cmd.colorscheme("catppuccin-mocha")
-        end
-    }
+    use { 'catppuccin/nvim', as = "catppuccin" }
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
 
@@ -58,7 +51,47 @@ return require('packer').startup(function(use)
     use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make' }
 
     use { 'nvim-lua/popup.nvim' }
+
     use { 'jvgrootveld/telescope-zoxide' }
 
     use { 'glepnir/dashboard-nvim' }
+
+    use "lukas-reineke/indent-blankline.nvim"
+
+    use {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    }
+
+    use { 'ggandor/leap.nvim' }
+
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
+
+    use {
+        "folke/twilight.nvim",
+        config = function()
+            require("twilight").setup {
+            }
+        end
+    }
+
+    use {
+        "folke/zen-mode.nvim",
+        config = function()
+            require("zen-mode").setup {
+                plugins = {
+                    twilight = {
+                        enabled = true,
+                    }
+                }
+            }
+        end
+    }
+
+
 end)
