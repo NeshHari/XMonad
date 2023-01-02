@@ -10,4 +10,6 @@ xsetroot -cursor_name left_ptr
 
 dunst &
 
+easyeffects --gapplication-service &
+
 exec ~/.local/bin/xmonad
