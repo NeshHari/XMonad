@@ -1,4 +1,10 @@
--- This file can be loaded by calling `lua require('plugins')` from your init.vim
+-- Run PackerSync when this file is written to
+vim.cmd([[
+  augroup packer_user_config
+    autocmd!
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
+  augroup end
+]])
 
 -- Only required if you have packer configured as `opt`
 vim.cmd [[packadd packer.nvim]]
@@ -41,6 +47,10 @@ return require('packer').startup(function(use)
             { 'L3MON4D3/LuaSnip' },
             { 'rafamadriz/friendly-snippets' },
         }
+    }
+
+    use {
+        "ray-x/lsp_signature.nvim",
     }
 
     use {
@@ -93,5 +103,20 @@ return require('packer').startup(function(use)
         end
     }
 
+    use {
+        'nvim-lualine/lualine.nvim',
+        requires = { 'kyazdani42/nvim-web-devicons', opt = true }
+    }
+
+    use 'onsails/lspkind-nvim'
+
+    use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
+
+    use { "akinsho/toggleterm.nvim", tag = '*' }
 
 end)
