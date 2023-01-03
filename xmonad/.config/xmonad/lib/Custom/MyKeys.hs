@@ -1,6 +1,7 @@
 module Custom.MyKeys where
 
 import Custom.MyPrompts
+import Custom.MyScratchpads
 import Custom.MyWorkspaces
 import Data.Map qualified as M
 import System.Exit
@@ -22,6 +23,7 @@ import XMonad.Prompt.Shell
 import XMonad.Prompt.XMonad
 import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig
+import XMonad.Util.NamedScratchpad
 
 myKeys :: [(String, X ())]
 myKeys =
@@ -30,7 +32,7 @@ myKeys =
     -- Browser
     ("M-b", spawn "microsoft-edge-stable"),
     -- Dmenu
-    ("M-p", spawn "dmenu_run"),
+    ("M-p", spawn "rofi -show drun"),
     -- XPrompts
     ("M-S-p m", manPrompt myPromptConfig),
     ("M-S-p x", xmonadPrompt myPromptConfig),
@@ -38,6 +40,9 @@ myKeys =
     -- Search commands
     ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig "microsoft-edge-stable"),
     ("M-S-s", SM.submap $ searchEngineMap $ S.selectSearchBrowser "microsoft-edge-stable"),
+    -- NamedScratchpads
+    ("M-t", namedScratchpadAction myScratchpads "quick commands"),
+    ("M-C-a", namedScratchpadAction myScratchpads "pavucontrol"),
     -- Bluetooth
     ("M-C-S-b", spawn "bluetoothctl -- connect 08:EF:3B:2B:B8:5F"),
     ("M-C-S-d", spawn "bluetoothctl -- disconnect 08:EF:3B:2B:B8:5F"),
