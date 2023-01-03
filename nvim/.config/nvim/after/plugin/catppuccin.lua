@@ -1,40 +1,20 @@
 require("catppuccin").setup({
     flavour = "mocha", -- latte, frappe, macchiato, mocha
-    background = { -- :h background
-        light = "latte",
-        dark = "mocha",
-    },
-    transparent_background = false,
-    term_colors = false,
-    dim_inactive = {
-        enabled = false,
-        shade = "dark",
-        percentage = 0.15,
-    },
-    no_italic = false, -- Force no italic
-    no_bold = false, -- Force no bold
-    styles = {
-        comments = { "italic" },
-        conditionals = { "italic" },
-        loops = {},
-        functions = {},
-        keywords = {},
-    },
-    color_overrides = {},
-    custom_highlights = {},
+    term_colors = true,
     integrations = {
         cmp = true,
         nvimtree = true,
         telescope = true,
-        notify = false,
-        mini = false,
+        notify = true,
+        mini = true,
         leap = true,
         mason = true,
         harpoon = true,
         treesitter = true,
+        treesitter_context = true,
         indent_blankline = {
             enabled = true,
-            colored_indent_levels = false,
+            colored_indent_levels = true,
         },
         native_lsp = {
             enabled = true,

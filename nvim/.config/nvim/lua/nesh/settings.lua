@@ -30,3 +30,7 @@ opt.lazyredraw = true
 opt.completeopt='menu,menuone,noselect,noinsert'
 
 opt.clipboard = 'unnamedplus'
+
+opt.list = true
+opt.listchars:append "space:⋅"
+opt.listchars:append "eol:↴"
