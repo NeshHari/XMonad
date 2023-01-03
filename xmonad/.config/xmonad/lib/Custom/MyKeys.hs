@@ -31,12 +31,15 @@ myKeys =
     ("M-<Return>", spawn "kitty"),
     -- Browser
     ("M-b", spawn "microsoft-edge-stable"),
-    -- Dmenu
+    -- Rofi
     ("M-p", spawn "rofi -show drun"),
     -- XPrompts
     ("M-S-p m", manPrompt myPromptConfig),
     ("M-S-p x", xmonadPrompt myPromptConfig),
     ("M-S-q", confirmPrompt myPromptConfig "exit" $ io exitSuccess),
+    -- Flameshot
+    ("<Print>", spawn "flameshot gui"),
+    ("S-<Print>", spawn "flameshot full"),
     -- Search commands
     ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig "microsoft-edge-stable"),
     ("M-S-s", SM.submap $ searchEngineMap $ S.selectSearchBrowser "microsoft-edge-stable"),
