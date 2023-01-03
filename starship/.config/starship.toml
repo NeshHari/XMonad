@@ -4,3 +4,6 @@ add_newline = false
 
 [package]
 disabled = true
+
+[character]
+success_symbol = '[ ](bold #cba6f7)[ ](bold #f2cdcd)[ ](bold #b4befe)[ ](bold #a6e3a1)'
