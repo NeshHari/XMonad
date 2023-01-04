@@ -1,17 +1,17 @@
 configuration{
     modi: "run,drun,window";
     lines: 5;
-    font: "JetBrainsMono Nerd Font 13";
+    font: "Sugar Snow 14";
     show-icons: true;
-    icon-theme: "Oranchelo";
+    icon-theme: "Candy Icons";
     terminal: "kitty";
     drun-display-format: "{icon} {name}";
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
-    display-drun: "   Apps ";
-    display-run: "   Run ";
-    display-window: " 﩯  Window";
+    display-run: "ﰌ Run  ﰌ ";
+    display-drun: "  Applications  ";
+    display-window: "  Tasks  ";
     sidebar-mode: true;
 }
 
@@ -75,7 +75,7 @@ element {
 }
 
 element-icon {
-    size: 25px;
+    size: 20px;
 }
 
 element selected {
@@ -85,7 +85,7 @@ element selected {
 
 mode-switcher {
     spacing: 0;
-  }
+}
 
 button {
     padding: 10px;
