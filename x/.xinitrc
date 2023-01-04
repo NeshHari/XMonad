@@ -12,6 +12,9 @@ dunst &
 
 easyeffects --gapplication-service &
 
-~/.screenlayout/pure_landscape.sh &
+#~/.screenlayout/pure_landscape.sh &
+nvidia-settings --load-config-only
+
+/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 exec ~/.local/bin/xmonad
