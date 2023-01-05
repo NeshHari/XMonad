@@ -10,6 +10,12 @@ xsetroot -cursor_name left_ptr
 
 dunst &
 
+flameshot &
+
+discord &
+
+whatsapp-natifier &
+
 easyeffects --gapplication-service &
 
 #~/.screenlayout/pure_landscape.sh &
