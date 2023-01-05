@@ -17,4 +17,7 @@ nvidia-settings --load-config-only
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
-exec ~/.local/bin/xmonad
+systemctl --user import-environment DISPLAY XAUTHORITY;
+dbus-update-activation-environment --systemd --all
+
+dbus-launch --exit-with-session ~/.local/bin/xmonad
