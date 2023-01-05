@@ -1,7 +1,9 @@
+import Custom.MyCatppuccin
 import Custom.MyKeys
 import Custom.MyLayouts
 import Custom.MyMouse
 import Custom.MyScratchpads
+import Custom.MyStartupApps
 import Custom.MyWorkspaces
 import Data.Map qualified as M
 import Data.Monoid
@@ -30,19 +32,9 @@ myBorderWidth = 3
 
 myModMask = mod4Mask
 
-myNormalBorderColor = "#1e1e2e"
+myNormalBorderColor = catMantle
 
-myFocusedBorderColor = "#cba6f7"
-
-myStartupHook :: X ()
-myStartupHook = do
-  spawn "~/.screenlayout/pure_landscape.sh"
-  spawn "~/.fehbg"
-  spawnOnce "xmodmap ~/.Xmodmap"
-  spawn "killall picom; picom -b"
-  spawn "~/feh-blur.sh -s; ~/feh-blur.sh -d"
-  spawn "easyeffects --gapplication-service &"
-  setWMName "LG3D"
+myFocusedBorderColor = catMauve
 
 myDynamicManageHook :: ManageHook
 myDynamicManageHook =
@@ -58,7 +50,7 @@ main =
     $ Hacks.javaHack
     $ withSB myPolybarConf
     $ docks
-{-       . ewmhFullscreen -}
+      {-       . ewmhFullscreen -}
       . ewmh
     $ def
       { terminal = myTerminal,

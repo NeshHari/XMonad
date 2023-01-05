@@ -37,7 +37,8 @@ emConf =
       borderCol = "#11111b",
       cancelKey = xK_Escape,
       emFont = "xft: Sugar Snow-60",
-      overlayF = textSize
+      overlayF = textSize,
+      borderPx = 10
     }
 
 myKeys :: [(String, X ())]
