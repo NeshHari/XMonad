@@ -4,10 +4,12 @@ import Custom.MyPrompts
 import Custom.MyScratchpads
 import Custom.MyWorkspaces
 import Data.Map qualified as M
+import Graphics.X11.Xlib.Extras (Event (MotionEvent))
 import System.Exit
 import System.IO
 import XMonad
 import XMonad.Actions.CycleWS
+import XMonad.Actions.EasyMotion
 import XMonad.Actions.PhysicalScreens
 import XMonad.Actions.Search qualified as S
 import XMonad.Actions.Submap qualified as SM
@@ -17,6 +19,8 @@ import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.Spacing
+import XMonad.Layout.SubLayouts
+import XMonad.Layout.WindowNavigation as WN
 import XMonad.Prompt.ConfirmPrompt
 import XMonad.Prompt.Man
 import XMonad.Prompt.Shell
@@ -24,6 +28,17 @@ import XMonad.Prompt.XMonad
 import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig
 import XMonad.Util.NamedScratchpad
+
+emConf :: EasyMotionConfig
+emConf =
+  def
+    { txtCol = "#cba6f7",
+      bgCol = "#11111b",
+      borderCol = "#11111b",
+      cancelKey = xK_Escape,
+      emFont = "xft: Sugar Snow-60",
+      overlayF = textSize
+    }
 
 myKeys :: [(String, X ())]
 myKeys =
@@ -34,15 +49,14 @@ myKeys =
     -- Rofi
     ("M-p", spawn "rofi -show drun"),
     -- XPrompts
-    ("M-S-p m", manPrompt myPromptConfig),
-    ("M-S-p x", xmonadPrompt myPromptConfig),
+    ("M-s-m", manPrompt myPromptConfig),
+    ("M-s-x", xmonadPrompt myPromptConfig),
     ("M-S-q", confirmPrompt myPromptConfig "exit" $ io exitSuccess),
     -- Flameshot
     ("<Print>", spawn "flameshot gui"),
     ("S-<Print>", spawn "flameshot full"),
     -- Search commands
     ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig "microsoft-edge-stable"),
-    ("M-S-s", SM.submap $ searchEngineMap $ S.selectSearchBrowser "microsoft-edge-stable"),
     -- NamedScratchpads
     ("M-t", namedScratchpadAction myScratchpads "quick commands"),
     ("M-C-a", namedScratchpadAction myScratchpads "pavucontrol"),
@@ -95,7 +109,20 @@ myKeys =
     ("M-C-S-k", incScreenSpacing 5),
     ("M-C-S-j", decScreenSpacing 5),
     ("M-C-S-l", incWindowSpacing 5),
-    ("M-C-S-h", decWindowSpacing 5)
+    ("M-C-S-h", decWindowSpacing 5),
+    -- Easy Motion
+    ("M-g", selectWindow emConf >>= (`whenJust` windows . W.focusWindow)),
+    ("M-x", selectWindow emConf >>= (`whenJust` killWindow)),
+    -- Sublayout Navigation
+    ("M-C-h", sendMessage $ pullGroup WN.L),
+    ("M-C-l", sendMessage $ pullGroup WN.R),
+    ("M-C-k", sendMessage $ pullGroup WN.U),
+    ("M-C-j", sendMessage $ pullGroup WN.D),
+    ("M-C-u", withFocused (sendMessage . UnMerge)),
+    ("M-C-S-u", withFocused (sendMessage . UnMergeAll)),
+    ("M-C-S-m", withFocused (sendMessage . MergeAll)),
+    ("M-C-.", onGroup W.focusUp'),
+    ("M-C-,", onGroup W.focusDown')
   ]
 
 myAdditionalKeys conf@XConfig {XMonad.modMask = modm} =
