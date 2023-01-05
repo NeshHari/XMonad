@@ -1,21 +1,21 @@
 module Custom.MyPrompts where
 
+import Custom.MyCatppuccin
 import XMonad.Prompt
 
 myPromptConfig =
   def
-    { position = Top,
+    { historySize = 0,
+      position = Top,
       promptBorderWidth = 0,
       defaultText = "",
       alwaysHighlight = True,
       height = 50,
-      font = "xft:CaskaydiaCove Nerd Font:style=Regular:size=12",
-      bgColor = "#1e1e2e",
-      fgColor = "#f5e0dc",
-      bgHLight = "#eba0ac",
-      fgHLight = "#1e1e2e",
+      font = "xft:Sugar Snow:style=Regular:size=12",
+      bgColor = catBase,
+      fgColor = catLavender,
+      bgHLight = catLavender,
+      fgHLight = catBase,
       autoComplete = Nothing,
-      showCompletionOnTab = False,
-      historySize = 0
+      showCompletionOnTab = False
     }
-
