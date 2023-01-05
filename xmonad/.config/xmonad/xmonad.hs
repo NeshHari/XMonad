@@ -1,13 +1,12 @@
 import Custom.MyKeys
 import Custom.MyLayouts
 import Custom.MyMouse
-import Custom.MyWorkspaces
 import Custom.MyScratchpads
+import Custom.MyWorkspaces
 import Data.Map qualified as M
 import Data.Monoid
 import System.Exit
 import XMonad
-import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (doCenterFloat)
@@ -18,8 +17,9 @@ import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.WindowSwallowing (swallowEventHook)
 import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig
-import XMonad.Util.SpawnOnce
+import XMonad.Util.Hacks as Hacks
 import XMonad.Util.NamedScratchpad
+import XMonad.Util.SpawnOnce
 
 myTerminal = "kitty --single-instance"
 
@@ -49,13 +49,16 @@ myDynamicManageHook =
   composeAll
     []
 
+myLogHook = return ()
+
 main :: IO ()
 main =
   do
     xmonad
+    $ Hacks.javaHack
     $ withSB myPolybarConf
     $ docks
-      . ewmhFullscreen
+{-       . ewmhFullscreen -}
       . ewmh
     $ def
       { terminal = myTerminal,
@@ -69,8 +72,8 @@ main =
         mouseBindings = myMouseBindings,
         layoutHook = myLayoutHook,
         manageHook = namedScratchpadManageHook myScratchpads,
-        handleEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myDynamicManageHook,
-        logHook = dynamicLog,
+        handleEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myDynamicManageHook <> Hacks.windowedFullscreenFixEventHook,
+        logHook = myLogHook,
         startupHook = myStartupHook
       }
       `additionalKeysP` myKeys
