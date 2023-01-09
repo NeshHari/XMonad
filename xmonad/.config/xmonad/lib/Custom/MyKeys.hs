@@ -49,6 +49,7 @@ myKeys =
     ("M-b", spawn "microsoft-edge-stable"),
     -- Rofi
     ("M-p", spawn "rofi -show drun"),
+    ("M1-<Tab>", spawn "rofi -show window"),
     -- XPrompts
     ("M-s-m", manPrompt myPromptConfig),
     ("M-s-x", xmonadPrompt myPromptConfig),
