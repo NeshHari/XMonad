@@ -1,15 +1,15 @@
 module Custom.MyStartupApps where
 
 import XMonad
-import XMonad.Hooks.SetWMName  
 import XMonad.Util.SpawnOnce
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "~/.screenlayout/pure_landscape.sh"
-  spawn "~/.fehbg"
+  spawn "~/scripts/screenlayout/switch.sh"
+  spawn "~/.feh --bg-scale ~/wallpapers/stains_of_purple.jpg"
+  spawn "~/.config/polybar/startup.sh"
   spawnOnce "xmodmap ~/.Xmodmap"
-  spawn "killall picom; picom -b"
-  spawn "~/feh-blur.sh -s; ~/feh-blur.sh -d"
-  spawn "easyeffects --gapplication-service &"
-  setWMName "LG3D"
+  spawnOnce "dunst &"
+  spawnOnce "picom -b"
+  spawn "~/scripts/feh-blur.sh -s; ~/scripts/feh-blur.sh -d"
+  spawnOnce "easyeffects --gapplication-service &"
