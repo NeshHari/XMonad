@@ -22,15 +22,16 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Hacks as Hacks
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
+import XMonad.Util.NamedScratchpad (namedScratchpadAction)
 
 myTerminal = "kitty --single-instance"
 
 myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
-myBorderWidth = 3
-
 myModMask = mod4Mask
+
+myBorderWidth = 3
 
 myNormalBorderColor = catMantle
 
@@ -44,7 +45,11 @@ myDynamicManageHook =
       className =? "witcher3.exe" --> doFloat
     ]
 
+myManageHook = namedScratchpadManageHook myScratchpads <> myDynamicManageHook
+
 myLogHook = return ()
+
+myEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myDynamicManageHook <> Hacks.windowedFullscreenFixEventHook
 
 main :: IO ()
 main =
@@ -67,8 +72,8 @@ main =
         keys = myAdditionalKeys,
         mouseBindings = myMouseBindings,
         layoutHook = myLayoutHook,
-        manageHook = namedScratchpadManageHook myScratchpads <> myDynamicManageHook,
-        handleEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myDynamicManageHook <> Hacks.windowedFullscreenFixEventHook,
+        manageHook = myManageHook,
+        handleEventHook = myEventHook,
         logHook = myLogHook,
         startupHook = myStartupHook
       }
