@@ -9,9 +9,10 @@ require("mason-lspconfig").setup({
 })
 
 --local util = require("lspconfig/util")
+require 'lspconfig'.bashls.setup {}
 
-require 'lspconfig'.hls.setup {
-}
+require 'lspconfig'.hls.setup {}
+
 require 'lspconfig'.sumneko_lua.setup {
     settings = {
         Lua = {

@@ -23,7 +23,7 @@ return require('packer').startup(function(use)
     use { 'catppuccin/nvim', as = "catppuccin" }
 
     use('nvim-treesitter/nvim-treesitter', { run = ':TSUpdate' })
-    use ('nvim-treesitter/nvim-treesitter-context')
+    use('nvim-treesitter/nvim-treesitter-context')
 
     use('ThePrimeagen/harpoon')
     use('mbbill/undotree')
@@ -119,5 +119,31 @@ return require('packer').startup(function(use)
     }
 
     use { "akinsho/toggleterm.nvim", tag = '*' }
+
+    use({
+        "kylechui/nvim-surround",
+        tag = "*", -- Use for stability; omit to use `main` branch for the latest features
+        config = function()
+            require("nvim-surround").setup({
+            })
+        end
+    })
+
+    use {
+        'epwalsh/obsidian.nvim',
+        config = function()
+            require("obsidian").setup({
+                dir = '~/obsidian/2ndTechBrain',
+                completion = {
+                    nvim_cmp = true,
+                }
+            })
+        end
+    }
+
+    use {
+        'glacambre/firenvim',
+        run = function() vim.fn['firenvim#install'](0) end
+    }
 
 end)
