@@ -39,7 +39,10 @@ myFocusedBorderColor = catMauve
 myDynamicManageHook :: ManageHook
 myDynamicManageHook =
   composeAll
-    []
+    [ className =? "epicgameslauncher.exe" --> doFloat,
+      className =? "redlauncher.exe" --> doFloat,
+      className =? "witcher3.exe" --> doFloat
+    ]
 
 myLogHook = return ()
 
@@ -47,6 +50,7 @@ main :: IO ()
 main =
   do
     xmonad
+    $ disableEwmhManageDesktopViewport
     $ Hacks.javaHack
     $ withSB myPolybarConf
     $ docks
@@ -63,7 +67,7 @@ main =
         keys = myAdditionalKeys,
         mouseBindings = myMouseBindings,
         layoutHook = myLayoutHook,
-        manageHook = namedScratchpadManageHook myScratchpads,
+        manageHook = namedScratchpadManageHook myScratchpads <> myDynamicManageHook,
         handleEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myDynamicManageHook <> Hacks.windowedFullscreenFixEventHook,
         logHook = myLogHook,
         startupHook = myStartupHook
