@@ -5,7 +5,6 @@ configuration{
     lines: 5;
     font: "Sugar Snow 14";
     show-icons: true;
-    icon-theme: "Candy Icons";
     terminal: "kitty";
     drun-display-format: "{icon} {name}";
     location: 0;
