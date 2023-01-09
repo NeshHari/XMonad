@@ -1,3 +1,5 @@
+@theme "catppuccin"
+
 configuration{
     modi: "run,drun,window";
     lines: 5;
@@ -9,13 +11,20 @@ configuration{
     location: 0;
     disable-history: false;
     hide-scrollbar: true;
+    window-format: " [{w}]\t\t{t:0}";
     display-run: "ﰌ Run  ﰌ ";
     display-drun: "  Applications  ";
     display-window: "  Tasks  ";
     sidebar-mode: true;
+    show-match: false;
+    kb-mode-previous: "Alt+h";
+    kb-mode-next: "Alt+l";
+    kb-row-left: "Control+Alt+h";
+    kb-row-right: "Control+Alt+l";
+    kb-row-down: "Control+Alt+j";
+    kb-row-up: "Control+Alt+k";
+    kb-remove-word-back: "Control+BackSpace";
 }
-
-@theme "catppuccin"
 
 element-text, element-icon , mode-switcher {
     background-color: inherit;
@@ -99,3 +108,4 @@ button selected {
   background-color: @bg-col;
   text-color: @blue;
 }
+
