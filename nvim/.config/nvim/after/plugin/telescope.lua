@@ -33,7 +33,7 @@ telescope.setup {
                 ["<C-b>"] = {
                     keepinsert = true,
                     action = function(selection)
-                        builtin.file_browser({ cwd = selection.path })
+                        telescope.extensions.file_browser.file_browser({ cwd = selection.path })
                     end
                 },
                 ["<C-f>"] = {
@@ -59,7 +59,6 @@ telescope.setup {
     }
 }
 
-
 telescope.load_extension('fzf')
 telescope.load_extension('zoxide')
 telescope.load_extension('file_browser')
@@ -69,3 +68,5 @@ vim.keymap.set('n', '<leader>fw', builtin.live_grep, {})
 vim.keymap.set("n", "<leader>fb", telescope.extensions.file_browser.file_browser)
 vim.keymap.set('n', '<leader>fh', builtin.help_tags, {})
 vim.keymap.set('n', '<leader>bf', builtin.buffers, {})
+vim.keymap.set('n', '<leader>di', '<cmd>Telescope diagnostics<CR>', {})
+vim.keymap.set("n", "<leader>cd", telescope.extensions.zoxide.list)
