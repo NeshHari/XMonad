@@ -1,2 +1,3 @@
 nvim/.config/nvim/plugin
 scripts/scripts/patch-spotify.sh
+xmonad/.config/xmonad/lib/Custom/MyMacAddresses.hs
