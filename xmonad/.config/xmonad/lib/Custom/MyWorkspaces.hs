@@ -1,4 +1,3 @@
 module Custom.MyWorkspaces where
 
-myWorkspaces = ["one", "two", "three", "four", "five"]
-
+myWorkspaces = ["one", "two", "three", "four", "five", "games"]
