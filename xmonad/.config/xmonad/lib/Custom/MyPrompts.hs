@@ -3,6 +3,7 @@ module Custom.MyPrompts where
 import Custom.MyCatppuccin
 import XMonad.Prompt
 
+myPromptConfig :: XPConfig
 myPromptConfig =
   def
     { historySize = 0,
