@@ -1,3 +1,8 @@
+window:
+  padding:
+    x: 20
+    y: 10
+
 colors:
     primary:
         background: "#1E1E2E" # base
