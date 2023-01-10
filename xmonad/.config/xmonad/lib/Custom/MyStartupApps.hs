@@ -7,7 +7,6 @@ myStartupHook :: X ()
 myStartupHook = do
   spawn "~/scripts/screenlayout/switch.sh"
   spawn "~/.feh --bg-scale ~/wallpapers/stains_of_purple.jpg"
-  spawn "~/.config/polybar/startup.sh"
   spawnOnce "xmodmap ~/.Xmodmap"
   spawnOnce "dunst &"
   spawnOnce "picom -b"
