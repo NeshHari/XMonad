@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
+
 module Custom.MyManagement where
 
 import Custom.MyScratchpads
