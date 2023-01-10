@@ -1,12 +1,11 @@
 module Custom.MyKeys where
 
+import Custom.MyMacAddresses
 import Custom.MyPrompts
 import Custom.MyScratchpads
 import Custom.MyWorkspaces
 import Data.Map qualified as M
-import Graphics.X11.Xlib.Extras (Event (MotionEvent))
 import System.Exit
-import System.IO
 import XMonad
 import XMonad.Actions.CycleWS
 import XMonad.Actions.EasyMotion
@@ -23,10 +22,8 @@ import XMonad.Layout.SubLayouts
 import XMonad.Layout.WindowNavigation as WN
 import XMonad.Prompt.ConfirmPrompt
 import XMonad.Prompt.Man
-import XMonad.Prompt.Shell
 import XMonad.Prompt.XMonad
 import XMonad.StackSet qualified as W
-import XMonad.Util.EZConfig
 import XMonad.Util.NamedScratchpad
 
 emConf :: EasyMotionConfig
@@ -63,8 +60,9 @@ myKeys =
     ("M-t", namedScratchpadAction myScratchpads "quick commands"),
     ("M-C-g", namedScratchpadAction myScratchpads "glava"),
     -- Bluetooth
-    ("M-C-S-b", spawn "bluetoothctl -- connect 08:EF:3B:2B:B8:5F"),
-    ("M-C-S-d", spawn "bluetoothctl -- disconnect 08:EF:3B:2B:B8:5F"),
+    ("<Page_Up>", spawn ("bluetoothctl -- connect " ++ mySpeakerMac)),
+    ("<Home>", spawn ("bluetoothctl -- connect " ++ myXMMac)),
+    ("<Page_Down>", spawn "bluetoothctl -- disconnect"),
     -- Close window(s)
     ("M-c", kill),
     ("M-S-c", killAll),
