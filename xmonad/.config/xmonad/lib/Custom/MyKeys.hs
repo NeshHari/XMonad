@@ -61,7 +61,7 @@ myKeys =
     ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig "microsoft-edge-stable"),
     -- NamedScratchpads
     ("M-t", namedScratchpadAction myScratchpads "quick commands"),
-    ("M-C-a", namedScratchpadAction myScratchpads "pavucontrol"),
+    ("M-C-g", namedScratchpadAction myScratchpads "glava"),
     -- Bluetooth
     ("M-C-S-b", spawn "bluetoothctl -- connect 08:EF:3B:2B:B8:5F"),
     ("M-C-S-d", spawn "bluetoothctl -- disconnect 08:EF:3B:2B:B8:5F"),
