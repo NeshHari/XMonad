@@ -1,10 +1,13 @@
+-- import modules in ./lib/Custom/
 import Custom.MyCatppuccin
 import Custom.MyKeys
 import Custom.MyLayouts
+import Custom.MyManagement
 import Custom.MyMouse
 import Custom.MyScratchpads
 import Custom.MyStartupApps
 import Custom.MyWorkspaces
+-- given modules from xmonad and xmonad-contrib
 import Data.Map qualified as M
 import Data.Monoid
 import System.Exit
@@ -22,11 +25,10 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Hacks as Hacks
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
-import XMonad.Util.NamedScratchpad (namedScratchpadAction)
 
+-- reduce startup time by using single sprite cache
 myTerminal = "kitty --single-instance"
 
-myFocusFollowsMouse :: Bool
 myFocusFollowsMouse = True
 
 myModMask = mod4Mask
@@ -37,29 +39,21 @@ myNormalBorderColor = catMantle
 
 myFocusedBorderColor = catMauve
 
-myDynamicManageHook :: ManageHook
-myDynamicManageHook =
-  composeAll
-    [ className =? "epicgameslauncher.exe" --> doFloat,
-      className =? "redlauncher.exe" --> doFloat,
-      className =? "witcher3.exe" --> doFloat
-    ]
-
-myManageHook = namedScratchpadManageHook myScratchpads <> myDynamicManageHook
-
 myLogHook = return ()
 
-myEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myDynamicManageHook <> Hacks.windowedFullscreenFixEventHook
+myEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myManageHook <> Hacks.windowedFullscreenFixEventHook
 
-main :: IO ()
 main =
   do
     xmonad
+    {- force XMonad to *not* set _NET_DESKTOP_VIEWPORT
+    available in latest commit cf13f8f (https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9)
+    correct polybar order on dual monitors -}
     $ disableEwmhManageDesktopViewport
     $ Hacks.javaHack
-    $ withSB myPolybarConf
+    $ withSB myPolybar
     $ docks
-      {-       . ewmhFullscreen -}
+      -- . ewmhFullscreen
       . ewmh
     $ def
       { terminal = myTerminal,
@@ -79,14 +73,13 @@ main =
       }
       `additionalKeysP` myKeys
 
-myPolybarConf =
+myPolybar =
   def
-    { sbLogHook =
+    { -- for defining what to log
+      sbLogHook =
         xmonadPropLog
-          =<< dynamicLogString polybarPPdef,
-      sbStartupHook = spawn "~/.config/polybar/startup.sh",
-      sbCleanupHook = spawn "killall polybar"
+          =<< dynamicLogString def,
+      -- lower polybar for monacle layout
+      sbStartupHook = spawn "~/.config/polybar/startup.sh; sleep 1; xdo lower -N 'Polybar'",
+      sbCleanupHook = spawn "killall -q polybar"
     }
-
-polybarPPdef =
-  def
