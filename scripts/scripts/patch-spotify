@@ -1,7 +1,0 @@
-#!/bin/bash
-
-killall spotify
-
-bash <(curl -sSL https://raw.githubusercontent.com/SpotX-CLI/SpotX-Linux/main/install.sh)
-
-spicetify apply
