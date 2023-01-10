@@ -7,7 +7,7 @@ xcape -e 'Caps_Lock=Escape'
 
 xsetroot -cursor_name left_ptr 
 
-~/scripts/.fix-wifi.sh
+~/scripts/.fix-wifi.sh &
 
 export _JAVA_AWT_WM_NONREPARENTING=1
 
