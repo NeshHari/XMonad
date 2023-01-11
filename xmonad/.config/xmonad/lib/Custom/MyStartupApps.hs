@@ -10,5 +10,4 @@ myStartupHook = do
   spawnOnce "xmodmap ~/.Xmodmap"
   spawnOnce "dunst &"
   spawnOnce "picom -b"
-  spawn "~/scripts/feh-blur.sh -s; ~/scripts/feh-blur.sh -d"
   spawnOnce "easyeffects --gapplication-service &"
