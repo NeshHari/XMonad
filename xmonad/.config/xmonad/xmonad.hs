@@ -80,6 +80,6 @@ myPolybar =
         xmonadPropLog
           =<< dynamicLogString def,
       -- lower polybar for monacle layout
-      sbStartupHook = spawn "~/.config/polybar/startup.sh; sleep 1; xdo lower -N 'Polybar'",
+      sbStartupHook = spawn "~/.config/polybar/startup.sh; xdo lower -N 'Polybar'",
       sbCleanupHook = spawn "killall -q polybar"
     }
