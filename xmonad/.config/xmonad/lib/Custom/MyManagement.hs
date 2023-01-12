@@ -1,5 +1,3 @@
-{-# OPTIONS_GHC -Wno-missing-signatures #-}
-
 module Custom.MyManagement where
 
 import Custom.MyScratchpads
@@ -9,8 +7,10 @@ import XMonad.Util.NamedScratchpad
 
 myManagement =
   composeAll
-    [ (className =? "epicgameslauncher.exe" <&&> className =? "redlauncher.exe" <&&> className =? "witcher3.exe") --> doCenterFloat,
-      (className =? "epicgameslauncher.exe" <&&> className =? "redlauncher.exe" <&&> className =? "witcher3.exe") --> doShift "games"
+    [ className =? "witcher3.exe" --> doCenterFloat,
+      className =? "witcher3.exe" --> doShift "games",
+      className =? "steam_app_0" --> doShift "games"
     ]
 
+myManageHook :: ManageHook
 myManageHook = namedScratchpadManageHook myScratchpads <> myManagement
