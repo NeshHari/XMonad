@@ -1,14 +1,17 @@
-#!/usr/bin/env sh
+#!/usr/bin/env bash
+#
+notify-send -u low "Rescreening in progress...";
 
-while pgrep -x polybar >/dev/null; do sleep 1; done
+killall -q polybar;
 
-main=HDMI-0
-left=DP-1
+while pgrep -x polybar >/dev/null; do sleep 1; done;
 
-if xrandr | grep "$main connected"; then
-    polybar main
+if autorandr --detected | grep "single"; then
+    polybar main &
 fi
-
-if xrandr | grep "$left connected"; then
-    polybar left
+if autorandr --detected | grep "dual"; then
+    polybar main &
+    polybar left &
 fi
+sleep 1;
+xdo lower -N "Polybar"
