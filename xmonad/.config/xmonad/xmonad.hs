@@ -5,6 +5,7 @@ import Custom.MyLayouts
 import Custom.MyManagement
 import Custom.MyMouse
 import Custom.MyScratchpads
+import Custom.MyScreen
 import Custom.MyStartupApps
 import Custom.MyWorkspaces
 -- given modules from xmonad and xmonad-contrib
@@ -16,6 +17,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers (doCenterFloat)
 import XMonad.Hooks.OnPropertyChange
+import XMonad.Hooks.Rescreen
 import XMonad.Hooks.SetWMName (setWMName)
 import XMonad.Hooks.StatusBar
 import XMonad.Hooks.StatusBar.PP
@@ -47,10 +49,11 @@ main =
   do
     xmonad
     {- force XMonad to *not* set _NET_DESKTOP_VIEWPORT
-    available in latest commit cf13f8f (https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9)
+    available since commit cf13f8f (https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9)
     correct polybar order on dual monitors -}
     $ disableEwmhManageDesktopViewport
     $ Hacks.javaHack
+      . rescreenHook rescreenCfg
     $ withSB myPolybar
     $ docks
       -- . ewmhFullscreen
@@ -80,6 +83,6 @@ myPolybar =
         xmonadPropLog
           =<< dynamicLogString def,
       -- lower polybar for monacle layout
-      sbStartupHook = spawn "~/.config/polybar/startup.sh; xdo lower -N 'Polybar'",
+      sbStartupHook = spawn "~/.config/polybar/startup.sh",
       sbCleanupHook = spawn "killall -q polybar"
     }
