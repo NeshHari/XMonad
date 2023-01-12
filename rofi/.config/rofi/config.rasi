@@ -1,8 +1,6 @@
 @theme "catppuccin"
 
 configuration{
-    modi: "run,drun,window";
-    lines: 5;
     font: "Sugar Snow 14";
     show-icons: true;
     terminal: "kitty";
@@ -11,18 +9,19 @@ configuration{
     disable-history: false;
     hide-scrollbar: true;
     window-format: " [{w}]\t\t{t:0}";
+    sidebar-mode: true;
     display-run: "ﰌ Run  ﰌ ";
     display-drun: "  Applications  ";
     display-window: "  Tasks  ";
-    sidebar-mode: true;
     show-match: false;
-    kb-mode-previous: "Alt+h";
-    kb-mode-next: "Alt+l";
+    kb-mode-previous: "Alt+h,Control+Shift+Tab";
+    kb-mode-next: "Alt+l,Control+Tab";
     kb-row-left: "Control+Alt+h";
     kb-row-right: "Control+Alt+l";
-    kb-row-down: "Control+Alt+j";
-    kb-row-up: "Control+Alt+k";
+    kb-row-down: "Control+Alt+j,Control+n,Down";
+    kb-row-up: "Control+Alt+k,Control+p,Up";
     kb-remove-word-back: "Control+BackSpace";
+    modi: "run,drun,window";
 }
 
 element-text, element-icon , mode-switcher {
