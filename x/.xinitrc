@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/usr/bin/env bash
 
 xmodmap ~/.Xmodmap
 xset r rate 300 50
@@ -7,11 +7,11 @@ xcape -e 'Caps_Lock=Escape'
 
 xsetroot -cursor_name left_ptr 
 
-~/scripts/.fix-wifi.sh &
-
-export _JAVA_AWT_WM_NONREPARENTING=1
+~/scripts/fix-wifi.sh
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+
+export _JAVA_AWT_WM_NONREPARENTING=1
 
 systemctl --user import-environment DISPLAY XAUTHORITY;
 dbus-update-activation-environment --systemd --all
