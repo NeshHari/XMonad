@@ -6,6 +6,7 @@ import Custom.MyMacAddresses
 import Custom.MyPrompts
 import Custom.MyScratchpads
 import Custom.MyWorkspaces
+import Custom.MyEasyMotion
 import Data.Map qualified as M
 import System.Exit
 import XMonad
@@ -27,18 +28,6 @@ import XMonad.Prompt.Man
 import XMonad.Prompt.XMonad
 import XMonad.StackSet qualified as W
 import XMonad.Util.NamedScratchpad
-
-emConf :: EasyMotionConfig
-emConf =
-  def
-    { txtCol = "#cba6f7",
-      bgCol = "#11111b",
-      borderCol = "#11111b",
-      cancelKey = xK_Escape,
-      emFont = "xft: Sugar Snow-60",
-      overlayF = textSize,
-      borderPx = 10
-    }
 
 myKeys :: [(String, X ())]
 myKeys =
