@@ -1,3 +1,5 @@
+{-# LANGUAGE ImportQualifiedPost #-}
+
 module Custom.MyKeys where
 
 import Custom.MyMacAddresses

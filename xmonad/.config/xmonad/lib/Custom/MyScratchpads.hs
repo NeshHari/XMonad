@@ -1,3 +1,5 @@
+{-# LANGUAGE ImportQualifiedPost #-}
+
 module Custom.MyScratchpads where
 
 import XMonad
