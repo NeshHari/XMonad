@@ -7,10 +7,7 @@ import XMonad.Util.NamedScratchpad
 
 myManagement =
   composeAll
-    [ className =? "witcher3.exe" --> doCenterFloat,
-      className =? "witcher3.exe" --> doShift "games",
-      className =? "steam_app_0" --> doShift "games"
-    ]
+    [(className =? "witcher3.exe" <&&> className =? "steam_app_0") --> doCenterFloat]
 
 myManageHook :: ManageHook
 myManageHook = namedScratchpadManageHook myScratchpads <> myManagement
