@@ -60,15 +60,14 @@ return {
 
     'epwalsh/obsidian.nvim',
 
-    { 'glacambre/firenvim',
-        build = function() vim.fn['firenvim#install'](0) end
-    },
-
-    {
+    --[[ {
         'folke/noice.nvim',
         dependencies = {
             "MunifTanjim/nui.nvim",
             "rcarriga/nvim-notify",
         }
-    }
+    }, ]]
+
+    'lewis6991/impatient.nvim',
+    'rcarriga/nvim-notify'
 }
