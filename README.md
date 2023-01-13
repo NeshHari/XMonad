@@ -4,70 +4,6 @@ aliases:
   - "Linux Distribution"
 tags: []
 ---
-
-# Linux Distribution
-Vanilla Arch
-Package Manager: Pacman
-AUR Helper: Paru
-
-# File Management
-## Dotfiles:
-### [GNU Stow ](https://github.com/aspiers/stow)
-The "symlink farm manager" to facilitates file backup.
-
-## Git:
-### [lazygit](https://github.com/jesseduffield/lazygit)
-Terminal UI for git commands.
-
-# Terminal
-## Emulator:
-### [kitty](https://github.com/kovidgoyal/kitty)
-GPU-based terminal emulator extensible by kittens (i.e., plugins), and supports layouts and tabs.
-
-## Shell:
-### Default Shell: [dash](https://wiki.archlinux.org/title/Dash)
-Modern POSIX-compliant implementation of /bin/sh that is 4 times faster than Bash. Re-symlink /bin/sh to /bin/dash for improved performance.
-
-### User Shell: [fish](https://github.com/fish-shell/fish-shell)
-Interactive shell that supports suggestions, syntax highlighting, and tab completions out of the box. Recommended to launch shell with terminal instance (e.g., kitty -e "fish" or add "shell fish" to kitty.conf).
-
-#### [fisher](https://github.com/jorgebucaran/fisher)
-Plugin manager for fish.
-
-## Modern Command Line Tools:
-### [fd](https://github.com/sharkdp/fd)
-Rust implementation of "find" that is faster due to parallelised directory travel, supporting majority of use cases. Hidden files and directories are hidden by default. Smart-casing is also supported.
-
-### [exa](https://github.com/ogham/exa)
-Rust replacement for "ls" featuring colour with parallelisation featuring colour and git support. 
-
-### [bat](https://github.com/sharkdp/bat)
-Clone of cat with syntax highlighting and integration with other tools (i.e., find, fd, fzf, git, etc.)
-
-### [tldr-pages](https://github.com/tldr-pages/tldr)
-Simpler and more approachable man pages.
-
-### [zoxide](https://github.com/ajeetdsouza/zoxide)
-Navigate (i.e., "jump")  to most frequently used directories, replacing "cd".
-
-### [fzf](https://github.com/junegunn/fzf)
-Interactive multipurpose Unix filter and fuzzy finding utility.
-
-# Editor
-### [neovim](https://github.com/neovim/neovim)
-
-[telescope](https://github.com/nvim-telescope/telescope.nvim)
-
-[treesitter](https://github.com/nvim-treesitter/nvim-treesitter)
-
-[harpoon](https://github.com/ThePrimeagen/harpoon)
-
-[undotree](https://github.com/mbbill/undotree)
-
-[lsp-zero](https://github.com/VonHeikemen/lsp-zero.nvim)
-
-
-
 # About
 Pardon the informality in this "about" section. If you are reading this you probably already know what [XMonad](https://xmonad.org/) is. Well if you don't, its a dynamic tiling window manager for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured, and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, the point is, its Haskell: the preeminent reason for staying clear of this WM. After a week of blood, sweat, and tears,
 
@@ -262,4 +198,3 @@ Files used (ensure xcape is installed):
 
 Windowed 
 [XMonad.Hooks.EwmhDesktops](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-EwmhDesktops.html) + 
-
