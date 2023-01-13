@@ -7,6 +7,8 @@ xcape -e 'Caps_Lock=Escape'
 
 xsetroot -cursor_name left_ptr 
 
+unclutter &
+
 export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}')
 
 ~/scripts/fix-wifi.sh
@@ -14,7 +16,6 @@ export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}'
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 export _JAVA_AWT_WM_NONREPARENTING=1
-
 
 systemctl --user import-environment DISPLAY XAUTHORITY;
 dbus-update-activation-environment --systemd --all
