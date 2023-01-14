@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-notify-send -u low "Rescreening in progress...";
+notify-send -u low " Rescreening in progress ";
 
 killall -q polybar;
 
