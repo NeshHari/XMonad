@@ -8,7 +8,7 @@ Pardon the informality in this introduction. If you are reading this you probabl
 - Multi-Monitor and Hotplugging Support
 - Polybar As Your Statusbar
 - Hyper Key Support
-- Notable Extensions: 
+- Other Notable Implementations: 
     - PerScreen (Different Layouts for Different Screen Dimensions)
     - SubLayouts (Tabs) & Window Navigation
     - CycleWS (Cycling Through Workspaces and Screens)
@@ -21,6 +21,7 @@ Pardon the informality in this introduction. If you are reading this you probabl
     - Spacing/Gaps on the Fly
     - Managehelpers (Center Float, Shift to Workspace, etc.)
     - Sensible Keybindings With Mkkeymap (Emacs-Style)
+    - Topic Spaces (upcoming)
 
 
 ## Prerequisites
