@@ -27,10 +27,14 @@ opt.swapfile = false
 
 -- opt.lazyredraw = true
 
-opt.completeopt='menu,menuone,noselect,noinsert'
+opt.completeopt = 'menu,menuone,noselect,noinsert'
 
 opt.clipboard = 'unnamedplus'
 
 opt.list = true
+
+opt.timeoutlen = 1000
+opt.ttimeoutlen = 1000
+
 opt.listchars:append "space:⋅"
 opt.listchars:append "eol:↴"
