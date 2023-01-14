@@ -1,26 +1,45 @@
-# About
-Pardon the informality in this "about" section. If you are reading this you probably already know what [XMonad](https://xmonad.org/) is. Well if you don't, its a dynamic tiling window manager for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured, and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, the point is, its Haskell: the preeminent reason for staying clear of this WM. At the expense of my blod, sweat, and tears (quite literally), I present a living document to provide a decent 
+# An Informal Intro...
+Pardon the informality in this introduction. If you are reading this you probably already know what [XMonad](https://xmonad.org/) is. Well if you don't, its a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured, and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, the point is, its Haskell: the preeminent reason for staying clear of this WM. Regardless, its one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance in adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
 
-What's Covered
-- Haskell Language Server integration with Neovim
-- Modularisation
-    -  
-- Multi-monitor support + hotplugging
-- Polybar
-- 
+## What's Covered
+*Note: Completed sections are ticked. Rest can be assumed to be WIP.* ✓
+- Haskell Language Server Integration With Neovim ✓
+- The Fundamentals of Modularisation ✓
+- Multi-Monitor and Hotplugging Support
+- Polybar As Your Statusbar
+- Hyper Key Support
+- Notable Extensions: 
+    - PerScreen (Different Layouts for Different Screen Dimensions)
+    - SubLayouts (Tabs) & Window Navigation
+    - CycleWS (Cycling Through Workspaces and Screens)
+    - EasyMotion (Focus and Kill Any Visible Window)
+    - Rescreen (Display Hotplugging)
+    - WindowedFullscreen (Chromium)
+    - Scratchpads
+    - ShowWMName on Workspace Change
+    - Custom Prompts (Man Pages, Search Engines, etc.)
+    - Spacing/Gaps on the Fly
+    - Managehelpers (Center Float, Shift to Workspace, etc.)
+    - Sensible Keybindings With Mkkeymap (Emacs-Style)
 
 
+## Prerequisites
+The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
 
-##
-The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable at the time of writing.
+*Note: Ensure xorg-xmessage is installed to view compilation errors.*
 
-## Setup
-For compatibility with the [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) provided by Neovim's native LSP, XMonad must be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer.  HLS provides various features such as diagnostics, completions, code actions, and formatting. As a personal choice [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html)  is utilised. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
+# Setup
+
+## Haskell Language Server (HLS) With Neovim
+For easily managing LSP servers in Neovim, I would suggest installing [Mason](https://github.com/williamboman/mason.nvim)plugin.
+
+
+For compatibility with the [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) provided by Neovim's native LSP, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. As a personal choice, [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html)  is utilised. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
 
 Additionally, a minimal hie.yaml must be defined as follows for HLS to function.
 ```yaml
 cradle:
-	stack:
+    stack:
 ```
 
 Expected folder structure:
@@ -60,6 +79,22 @@ module Custom.MyModule where
 import Custom.MyModule
 
 -- code...
+```
+```
+.
+└── Custom
+   ├── MyCatppuccin.hs
+   ├── MyEasyMotion.hs
+   ├── MyKeys.hs
+   ├── MyLayouts.hs
+   ├── MyMacAddresses.hs (hidden)
+   ├── MyManagement.hs
+   ├── MyMouse.hs
+   ├── MyPrompts.hs
+   ├── MyScratchpads.hs
+   ├── MyScreen.hs
+   ├── MyStartupApps.hs
+   └── MyWorkspaces.hs  
 ```
 
 ### Custom Modules:
@@ -118,7 +153,7 @@ catText = "#cdd6f4"
 catSubtext1 :: String
 catSubtext1 = "#bac2de"
 
-catSubtext0 :: String
+catSubtext0 :: String✓
 catSubtext0 = "#a6adc8"
 
 catOverlay2 :: String
@@ -177,28 +212,34 @@ myStartupHook = do
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
 
 The following is achieved:
-	Caps to Escape (for vim use). 
-	Holding down Caps acts as Ctrl (easy to Ctrl-f for shell completion etc.)
-	Holding down either Tab or Backslash acts as Windows key (i.e., Mod4Mask).
+- Caps to Escape (for vim use). 
+- Holding down Caps acts as Ctrl (easy to Ctrl-f for shell completion etc.)
+- Holding down either Tab or Backslash acts as Windows key (i.e., Mod4Mask).
 
 Files used (ensure xcape is installed):
 1. .xinitrc
-	setxkbmap -option "caps:ctrl_modifier" &
-	xcape -e 'Caps_Lock=Escape' &
+
+    xmodmap ~/.Xmodmap
+
+    setxkbmap -option "caps:ctrl_modifier" &
+
+    xcape -e 'Caps_Lock=Escape' &
 
 2. .Xmodmap (called in XMonad startupApps)
-	! Tab as modifier
-	keycode 23 = Tab Hyper_L
-	
-	! Backslash(\) as modifier + preserve bar(|)
-	keycode 51 = backslash bar Hyper_L
-	
-	add mod4 = Hyper_L
-	
-	clear lock
+
+    ! Tab as modifier
+
+    keycode 23 = Tab Hyper_L
+    
+    ! Backslash(\) as modifier + preserve bar(|)
+
+    keycode 51 = backslash bar Hyper_L
+    
+    add mod4 = Hyper_L
+    
+    clear lock
 
 
-*Note: Ensure xorg-xmessage is installed to view compilation errors.*
 
 Windowed 
 [XMonad.Hooks.EwmhDesktops](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-EwmhDesktops.html) + 
