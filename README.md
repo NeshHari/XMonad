@@ -1,11 +1,15 @@
----
-id: "Living Documentation.md"
-aliases:
-  - "Linux Distribution"
-tags: []
----
 # About
-Pardon the informality in this "about" section. If you are reading this you probably already know what [XMonad](https://xmonad.org/) is. Well if you don't, its a dynamic tiling window manager for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured, and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, the point is, its Haskell: the preeminent reason for staying clear of this WM. After a week of blood, sweat, and tears,
+Pardon the informality in this "about" section. If you are reading this you probably already know what [XMonad](https://xmonad.org/) is. Well if you don't, its a dynamic tiling window manager for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured, and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, the point is, its Haskell: the preeminent reason for staying clear of this WM. At the expense of my blod, sweat, and tears (quite literally), I present a living document to provide a decent 
+
+What's Covered
+- Haskell Language Server integration with Neovim
+- Modularisation
+    -  
+- Multi-monitor support + hotplugging
+- Polybar
+- 
+
+
 
 ##
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable at the time of writing.
