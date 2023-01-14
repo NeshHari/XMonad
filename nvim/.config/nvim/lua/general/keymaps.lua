@@ -12,3 +12,12 @@ key.set("x", "<leader>p", [["_dP]])
 
 -- format
 key.set("n", "<leader>fo", vim.lsp.buf.format)
+
+-- navigate buffers
+key.set("n", "gt", "<cmd>bnext<CR>")
+key.set("n", "gT", "<cmd>bprev<CR>")
+
+-- splits
+key.set("n", "<leader>hs", "<cmd>split<CR>")
+key.set("n", "<leader>vs", "<cmd>vsplit<CR>")
+key.set("n", "<leader>cs", "<cmd>close<CR>")
