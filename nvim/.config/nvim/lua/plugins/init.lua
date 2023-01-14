@@ -60,14 +60,11 @@ return {
 
     'epwalsh/obsidian.nvim',
 
-    --[[ {
-        'folke/noice.nvim',
-        dependencies = {
-            "MunifTanjim/nui.nvim",
-            "rcarriga/nvim-notify",
-        }
-    }, ]]
 
     'lewis6991/impatient.nvim',
-    'rcarriga/nvim-notify'
+    'rcarriga/nvim-notify',
+
+    { 'iamcco/markdown-preview.nvim',
+        build = function() vim.fn["mkdp#util#install"]() end
+    }
 }
