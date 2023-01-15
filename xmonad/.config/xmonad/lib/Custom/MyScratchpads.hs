@@ -1,26 +1,9 @@
-{-# LANGUAGE ImportQualifiedPost #-}
-
 module Custom.MyScratchpads where
 
-import XMonad
-import XMonad.StackSet qualified as W
+import Custom.MyManagementPositioning
+import XMonad (appName)
+import XMonad.ManageHook ((=?))
 import XMonad.Util.NamedScratchpad
-
-myCenter :: ManageHook
-myCenter = customFloating $ W.RationalRect fromLeft fromTop width height
-  where
-    width = 1 / 2
-    height = 1 / 2
-    fromLeft = (1 - width) / 2
-    fromTop = (1 - height) / 2
-
-myCenterSmall :: ManageHook
-myCenterSmall = customFloating $ W.RationalRect fromLeft fromTop width height
-  where
-    width = 1 / 3
-    height = 1 / 3
-    fromLeft = (1 - width) / 2
-    fromTop = (1 - height) / 2
 
 myScratchpads :: [NamedScratchpad]
 myScratchpads =
@@ -28,9 +11,18 @@ myScratchpads =
     NS "glava" spawnGl findGl myCenterSmall
   ]
   where
-    -- use different terminal from default
+    {-
+    To get WM_CLASS of a visible window, run "xprop | grep 'CLASS'" and select the window.
+    appName :: Query StringSource
+    Return the application name; i.e., the first string returned by WM_CLASS.
+
+    resource :: Query StringSource
+    Backwards compatible alias for appName.
+
+    className :: Query StringSource
+    Return the resource class; i.e., the second string returned by WM_CLASS. -}
     spawnQc = "alacritty -e fish"
-    findQc = resource =? "Alacritty"
+    findQc = appName =? "Alacritty"
 
     spawnGl = "glava"
-    findGl = resource =? "GLava"
+    findGl = appName =? "GLava"
