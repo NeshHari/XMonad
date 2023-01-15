@@ -21,3 +21,7 @@ key.set("n", "gT", "<cmd>bprev<CR>")
 key.set("n", "<leader>hs", "<cmd>split<CR>")
 key.set("n", "<leader>vs", "<cmd>vsplit<CR>")
 key.set("n", "<leader>cs", "<cmd>close<CR>")
+
+-- wrapped lines
+key.set({ "n", "v" }, "j", "gj")
+key.set({ "n", "v" }, "k", "gk")
