@@ -2,5 +2,5 @@ nvim/.config/nvim/plugin
 scripts/scripts/patch-spotify.sh
 xmonad/.config/xmonad/lib/Custom/MyMacAddresses.hs
 nvim/.config/nvim/lazy-lock.json
-images
-spicetify
+spicetify/.config/spicetify/Backup
+spicetify/.config/spicetify/Extracted
