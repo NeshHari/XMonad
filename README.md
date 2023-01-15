@@ -7,7 +7,7 @@ Pardon the informality in this introduction. If you are reading this you probabl
 *Note: Completed sections are ticked. Rest can be assumed to be WIP.* ✓
 - Haskell Language Server Integration With Neovim ✓
 - The Fundamentals of Modularisation ✓
-- Multi-Monitor and Hot Plugging Support
+- Multi-Monitor and Hot Plugging Support ✓
 - Polybar As Your Statusbar
 - Hyper Key Support ✓
 - Other Notable Implementations: 
@@ -16,7 +16,7 @@ Pardon the informality in this introduction. If you are reading this you probabl
     - SubLayouts (Custom Tabs) & Window Navigation
     - CycleWS (Cycling Through Workspaces and Screens)
     - EasyMotion (Focus and Kill Any Visible Window)
-    - Rescreen (Monitor Hot Plugging)
+    - Rescreen (Monitor Hot Plugging) ✓
     - WindowedFullscreen (Chromium Support)
     - Scratchpads (Quick Commands, Spotify, Glava)
     - ShowWMName (Display Workspace Name When Switching Workspaces)
@@ -24,7 +24,7 @@ Pardon the informality in this introduction. If you are reading this you probabl
     - Spacing/Gaps on the Fly
     - Managehelpers (Center Float, Shift to Workspace, etc.)
     - Sane Keybindings With mkKeymap (Emacs-Style)
-    - Catppuccin Color Scheme
+    - Catppuccin Color Scheme ✓
     - Topic Spaces (upcoming)
     - Theme Switching (upcoming)
 
@@ -59,7 +59,7 @@ To easily manage LSP servers in Neovim, I would suggest using the [Mason](https:
 ```
 *Note: Look at my [lsp.lua](./nvim/.config/nvim/after/plugin/lsp.lua) for configuration post installation.*
 
-To ensure compatibility with the [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) with Neovim, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. As a personal choice, [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html)  is utilised. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
+To ensure complete compatibility [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) with Neovim, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) is utilised as my formatter of choice. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
 
 Additionally, a minimal hie.yaml must be defined as follows for HLS to function.
 ```yaml
@@ -212,7 +212,7 @@ catCrust = "#11111b"
 
 ```
 ## MyStartupApps.hs
-Launch startup applications/scripts like setting wallpaper etc. Some applications are denoted by "spawn" instead of "[spawnOnce](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Util-SpawnOnce.html)"(i.e., only once) is to facilitate display hot plugging. 
+Launch startup applications/scripts like setting wallpaper etc. Some applications are denoted by "spawn" instead of "[spawnOnce](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Util-SpawnOnce.html)"(i.e., only once) is to facilitate display hot plugging. Further details are provided in the MyRescreen.hs subsection.
 ```haskell
 module Custom.MyStartupApps where
 
@@ -229,6 +229,47 @@ myStartupHook = do
   spawnOnce "easyeffects --gapplication-service &"
 ```
 
+## MyRescreen.hs
+Required package: [autorandr](https://archlinux.org/packages/community/any/autorandr/)
+
+Firstly, ensure autorandr detects all possible monitor combinations. In this example, I shall provide single and dual monitor setups. This is assuming the layouts (i.e., portrait/landscape & positioning) are already set up.
+
+With only one monitor, run the following command: 
+```fish
+autorandr --save single
+```
+
+With both monitors on, run the following command:
+```fish
+autorandr --save dual
+```
+Use the following command to ensure the correct layout is detected:
+```fish
+autorandr --detected
+```
+Adapt this concept to whatever configuration you have.
+
+Once autorandr is good to go, add the self-explanatory ReScreen hooks below. If you get kicked to TTY (i.e., xorg crashed), increase the sleep duration before restarting xmonad. My purpose of restarting is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is prevalent when switching from smaller to bigger displays (e.g., single -> dual monitor).
+
+```haskell
+module Custom.MyScreen where
+
+import XMonad
+import XMonad.Hooks.Rescreen
+
+myAfterRescreenHook :: X ()
+myAfterRescreenHook = spawn "sleep 1; xmonad --restart"
+
+myRandrChangeHook :: X ()
+myRandrChangeHook = spawn "autorandr --change"
+
+rescreenCfg :: RescreenConfig
+rescreenCfg =
+  def
+    { afterRescreenHook = myAfterRescreenHook,
+      randrChangeHook = myRandrChangeHook
+    }
+```
 
 # Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
