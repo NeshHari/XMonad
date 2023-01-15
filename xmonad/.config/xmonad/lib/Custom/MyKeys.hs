@@ -46,6 +46,8 @@ myKeys =
     -- Flameshot
     ("<Print>", spawn "flameshot gui"),
     ("S-<Print>", spawn "flameshot full"),
+    -- Scrot
+    ("C-<Print>", spawn "scrot -q 100 ~/Desktop/reddit/%Y-%m-%d-%T.png"),
     -- Search commands (wait for next keypress)
     ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig "microsoft-edge-stable"),
     -- NamedScratchpads
