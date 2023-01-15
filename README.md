@@ -34,7 +34,6 @@ The following guide requires the latest/git version of XMonad to be installed to
 *Note: Ensure xorg-xmessage is installed to view compilation errors.*
 
 # Setup
-
 ## Haskell Language Server (HLS) With Neovim
 To easily manage LSP servers in Neovim, I would suggest using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A straightforward approach is to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
 ```lua
@@ -58,7 +57,7 @@ To easily manage LSP servers in Neovim, I would suggest using the [Mason](https:
         }
     },
 ```
-*Note: Look at my [lsp.lua](./nvim/.config/nvim/after/plugin/lsp.lua) for configuration post installation.
+*Note: Look at my [lsp.lua](./nvim/.config/nvim/after/plugin/lsp.lua) for configuration post installation.*
 
 To ensure compatibility with the [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) with Neovim, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. As a personal choice, [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html)  is utilised. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
 
@@ -126,10 +125,10 @@ xmonad/lib/Custom
 └── MyWorkspaces.hs
 ```
 
-*Note: Ensure there are no mutually recursive modules, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hsin Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.*
+*Note: Ensure there are no mutually recursive modules, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hs in Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.*
 
 ## MyCatppuccin.hs  (Catppuccin Mocha)
-Create color variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend color variables with something unique to that colorscheme such as "cat", to prevent ambiguity when used in conjuction with other colorschemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates amguity errors.
+Create color variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend color variables with something unique to that color scheme such as "cat", to prevent ambiguity when used in conjunction with other color schemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates ambiguity errors.
 ```haskell
 module Custom.MyCatppuccin where
 
@@ -234,9 +233,11 @@ myStartupHook = do
 # Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
 
+Required package: [xcape](https://archlinux.org/packages/community/x86_64/xcape/)
+
 The following is achieved:
 - Caps to Escape (for vim use). 
-- Holding down Caps acts as Ctrl (easy to Ctrl-f for shell completion etc.)
+- Holding down Caps (i.e., Esc) acts as Ctrl (easy to Ctrl-f for shell completion etc.)
 - Holding down either Tab or Backslash acts as Windows key (i.e., Mod4Mask).
 
 Files used (ensure xcape is installed):
@@ -262,7 +263,3 @@ Files used (ensure xcape is installed):
     
     clear lock
 ```
-
-
-Windowed 
-[XMonad.Hooks.EwmhDesktops](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-EwmhDesktops.html) + 
