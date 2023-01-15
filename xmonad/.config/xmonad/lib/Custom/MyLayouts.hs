@@ -1,8 +1,9 @@
 module Custom.MyLayouts where
 
-import Custom.MyCatppuccin
+import Custom.MyDecorations
 import XMonad
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.BoringWindows
 import XMonad.Layout.Column
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
@@ -17,28 +18,6 @@ import XMonad.Layout.Tabbed
 import XMonad.Layout.WindowNavigation
 
 mySpacing i = spacingRaw False (Border 10 10 30 30) True (Border i i i i) True
-
-myShowWNameConfig =
-  def
-    { swn_font = "xft:Sugar Snow:size=60",
-      swn_color = catFlamingo,
-      swn_bgcolor = catBase,
-      swn_fade = 0.8
-    }
-
-myTabConfig =
-  def
-    { activeColor = catGreen,
-      inactiveColor = catBase,
-      urgentColor = catRed,
-      activeBorderColor = catBase,
-      inactiveBorderColor = catBase,
-      urgentBorderColor = catRed,
-      activeTextColor = catBase,
-      inactiveTextColor = catFlamingo,
-      urgentTextColor = catBase,
-      fontName = "xft:Sugar Snow:size=12"
-    }
 
 tabs =
   renamed [XLR.Replace "Tabs"] $
@@ -71,7 +50,7 @@ column =
 
 full = renamed [XLR.Replace "Monocle"] $ noBorders Full
 
-myLayout = ifWider 1080 tall column ||| full
+myLayout = boringWindows (ifWider 1080 tall column ||| full)
 
 myLayoutHook =
   showWName' myShowWNameConfig $
