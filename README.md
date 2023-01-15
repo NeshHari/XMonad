@@ -9,19 +9,21 @@ Pardon the informality in this introduction. If you are reading this you probabl
 - Polybar As Your Statusbar
 - Hyper Key Support
 - Other Notable Implementations: 
-    - PerScreen (Different Layouts for Different Screen Dimensions)
+    - ResizableTile (Tall and Resizable)
+    - PerScreen (Different Layouts for Varied Screen Dimensions)
     - SubLayouts (Tabs) & Window Navigation
     - CycleWS (Cycling Through Workspaces and Screens)
     - EasyMotion (Focus and Kill Any Visible Window)
-    - Rescreen (Display Hotplugging)
-    - WindowedFullscreen (Chromium)
-    - Scratchpads
-    - ShowWMName on Workspace Change
+    - Rescreen (Monitor Hotplugging)
+    - WindowedFullscreen (Chromium Support)
+    - Scratchpads (Quick Commands, Spotify, Glava)
+    - ShowWMName (Display Workspace Name When Switching Workspaces)
     - Custom Prompts (Man Pages, Search Engines, etc.)
     - Spacing/Gaps on the Fly
     - Managehelpers (Center Float, Shift to Workspace, etc.)
     - Sensible Keybindings With Mkkeymap (Emacs-Style)
     - Topic Spaces (upcoming)
+    - Theme Switching (upcoming)
 
 
 ## Prerequisites
