@@ -3,7 +3,7 @@
 # An Informal Intro...
 Pardon the informality in this introduction. If you are reading this you probably already know what [XMonad](https://xmonad.org/) is. Well if you don't, its a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured, and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, the point is, its Haskell: the preeminent reason for staying clear of this WM. Regardless, its one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance in adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
 
-## What's Covered (docs-wise)
+# What's Covered (docs-wise)
 *Note: Completed sections are ticked. Rest can be assumed to be WIP.* ✓
 - Haskell Language Server Integration With Neovim ✓
 - The Fundamentals of Modularisation ✓
@@ -28,7 +28,7 @@ Pardon the informality in this introduction. If you are reading this you probabl
     - Topic Spaces (upcoming)
     - Theme Switching (upcoming)
 
-## Prerequisites
+# Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
 
 ## Recompilation Tips
@@ -45,6 +45,8 @@ The following guide requires the latest/git version of XMonad to be installed to
     -- to address, explicit definition of myVar
     myVar :: String
     ```
+## Haskell Cheat Sheet
+Here's a pretty good [cheat sheet](https://hackage.haskell.org/package/CheatSheet-1.10/src/CheatSheet.pdf)to familiarise with Haskell if you come from any other programming language.
 
 # Setup
 ## Haskell Language Server (HLS) With Neovim
