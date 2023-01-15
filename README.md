@@ -241,15 +241,15 @@ The following is achieved:
 
 Files used (ensure xcape is installed):
 1. .xinitrc
-
+```
     xmodmap ~/.Xmodmap
 
     setxkbmap -option "caps:ctrl_modifier" &
 
     xcape -e 'Caps_Lock=Escape' &
-
-2. .Xmodmap (called in XMonad startupApps)
-
+```
+2. .Xmodmap (also called in MyStartupApps)
+```
     ! Tab as modifier
 
     keycode 23 = Tab Hyper_L
@@ -261,7 +261,7 @@ Files used (ensure xcape is installed):
     add mod4 = Hyper_L
     
     clear lock
-
+```
 
 
 Windowed 
