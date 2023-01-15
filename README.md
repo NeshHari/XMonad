@@ -31,7 +31,11 @@ Pardon the informality in this introduction. If you are reading this you probabl
 ## Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
 
-*Note: Ensure xorg-xmessage is installed to view compilation errors.*
+## Recompilation Tips
+- Ensure xorg-xmessage is installed to view compilation errors
+- Ambiguity occurences can be combatted by renaming the namespace of the imported modules using the "as" clause
+    - For example, import ModuleA as MA, and calling the required functions/variables by prepending "MA."
+- Avoid mutual recursion (i.e., don't import from each other). If required, create a new module.
 
 # Setup
 ## Haskell Language Server (HLS) With Neovim
@@ -84,10 +88,10 @@ Note: If XMonad was installed via stack, symlink or add the xmonad executable to
 sudo ln -s ~/.local/bin/xmonad /usr/bin
 ```
 
-### Modularisation
+## Modularisation
 To improve accessibility and testing in comparison to monolithic code, code is separated into independent modules that are integrated as required in xmonad.hs.  Modules in XMonad are read from the "lib" folder by default, which can be created in the same directory as xmonad.hs. Individual modules (i.e., files with .hs extension) can then be created directly in that folder or subfolders within, and imported in xmonad.hs. In this example, 
 
-#### How it works?
+### How it works?
 
 General Path: ./lib/Custom/MyModule.hs, where "." is relative to where xmonad.hs resides, and MyModule is replaceable by the name of the module. As a rule of thumb, ensure both file name (<MyModule>.hs) and module name (Custom.<MyModule>) are the same.
 
@@ -128,7 +132,7 @@ xmonad/lib/Custom
 *Note: Ensure there are no mutually recursive modules, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hs in Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.*
 
 ## MyCatppuccin.hs  (Catppuccin Mocha)
-Create color variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend color variables with something unique to that color scheme such as "cat", to prevent ambiguity when used in conjunction with other color schemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates ambiguity errors.
+Create color variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend color variables with something unique to that color scheme such as "cat", to prevent ambiguity when used in conjunction with other color schemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates **ambiguity** errors. Refer to the Recompilation Notes subsection on other methods to prevent ambiguous occurences.
 ```haskell
 module Custom.MyCatppuccin where
 
@@ -234,12 +238,12 @@ Required package: [autorandr](https://archlinux.org/packages/community/any/autor
 
 Firstly, ensure autorandr detects all possible monitor combinations. In this example, I shall provide single and dual monitor setups. This is assuming the layouts (i.e., portrait/landscape & positioning) are already set up.
 
-With only one monitor, run the following command: 
+With only one display on, run the following command: 
 ```fish
 autorandr --save single
 ```
 
-With both monitors on, run the following command:
+With both displays on, run the following command:
 ```fish
 autorandr --save dual
 ```
