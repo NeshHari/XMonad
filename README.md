@@ -36,6 +36,15 @@ The following guide requires the latest/git version of XMonad to be installed to
 - Ambiguity occurences can be combatted by renaming the namespace of the imported modules using the "as" clause
     - For example, import ModuleA as MA, and calling the required functions/variables by prepending "MA."
 - Avoid mutual recursion (i.e., don't import from each other). If required, create a new module. More details provided in the Modularisation subsection. 
+- Missing signature warnings can be addressed by explicitly defining the variable type or ignoring the warnings during compilation.
+    ```haskell
+    -- to ignore, prepend this at the top of file
+    {-# OPTIONS_GHC -Wno-missing-signatures #-}
+    ```
+    ```haskell
+    -- to address, explicit definition of myVar
+    myVar :: String
+    ```
 
 # Setup
 ## Haskell Language Server (HLS) With Neovim
@@ -71,7 +80,7 @@ cradle:
     stack:
 ```
 
-Expected folder structure:
+Expected High Level Structure
 ```
 .
 ├── hie.yaml
@@ -132,7 +141,7 @@ xmonad/lib/Custom
 *Note: Ensure there are no mutually recursive modules, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hs in Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.*
 
 ## MyCatppuccin.hs  (Catppuccin Mocha)
-Create color variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend color variables with something unique to that color scheme such as "cat", to prevent ambiguity when used in conjunction with other color schemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates **ambiguity** errors. Refer to the Recompilation Tips subsection on other methods to prevent ambiguous occurences.
+Create color variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend color variables with something unique to that color scheme such as "cat", to prevent ambiguity when used in conjunction with other color schemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates **ambiguity** errors. Refer to the Recompilation Tips subsection on other methods to prevent ambiguous occurrences.
 ```haskell
 module Custom.MyCatppuccin where
 
