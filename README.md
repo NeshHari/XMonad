@@ -46,7 +46,7 @@ The following guide requires the latest/git version of XMonad to be installed to
     myVar :: String
     ```
 ## Haskell Cheat Sheet
-Here's a pretty good [cheat sheet](https://hackage.haskell.org/package/CheatSheet-1.10/src/CheatSheet.pdf)to familiarise with Haskell if you come from any other programming language.
+Here's a pretty good [cheat sheet](https://hackage.haskell.org/package/CheatSheet-1.10/src/CheatSheet.pdf) to familiarise with Haskell if you come from any other programming language.
 
 # Setup
 ## Haskell Language Server (HLS) With Neovim
