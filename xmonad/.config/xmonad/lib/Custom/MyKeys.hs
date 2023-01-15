@@ -2,11 +2,11 @@
 
 module Custom.MyKeys where
 
+import Custom.MyDecorations
+import Custom.MyEasyMotion
 import Custom.MyMacAddresses
-import Custom.MyPrompts
 import Custom.MyScratchpads
 import Custom.MyWorkspaces
-import Custom.MyEasyMotion
 import Data.Map qualified as M
 import System.Exit
 import XMonad
@@ -17,6 +17,7 @@ import XMonad.Actions.Search qualified as S
 import XMonad.Actions.Submap qualified as SM
 import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.BoringWindows
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
 import XMonad.Layout.ResizableTile
@@ -45,15 +46,15 @@ myKeys =
     -- Flameshot
     ("<Print>", spawn "flameshot gui"),
     ("S-<Print>", spawn "flameshot full"),
-    -- Search commands
+    -- Search commands (wait for next keypress)
     ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig "microsoft-edge-stable"),
     -- NamedScratchpads
     ("M-t", namedScratchpadAction myScratchpads "quick commands"),
     ("M-C-g", namedScratchpadAction myScratchpads "glava"),
     -- Bluetooth
-    ("<Page_Up>", spawn ("bluetoothctl -- connect " ++ mySpeakerMac)),
-    ("<Home>", spawn ("bluetoothctl -- connect " ++ myXMMac)),
-    ("<Page_Down>", spawn "bluetoothctl -- disconnect"),
+    ("<Page_Up>", spawn ("bluetoothctl connect " ++ mySpeakerMac)),
+    ("<Home>", spawn ("bluetoothctl connect " ++ myXMMac)),
+    ("<Page_Down>", spawn "bluetoothctl disconnect"),
     -- Close window(s)
     ("M-c", kill),
     ("M-S-c", killAll),
@@ -76,13 +77,13 @@ myKeys =
     -- Focus
     ("M-<Tab>", windows W.focusDown),
     ("M-S-<Tab>", windows W.focusUp),
-    ("M-k", windows W.focusUp),
-    ("M-j", windows W.focusDown),
-    ("M-m", windows W.focusMaster),
+    ("M-k", focusUp),
+    ("M-j", focusDown),
+    ("M-m", focusMaster),
     ("M-S-<Return>", windows W.swapMaster),
-    ("M-S-j", windows W.swapDown),
-    ("M-S-k", windows W.swapUp),
-    -- Master keybinds
+    ("M-S-j", swapDown),
+    ("M-S-k", swapUp),
+    -- Resize
     ("M-h", sendMessage Shrink),
     ("M-l", sendMessage Expand),
     ("M-a", sendMessage MirrorShrink),
