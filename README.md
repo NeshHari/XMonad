@@ -3,20 +3,20 @@
 # An Informal Intro...
 Pardon the informality in this introduction. If you are reading this you probably already know what [XMonad](https://xmonad.org/) is. Well if you don't, its a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured, and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, the point is, its Haskell: the preeminent reason for staying clear of this WM. Regardless, its one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance in adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
 
-## What's Covered
+## What's Covered (docs-wise)
 *Note: Completed sections are ticked. Rest can be assumed to be WIP.* ✓
 - Haskell Language Server Integration With Neovim ✓
 - The Fundamentals of Modularisation ✓
-- Multi-Monitor and Hotplugging Support
+- Multi-Monitor and Hot Plugging Support
 - Polybar As Your Statusbar
-- Hyper Key Support
+- Hyper Key Support ✓
 - Other Notable Implementations: 
-    - ResizableTile (Tall and Resizable)
+    - ResizableTile (Tall and Resizable, and Possible Grid Replacement)
     - PerScreen (Different Layouts for Varied Screen Dimensions)
     - SubLayouts (Custom Tabs) & Window Navigation
     - CycleWS (Cycling Through Workspaces and Screens)
     - EasyMotion (Focus and Kill Any Visible Window)
-    - Rescreen (Monitor Hotplugging)
+    - Rescreen (Monitor Hot Plugging)
     - WindowedFullscreen (Chromium Support)
     - Scratchpads (Quick Commands, Spotify, Glava)
     - ShowWMName (Display Workspace Name When Switching Workspaces)
@@ -24,6 +24,7 @@ Pardon the informality in this introduction. If you are reading this you probabl
     - Spacing/Gaps on the Fly
     - Managehelpers (Center Float, Shift to Workspace, etc.)
     - Sane Keybindings With mkKeymap (Emacs-Style)
+    - Catppuccin Color Scheme
     - Topic Spaces (upcoming)
     - Theme Switching (upcoming)
 
@@ -35,10 +36,31 @@ The following guide requires the latest/git version of XMonad to be installed to
 # Setup
 
 ## Haskell Language Server (HLS) With Neovim
-For easily managing LSP servers in Neovim, I would suggest installing [Mason](https://github.com/williamboman/mason.nvim)plugin.
+To easily manage LSP servers in Neovim, I would suggest using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A straightforward approach is to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
+```lua
+-- example using lazy plugin manager
+ { 'VonHeikemen/lsp-zero.nvim',
+        dependencies = {
+            -- LSP Support
+            { 'neovim/nvim-lspconfig' },
+            { 'williamboman/mason.nvim' },
+            { 'williamboman/mason-lspconfig.nvim' },
+            -- Autocompletion
+            { 'hrsh7th/nvim-cmp' },
+            { 'hrsh7th/cmp-buffer' },
+            { 'hrsh7th/cmp-path' },
+            { 'saadparwaiz1/cmp_luasnip' },
+            { 'hrsh7th/cmp-nvim-lsp' },
+            { 'hrsh7th/cmp-nvim-lua' },
+            -- Snippets
+            { 'L3MON4D3/LuaSnip' },
+            { 'rafamadriz/friendly-snippets' },
+        }
+    },
+```
+Note: Look at my [lsp.lua](./nvim/.config/nvim/after/plugin/lsp.lua) for configuration post installation.
 
-
-For compatibility with the [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) provided by Neovim's native LSP, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. As a personal choice, [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html)  is utilised. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
+To ensure compatibility with the [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) with Neovim, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. As a personal choice, [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html)  is utilised. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
 
 Additionally, a minimal hie.yaml must be defined as follows for HLS to function.
 ```yaml
@@ -66,9 +88,10 @@ sudo ln -s ~/.local/bin/xmonad /usr/bin
 ### Modularisation
 To improve accessibility and testing in comparison to monolithic code, code is separated into independent modules that are integrated as required in xmonad.hs.  Modules in XMonad are read from the "lib" folder by default, which can be created in the same directory as xmonad.hs. Individual modules (i.e., files with .hs extension) can then be created directly in that folder or subfolders within, and imported in xmonad.hs. In this example, 
 
-How it works?
+#### How it works?
 
-*Note: MyModule is replaceable by the name of the module*
+General Path: ./lib/Custom/MyModule.hs, where "." is relative to where xmonad.hs resides, and MyModule is replaceable by the name of the module. As a rule of thumb, ensure both file name (<MyModule>.hs) and module name (Custom.<MyModule>) are the same.
+
 ```haskell
 -- path: lib/Custom/MyModule.hs
 -- define module at the top of file
@@ -103,10 +126,9 @@ xmonad/lib/Custom
 └── MyWorkspaces.hs
 ```
 
-### Custom Modules:
-General Path: ./lib/Custom/MyModuleName.hs, where "." is relative to where xmonad.hs resides.
+Note: Ensure there are no mutually recursive modules, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hsin Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.
 
-#### MyCatppuccin.hs  (Catppuccin Mocha)
+## MyCatppuccin.hs  (Catppuccin Mocha)
 Create color variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend color variables with something unique to that colorscheme such as "cat", to prevent ambiguity when used in conjuction with other colorschemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates amguity errors.
 ```haskell
 module Custom.MyCatppuccin where
@@ -190,31 +212,26 @@ catCrust :: String
 catCrust = "#11111b"
 
 ```
-#### MyStartupApps.hs
-Launch startup applications/scripts like setting wallpaper etc. 
+## MyStartupApps.hs
+Launch startup applications/scripts like setting wallpaper etc. Some applications are denoted by "spawn" instead of "[spawnOnce](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Util-SpawnOnce.html)"(i.e., only once) is to facilitate display hot plugging. 
 ```haskell
 module Custom.MyStartupApps where
 
 import XMonad
-import XMonad.Hooks.SetWMName  
 import XMonad.Util.SpawnOnce
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "~/.fehbg"
-  -- supports hyper keys
+  spawn "feh --bg-scale ~/wallpapers/stains_of_purple.jpg"
+  spawn "~/scripts/feh-blur.sh -s; ~/scripts/feh-blur.sh -d"
   spawnOnce "xmodmap ~/.Xmodmap"
+  spawnOnce "dunst &"
   spawn "killall picom; picom -b"
-  spawn "~/feh-blur.sh -s; ~/feh-blur.sh -d"
-  spawn "easyeffects --gapplication-service &"
-  -- export _JAVA_AWT_WM_NONREPARENTING=1 instead of LG3D
-  -- setWMName "LG3D"
-
+  spawnOnce "easyeffects --gapplication-service &"
 ```
 
-### User-Specific Workflow Configuration 
 
-#### Hyper Keys
+# Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
 
 The following is achieved:
