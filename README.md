@@ -286,6 +286,25 @@ rescreenCfg =
     }
 ```
 
+## MyWorkspaces.hs
+Workspaces can be named as you wish. These will be displayed on the screen when switching workspaces if used alongside [XMonad.Layout.ShowWName](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Layout-ShowWName.html). Always remember what's named here must be carried over to your Polybar configuration, particularly if icons are used.
+
+```haskell
+module Custom.MyWorkspaces where
+
+myWorkspaces :: [String]
+myWorkspaces = ["one", "two", "three", "four", "five"]
+```
+Snippet of EWMH module in Polybar's config.ini:
+```
+icon-0 = one;<icon-for-ws-1>
+icon-1 = two;<icon-for-ws-2>
+icon-2 = three;<icon-for-ws-3>
+icon-3 = four;<icon-for-ws-4>
+icon-4 = five;<icon-for-ws-5>
+```
+For my full Polybar configuration, click [here](./polybar/.config/polybar/config.ini).
+
 # Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
 
