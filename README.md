@@ -11,7 +11,7 @@ Pardon the informality in this introduction. If you are reading this you probabl
 - Other Notable Implementations: 
     - ResizableTile (Tall and Resizable)
     - PerScreen (Different Layouts for Varied Screen Dimensions)
-    - SubLayouts (Tabs) & Window Navigation
+    - SubLayouts (Custom Tabs) & Window Navigation
     - CycleWS (Cycling Through Workspaces and Screens)
     - EasyMotion (Focus and Kill Any Visible Window)
     - Rescreen (Monitor Hotplugging)
@@ -21,10 +21,9 @@ Pardon the informality in this introduction. If you are reading this you probabl
     - Custom Prompts (Man Pages, Search Engines, etc.)
     - Spacing/Gaps on the Fly
     - Managehelpers (Center Float, Shift to Workspace, etc.)
-    - Sensible Keybindings With Mkkeymap (Emacs-Style)
+    - Sane Keybindings With mkKeymap (Emacs-Style)
     - Topic Spaces (upcoming)
     - Theme Switching (upcoming)
-
 
 ## Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
@@ -83,21 +82,23 @@ import Custom.MyModule
 
 -- code...
 ```
-```
+```fish
+xmonad/lib/Custom
+>  exa --tree
 .
-└── Custom
-   ├── MyCatppuccin.hs
-   ├── MyEasyMotion.hs
-   ├── MyKeys.hs
-   ├── MyLayouts.hs
-   ├── MyMacAddresses.hs (hidden)
-   ├── MyManagement.hs
-   ├── MyMouse.hs
-   ├── MyPrompts.hs
-   ├── MyScratchpads.hs
-   ├── MyScreen.hs
-   ├── MyStartupApps.hs
-   └── MyWorkspaces.hs  
+├── MyCatppuccin.hs
+├── MyDecorations.hs
+├── MyEasyMotion.hs
+├── MyKeys.hs
+├── MyLayouts.hs
+├── MyMacAddresses.hs
+├── MyManagement.hs
+├── MyManagementPositioning.hs
+├── MyMouse.hs
+├── MyScratchpads.hs
+├── MyScreen.hs
+├── MyStartupApps.hs
+└── MyWorkspaces.hs
 ```
 
 ### Custom Modules:
