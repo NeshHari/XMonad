@@ -94,7 +94,7 @@ Expected High Level Structure
 └── xmonad.hs
 ```
 
-Note: If XMonad was installed via stack, symlink or add the xmonad executable to PATH to make "xmonad --restart" usable.
+*Note: If XMonad was installed via stack, symlink or add the xmonad executable to PATH to make "xmonad --restart" usable.*
 ```bash
 sudo ln -s ~/.local/bin/xmonad /usr/bin
 ```
