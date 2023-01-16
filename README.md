@@ -4,7 +4,7 @@
 Pardon the informality in this introduction. If you are reading this, you probably already know what [XMonad](https://xmonad.org/) is. Well, if you don't, it's a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, it's Haskell: the preeminent reason for staying clear of this WM. Regardless, it's one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance to adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
 
 # What's Covered (docs-wise)
-*Note: Completed sections are ticked. Rest can be assumed to be WIP.* ✓
+*Note: Completed sections are ticked ✓. Rest can be assumed to be WIP.*
 - Haskell Language Server Integration With Neovim ✓
 - The Fundamentals of Modularisation ✓
 - Multi-Monitor and Hot Plugging Support ✓
@@ -18,11 +18,11 @@ Pardon the informality in this introduction. If you are reading this, you probab
     - EasyMotion (Focus and Kill Any Visible Window)
     - Rescreen (Monitor Hot Plugging) ✓
     - WindowedFullscreen (Chromium Support)
-    - Scratchpads (Quick Commands, Spotify, Glava)
+    - Scratchpads (Quick Commands, Glava, etc.) ✓
     - ShowWMName (Display Workspace Name When Switching Workspaces)
     - Custom Prompts (Man Pages, Search Engines, etc.)
     - Spacing/Gaps on the Fly
-    - Managehelpers (Center Float, Shift to Workspace, etc.)
+    - Managehelpers (Center Float, Shift to Workspace, etc.) ✓
     - Sane Keybindings With mkKeymap (Emacs-Style)
     - Catppuccin Colour Scheme ✓
     - Topic Spaces (upcoming)
@@ -198,7 +198,7 @@ catText = "#cdd6f4"
 catSubtext1 :: String
 catSubtext1 = "#bac2de"
 
-catSubtext0 :: String✓
+catSubtext0 :: String
 catSubtext0 = "#a6adc8"
 
 catOverlay2 :: String
@@ -251,7 +251,6 @@ myStartupHook = do
 Required package: [autorandr](https://archlinux.org/packages/community/any/autorandr/)
 
 Firstly, ensure autorandr detects all possible monitor combinations. In this example, I shall provide single and dual monitor setups. This assumes the layouts (i.e., portrait/landscape & positioning) are already set up.
-Adapt this concept to whatever configuration you have.
 
 With only one display on, run the following command: 
 ```fish
@@ -268,7 +267,7 @@ autorandr --detected
 ```
 Adapt this concept to whatever configuration you have.
 
-Once autorandr is good to go, add the self-explanatory ReScreen hooks below. If you get kicked to TTY (i.e., Xorg crashed), increase the sleep duration before restarting xmonad. My purpose for "restarting" is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is prevalent when switching from more minor to more extensive displays (e.g., single -> dual monitor).
+Once autorandr is good to go, add the self-explanatory ReScreen hooks below. If you get kicked to TTY (i.e., Xorg crashed), increase the sleep duration before restarting xmonad. My purpose for "restarting" is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is prominent when switching from more smaller to more extensive displays (e.g., single -> dual monitor).
 
 ```haskell
 module Custom.MyScreen where
@@ -312,13 +311,13 @@ Click [here](./polybar/.config/polybar/config.ini) for my full Polybar configura
 ## MyManagement.hs
 There will be instances where you want windows to automatically start in full screen, float in the middle, spawn in a different workspace, and much more etc. This is where [ManageHelpers](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-ManageHelpers.html) come in. For such windows, you must first identify appName/className/resource of that window. The differences are indicated below, referenced from [Hackage](https://hackage.haskell.org/package/xmonad-0.17.1/docs/XMonad-ManageHook.html).
 ```haskell
-appName :: Query StringSource#
+appName :: Query String
 Return the application name; i.e., the first string returned by WM_CLASS.
 
-resource :: Query StringSource#
+resource :: Query String
 Backwards compatible alias for appName.
 
-className :: Query StringSource#
+className :: Query String
 Return the resource class; i.e., the second string returned by WM_CLASS.
 ```
 To get the WM_CLASS, run the following in the terminal:
@@ -327,7 +326,7 @@ xprop | grep 'CLASS'
 ```
 *Note: The terminal will not display any output till a visible window is clicked with a mouse/cursor.*
 
-Now that we know the window's name, we use composeAll, which executes all matching rules, unlike composeOne, which only executes the first match. As shown, we can then utilise the same manage helper for multiple windows (via <&&>). To shift to a different workspace, use doShift followed by the workspace name (e.g., --> doShift "games"). Note that the workspace names must exist for this to work. [MyWorkspaces.hs](./xmonad/.config/xmonad/lib/Custom/MyWorkspaces.hs) covers how workspaces are defined. Finally, since manage helpers are functions to be used with manageHook, we must add them back to the hook since myManagement was extracted instead of defined directly in the manageHook.
+Now that we know the window's name, we use composeAll, which executes all matching rules, unlike composeOne, which only executes the first match. We can then utilise the same manage helper for multiple windows (via <&&>). To shift to a different workspace, use doShift followed by the workspace name (e.g., --> doShift "games"). Note that the workspace names must exist for this to work. [MyWorkspaces.hs](./xmonad/.config/xmonad/lib/Custom/MyWorkspaces.hs) covers how workspaces are defined. Finally, since manage helpers are functions to be used with manageHook, we must add them back to the hook since myManagement was extracted instead of defined directly in the manageHook.
 ```haskell
 module Custom.MyManagement where
 
@@ -371,6 +370,49 @@ myCenterSmall = customFloating $ W.RationalRect fromLeft fromTop width height
     height = 1 / 3
     fromLeft = (1 - width) / 2
     fromTop = (1 - height) / 2
+```
+## MyScratchpads.hs
+Scratchpads can be considered floating windows that are hidden and shown as necessary. I use it for running quick terminal commands via Alacritty instead of my main terminal Kitty. The reason is that scratchpads are dependent on WM_CLASS. If a terminal (e.g., kitty) is already open, and one toggles a scratchpad with the same WM_CLASS "kitty", XMonad may hide the tiled window instead.
+```haskell
+module Custom.MyScratchpads where
+
+import Custom.MyManagementPositioning
+import XMonad (appName)
+import XMonad.ManageHook ((=?))
+import XMonad.Util.NamedScratchpad
+
+myScratchpads :: [NamedScratchpad]
+myScratchpads =
+  [ NS "quick commands" spawnQc findQc myCenter,
+    NS "glava" spawnGl findGl myCenterSmall
+  ]
+  where
+    {-
+    To get WM_CLASS of a visible window, run "xprop | grep 'CLASS'" and select the window.
+    appName :: Query StringSource
+    Return the application name; i.e., the first string returned by WM_CLASS.
+
+    resource :: Query StringSource
+    Backwards compatible alias for appName.
+
+    className :: Query StringSource
+    Return the resource class; i.e., the second string returned by WM_CLASS. -}
+    spawnQc = "alacritty -e fish"
+    findQc = appName =? "Alacritty"
+
+    spawnGl = "glava"
+    findGl = appName =? "GLava"
+```
+Another thing to consider is hiding the "NSP" workspace, which appears in the polybar from the first spawn of a named scratchpad. A simple and effective solution is to set the icon for the NSP workspace to empty. Assuming icons are used as labels for workspaces, leave the icon for NSP  blank.
+
+Snippet of EWMH module in Polybar's config.ini:
+```
+icon-0 = one;<icon-for-ws-1>
+icon-1 = two;<icon-for-ws-2>
+icon-2 = three;<icon-for-ws-3>
+icon-3 = four;<icon-for-ws-4>
+icon-4 = five;<icon-for-ws-5>
+icon-5 = NSP;
 ```
 
 # Hyper Keys
