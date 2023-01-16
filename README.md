@@ -1,7 +1,7 @@
 ![IMAGE](./images/reddit.png)
 
 # An Informal Intro...
-Pardon the informality in this introduction. If you are reading this you probably already know what [XMonad](https://xmonad.org/) is. Well if you don't, its a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured, and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, the point is, its Haskell: the preeminent reason for staying clear of this WM. Regardless, its one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance in adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
+Pardon the informality in this introduction. If you are reading this, you probably already know what [XMonad](https://xmonad.org/) is. Well, if you don't, it's a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, it's Haskell: the preeminent reason for staying clear of this WM. Regardless, it's one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance to adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
 
 # What's Covered (docs-wise)
 *Note: Completed sections are ticked. Rest can be assumed to be WIP.* ✓
@@ -31,26 +31,28 @@ Pardon the informality in this introduction. If you are reading this you probabl
 # Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
 
+
 ## Recompilation Tips
 - Ensure xorg-xmessage is installed to view compilation errors
-- Ambiguity occurences can be combatted by renaming the namespace of the imported modules using the "as" clause
-    - For example, import ModuleA as MA, and calling the required functions/variables by prepending "MA."
-- Avoid mutual recursion (i.e., don't import from each other). If required, create a new module. More details provided in the Modularisation subsection. 
+- Ambiguity occurrences can be combatted by renaming the namespace of the imported modules using the "as" clause
+    - For example, import ModuleA as MA and call the required functions/variables by prepending "MA."
+- Avoid mutual recursion (i.e., don't import from each other). If required, create a new module. More details are provided in the Modularisation subsection. 
 - Missing signature warnings can be addressed by explicitly defining the variable type or ignoring the warnings during compilation.
-    ```haskell
-    -- to ignore, prepend this at the top of file
-    {-# OPTIONS_GHC -Wno-missing-signatures #-}
-    ```
-    ```haskell
-    -- to address, explicit definition of myVar
-    myVar :: String
-    ```
+
+```haskell
+-- to ignore, prepend this at the top of file
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
+```
+```haskell
+-- to address, explicit definition of myVar
+myVar :: String
+```
 ## Haskell Cheat Sheet
 Here's a pretty good [cheat sheet](https://hackage.haskell.org/package/CheatSheet-1.10/src/CheatSheet.pdf) to familiarise with Haskell if you come from any other programming language.
 
 # Setup
 ## Haskell Language Server (HLS) With Neovim
-To easily manage LSP servers in Neovim, I would suggest using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A straightforward approach is to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
+To easily manage LSP servers in Neovim, I suggest using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A straightforward approach is to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
 ```lua
 -- example using lazy plugin manager
  { 'VonHeikemen/lsp-zero.nvim',
@@ -74,9 +76,9 @@ To easily manage LSP servers in Neovim, I would suggest using the [Mason](https:
 ```
 *Note: Look at my [lsp.lua](./nvim/.config/nvim/after/plugin/lsp.lua) for configuration post installation.*
 
-To ensure complete compatibility [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) with Neovim, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) is utilised as my formatter of choice. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
+To ensure complete compatibility [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) with Neovim, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via Pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) is utilised as my formatter of choice. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
 
-Additionally, a minimal hie.yaml must be defined as follows for HLS to function.
+A minimal hie.yaml must be defined for HLS to function.
 ```yaml
 cradle:
     stack:
@@ -99,11 +101,11 @@ Expected High Level Structure
 sudo ln -s ~/.local/bin/xmonad /usr/bin
 ```
 
+
 ## Modularisation
 To improve accessibility and testing in comparison to monolithic code, code is separated into independent modules that are integrated as required in xmonad.hs.  Modules in XMonad are read from the "lib" folder by default, which can be created in the same directory as xmonad.hs. Individual modules (i.e., files with .hs extension) can then be created directly in that folder or subfolders within, and imported in xmonad.hs. In this example, 
 
 ### How it works?
-
 General Path: ./lib/Custom/MyModule.hs, where "." is relative to where xmonad.hs resides, and MyModule is replaceable by the name of the module. As a rule of thumb, ensure both file name (<MyModule>.hs) and module name (Custom.<MyModule>) are the same.
 
 ```haskell
@@ -140,10 +142,11 @@ xmonad/lib/Custom
 └── MyWorkspaces.hs
 ```
 
-*Note: Ensure there are no mutually recursive modules, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hs in Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.*
+*Note: Ensure no mutually recursive modules exist, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hs in Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.*
 
 ## MyCatppuccin.hs  (Catppuccin Mocha)
-Create color variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend color variables with something unique to that color scheme such as "cat", to prevent ambiguity when used in conjunction with other color schemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates **ambiguity** errors. Refer to the Recompilation Tips subsection on other methods to prevent ambiguous occurrences.
+Create colour variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend colour variables with something unique to that colour scheme, such as "cat", to prevent ambiguity when used in conjunction with other colour schemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates **ambiguity** errors. Refer to the Recompilation Tips subsection on other methods to prevent ambiguous occurrences.
+
 ```haskell
 module Custom.MyCatppuccin where
 
@@ -247,7 +250,8 @@ myStartupHook = do
 ## MyRescreen.hs
 Required package: [autorandr](https://archlinux.org/packages/community/any/autorandr/)
 
-Firstly, ensure autorandr detects all possible monitor combinations. In this example, I shall provide single and dual monitor setups. This is assuming the layouts (i.e., portrait/landscape & positioning) are already set up.
+Firstly, ensure autorandr detects all possible monitor combinations. In this example, I shall provide single and dual monitor setups. This assumes the layouts (i.e., portrait/landscape & positioning) are already set up.
+Adapt this concept to whatever configuration you have.
 
 With only one display on, run the following command: 
 ```fish
@@ -264,7 +268,7 @@ autorandr --detected
 ```
 Adapt this concept to whatever configuration you have.
 
-Once autorandr is good to go, add the self-explanatory ReScreen hooks below. If you get kicked to TTY (i.e., xorg crashed), increase the sleep duration before restarting xmonad. My purpose of restarting is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is prevalent when switching from smaller to bigger displays (e.g., single -> dual monitor).
+Once autorandr is good to go, add the self-explanatory ReScreen hooks below. If you get kicked to TTY (i.e., Xorg crashed), increase the sleep duration before restarting xmonad. My purpose for "restarting" is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is prevalent when switching from more minor to more extensive displays (e.g., single -> dual monitor).
 
 ```haskell
 module Custom.MyScreen where
@@ -287,7 +291,7 @@ rescreenCfg =
 ```
 
 ## MyWorkspaces.hs
-Workspaces can be named as you wish. These will be displayed on the screen when switching workspaces if used alongside [XMonad.Layout.ShowWName](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Layout-ShowWName.html). Always remember what's named here must be carried over to your Polybar configuration, particularly if icons are used.
+Workspaces can be named as you wish. When switching workspaces, the names will be displayed on the screen if used alongside [XMonad.Layout.ShowWName](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Layout-ShowWName.html). Always remember what's named here must be carried over to your Polybar configuration, mainly if icons are used.
 
 ```haskell
 module Custom.MyWorkspaces where
@@ -303,7 +307,7 @@ icon-2 = three;<icon-for-ws-3>
 icon-3 = four;<icon-for-ws-4>
 icon-4 = five;<icon-for-ws-5>
 ```
-For my full Polybar configuration, click [here](./polybar/.config/polybar/config.ini).
+Click [here](./polybar/.config/polybar/config.ini) for my full Polybar configuration.
 
 # Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
