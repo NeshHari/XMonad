@@ -24,7 +24,7 @@ Pardon the informality in this introduction. If you are reading this, you probab
     - Spacing/Gaps on the Fly
     - Managehelpers (Center Float, Shift to Workspace, etc.)
     - Sane Keybindings With mkKeymap (Emacs-Style)
-    - Catppuccin Color Scheme ✓
+    - Catppuccin Colour Scheme ✓
     - Topic Spaces (upcoming)
     - Theme Switching (upcoming)
 
@@ -101,11 +101,11 @@ Expected High Level Structure
 sudo ln -s ~/.local/bin/xmonad /usr/bin
 ```
 
-
 ## Modularisation
-To improve accessibility and testing in comparison to monolithic code, code is separated into independent modules that are integrated as required in xmonad.hs.  Modules in XMonad are read from the "lib" folder by default, which can be created in the same directory as xmonad.hs. Individual modules (i.e., files with .hs extension) can then be created directly in that folder or subfolders within, and imported in xmonad.hs. In this example, 
+To improve accessibility and testing compared to monolithic code, code is separated into independent modules integrated as required in xmonad.hs. Modules in XMonad are read from the "lib" folder by default, which can be created in the same directory as xmonad.hs. Individual modules (i.e., files with .hs extension) can then be made directly in that folder or subfolders within and imported in xmonad.hs. 
 
 ### How it works?
+
 General Path: ./lib/Custom/MyModule.hs, where "." is relative to where xmonad.hs resides, and MyModule is replaceable by the name of the module. As a rule of thumb, ensure both file name (<MyModule>.hs) and module name (Custom.<MyModule>) are the same.
 
 ```haskell
@@ -308,6 +308,70 @@ icon-3 = four;<icon-for-ws-4>
 icon-4 = five;<icon-for-ws-5>
 ```
 Click [here](./polybar/.config/polybar/config.ini) for my full Polybar configuration.
+
+## MyManagement.hs
+There will be instances where you want windows to automatically start in full screen, float in the middle, spawn in a different workspace, and much more etc. This is where [ManageHelpers](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-ManageHelpers.html) come in. For such windows, you must first identify appName/className/resource of that window. The differences are indicated below, referenced from [Hackage](https://hackage.haskell.org/package/xmonad-0.17.1/docs/XMonad-ManageHook.html).
+```haskell
+appName :: Query StringSource#
+Return the application name; i.e., the first string returned by WM_CLASS.
+
+resource :: Query StringSource#
+Backwards compatible alias for appName.
+
+className :: Query StringSource#
+Return the resource class; i.e., the second string returned by WM_CLASS.
+```
+To get the WM_CLASS, run the following in the terminal:
+```fish
+xprop | grep 'CLASS'
+```
+*Note: The terminal will not display any output till a visible window is clicked with a mouse/cursor.*
+
+Now that we know the window's name, we use composeAll, which executes all matching rules, unlike composeOne, which only executes the first match. As shown, we can then utilise the same manage helper for multiple windows (via <&&>). To shift to a different workspace, use doShift followed by the workspace name (e.g., --> doShift "games"). Note that the workspace names must exist for this to work. [MyWorkspaces.hs](./xmonad/.config/xmonad/lib/Custom/MyWorkspaces.hs) covers how workspaces are defined. Finally, since manage helpers are functions to be used with manageHook, we must add them back to the hook since myManagement was extracted instead of defined directly in the manageHook.
+```haskell
+module Custom.MyManagement where
+
+import Custom.MyScratchpads
+import XMonad
+import XMonad.Hooks.ManageHelpers (doCenterFloat)
+import XMonad.Util.NamedScratchpad
+
+myManagement =
+  composeAll
+    [(className =? "witcher3.exe" <&&> className =? "steam_app_0") --> doCenterFloat]
+
+myManageHook :: ManageHook
+myManageHook = namedScratchpadManageHook myScratchpads <> myManagement
+```
+
+## MyManagementPositioning.hs
+This is an extension to Custom.MyManagement. It handles the positioning of floating windows such as scratchpads. To keep the windows centred whilst varying the size, only modify the width and height "size" variables whilst ignoring the fromLeft and fromTop "distance" variables I have defined. You can skip the {-# Language... #-}. It is just something I use to ignore warnings stemming from importing qualified during stack install.
+```haskell
+{-# LANGUAGE ImportQualifiedPost #-}
+
+-- separated module from Custom.MyManagement to prevent mutually recursive modules
+module Custom.MyManagementPositioning where
+
+import XMonad
+import XMonad.StackSet qualified as W
+import XMonad.Util.NamedScratchpad
+
+myCenter :: ManageHook
+myCenter = customFloating $ W.RationalRect fromLeft fromTop width height
+  where
+    width = 1 / 2
+    height = 1 / 2
+    fromLeft = (1 - width) / 2
+    fromTop = (1 - height) / 2
+
+myCenterSmall :: ManageHook
+myCenterSmall = customFloating $ W.RationalRect fromLeft fromTop width height
+  where
+    width = 1 / 3
+    height = 1 / 3
+    fromLeft = (1 - width) / 2
+    fromTop = (1 - height) / 2
+```
 
 # Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
