@@ -1,12 +1,5 @@
-<style>
-    body {
-        text-align: justify
-    }
-</style>
-
-<body>
 <h1 align="center">XMonad Starter Kit</h1>
-<h2 align="center">~The Stains of Purple~</h2>
+<h2 align="center">~ The Stains of Purple ~</h2>
 
 ![IMAGE](./images/reddit.png)
 
@@ -241,7 +234,7 @@ catCrust = "#11111b"
 
 ```
 ## MyStartupApps.hs
-Launch startup applications/scripts like setting wallpaper etc. Some applications are denoted by "spawn" instead of "[spawnOnce](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Util-SpawnOnce.html)"(i.e., only once) is to facilitate display hot plugging. Further details are provided in the MyRescreen.hs subsection.
+Launch startup applications/scripts like setting wallpaper etc. Some applications are denoted by "spawn" instead of "[spawnOnce](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Util-SpawnOnce.html)" (i.e., only once) is to facilitate display hot plugging. Further details are provided in the MyRescreen.hs subsection.
 ```haskell
 module Custom.MyStartupApps where
 
@@ -282,7 +275,7 @@ autorandr --detected
 Adapt this concept to whatever configuration you have.
 
 ### Rescreen Hook
-Once autorandr is good to go, add the self-explanatory ReScreen hooks below. If you get kicked to TTY (i.e., Xorg crashed), increase the sleep duration before restarting xmonad. My purpose for "restarting" is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is prominent when switching from more smaller to more extensive displays (e.g., single -> dual monitor).
+Once autorandr is good to go, add the self-explanatory Rescreen hooks below. If you get kicked to TTY (i.e., Xorg crashed), increase the sleep duration before restarting xmonad. My purpose for "restarting" is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is critical when switching from smaller to more extensive displays (e.g., single -> dual monitor).
 
 ```haskell
 module Custom.MyScreen where
@@ -431,14 +424,6 @@ icon-4 = five;<icon-for-ws-5>
 icon-5 = NSP;
 ```
 
-<p style="font-size: 0">
-## XMonad.hs
-### Window Swallowing
-### Fullscreen
-### Windowed Fullscreen (Chromium Support)
-</p>
-
-
 ## Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
 
@@ -472,4 +457,3 @@ Files used (ensure xcape is installed):
     
     clear lock
 ```
-</body>
