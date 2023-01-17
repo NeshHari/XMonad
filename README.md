@@ -1,9 +1,14 @@
+<style>body {text-align: justify}</style>
+
+<h1 align="center">XMonad Starter Kit</h1>
+<h2 align="center">~The Stains of Purple~</h2>
+
 ![IMAGE](./images/reddit.png)
 
-# An Informal Intro...
+## An Informal Intro...
 Pardon the informality in this introduction. If you are reading this, you probably already know what [XMonad](https://xmonad.org/) is. Well, if you don't, it's a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, it's Haskell: the preeminent reason for staying clear of this WM. Regardless, it's one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance to adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
 
-# What's Covered (docs-wise)
+## What's Covered (docs-wise)
 *Note: Completed sections are ticked ✓. Rest can be assumed to be WIP.*
 - Haskell Language Server Integration With Neovim ✓
 - The Fundamentals of Modularisation ✓
@@ -17,40 +22,41 @@ Pardon the informality in this introduction. If you are reading this, you probab
     - CycleWS (Cycling Through Workspaces and Screens)
     - EasyMotion (Focus and Kill Any Visible Window)
     - Rescreen (Monitor Hot Plugging) ✓
-    - WindowedFullscreen (Chromium Support)
-    - Scratchpads (Quick Commands, Glava, etc.) ✓
+    - WindowSwallowing (Hide Terminal Instance Which Launches GUI)
+    - Windowed Fullscreen (Chromium Support)
+    - EwmhDesktops (Communicate with Polybar)
+    - NamedScratchpads (Quick Commands, Glava, etc.) ✓
     - ShowWMName (Display Workspace Name When Switching Workspaces)
     - Custom Prompts (Man Pages, Search Engines, etc.)
     - Spacing/Gaps on the Fly
     - Managehelpers (Center Float, Shift to Workspace, etc.) ✓
     - Sane Keybindings With mkKeymap (Emacs-Style)
     - Catppuccin Colour Scheme ✓
+    - Better Borders (Single Open Window, Fullscreen, etc.)
     - Topic Spaces (upcoming)
     - Theme Switching (upcoming)
 
-# Prerequisites
+## Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
 
 
 ## Recompilation Tips
 - Ensure xorg-xmessage is installed to view compilation errors
-- Ambiguity occurrences can be combatted by renaming the namespace of the imported modules using the "as" clause
-    - For example, import ModuleA as MA and call the required functions/variables by prepending "MA."
+- Ambiguity occurrences can be combatted by renaming the namespace of the imported modules using the "as" clause. For example, import ModuleA as MA and call the required functions/variables by prepending "MA."
 - Avoid mutual recursion (i.e., don't import from each other). If required, create a new module. More details are provided in the Modularisation subsection. 
 - Missing signature warnings can be addressed by explicitly defining the variable type or ignoring the warnings during compilation.
+    ```haskell
+    -- to ignore, prepend this at the top of file
+    {-# OPTIONS_GHC -Wno-missing-signatures #-}
+    ```
+    ```haskell
+    -- to address, explicit definition of myVar
+    myVar :: String
+    ```
 
-```haskell
--- to ignore, prepend this at the top of file
-{-# OPTIONS_GHC -Wno-missing-signatures #-}
-```
-```haskell
--- to address, explicit definition of myVar
-myVar :: String
-```
 ## Haskell Cheat Sheet
 Here's a pretty good [cheat sheet](https://hackage.haskell.org/package/CheatSheet-1.10/src/CheatSheet.pdf) to familiarise with Haskell if you come from any other programming language.
 
-# Setup
 ## Haskell Language Server (HLS) With Neovim
 To easily manage LSP servers in Neovim, I suggest using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A straightforward approach is to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
 ```lua
@@ -102,11 +108,11 @@ sudo ln -s ~/.local/bin/xmonad /usr/bin
 ```
 
 ## Modularisation
-To improve accessibility and testing compared to monolithic code, code is separated into independent modules integrated as required in xmonad.hs. Modules in XMonad are read from the "lib" folder by default, which can be created in the same directory as xmonad.hs. Individual modules (i.e., files with .hs extension) can then be made directly in that folder or subfolders within and imported in xmonad.hs. 
+To improve accessibility and testing compared to monolithic code, code is separated into independent modules integrated as required in xmonad.hs. Modules in XMonad are read from the "lib" folder by default, which can be created in the same directory as xmonad.hs. Individual modules (i.e., files with .hs extension) can then be made directly in that folder (./lib) or subfolders (e.g. ./lib/Custom) within and imported in xmonad.hs.
 
-### How it works?
+### The Basics
 
-General Path: ./lib/Custom/MyModule.hs, where "." is relative to where xmonad.hs resides, and MyModule is replaceable by the name of the module. As a rule of thumb, ensure both file name (<MyModule>.hs) and module name (Custom.<MyModule>) are the same.
+General Path: ./lib/Custom/MyModule.hs, where "." is relative to where xmonad.hs resides, and MyModule is replaceable by the name of the module. As a rule of thumb, ensure both file name (MyModuleName.hs) and module name (Custom.MyModuleName) are the same.
 
 ```haskell
 -- path: lib/Custom/MyModule.hs
@@ -248,6 +254,9 @@ myStartupHook = do
 ```
 
 ## MyRescreen.hs
+Hot plugging is a must-have feature for any multi-monitor workflow. XMonad provides a [custom hook](https://xmonad.github.io/xmonad-docs/xmonad-contrib-0.16.999/XMonad-Hooks-Rescreen.html) that monitors xrandr changes. This is best used alongside [autorandr](https://github.com/phillipberndt/autorandr), which automatically selects a predefined configuration dependent on the number of connected displays.
+
+### Autorandr 
 Required package: [autorandr](https://archlinux.org/packages/community/any/autorandr/)
 
 Firstly, ensure autorandr detects all possible monitor combinations. In this example, I shall provide single and dual monitor setups. This assumes the layouts (i.e., portrait/landscape & positioning) are already set up.
@@ -267,6 +276,7 @@ autorandr --detected
 ```
 Adapt this concept to whatever configuration you have.
 
+### Rescreen Hook
 Once autorandr is good to go, add the self-explanatory ReScreen hooks below. If you get kicked to TTY (i.e., Xorg crashed), increase the sleep duration before restarting xmonad. My purpose for "restarting" is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is prominent when switching from more smaller to more extensive displays (e.g., single -> dual monitor).
 
 ```haskell
@@ -387,21 +397,22 @@ myScratchpads =
     NS "glava" spawnGl findGl myCenterSmall
   ]
   where
-    {-
-    To get WM_CLASS of a visible window, run "xprop | grep 'CLASS'" and select the window.
-    appName :: Query StringSource
-    Return the application name; i.e., the first string returned by WM_CLASS.
-
-    resource :: Query StringSource
-    Backwards compatible alias for appName.
-
-    className :: Query StringSource
-    Return the resource class; i.e., the second string returned by WM_CLASS. -}
     spawnQc = "alacritty -e fish"
     findQc = appName =? "Alacritty"
 
     spawnGl = "glava"
     findGl = appName =? "GLava"
+
+{-
+To get WM_CLASS of a visible window, run "xprop | grep 'CLASS'" and select the window.
+appName :: Query String
+Return the application name; i.e., the first string returned by WM_CLASS.
+
+resource :: Query String
+Backwards compatible alias for appName.
+
+className :: Query String
+Return the resource class; i.e., the second string returned by WM_CLASS. -}
 ```
 Another thing to consider is hiding the "NSP" workspace, which appears in the polybar from the first spawn of a named scratchpad. A simple and effective solution is to set the icon for the NSP workspace to empty. Assuming icons are used as labels for workspaces, leave the icon for NSP  blank.
 
@@ -415,7 +426,15 @@ icon-4 = five;<icon-for-ws-5>
 icon-5 = NSP;
 ```
 
-# Hyper Keys
+<p style="font-size: 0">
+## XMonad.hs
+### Window Swallowing
+### Fullscreen
+### Windowed Fullscreen (Chromium Support)
+</p>
+
+
+## Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
 
 Required package: [xcape](https://archlinux.org/packages/community/x86_64/xcape/)
