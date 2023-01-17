@@ -1,5 +1,10 @@
-<style>body {text-align: justify}</style>
+<style>
+    body {
+        text-align: justify
+    }
+</style>
 
+<body>
 <h1 align="center">XMonad Starter Kit</h1>
 <h2 align="center">~The Stains of Purple~</h2>
 
@@ -467,3 +472,4 @@ Files used (ensure xcape is installed):
     
     clear lock
 ```
+</body>
