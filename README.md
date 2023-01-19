@@ -1,7 +1,7 @@
 <h1 align="center">XMonad Starter Kit</h1>
 <h2 align="center">~ The Stains of Purple ~</h2>
 
-![IMAGE](./images/reddit.png)
+![IMAGE](./images/xmonad.png)
 
 ## An Informal Intro...
 Pardon the informality in this introduction. If you are reading this, you probably already know what [XMonad](https://xmonad.org/) is. Well, if you don't, it's a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, it's Haskell: the preeminent reason for staying clear of this WM. Regardless, it's one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance to adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
