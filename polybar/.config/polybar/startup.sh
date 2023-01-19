@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 #
+export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}')
+
 notify-send -u low " Rescreening in progress ";
 
 killall -q polybar;

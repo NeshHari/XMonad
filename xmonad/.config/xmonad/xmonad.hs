@@ -78,11 +78,17 @@ main =
 
 myPolybar =
   def
-    { -- for defining what to log
-      sbLogHook =
+    { sbLogHook =
         xmonadPropLog
-          =<< dynamicLogString def,
-      -- lower polybar for monacle layout
+          =<< dynamicLogString polybarPP,
       sbStartupHook = spawn "~/.config/polybar/startup.sh",
-      sbCleanupHook = spawn "killall -q polybar"
+      sbCleanupHook = spawn "killall polybar"
     }
+
+polybarPP =
+  def
+    { ppCurrent = textColor "" . wrap "" "",
+      ppOrder = \(_ : l : _ : _) -> [l]
+    }
+
+textColor color = wrap ("%{F" <> color <> "}") " %{F-}"
