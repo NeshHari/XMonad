@@ -9,9 +9,9 @@ xsetroot -cursor_name left_ptr
 
 unclutter &
 
-export DEFAULT_NETWORK_INTERFACE=$(ip route | grep '^default' | awk '{print $5}')
-
 ~/scripts/fix-wifi.sh
+
+wait
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
