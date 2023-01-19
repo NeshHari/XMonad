@@ -11,8 +11,6 @@ unclutter &
 
 ~/scripts/fix-wifi.sh
 
-wait
-
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
 export _JAVA_AWT_WM_NONREPARENTING=1
