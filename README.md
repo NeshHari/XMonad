@@ -263,7 +263,11 @@ With only one display on, run the following command:
 ```fish
 autorandr --save single
 ```
-
+*Note: There may be cases particularly on boot where the second monitor is turned off (i.e., black screen) but connected to a power supply and display port. In such cases where xrandr does not correctly detect the screen resolution, you may want to force the second monitor to be off before saving the "single" profile. In my setup, DP-1 is the second monitor that I want off, whilst the specified resolution is for the monitor I wish to utilise.*
+```fish
+xrandr --fb 2560x1440 --output DP-1 --off
+autorandr --save single --force
+```
 With both displays on, run the following command:
 ```fish
 autorandr --save dual
@@ -272,7 +276,10 @@ Use the following command to ensure the correct layout is detected:
 ```fish
 autorandr --detected
 ```
-Adapt this concept to whatever configuration you have.
+Adapt this concept to whatever configuration you have. To debug, run the following: 
+```fish
+autorandr --debug --dry-run -cf
+```
 
 ### Rescreen Hook
 Once autorandr is good to go, add the self-explanatory Rescreen hooks below. If you get kicked to TTY (i.e., Xorg crashed), increase the sleep duration before restarting xmonad. My purpose for "restarting" is to recall the StartupHook in Custom.MyStartupApps, and spawn polybar and feh accordingly on the detected monitor. This is critical when switching from smaller to more extensive displays (e.g., single -> dual monitor).
@@ -422,6 +429,69 @@ icon-2 = three;<icon-for-ws-3>
 icon-3 = four;<icon-for-ws-4>
 icon-4 = five;<icon-for-ws-5>
 icon-5 = NSP;
+```
+## MyLayouts.hs
+```haskell
+module Custom.MyLayouts where
+
+import Custom.MyDecorations
+import XMonad
+import XMonad.Hooks.ManageDocks
+import XMonad.Layout.BoringWindows
+import XMonad.Layout.Column
+import XMonad.Layout.MultiToggle
+import XMonad.Layout.MultiToggle.Instances
+import XMonad.Layout.NoBorders
+import XMonad.Layout.PerScreen
+import XMonad.Layout.Renamed as XLR
+import XMonad.Layout.ResizableTile
+import XMonad.Layout.ShowWName
+import XMonad.Layout.Spacing
+import XMonad.Layout.SubLayouts
+import XMonad.Layout.Tabbed
+import XMonad.Layout.WindowNavigation
+
+mySpacing i = spacingRaw False (Border 10 10 30 30) True (Border i i i i) True
+
+tabs =
+  renamed [XLR.Replace "Tabs"] $
+    avoidStruts $
+      tabbed
+        shrinkText
+        myTabConfig
+
+tall =
+  renamed [XLR.Replace "Tall"] $
+    avoidStruts $
+      windowNavigation $
+        addTabs shrinkText myTabConfig $
+          subLayout [] tabs $
+            mySpacing 7 $
+              ResizableTall nmaster delta ratio []
+  where
+    nmaster = 1
+    ratio = 1 / 2
+    delta = 3 / 100
+
+column =
+  renamed [XLR.Replace "Column"] $
+    avoidStruts $
+      windowNavigation $
+        addTabs shrinkText myTabConfig $
+          subLayout [] tabs $
+            mySpacing 7 $
+              Column 1.0
+
+full = renamed [XLR.Replace "Monocle"] $ noBorders Full
+
+myLayout = boringWindows (ifWider 1080 tall column ||| full)
+
+myLayoutHook =
+  showWName' myShowWNameConfig $
+    smartBorders $
+      mkToggle
+        (NOBORDERS ?? FULL ?? EOT)
+        myLayout
 ```
 
 ## Hyper Keys
