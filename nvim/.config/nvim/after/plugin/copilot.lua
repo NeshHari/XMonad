@@ -46,3 +46,6 @@ end)
 cmp.event:on("menu_closed", function()
     vim.b.copilot_suggestion_hidden = false
 end)
+
+vim.keymap.set({ "n" }, "<C-[>", "<cmd>lua require('copilot.suggestion').toggle_auto_trigger()<CR>",
+    { noremap = true, silent = true })
