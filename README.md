@@ -14,9 +14,9 @@ Pardon the informality in this introduction. If you are reading this, you probab
 - Polybar As Your Statusbar
 - Hyper Key Support ✓
 - Other Notable Implementations: 
-    - ResizableTile (Tall and Resizable, and Possible Grid Replacement)
-    - PerScreen (Different Layouts for Varied Screen Dimensions)
-    - SubLayouts (Custom Tabs) & Window Navigation
+    - ResizableTile (Tall and Resizable, and Possible Grid Replacement) ✓
+    - PerScreen (Different Layouts for Varied Screen Dimensions) ✓
+    - SubLayouts (Custom Tabs) & Window Navigation ✓
     - CycleWS (Cycling Through Workspaces and Screens)
     - EasyMotion (Focus and Kill Any Visible Window)
     - Rescreen (Monitor Hot Plugging) ✓
@@ -24,13 +24,13 @@ Pardon the informality in this introduction. If you are reading this, you probab
     - Windowed Fullscreen (Chromium Support)
     - EwmhDesktops (Communicate with Polybar)
     - NamedScratchpads (Quick Commands, Glava, etc.) ✓
-    - ShowWMName (Display Workspace Name When Switching Workspaces)
+    - ShowWMName (Display Workspace Name When Switching Workspaces) ✓
     - Custom Prompts (Man Pages, Search Engines, etc.)
-    - Spacing/Gaps on the Fly
+    - Spacing/Gaps on the Fly 
     - Managehelpers (Center Float, Shift to Workspace, etc.) ✓
     - Sane Keybindings With mkKeymap (Emacs-Style)
     - Catppuccin Colour Scheme ✓
-    - Better Borders (Single Open Window, Fullscreen, etc.)
+    - Better Borders (Single Open Window, Fullscreen, etc.) ✓
     - Topic Spaces (upcoming)
     - Theme Switching (upcoming)
 
@@ -140,12 +140,12 @@ xmonad/lib/Custom
 ├── MyManagement.hs
 ├── MyManagementPositioning.hs
 ├── MyMouse.hs
+├── MyPolybar.hs
 ├── MyScratchpads.hs
 ├── MyScreen.hs
 ├── MyStartupApps.hs
 └── MyWorkspaces.hs
 ```
-
 *Note: Ensure no mutually recursive modules exist, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hs in Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.*
 
 ## MyCatppuccin.hs  (Catppuccin Mocha)
@@ -419,7 +419,7 @@ Backwards compatible alias for appName.
 className :: Query String
 Return the resource class; i.e., the second string returned by WM_CLASS. -}
 ```
-Another thing to consider is hiding the "NSP" workspace, which appears in the polybar from the first spawn of a named scratchpad. A simple and effective solution is to set the icon for the NSP workspace to empty. Assuming icons are used as labels for workspaces, leave the icon for NSP  blank.
+Another thing to consider is hiding the "NSP" workspace, which appears in the polybar from the first spawn of a named scratchpad. A simple and effective solution is to set the icon for the NSP workspace to empty. Assuming icons are used as labels for workspaces, leave the icon for NSP  blank. Another alternative is to filter out the workspace. 
 
 Snippet of EWMH module in Polybar's config.ini:
 ```
@@ -430,8 +430,45 @@ icon-3 = four;<icon-for-ws-4>
 icon-4 = five;<icon-for-ws-5>
 icon-5 = NSP;
 ```
-## MyLayouts.hs
+Snippet of xmonad.hs:
 ```haskell
+$ addEwmhWorkspaceSort (pure (filterOutWs [scratchpadWorkspaceTag]))
+````
+
+## MyLayouts.hs
+Each layout and screen can be customised to your workflow. I have included the layouts I use on a daily basis. I suggest using the "ResizableTall" layout as it permits the modification of window height and width. Remember to avoid struts on layouts that are not full screen to prevent docks (i.e., polybar) from overlapping the layouts or vice versa. I have added a key bind to manually toggle polybar and struts if you wish to do so. Optionally, you may rename your layouts which will affect how the current layout name is printed in polybar.
+
+Snippet of key map:
+```haskell
+("M-C-<Space>", spawn "polybar-msg cmd toggle" >> sendMessage ToggleStruts),
+```
+### PerScreen
+In my dual monitor setup, I have a portrait and landscape monitor. It is not sensible to use the same layouts for both monitors. Using the "Tall" layout on a portrait monitor (1080 x 1920) is impractical. Therefore, I specify that only if the screen resolution is wider than 1080, I use "Tall". Otherwise I use "Column". Additionally, for both monitors I use "Full" since I would like full screen support for both. 
+
+### SubLayouts & BoringWindows
+SubLayouts are layouts within a layout. I use tabs as a sub layout for "Tall" and "Column". Although not included, you may consider using "Accordion" as a sub layout to "Column". Tweak this however you wish as long as its sensible to you. BoringWindows allow you to skip over windows in a sublayout when moving focus. I use a separate separate key map to navigate through windows confined in a sub layout (i.e., grouped together). 
+
+Snippet of key map:
+```haskell
+("M-C-.", onGroup W.focusUp'),
+("M-C-,", onGroup W.focusDown')
+```
+### Better Borders
+If borders are not needed when a single window is present, use "smartBorders". Borders will be visible when more than one window is present. For full screen layouts, use "noBorders" to completely remove the border. This can be achieved by dynamically applying and removing the transformer. 
+
+Snippet of concept above: 
+```haskell
+smartBorders $
+  mkToggle
+    (NOBORDERS ?? FULL ?? EOT)
+```
+*Note: EOT simply marks the end of transformer*
+
+Everything in MyLayout.hs:
+
+*Note: I have disabled the missing signature warning for this module due to complexity in defining type signatures for the present variables.*
+```haskell
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
 module Custom.MyLayouts where
 
 import Custom.MyDecorations
