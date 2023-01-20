@@ -2,32 +2,24 @@
 import Custom.MyCatppuccin
 import Custom.MyDecorations (myBorderWidth, myFocusedBorderColor, myNormalBorderColor)
 import Custom.MyKeys
-import Custom.MyLayouts
+import Custom.MyLayouts (myLayoutHook)
 import Custom.MyManagement
-import Custom.MyMouse
-import Custom.MyPolybar
-import Custom.MyScratchpads
-import Custom.MyScreen
-import Custom.MyStartupApps
-import Custom.MyWorkspaces
+import Custom.MyMouse (myMouseBindings)
+import Custom.MyPolybar (myPolybar)
+import Custom.MyScreen (rescreenCfg)
+import Custom.MyStartupApps (myStartupHook)
+import Custom.MyWorkspaces (myWorkspaces)
 -- given modules from xmonad and xmonad-contrib
-import Data.Map qualified as M
-import Data.Monoid
-import System.Exit
 import XMonad
 import XMonad.Hooks.EwmhDesktops
-import XMonad.Hooks.ManageDocks
-import XMonad.Hooks.ManageHelpers (doCenterFloat)
-import XMonad.Hooks.OnPropertyChange
-import XMonad.Hooks.Rescreen
-import XMonad.Hooks.SetWMName (setWMName)
+import XMonad.Hooks.ManageDocks (docks)
+import XMonad.Hooks.OnPropertyChange (onXPropertyChange)
+import XMonad.Hooks.Rescreen (rescreenHook)
 import XMonad.Hooks.StatusBar
-import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.WindowSwallowing (swallowEventHook)
-import XMonad.StackSet qualified as W
 import XMonad.Util.EZConfig
 import XMonad.Util.Hacks as Hacks
-import XMonad.Util.NamedScratchpad
+import XMonad.Util.NamedScratchpad (scratchpadWorkspaceTag)
 import XMonad.Util.SpawnOnce
 import XMonad.Util.WorkspaceCompare
 
