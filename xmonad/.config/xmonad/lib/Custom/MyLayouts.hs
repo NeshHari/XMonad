@@ -1,3 +1,5 @@
+{-# OPTIONS_GHC -Wno-missing-signatures #-}
+
 module Custom.MyLayouts where
 
 import Custom.MyDecorations
