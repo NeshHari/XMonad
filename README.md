@@ -11,7 +11,7 @@ Pardon the informality in this introduction. If you are reading this, you probab
 - Haskell Language Server Integration With Neovim ✓
 - The Fundamentals of Modularisation ✓
 - Multi-Monitor and Hot Plugging Support ✓
-- Polybar As Your Statusbar
+- Polybar As Your Statusbar ✓
 - Hyper Key Support ✓
 - Other Notable Implementations: 
     - ResizableTile (Tall and Resizable, and Possible Grid Replacement) ✓
@@ -37,23 +37,22 @@ Pardon the informality in this introduction. If you are reading this, you probab
 ## Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
 
-
 ## Recompilation Tips
 - Ensure xorg-xmessage is installed to view compilation errors
 - Ambiguity occurrences can be combatted by renaming the namespace of the imported modules using the "as" clause. For example, import ModuleA as MA and call the required functions/variables by prepending "MA."
 - Avoid mutual recursion (i.e., don't import from each other). If required, create a new module. More details are provided in the Modularisation subsection. 
 - Missing signature warnings can be addressed by explicitly defining the variable type or ignoring the warnings during compilation.
     ```haskell
-    -- to ignore, prepend this at the top of file
+    -- to ignore, prepend this at the top of the file
     {-# OPTIONS_GHC -Wno-missing-signatures #-}
     ```
     ```haskell
-    -- to address, explicit definition of myVar
+    -- to address, explicitly define the type for myVar (e.g. String)
     myVar :: String
     ```
 
 ## Haskell Cheat Sheet
-Here's a pretty good [cheat sheet](https://hackage.haskell.org/package/CheatSheet-1.10/src/CheatSheet.pdf) to familiarise with Haskell if you come from any other programming language.
+Here's a pretty good [cheat sheet](https://hackage.haskell.org/package/CheatSheet-1.10/src/CheatSheet.pdf) to familiarise yourself with Haskell if you come from any other programming language.
 
 ## Haskell Language Server (HLS) With Neovim
 To easily manage LSP servers in Neovim, I suggest using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A straightforward approach is to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
@@ -88,7 +87,7 @@ cradle:
     stack:
 ```
 
-Expected High Level Structure
+Expected High-Level Structure
 ```
 .
 ├── hie.yaml
@@ -114,7 +113,7 @@ General Path: ./lib/Custom/MyModule.hs, where "." is relative to where xmonad.hs
 
 ```haskell
 -- path: lib/Custom/MyModule.hs
--- define module at the top of file
+-- define the module at the top of the file
 module Custom.MyModule where
 -- other imports
 -- code...
@@ -252,7 +251,7 @@ myStartupHook = do
 ```
 
 ## MyRescreen.hs
-Hot plugging is a must-have feature for any multi-monitor workflow. XMonad provides a [custom hook](https://xmonad.github.io/xmonad-docs/xmonad-contrib-0.16.999/XMonad-Hooks-Rescreen.html) that monitors xrandr changes. This is best used alongside [autorandr](https://github.com/phillipberndt/autorandr), which automatically selects a predefined configuration dependent on the number of connected displays.
+Hot plugging is a must-have feature for any multi-monitor workflow. XMonad provides a [custom hook](https://xmonad.github.io/xmonad-docs/xmonad-contrib-0.16.999/XMonad-Hooks-Rescreen.html) that monitors xrandr changes, best used alongside [autorandr](https://github.com/phillipberndt/autorandr), which automatically selects a predefined configuration dependent on the number of connected displays.
 
 ### Autorandr 
 Required package: [autorandr](https://archlinux.org/packages/community/any/autorandr/)
@@ -263,7 +262,7 @@ With only one display on, run the following command:
 ```fish
 autorandr --save single
 ```
-*Note: There may be cases particularly on boot where the second monitor is turned off (i.e., black screen) but connected to a power supply and display port. In such cases where xrandr does not correctly detect the screen resolution, you may want to force the second monitor to be off before saving the "single" profile. In my setup, DP-1 is the second monitor that I want off, whilst the specified resolution is for the monitor I wish to utilise.*
+*Note: There may be cases, particularly on boot, where the second monitor is turned off (i.e., black screen) but connected to a power supply and display port. In cases where xrandr does not correctly detect the screen resolution, you may want to force the second monitor to be off before saving the "single" profile. In my setup, DP-1 is the second monitor I want off, whilst the specified resolution is for the monitor I wish to utilise.*
 ```fish
 xrandr --fb 2560x1440 --output DP-1 --off
 autorandr --save single --force
@@ -324,16 +323,16 @@ icon-4 = five;<icon-for-ws-5>
 Click [here](./polybar/.config/polybar/config.ini) for my full Polybar configuration.
 
 ## MyManagement.hs
-There will be instances where you want windows to automatically start in full screen, float in the middle, spawn in a different workspace, and much more etc. This is where [ManageHelpers](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-ManageHelpers.html) come in. For such windows, you must first identify appName/className/resource of that window. The differences are indicated below, referenced from [Hackage](https://hackage.haskell.org/package/xmonad-0.17.1/docs/XMonad-ManageHook.html).
+There will be instances where you want windows to start in full screen automatically, float in the middle, spawn in a different workspace, etc. [ManageHelpers](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-ManageHelpers.html) come in handy in such instances. For such windows, you must first identify the appName/className/resource of that window. The differences are referenced below from [Hackage](https://hackage.haskell.org/package/xmonad-0.17.1/docs/XMonad-ManageHook.html).
 ```haskell
 appName :: Query String
-Return the application name; i.e., the first string returned by WM_CLASS.
+Return the application name, i.e., the first String returned by WM_CLASS.
 
 resource :: Query String
 Backwards compatible alias for appName.
 
 className :: Query String
-Return the resource class; i.e., the second string returned by WM_CLASS.
+Return the resource class, i.e., the second String returned by WM_CLASS.
 ```
 To get the WM_CLASS, run the following in the terminal:
 ```fish
@@ -411,13 +410,13 @@ myScratchpads =
 {-
 To get WM_CLASS of a visible window, run "xprop | grep 'CLASS'" and select the window.
 appName :: Query String
-Return the application name; i.e., the first string returned by WM_CLASS.
+Return the application name; i.e., the first String returned by WM_CLASS.
 
 resource :: Query String
 Backwards compatible alias for appName.
 
 className :: Query String
-Return the resource class; i.e., the second string returned by WM_CLASS. -}
+Return the resource class; i.e., the second String returned by WM_CLASS. -}
 ```
 Another thing to consider is hiding the "NSP" workspace, which appears in the polybar from the first spawn of a named scratchpad. A simple and effective solution is to set the icon for the NSP workspace to empty. Assuming icons are used as labels for workspaces, leave the icon for NSP  blank. Another alternative is to filter out the workspace. 
 
@@ -436,7 +435,7 @@ $ addEwmhWorkspaceSort (pure (filterOutWs [scratchpadWorkspaceTag]))
 ````
 
 ## MyLayouts.hs
-Each layout and screen can be customised to your workflow. I have included the layouts I use on a daily basis. I suggest using the "ResizableTall" layout as it permits the modification of window height and width. Remember to avoid struts on layouts that are not full screen to prevent docks (i.e., polybar) from overlapping the layouts or vice versa. I have added a key bind to manually toggle polybar and struts if you wish to do so. Optionally, you may rename your layouts which will affect how the current layout name is printed in polybar.
+Each layout and screen can be customised to your workflow. I have included the layouts I use daily. I suggest using the "ResizableTall" layout as it permits the modification of window height and width. Remember to avoid struts on layouts that are not full screen to prevent docks (i.e., polybar) from overlapping the layouts or vice versa. I have added a key map to toggle polybar and struts manually if you wish. Optionally, you may rename your layouts which will affect how the current layout name is printed in polybar.
 
 Snippet of key map:
 ```haskell
@@ -454,7 +453,7 @@ Snippet of key map:
 ("M-C-,", onGroup W.focusDown')
 ```
 ### Better Borders
-If borders are not needed when a single window is present, use "smartBorders". Borders will be visible when more than one window is present. For full screen layouts, use "noBorders" to completely remove the border. This can be achieved by dynamically applying and removing the transformer. 
+If borders are not needed when a single window is present, use "smartBorders". Borders will be visible when more than one window is present. For full screen layouts, use "noBorders" to altogether remove the border, achievable by dynamically applying and removing the transformer. 
 
 Snippet of concept above: 
 ```haskell
@@ -466,7 +465,7 @@ smartBorders $
 
 Everything in MyLayout.hs:
 
-*Note: I have disabled the missing signature warning for this module due to complexity in defining type signatures for the present variables.*
+*Note: I have disabled the missing signature warning for this module due to the complexity in defining type signatures for the present variables.*
 ```haskell
 {-# OPTIONS_GHC -Wno-missing-signatures #-}
 module Custom.MyLayouts where
@@ -530,6 +529,83 @@ myLayoutHook =
         (NOBORDERS ?? FULL ?? EOT)
         myLayout
 ```
+## Polybar Support
+With the release of [XMonad.Hooks.StatusBar](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar.html) and [XMonad.Hooks.StatusBar.PP](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar-PP.html), utilising Polybar with XMonad has become straightforward. To get started, the polybar configuration requires two modules: "ewmh" and "xmonad". Let us take a closer look at each module separately.
+
+### EWMH Module
+This module queries the EWMH desktops configured by XMonad, which explains why we import EwmhDesktops (ewmh) in xmonad.hs. As highlighted in the section on prerequisites, I suggest utilising disableEwmhManageDesktopViewport, which prevents the wrong ordering of workspaces you may encounter, especially with a multi-polybar instance workflow. When assigning each workspace an icon, ensure the name of the workspace (e.g., "one") is an exact match of that declared in MyWorkspaces.hs. As far as I know, it is not possible to retrieve other information such as the current monitor layout via this module alone. 
+
+*Note: Window titles are not supported by this module. To display window titles, use module/title of type internal/xwindow. Or you may also use the module/xmonad.*
+
+```ini
+[module/ewmh]
+type = internal/xworkspaces
+enable-click = false
+enable-scroll = false
+
+icon-0 = one;
+icon-1 = two;
+icon-2 = three;
+icon-3 = four;
+icon-4 = five;
+icon-5 = NSP;
+
+format = <label-state>
+label-active = %icon% 
+label-occupied = %icon%
+label-empty = %icon%
+
+label-empty-padding = 1
+label-active-padding = 1
+label-urgent-padding = 1
+label-occupied-padding = 1
+
+label-empty-foreground = ${colors.surface2}
+label-active-foreground = ${colors.green}
+label-urgent-foreground = ${colors.red}
+label-occupied-foreground = ${colors.flamingo}
+
+```
+### XMonad Module
+This module executes xmonadpropread found in xmonad-contrib. It permits the use of property logging via xmonadPropLog, which writes a formatted string (i.e., dynamicLogString) to _XMONAD_LOG to be further processsed by polybar's module/xmonad.
+```ini
+[module/xmonad]
+type = custom/script
+exec = /home/nesh/.config/xmonad/xmonad-contrib/scripts/xmonadpropread.hs
+tail = true
+format-font = 5
+format-foreground = ${colors.peach}
+format-offset = -20
+```
+### MyPolybar.hs
+With the rudiments of xmonadPropLog and dynamicLogString covered in the previous subsection, we can move on to customising the formatted string discussed earlier. At this stage in our example, we only have workspace icons. Optionally, we discussed how to include window titles. Although all of which can be made available by modifying the ppOrder to include "ws" (i.e., workspace) and "t" (i.e., title), it is much more tedious to do so since we need to find the exact icon code rather than simply copy and paste the icon of choice. Therefore, I personally prefer the current approach of using two distinct modules (i.e., ewmh and xmonad) in polybar. Continuing our example, I only wish to add the current layout ("l") as defined in ppOrder. However, I would like polybar to assign the colors as it would for any module via "format-foreground". I also do not wish to wrap the current layout with anything (e.g. [Tall], >Tall<, etc.). Therefore, I shall only define the textColor variable and ignore wraps.
+```haskell
+module Custom.MyPolybar where
+
+import XMonad (spawn)
+import XMonad.Hooks.StatusBar
+import XMonad.Hooks.StatusBar.PP
+
+myPolybar :: StatusBarConfig
+myPolybar =
+  def
+    { sbLogHook =
+        xmonadPropLog
+          =<< dynamicLogString polybarPP,
+      sbStartupHook = spawn "~/.config/polybar/startup.sh",
+      sbCleanupHook = spawn "killall polybar"
+    }
+
+polybarPP :: PP
+polybarPP =
+  def
+    { ppCurrent = textColor "" . wrap "" "",
+      ppOrder = \(_ : l : _ : _) -> [l]
+    }
+
+textColor :: String -> String -> String
+textColor color = wrap ("%{F" <> color <> "}") " %{F-}"
+```
 
 ## Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
@@ -564,3 +640,4 @@ Files used (ensure xcape is installed):
     
     clear lock
 ```
+
