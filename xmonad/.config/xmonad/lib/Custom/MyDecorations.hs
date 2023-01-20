@@ -1,9 +1,19 @@
 module Custom.MyDecorations where
 
 import Custom.MyCatppuccin
+import XMonad qualified
 import XMonad.Layout.ShowWName
 import XMonad.Layout.Tabbed
 import XMonad.Prompt
+
+myBorderWidth :: XMonad.Dimension
+myBorderWidth = 3
+
+myNormalBorderColor :: String
+myNormalBorderColor = catMantle
+
+myFocusedBorderColor :: String
+myFocusedBorderColor = catMauve
 
 myPromptConfig :: XPConfig
 myPromptConfig =
@@ -24,6 +34,7 @@ myPromptConfig =
       showCompletionOnTab = False
     }
 
+myShowWNameConfig :: SWNConfig
 myShowWNameConfig =
   def
     { swn_font = "xft:Sugar Snow:size=60",
@@ -32,9 +43,10 @@ myShowWNameConfig =
       swn_fade = 0.8
     }
 
+myTabConfig :: Theme
 myTabConfig =
   def
-    { activeColor = catGreen,
+    { activeColor = catMauve,
       inactiveColor = catBase,
       urgentColor = catRed,
       activeBorderColor = catBase,
