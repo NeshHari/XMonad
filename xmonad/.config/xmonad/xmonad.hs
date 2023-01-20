@@ -1,9 +1,11 @@
 -- import modules in ./lib/Custom/
 import Custom.MyCatppuccin
+import Custom.MyDecorations (myBorderWidth, myFocusedBorderColor, myNormalBorderColor)
 import Custom.MyKeys
 import Custom.MyLayouts
 import Custom.MyManagement
 import Custom.MyMouse
+import Custom.MyPolybar
 import Custom.MyScratchpads
 import Custom.MyScreen
 import Custom.MyStartupApps
@@ -27,42 +29,28 @@ import XMonad.Util.EZConfig
 import XMonad.Util.Hacks as Hacks
 import XMonad.Util.NamedScratchpad
 import XMonad.Util.SpawnOnce
-
--- reduce startup time by using single sprite cache
-myTerminal = "kitty --single-instance"
-
-myFocusFollowsMouse = True
-
-myModMask = mod4Mask
-
-myBorderWidth = 3
-
-myNormalBorderColor = catMantle
-
-myFocusedBorderColor = catMauve
-
-myLogHook = return ()
+import XMonad.Util.WorkspaceCompare
 
 myEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myManageHook <> Hacks.windowedFullscreenFixEventHook
 
 main =
   do
     xmonad
-    {- force XMonad to *not* set _NET_DESKTOP_VIEWPORT
-    available since commit cf13f8f (https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9)
-    correct polybar order on dual monitors -}
-    $ disableEwmhManageDesktopViewport
     $ Hacks.javaHack
       . rescreenHook rescreenCfg
     $ withSB myPolybar
     $ docks
-      -- . ewmhFullscreen
+    -- . ewmhFullscreen
+    $ addEwmhWorkspaceSort (pure (filterOutWs [scratchpadWorkspaceTag]))
+      {- force XMonad to *not* set _NET_DESKTOP_VIEWPORT available since commit cf13f8f (https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9)
+       - correct polybar order on dual monitors -}
+      . disableEwmhManageDesktopViewport
       . ewmh
     $ def
-      { terminal = myTerminal,
-        focusFollowsMouse = myFocusFollowsMouse,
+      { terminal = "kitty --single instance",
+        focusFollowsMouse = True,
         borderWidth = myBorderWidth,
-        modMask = myModMask,
+        modMask = mod4Mask,
         workspaces = myWorkspaces,
         normalBorderColor = myNormalBorderColor,
         focusedBorderColor = myFocusedBorderColor,
@@ -71,24 +59,7 @@ main =
         layoutHook = myLayoutHook,
         manageHook = myManageHook,
         handleEventHook = myEventHook,
-        logHook = myLogHook,
+        logHook = return (),
         startupHook = myStartupHook
       }
       `additionalKeysP` myKeys
-
-myPolybar =
-  def
-    { sbLogHook =
-        xmonadPropLog
-          =<< dynamicLogString polybarPP,
-      sbStartupHook = spawn "~/.config/polybar/startup.sh",
-      sbCleanupHook = spawn "killall polybar"
-    }
-
-polybarPP =
-  def
-    { ppCurrent = textColor "" . wrap "" "",
-      ppOrder = \(_ : l : _ : _) -> [l]
-    }
-
-textColor color = wrap ("%{F" <> color <> "}") " %{F-}"
