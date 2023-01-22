@@ -79,7 +79,7 @@ The $ operator is used to apply a function to an argument without the need for p
 On the other hand, the dot operator (.) is used to compose two functions together. This creates a new function that applies the right-hand function to the result of the left-hand function. An example of this would be f(g(x)) becoming (f . g) x. The dot operator has a higher precedence than the $ operator, so it will be evaluated first.
 
 ## Haskell Language Server (HLS) With Neovim
-Managing LSP servers in Neovim can be made easier by using the [Mason] (https://github.com/williamboman/mason.nvim) plugin. A simpler option would be to install [LSP Zero] (https://github.com/VonHeikemen/lsp-zero.nvim).
+Managing LSP servers in Neovim can be made easier by using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A simpler option would be to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
 
 ```haskell
 -- example using lazy plugin manager
@@ -100,19 +100,25 @@ Managing LSP servers in Neovim can be made easier by using the [Mason] (https://
         { 'L3MON4D3/LuaSnip' },
         { 'rafamadriz/friendly-snippets' },
     }
-},
+}
+```
+*Note: My [lsp.lua](./nvim/.config/nvim/after/plugin/lsp.lua) file contains configuration information post-installation.*
+
+In order to ensure optimal compatibility between the Haskell Language Server (HLS) and Neovim, it is recommended to set up XMonad using stack (what I use) or cabal. Installing it via Pacman/AUR may result in errors such as "could not find module" or "unknown package" on import of modules, even if HLS is successfully attached and running on the Neovim buffer. HLS offers a range of features including diagnostics, completions, code actions, and formatting. A complete list of features can be found [here](https://haskell-language-server.readthedocs.io/en/latest/features.html). My formatter of choice is [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) due to its readability and consistency, which I believe is the default formatter for HLS. 
+
+You may want to include a key mapping and/or autocommand for formatting in Neovim. 
+```lua
+-- autocommand
+vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({async = false})]]
+-- manual format in normal mode (assuming vim.g.mapleader is set)
+vim.keymap.set("n", "<leader>fo", vim.lsp.buf.format)
 ```
 
-*Note: My [lsp.lua] (./nvim/.config/nvim/after/plugin/lsp.lua) file contains configuration information post-installation.*
-
-To ensure full compatibility between the Haskell Language Server (HLS) and Neovim, XMonad should be set up using stack or cabal. Installing it via Pacman/AUR may result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on the Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. [Ormolu] (https://haskell-language-server.readthedocs.io/en/latest/features.html) is utilised as my formatter of choice. The complete list of features is provided [here] (https://haskell-language-server.readthedocs.io/en/latest/features.html).
-
-A minimal hie.yaml must be defined for HLS to function.
+Moving on, a minimal hie.yaml must be defined for HLS to function.
 ```yaml
 cradle:
     stack:
 ```
-
 Expected High-Level Structure
 ```
 .
@@ -125,7 +131,7 @@ Expected High-Level Structure
 └── xmonad.hs
 ```
 
-*Note: If XMonad was installed via stack, symlink or add the xmonad executable to PATH to make "xmonad --restart" usable.*
+If XMonad was installed via stack, symlink or add the xmonad executable to PATH to make "xmonad --recompile/--restart" usable.
 ```bash
 sudo ln -s ~/.local/bin/xmonad /usr/bin
 ```
@@ -147,7 +153,6 @@ module Custom.MyModule where
 -- path: xmonad.hs
 -- import the custom module
 import Custom.MyModule
-
 -- code...
 ```
 ```fish
@@ -172,89 +177,38 @@ xmonad/lib/Custom
 *Note: Ensure no mutually recursive modules exist, or XMonad will not compile. These are modules that import each other. For example, if you import Custom.MyScratchpads in MyManagement.hs, do not import Custom.MyManagement.hs in Custom.MyScratchpads. If the need arises, you can bypass this by extracting part of the module into an even simpler module, as seen in MyManagementPositioning.hs.*
 
 ## MyCatppuccin.hs  (Catppuccin Mocha)
-Create colour variables for the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes) due to their simplicity in recognition compared to hex representations. Prepend colour variables with something unique to that colour scheme, such as "cat", to prevent ambiguity when used in conjunction with other colour schemes with the same variable name. For example, catBlue and nordBlue are different, but using just "blue" creates **ambiguity** errors. Refer to the Recompilation Tips subsection on other methods to prevent ambiguous occurrences.
+In order to improve recognition and simplify the use of the "Catppuccin Mocha" [palette](https://github.com/catppuccin/catppuccin#user-content--palettes), the MyCatppuccin.hs file should define color variables for each color in the palette. Doing this prevents the need to memorise hex representations for each color. To prevent ambiguity when used in conjunction with other color schemes with the same variable name, it is recommended to prepend the color variables with something unique to that color scheme, such as "cat". For example, "catBlue" and "nordBlue" are different, but using just "blue" creates ambiguity errors. Refer to the "Recompilation Tips" subsection for other methods to prevent ambiguous occurrences.
 
 ```haskell
 module Custom.MyCatppuccin where
 
-catRosewater :: String
+catRosewater, catFlamingo, catPink, catMauve, catRed, catMaroon, catPeach, catYellow, catGreen, catTeal, catSky, catSapphire, catBlue, catLavender, catText, catSubtext1, catSubtext0, catOverlay2, catOverlay1, catOverlay0, catSurface2, catSurface1, catSurface0, catBase, catMantle, catCrust :: String
 catRosewater = "#f5e0dc"
-
-catFlamingo :: String
 catFlamingo = "#f2cdcd"
-
-catPink :: String
 catPink = "#f5c2e7"
-
-catMauve :: String
 catMauve = "#cba6f7"
-
-catRed :: String
 catRed = "#f38ba8"
-
-catMaroon :: String
 catMaroon = "#eba0ac"
-
-catPeach :: String
 catPeach = "#fab387"
-
-catYellow :: String
 catYellow = "#f9e2af"
-
-catGreen :: String
 catGreen = "#a6e3a1"
-
-catTeal :: String
 catTeal = "#94e2d5"
-
-catSky :: String
 catSky = "#89dceb"
-
-catSapphire :: String
 catSapphire = "#74c7ec"
-
-catBlue :: String
 catBlue = "#89b4fa"
-
-catLavender :: String
 catLavender = "#b4befe"
-
-catText :: String
 catText = "#cdd6f4"
-
-catSubtext1 :: String
 catSubtext1 = "#bac2de"
-
-catSubtext0 :: String
 catSubtext0 = "#a6adc8"
-
-catOverlay2 :: String
 catOverlay2 = "#9399b2"
-
-catOverlay1 :: String
 catOverlay1 = "#7f849c"
-
-catOverlay0 :: String
 catOverlay0 = "#6c7086"
-
-catSurface2 :: String
 catSurface2 = "#585b70"
-
-catSurface1 :: String
 catSurface1 = "#45475a"
-
-catSurface0 :: String
 catSurface0 = "#313244"
-
-catBase :: String
 catBase = "#1e1e2e"
-
-catMantle :: String
 catMantle = "#181825"
-
-catCrust :: String
 catCrust = "#11111b"
-
 ```
 ## MyStartupApps.hs
 Launch startup applications/scripts like setting wallpaper etc. Some applications are denoted by "spawn" instead of "[spawnOnce](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Util-SpawnOnce.html)" (i.e., only once) is to facilitate display hot plugging. Further details are provided in the MyRescreen.hs subsection.
