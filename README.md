@@ -33,12 +33,14 @@ Are you tired of using the same old window manager? Want to elevate your computi
 | Better Borders (Single Open Window, Fullscreen, etc.)        | Completed |
 | Topic Spaces                                                 | Upcoming  |
 | Theme Switching                                              | Upcoming  |
+| Support for NixOS                                            | Upcoming  |
 
 ## Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
 
 ## Recompilation Tips
 *Note: xorg-xmessage is installed to view compilation errors*
+
 In xmonad, there are several common recompilation errors that can occur while building a configuration. Some of these errors include:
 - Mutual recursion with imported modules - When two or more functions are defined in terms of each other, creating an infinite loop, and the functions are defined in different imported modules. To fix this, you will need to ensure that the mutual recursion is not happening by importing the modules in a different order or by changing the function calls to not cause recursion.
 - Ambiguity Occurrences - An ambiguity error in xmonad can occur when multiple functions with the same name are imported from different modules. To fix this, you can use a qualified import or use an import abbreviation (import module *as* abbreviation) to specify which function to use.
@@ -211,7 +213,9 @@ catMantle = "#181825"
 catCrust = "#11111b"
 ```
 ## MyStartupApps.hs
-Launch startup applications/scripts like setting wallpaper etc. Some applications are denoted by "spawn" instead of "[spawnOnce](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Util-SpawnOnce.html)" (i.e., only once) is to facilitate display hot plugging. Further details are provided in the MyRescreen.hs subsection.
+
+The main difference between the spawn and spawnOnce functions in XMonad is that spawn will start the specified command every time it is called, while spawnOnce will start the specified command only the first time it is called, and subsequent calls will have no effect. Despite traditional use cases where the wallpaper is set only once, some users might choose to set it every time xmonad is restarted so as to better support monitor hot-plugging. This ensures that the wallpaper will be set correctly even if a new monitor is plugged in or if the resolution of the monitor changes. This assumes the user utilises something like "feh bg-scale" in order to scale the wallpaper accordingly.
+
 ```haskell
 module Custom.MyStartupApps where
 
@@ -229,7 +233,7 @@ myStartupHook = do
 ```
 
 ## MyRescreen.hs
-Hot plugging is a must-have feature for any multi-monitor workflow. XMonad provides a [custom hook](https://xmonad.github.io/xmonad-docs/xmonad-contrib-0.16.999/XMonad-Hooks-Rescreen.html) that monitors xrandr changes, best used alongside [autorandr](https://github.com/phillipberndt/autorandr), which automatically selects a predefined configuration dependent on the number of connected displays.
+Hot plugging is a crucial feature for any multi-monitor workflow as it allows users to seamlessly add or remove monitors without disrupting their workflow. XMonad provides a [custom hook](https://xmonad.github.io/xmonad-docs/xmonad-contrib-0.16.999/XMonad-Hooks-Rescreen.html) that is best used in conjunction with other tools such as [autorandr](https://github.com/phillipberndt/autorandr), which automatically selects a predefined configuration dependent on the number of connected displays. It works by listening for RandR events and performing a defined action such as restarting xmonad when the number of screens changes. Together they provide a robust solution for monitor hot-plugging.
 
 ### Autorandr 
 Required package: [autorandr](https://archlinux.org/packages/community/any/autorandr/)
