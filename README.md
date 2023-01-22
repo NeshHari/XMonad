@@ -4,11 +4,7 @@
 ![IMAGE](./images/xmonad.png)
 
 ## An Informal Intro...
-Are you tired of using the same old window manager? Want to elevate your computing experience to the next level? Look no further than XMonad - the dynamic, tiling window manager written in the powerful Haskell programming language.
-
-But don't let the fact that it's written in Haskell scare you away. Despite its intimidating reputation, XMonad is incredibly user-friendly and customizable to fit your specific needs. And the effort you put into learning it will be well worth it.
-
-Through blood, sweat, and tears (yes, literally), I present to you a comprehensive guide to ease your transition to using XMonad as your daily driver. From aesthetics to advanced workflow, everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. So what are you waiting for? Let's revolutionize the way you work and play with XMonad.
+Are you tired of using the same old window manager? Want to elevate your computing experience to the next level? Look no further than XMonad - the dynamic, tiling window manager written in the powerful Haskell programming language. But don't let the fact that it's written in Haskell scare you away. Despite its intimidating reputation, XMonad is incredibly user-friendly and customizable to fit your specific needs. And trust me, the effort you put into learning it will be well worth it. Through blood, sweat, and tears (yes, literally), I present a comprehensive guide (i.e., Starter Kit) to ease your transition to using XMonad as your daily driver. From aesthetics to advanced workflow, I've got you covered with easy-to-digest information and tips. So what are you waiting for? Let's revolutionize the way you work and play with XMonad.
 
 ## What's Covered (docs-wise)
 | Feature                                                           | Status    |
@@ -83,31 +79,33 @@ The $ operator is used to apply a function to an argument without the need for p
 On the other hand, the dot operator (.) is used to compose two functions together. This creates a new function that applies the right-hand function to the result of the left-hand function. An example of this would be f(g(x)) becoming (f . g) x. The dot operator has a higher precedence than the $ operator, so it will be evaluated first.
 
 ## Haskell Language Server (HLS) With Neovim
-To easily manage LSP servers in Neovim, I suggest using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A straightforward approach is to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
-```lua
--- example using lazy plugin manager
- { 'VonHeikemen/lsp-zero.nvim',
-        dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-nvim-lua' },
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
-        }
-    },
-```
-*Note: Look at my [lsp.lua](./nvim/.config/nvim/after/plugin/lsp.lua) for configuration post installation.*
+Managing LSP servers in Neovim can be made easier by using the [Mason] (https://github.com/williamboman/mason.nvim) plugin. A simpler option would be to install [LSP Zero] (https://github.com/VonHeikemen/lsp-zero.nvim).
 
-To ensure complete compatibility [Haskell Language Server (HLS)](https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#user-content-hls) with Neovim, XMonad should be [setup](https://xmonad.org/INSTALL.html) using stack or cabal. Installing via Pacman/AUR will result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) is utilised as my formatter of choice. The complete list of features is provided [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
+```haskell
+-- example using lazy plugin manager
+{ 'VonHeikemen/lsp-zero.nvim',
+    dependencies = {
+        -- LSP Support
+        { 'neovim/nvim-lspconfig' },
+        { 'williamboman/mason.nvim' },
+        { 'williamboman/mason-lspconfig.nvim' },
+        -- Autocompletion
+        { 'hrsh7th/nvim-cmp' },
+        { 'hrsh7th/cmp-buffer' },
+        { 'hrsh7th/cmp-path' },
+        { 'saadparwaiz1/cmp_luasnip' },
+        { 'hrsh7th/cmp-nvim-lsp' },
+        { 'hrsh7th/cmp-nvim-lua' },
+        -- Snippets
+        { 'L3MON4D3/LuaSnip' },
+        { 'rafamadriz/friendly-snippets' },
+    }
+},
+```
+
+*Note: My [lsp.lua] (./nvim/.config/nvim/after/plugin/lsp.lua) file contains configuration information post-installation.*
+
+To ensure full compatibility between the Haskell Language Server (HLS) and Neovim, XMonad should be set up using stack or cabal. Installing it via Pacman/AUR may result in "could not find module" or "unknown package" errors on import of any module, despite HLS successfully attaching and running on the Neovim buffer. HLS provides various features such as diagnostics, completions, code actions, and formatting. [Ormolu] (https://haskell-language-server.readthedocs.io/en/latest/features.html) is utilised as my formatter of choice. The complete list of features is provided [here] (https://haskell-language-server.readthedocs.io/en/latest/features.html).
 
 A minimal hie.yaml must be defined for HLS to function.
 ```yaml
@@ -131,12 +129,10 @@ Expected High-Level Structure
 ```bash
 sudo ln -s ~/.local/bin/xmonad /usr/bin
 ```
-
 ## Modularisation
-To improve accessibility and testing compared to monolithic code, code is separated into independent modules integrated as required in xmonad.hs. Modules in XMonad are read from the "lib" folder by default, which can be created in the same directory as xmonad.hs. Individual modules (i.e., files with .hs extension) can then be made directly in that folder (./lib) or subfolders (e.g. ./lib/Custom) within and imported in xmonad.hs.
+I utilize a modular structure to enhance accessibility, manageability, and testability in comparison to monolithic code. This method consists of dividing/breaking the code into smaller, independent modules that can be integrated as needed. In XMonad, these modules are typically imported from a folder named "lib", which is located in the same directory as the xmonad.hs file. If the folder does not already exist, it can be created. Users can create individual modules by creating files with the .hs extension within the lib folder or any of its subfolders (e.g. ./lib/Custom). These modules can then be imported directly into xmonad.hs or indirectly through other modules for use.
 
 ### The Basics
-
 General Path: ./lib/Custom/MyModule.hs, where "." is relative to where xmonad.hs resides, and MyModule is replaceable by the name of the module. As a rule of thumb, ensure both file name (MyModuleName.hs) and module name (Custom.MyModuleName) are the same.
 
 ```haskell
@@ -163,7 +159,7 @@ xmonad/lib/Custom
 ├── MyEasyMotion.hs
 ├── MyKeys.hs
 ├── MyLayouts.hs
-├── MyMacAddresses.hs
+├── MyMacAddresses.hs (hidden)
 ├── MyManagement.hs
 ├── MyManagementPositioning.hs
 ├── MyMouse.hs
