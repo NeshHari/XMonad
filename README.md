@@ -286,7 +286,7 @@ rescreenCfg =
 ```
 
 ## MyWorkspaces.hs
-Workspaces can be named as you wish. When switching workspaces, the names will be displayed on the screen if used alongside [XMonad.Layout.ShowWName](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Layout-ShowWName.html). Always remember what's named here must be carried over to your Polybar configuration, mainly if icons are used.
+Workspaces are a powerful feature that allow users to organize and manage their open applications in a highly customizable way. The names of these workspaces can be chosen according to personal preference. Utilizing [XMonad.Layout.ShowWName](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Layout-ShowWName.html) via the layout hook will display the assigned names on the screen when switching workspaces. It is important to note that the names assigned to workspaces must also be reflected in the Polybar configuration, particularly if icons are utilized. The XMonad.Layout.ShowWName package provides additional functionality and customization options which are covered in the [Custom.MyDecorations](./xmonad/.config/xmonad/lib/Custom/MyDecorations.hs) module.
 
 ```haskell
 module Custom.MyWorkspaces where
@@ -305,7 +305,11 @@ icon-4 = five;<icon-for-ws-5>
 Click [here](./polybar/.config/polybar/config.ini) for my full Polybar configuration.
 
 ## MyManagement.hs
-There will be instances where you want windows to start in full screen automatically, float in the middle, spawn in a different workspace, etc. [ManageHelpers](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-ManageHelpers.html) come in handy in such instances. For such windows, you must first identify the appName/className/resource of that window. The differences are referenced below from [Hackage](https://hackage.haskell.org/package/xmonad-0.17.1/docs/XMonad-ManageHook.html).
+The XMonad window manager provides a number of powerful tools for managing and positioning windows, including the [ManageHelpers](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Hooks-ManageHelpers.html) module. This module can be particularly useful for scenarios where certain windows need to be automatically set to full-screen, float in the center of the screen, or spawn on a specific workspace.
+
+To utilize the ManageHelpers module, the first step is to identify the appName, className, or resource of the target window. These terms refer to different aspects of the window's properties, and are described in more detail on the Hackage documentation page for the [XMonad.ManageHook](https://hackage.haskell.org/package/xmonad-0.17.1/docs/XMonad-ManageHook.html) module. One way to obtain the WM_CLASS value for a window is to run the command "xprop | grep 'CLASS'" in the terminal, and then click on the desired window with the cursor.
+
+Quick Peek at Referenced Differences: 
 ```haskell
 appName :: Query String
 Return the application name, i.e., the first String returned by WM_CLASS.
@@ -316,13 +320,12 @@ Backwards compatible alias for appName.
 className :: Query String
 Return the resource class, i.e., the second String returned by WM_CLASS.
 ```
-To get the WM_CLASS, run the following in the terminal:
-```fish
-xprop | grep 'CLASS'
-```
-*Note: The terminal will not display any output till a visible window is clicked with a mouse/cursor.*
+Once the window's properties have been identified, the ManageHelpers module can be used to apply various management rules. The composeAll function can be used to execute all matching rules, while composeOne will only execute the first match. Additionally, the <&&> operator can be used to apply the same manage helper to multiple windows.
 
-Now that we know the window's name, we use composeAll, which executes all matching rules, unlike composeOne, which only executes the first match. We can then utilise the same manage helper for multiple windows (via <&&>). To shift to a different workspace, use doShift followed by the workspace name (e.g., --> doShift "games"). Note that the workspace names must exist for this to work. [MyWorkspaces.hs](./xmonad/.config/xmonad/lib/Custom/MyWorkspaces.hs) covers how workspaces are defined. Finally, since manage helpers are functions to be used with manageHook, we must add them back to the hook since myManagement was extracted instead of defined directly in the manageHook.
+For example, to shift a window to a specific workspace, the doShift function can be used, followed by the name of the desired workspace. It is important to note that the workspace names must already exist, and can be defined using the MyWorkspaces module.
+
+Finally, it's worth mentioning that manage helpers are functions that should be used with the manageHook. Therefore, they must be added back to the manageHook after they are defined in the MyManagement module.
+
 ```haskell
 module Custom.MyManagement where
 
@@ -340,7 +343,8 @@ myManageHook = namedScratchpadManageHook myScratchpads <> myManagement
 ```
 
 ## MyManagementPositioning.hs
-This is an extension to Custom.MyManagement. It handles the positioning of floating windows such as scratchpads. To keep the windows centred whilst varying the size, only modify the width and height "size" variables whilst ignoring the fromLeft and fromTop "distance" variables I have defined. You can skip the {-# Language... #-}. It is just something I use to ignore warnings stemming from importing qualified during stack install.
+In addition to the MyManagement module, the MyManagementPositioning module can be used to handle the positioning of floating windows such as scratchpads. To keep windows centered while varying their size, it's recommended to only modify the width and height "size" variables, while ignoring the "distance" variables defined in the fromLeft and fromTop. The purpose of extending the existing Custom.MyManagement module is to avert mutual recursion between Custom.MyManagement and Custom.MyScratchpads. See the Recompilation Tips subsection for more information on mutual recursion.
+
 ```haskell
 {-# LANGUAGE ImportQualifiedPost #-}
 
@@ -368,7 +372,9 @@ myCenterSmall = customFloating $ W.RationalRect fromLeft fromTop width height
     fromTop = (1 - height) / 2
 ```
 ## MyScratchpads.hs
-Scratchpads can be considered floating windows that are hidden and shown as necessary. I use it for running quick terminal commands via Alacritty instead of my main terminal Kitty. The reason is that scratchpads are dependent on WM_CLASS. If a terminal (e.g., kitty) is already open, and one toggles a scratchpad with the same WM_CLASS "kitty", XMonad may hide the tiled window instead.
+Scratchpads are a useful feature in XMonad that allow users to temporarily hide and show floating windows as needed. One common use case for scratchpads is running quick terminal commands through a terminal emulator such as Alacritty, rather than the primary terminal (e.g. Kitty) that is already open. This is because scratchpads are dependent on the WM_CLASS property of a window, and if a terminal with the same WM_CLASS as a scratchpad (e.g. "kitty") is already open, XMonad may hide the tiled window instead of the scratchpad.
+
+The code snippet below illustrates an example of how to define and manage scratchpads using the NamedScratchpad module from the xmonad-contrib package. The example defines two scratchpads, "quick commands" and "glava", and assigns them specific spawn and find commands. This allows the user to easily toggle these scratchpads using the defined hotkeys.
 ```haskell
 module Custom.MyScratchpads where
 
@@ -388,19 +394,9 @@ myScratchpads =
 
     spawnGl = "glava"
     findGl = appName =? "GLava"
-
-{-
-To get WM_CLASS of a visible window, run "xprop | grep 'CLASS'" and select the window.
-appName :: Query String
-Return the application name; i.e., the first String returned by WM_CLASS.
-
-resource :: Query String
-Backwards compatible alias for appName.
-
-className :: Query String
-Return the resource class; i.e., the second String returned by WM_CLASS. -}
 ```
-Another thing to consider is hiding the "NSP" workspace, which appears in the polybar from the first spawn of a named scratchpad. A simple and effective solution is to set the icon for the NSP workspace to empty. Assuming icons are used as labels for workspaces, leave the icon for NSP  blank. Another alternative is to filter out the workspace. 
+
+Another consideration when using scratchpads is hiding the "NSP" workspace that appears in the polybar after the first spawn of a named scratchpad. One solution is to set the icon for the NSP workspace to empty in the polybar's config.ini file. Or alternatively, one can filter out the workspace using the addEwmhWorkspaceSort function and filterOutWs as shown in the snippet of xmonad.hs
 
 Snippet of EWMH module in Polybar's config.ini:
 ```
@@ -415,37 +411,10 @@ Snippet of xmonad.hs:
 ```haskell
 $ addEwmhWorkspaceSort (pure (filterOutWs [scratchpadWorkspaceTag]))
 ````
+Overall, scratchpads are a powerful feature that can improve workflow and organization in XMonad, but it's important to keep in mind the WM_CLASS dependencies and the potential issues with the NSP workspace when configuring them.
 
 ## MyLayouts.hs
-Each layout and screen can be customised to your workflow. I have included the layouts I use daily. I suggest using the "ResizableTall" layout as it permits the modification of window height and width. Remember to avoid struts on layouts that are not full screen to prevent docks (i.e., polybar) from overlapping the layouts or vice versa. I have added a key map to toggle polybar and struts manually if you wish. Optionally, you may rename your layouts which will affect how the current layout name is printed in polybar.
-
-Snippet of key map:
-```haskell
-("M-C-<Space>", spawn "polybar-msg cmd toggle" >> sendMessage ToggleStruts),
-```
-### PerScreen
-In my dual monitor setup, I have a portrait and landscape monitor. It is not sensible to use the same layouts for both monitors. Using the "Tall" layout on a portrait monitor (1080 x 1920) is impractical. Therefore, I specify that only if the screen resolution is wider than 1080, I use "Tall". Otherwise I use "Column". Additionally, for both monitors I use "Full" since I would like full screen support for both. 
-
-### SubLayouts & BoringWindows
-SubLayouts are layouts within a layout. I use tabs as a sub layout for "Tall" and "Column". Although not included, you may consider using "Accordion" as a sub layout to "Column". Tweak this however you wish as long as its sensible to you. BoringWindows allow you to skip over windows in a sublayout when moving focus. I use a separate separate key map to navigate through windows confined in a sub layout (i.e., grouped together). 
-
-Snippet of key map:
-```haskell
-("M-C-.", onGroup W.focusUp'),
-("M-C-,", onGroup W.focusDown')
-```
-### Better Borders
-If borders are not needed when a single window is present, use "smartBorders". Borders will be visible when more than one window is present. For full screen layouts, use "noBorders" to altogether remove the border, achievable by dynamically applying and removing the transformer. 
-
-Snippet of concept above: 
-```haskell
-smartBorders $
-  mkToggle
-    (NOBORDERS ?? FULL ?? EOT)
-```
-*Note: EOT simply marks the end of transformer*
-
-Everything in MyLayout.hs:
+The Custom.MyLayouts module provides a starting point for customizing the layout and appearance of windows on the screen. This module allows users to select from a variety of layouts, such as "ResizableTall", "Tall", "Column" and "Full", and customize them to suit their workflow.
 
 *Note: I have disabled the missing signature warning for this module due to the complexity in defining type signatures for the present variables.*
 ```haskell
@@ -511,6 +480,40 @@ myLayoutHook =
         (NOBORDERS ?? FULL ?? EOT)
         myLayout
 ```
+
+One layout that is particularly useful is "ResizableTall", as it permits the modification of window height and width. When using layouts that are not full-screen, it is important to avoid struts, as they can cause docks (such as polybar) to overlap the layouts or vice versa. To address this issue, I have added a key map that allows the user to toggle the polybar and struts manually. Additionally, it's possible to rename the layouts, which will affect how the current layout name is displayed in the polybar.
+
+Snippet of key map:
+```haskell
+("M-C-<Space>", spawn "polybar-msg cmd toggle" >> sendMessage ToggleStruts),
+```
+### PerScreen
+In the case of a dual monitor setup, it may be useful to use different layouts for each monitor. For example, using the "Tall" layout on a portrait monitor (1080 x 1920) might not be practical. Therefore, I specify that only if the screen resolution is wider than 1080, I use "Tall", otherwise I use "Column" layout. Additionally, for both monitors I use "Full" since I would like full screen support for both.
+
+### SubLayouts & BoringWindows
+Another useful feature in XMonad is the use of sublayouts and boring windows. Sublayouts are layouts within a layout, and can be used to group windows together. In this example, I use tabs as a sublayout for "Tall" and "Column", but other options such as "Accordion" could also be used. Additionally, BoringWindows allow you to skip over windows in a sublayout when moving focus. I use a separate key map to navigate through windows confined in a sublayout.
+
+Snippet of key map:
+```haskell
+("M-C-.", onGroup W.focusUp'),
+("M-C-,", onGroup W.focusDown')
+```
+### Better Borders
+The XMonad window manager provides several options for customizing the appearance of window borders, including the "smartBorders" and "noBorders" layout transformers. These transformers can be used to improve the appearance and functionality of the borders, depending on the number of windows and the layout being used.
+
+The "smartBorders" layout transformer is particularly useful when borders are not needed when only a single window is present. This transformer automatically hides the borders when there is only one window, and makes them visible again when more than one window is present. This can greatly improve the appearance and usability of the window manager, as it eliminates the need for unnecessary borders when working with a single window.
+
+Another useful layout transformer is "noBorders", which can be used to altogether remove the border from full-screen layouts. This transformer can be dynamically applied and removed by using the "mkToggle" function, which allows the user to toggle the border on and off as needed. This can be achieved using the following code snippet:
+
+```haskell
+smartBorders $
+  mkToggle
+    (NOBORDERS ?? FULL ?? EOT)
+```
+*Note: EOT simply marks the end of transformer*
+
+The [XMonad.Layout.NoBorders](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Layout-NoBorders.html) package provides more information on how to configure and use these transformers
+
 ## Polybar Support
 With the release of [XMonad.Hooks.StatusBar](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar.html) and [XMonad.Hooks.StatusBar.PP](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar-PP.html), utilising Polybar with XMonad has become straightforward. To get started, the polybar configuration requires two modules: "ewmh" and "xmonad". Let us take a closer look at each module separately.
 
