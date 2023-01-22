@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 xmodmap ~/.Xmodmap
-xset r rate 300 50
+xset r rate 350 35
 setxkbmap -option "caps:ctrl_modifier"
 xcape -e 'Caps_Lock=Escape'
 
