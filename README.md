@@ -4,44 +4,66 @@
 ![IMAGE](./images/xmonad.png)
 
 ## An Informal Intro...
-Pardon the informality in this introduction. If you are reading this, you probably already know what [XMonad](https://xmonad.org/) is. Well, if you don't, it's a dynamic tiling window manager (WM) for [X Windows System (X11)](https://wiki.archlinux.org/title/xorg) that is written, configured and fully extensible in Haskell (sincere apologies for the somewhat plagiarised description). Anyways, it's Haskell: the preeminent reason for staying clear of this WM. Regardless, it's one that you should be using. At the expense of my blood, sweat, and tears (quite literally), I present a **living document** to reduce your resistance to adopting XMonad as your daily driver. Everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. 
+Are you tired of using the same old window manager? Want to elevate your computing experience to the next level? Look no further than XMonad - the dynamic, tiling window manager written in the powerful Haskell programming language.
+
+But don't let the fact that it's written in Haskell scare you away. Despite its intimidating reputation, XMonad is incredibly user-friendly and customizable to fit your specific needs. And the effort you put into learning it will be well worth it.
+
+Through blood, sweat, and tears (yes, literally), I present to you a comprehensive guide to ease your transition to using XMonad as your daily driver. From aesthetics to advanced workflow, everything required to get an aesthetic and advanced user-specific workflow is broken into smaller, consumable chunks below. So what are you waiting for? Let's revolutionize the way you work and play with XMonad.
 
 ## What's Covered (docs-wise)
-*Note: Completed sections are ticked ✓. Rest can be assumed to be WIP.*
-- Haskell Language Server Integration With Neovim ✓
-- The Fundamentals of Modularisation ✓
-- Multi-Monitor and Hot Plugging Support ✓
-- Polybar As Your Statusbar ✓
-- Hyper Key Support ✓
-- Other Notable Implementations: 
-    - ResizableTile (Tall and Resizable, and Possible Grid Replacement) ✓
-    - PerScreen (Different Layouts for Varied Screen Dimensions) ✓
-    - SubLayouts (Custom Tabs) & Window Navigation ✓
-    - CycleWS (Cycling Through Workspaces and Screens)
-    - EasyMotion (Focus and Kill Any Visible Window)
-    - Rescreen (Monitor Hot Plugging) ✓
-    - WindowSwallowing (Hide Terminal Instance Which Launches GUI)
-    - Windowed Fullscreen (Chromium Support)
-    - EwmhDesktops (Communicate with Polybar)
-    - NamedScratchpads (Quick Commands, Glava, etc.) ✓
-    - ShowWMName (Display Workspace Name When Switching Workspaces) ✓
-    - Custom Prompts (Man Pages, Search Engines, etc.)
-    - Spacing/Gaps on the Fly 
-    - Managehelpers (Center Float, Shift to Workspace, etc.) ✓
-    - Sane Keybindings With mkKeymap (Emacs-Style)
-    - Catppuccin Colour Scheme ✓
-    - Better Borders (Single Open Window, Fullscreen, etc.) ✓
-    - Topic Spaces (upcoming)
-    - Theme Switching (upcoming)
+| Feature                                                           | Status    |
+|-------------------------------------------------------------|----------|
+| Haskell Language Server Integration with Neovim             | Completed |
+| The Fundamentals of Modularization                           | Completed |
+| Multi-Monitor and Hot-Plugging Support                       | Completed |
+| Polybar as Your Statusbar                                   | Completed |
+| Hyper Key Support                                           | Completed |
+| ResizableTile (Tall and Resizable, and Possible Grid Replacement) | Completed |
+| Per-Screen (Different Layouts for Varied Screen Dimensions)   | Completed |
+| Sub-Layouts (Custom Tabs) & Window Navigation                 | Completed |
+| CycleWS (Cycling Through Workspaces and Screens)             | WIP       |
+| EasyMotion (Focus and Kill Any Visible Window)               | WIP       |
+| Rescreen (Monitor Hot-Plugging)                              | Completed |
+| WindowSwallowing (Hide Terminal Instance Which Launches GUI) | WIP       |
+| Windowed Fullscreen (Chromium Support)                       | WIP       |
+| EwmhDesktops (Communicate with Polybar)                      | WIP       |
+| NamedScratchpads (Quick Commands, Glava, etc.)              | Completed |
+| ShowWMName (Display Workspace Name When Switching Workspaces)| Completed |
+| Custom Prompts (Man Pages, Search Engines, etc.)            | WIP       |
+| Spacing/Gaps on the Fly                                      | WIP       |
+| Managehelpers (Center Float, Shift to Workspace, etc.)       | Completed |
+| Sane Keybindings with mkKeymap (Emacs-Style)                | WIP       |
+| Catppuccin Color Scheme                                     | Completed |
+| Better Borders (Single Open Window, Fullscreen, etc.)        | Completed |
+| Topic Spaces                                                 | Upcoming  |
+| Theme Switching                                              | Upcoming  |
 
 ## Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
 
 ## Recompilation Tips
-- Ensure xorg-xmessage is installed to view compilation errors
-- Ambiguity occurrences can be combatted by renaming the namespace of the imported modules using the "as" clause. For example, import ModuleA as MA and call the required functions/variables by prepending "MA."
-- Avoid mutual recursion (i.e., don't import from each other). If required, create a new module. More details are provided in the Modularisation subsection. 
-- Missing signature warnings can be addressed by explicitly defining the variable type or ignoring the warnings during compilation.
+*Note: xorg-xmessage is installed to view compilation errors*
+In xmonad, there are several common recompilation errors that can occur while building a configuration. Some of these errors include:
+- Mutual recursion with imported modules - When two or more functions are defined in terms of each other, creating an infinite loop, and the functions are defined in different imported modules. To fix this, you will need to ensure that the mutual recursion is not happening by importing the modules in a different order or by changing the function calls to not cause recursion.
+- Ambiguity Occurrences - An ambiguity error in xmonad can occur when multiple functions with the same name are imported from different modules. To fix this, you can use a qualified import or use an import abbreviation (import module *as* abbreviation) to specify which function to use.
+
+    For example, if you want to use the function foo from both module A and B in your xmonad configuration, you can import them like this:
+    ```haskell
+    import A (foo)
+    import B (foo) as fooB
+    ```
+    Then, when you use the function foo in your code, it will refer to the one imported from module A, and you can use fooB to refer to the one from module B.
+    
+    Alternatively, you can use a qualified import to specify which function to use like this:
+    ```haskell
+    import qualified A
+    import qualified B
+    ```
+    Then, when you use the function foo in your code, you will have to specify from which module you want to use it, like A.foo or B.foo. By doing this, you can avoid the ambiguity error, the compiler will understand which function you want to use.
+- Unresolved symbols - When the compiler is unable to find the definition of a symbol that is referenced in the code. To fix this, you will need to import the necessary modules or define the symbol.
+- Type error - When the type of a variable or expression does not match what is expected by the function or operation. To fix this, you will need to ensure that the types of the variables and expressions are consistent with what is expected.
+- Syntax error - When the code does not conform to the Haskell syntax. To fix this, you will need to check for missing or extra characters, or any other syntax issues.
+- Missing type signatures/incomplete type annotations - When the type signature of a function or variable is missing or not specified, the compiler may not have enough information to understand the expected behavior of the function or variable. This can lead to potential type errors during compilation. To avoid this, it's important to ensure that all functions and variables have their type signature specified. This way, the compiler can understand the inputs and outputs of the function or variable, and how it should behave. Although it's possible to suppress this warning by using the -Wno-missing-signatures flag when compiling the code, it's not recommended as it can lead to potential type errors in the future. For best practices, it's always recommended to include the type signature for functions and variables.
     ```haskell
     -- to ignore, prepend this at the top of the file
     {-# OPTIONS_GHC -Wno-missing-signatures #-}
@@ -53,6 +75,12 @@ The following guide requires the latest/git version of XMonad to be installed to
 
 ## Haskell Cheat Sheet
 Here's a pretty good [cheat sheet](https://hackage.haskell.org/package/CheatSheet-1.10/src/CheatSheet.pdf) to familiarise yourself with Haskell if you come from any other programming language.
+
+### $ vs . Operators
+In Haskell, both the $ operator and the dot (.) operator are used to control the order of function application. However, they have different functionality.
+
+The $ operator is used to apply a function to an argument without the need for parentheses. This operator has the lowest precedence of any operator in Haskell and is often used to make code more readable by allowing the argument to be placed at the end of a chain of function calls. For example, f(g(x)) can be rewritten as f $ g x.
+On the other hand, the dot operator (.) is used to compose two functions together. This creates a new function that applies the right-hand function to the result of the left-hand function. An example of this would be f(g(x)) becoming (f . g) x. The dot operator has a higher precedence than the $ operator, so it will be evaluated first.
 
 ## Haskell Language Server (HLS) With Neovim
 To easily manage LSP servers in Neovim, I suggest using the [Mason](https://github.com/williamboman/mason.nvim) plugin. A straightforward approach is to install [LSP Zero](https://github.com/VonHeikemen/lsp-zero.nvim).
