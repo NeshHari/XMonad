@@ -7,29 +7,30 @@
 Are you tired of using the same old window manager? Want to elevate your computing experience to the next level? Look no further than XMonad - the dynamic, tiling window manager written in the powerful Haskell programming language. But don't let the fact that it's written in Haskell scare you away. Despite its intimidating reputation, XMonad is incredibly user-friendly and customizable to fit your specific needs. And trust me, the effort you put into learning it will be well worth it. Through blood, sweat, and tears (yes, literally), I present a comprehensive guide (i.e., Starter Kit) to ease your transition to using XMonad as your daily driver. From aesthetics to advanced workflow, I've got you covered with easy-to-digest information and tips. So what are you waiting for? Let's revolutionize the way you work and play with XMonad.
 
 ## What's Covered (docs-wise)
-| Feature                                                           | Status    |
-|-------------------------------------------------------------|----------|
-| Haskell Language Server Integration with Neovim             | Completed |
+| Feature                                                      | Status    |
+|--------------------------------------------------------------|-----------|
+| Haskell Language Server Integration with Neovim              | Completed |
 | The Fundamentals of Modularization                           | Completed |
 | Multi-Monitor and Hot-Plugging Support                       | Completed |
-| Polybar as Your Statusbar                                   | Completed |
-| Hyper Key Support                                           | Completed |
+| Polybar as Your Statusbar                                    | Completed |
+| Hyper Key Support                                            | Completed |
 | ResizableTile (Tall and Resizable, and Possible Grid Replacement) | Completed |
-| Per-Screen (Different Layouts for Varied Screen Dimensions)   | Completed |
-| Sub-Layouts (Custom Tabs) & Window Navigation                 | Completed |
+| Per-Screen (Different Layouts for Varied Screen Dimensions)  | Completed |
+| Sub-Layouts (Custom Tabs) & Window Navigation                | Completed |
 | CycleWS (Cycling Through Workspaces and Screens)             | WIP       |
 | EasyMotion (Focus and Kill Any Visible Window)               | WIP       |
 | Rescreen (Monitor Hot-Plugging)                              | Completed |
-| WindowSwallowing (Hide Terminal Instance Which Launches GUI) | WIP       |
-| Windowed Fullscreen (Chromium Support)                       | WIP       |
-| EwmhDesktops (Communicate with Polybar)                      | WIP       |
-| NamedScratchpads (Quick Commands, Glava, etc.)              | Completed |
+| WindowSwallowing (Hide Terminal Instance Which Launches GUI) | Completed |
+| Java Hack (Better Support for Java Apps)                     | Completed |
+| Windowed Fullscreen (Chromium Support)                       | Completed |
+| EwmhDesktops (Communicate with Polybar)                      | Completed |
+| NamedScratchpads (Quick Commands, Glava, etc.)               | Completed |
 | ShowWMName (Display Workspace Name When Switching Workspaces)| Completed |
-| Custom Prompts (Man Pages, Search Engines, etc.)            | WIP       |
+| Custom Prompts (Man Pages, Search Engines, etc.)             | WIP       |
 | Spacing/Gaps on the Fly                                      | WIP       |
 | Managehelpers (Center Float, Shift to Workspace, etc.)       | Completed |
-| Sane Keybindings with mkKeymap (Emacs-Style)                | WIP       |
-| Catppuccin Color Scheme                                     | Completed |
+| Sane Keybindings with mkKeymap (Emacs-Style)                 | WIP       |
+| Catppuccin Color Scheme                                      | Completed |
 | Better Borders (Single Open Window, Fullscreen, etc.)        | Completed |
 | Topic Spaces                                                 | Upcoming  |
 | Theme Switching                                              | Upcoming  |
@@ -515,12 +516,12 @@ smartBorders $
 The [XMonad.Layout.NoBorders](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Layout-NoBorders.html) package provides more information on how to configure and use these transformers
 
 ## Polybar Support
-With the release of [XMonad.Hooks.StatusBar](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar.html) and [XMonad.Hooks.StatusBar.PP](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar-PP.html), utilising Polybar with XMonad has become straightforward. To get started, the polybar configuration requires two modules: "ewmh" and "xmonad". Let us take a closer look at each module separately.
+The integration of Polybar with XMonad has been greatly simplified with the release of the [XMonad.Hooks.StatusBar](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar.html) and [XMonad.Hooks.StatusBar.PP](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar-PP.html), modules. These modules provide a convenient way to display important information such as the current workspace and layout in Polybar. Let us analyse these module separately.
 
 ### EWMH Module
-This module queries the EWMH desktops configured by XMonad, which explains why we import EwmhDesktops (ewmh) in xmonad.hs. As highlighted in the section on prerequisites, I suggest utilising disableEwmhManageDesktopViewport, which prevents the wrong ordering of workspaces you may encounter, especially with a multi-polybar instance workflow. When assigning each workspace an icon, ensure the name of the workspace (e.g., "one") is an exact match of that declared in MyWorkspaces.hs. As far as I know, it is not possible to retrieve other information such as the current monitor layout via this module alone. 
+To get started, the Polybar configuration requires two modules: "ewmh" and "xmonad". The "ewmh" module queries the EWMH desktops configured by XMonad, and is responsible for displaying the current workspace and its associated icon in Polybar. It is important to note that the workspace names must match exactly with the names defined in the MyWorkspaces module. Additionally, it is recommended to use the disableEwmhManageDesktopViewport function to prevent any issues with the ordering of workspaces, especially when using a multi-Polybar instance workflow.
 
-*Note: Window titles are not supported by this module. To display window titles, use module/title of type internal/xwindow. Or you may also use the module/xmonad.*
+To my knowledge, while the EWMH module can display information such as the current workspace and its associated icon, it does not support the display of window titles or other information such as the current monitor layout. To display window titles, use module/title of type internal/xwindow or module/xmonad.
 
 ```ini
 [module/ewmh]
@@ -549,10 +550,11 @@ label-empty-foreground = ${colors.surface2}
 label-active-foreground = ${colors.green}
 label-urgent-foreground = ${colors.red}
 label-occupied-foreground = ${colors.flamingo}
-
 ```
+
 ### XMonad Module
-This module executes xmonadpropread found in xmonad-contrib. It permits the use of property logging via xmonadPropLog, which writes a formatted string (i.e., dynamicLogString) to _XMONAD_LOG to be further processsed by polybar's module/xmonad.
+The "xmonad" module, on the other hand, uses the xmonadpropread script found in the xmonad-contrib package to execute property logging via xmonadPropLog. This allows for the creation of a formatted string, such as the current layout, which is then written to _XMONAD_LOG and further processed by the Polybar module/xmonad. This module also allows for the display of window titles in Polybar.
+
 ```ini
 [module/xmonad]
 type = custom/script
@@ -563,7 +565,7 @@ format-foreground = ${colors.peach}
 format-offset = -20
 ```
 ### MyPolybar.hs
-With the rudiments of xmonadPropLog and dynamicLogString covered in the previous subsection, we can move on to customising the formatted string discussed earlier. At this stage in our example, we only have workspace icons. Optionally, we discussed how to include window titles. Although all of which can be made available by modifying the ppOrder to include "ws" (i.e., workspace) and "t" (i.e., title), it is much more tedious to do so since we need to find the exact icon code rather than simply copy and paste the icon of choice. Therefore, I personally prefer the current approach of using two distinct modules (i.e., ewmh and xmonad) in polybar. Continuing our example, I only wish to add the current layout ("l") as defined in ppOrder. However, I would like polybar to assign the colors as it would for any module via "format-foreground". I also do not wish to wrap the current layout with anything (e.g. [Tall], >Tall<, etc.). Therefore, I shall only define the textColor variable and ignore wraps.
+With the rudiments of xmonadPropLog and dynamicLogString covered in the previous subsection, we can move on to customising the formatted string discussed earlier. At this stage in our example, we only have workspace icons. Optionally, we discussed how to include window titles. Although all of which can be made available by modifying the ppOrder to include "ws" (i.e., workspace) and "t" (i.e., title), it is much more tedious to do so since we need to find the exact icon code rather than simply copy and paste the icon of choice. Therefore, I personally prefer the current approach of using two distinct modules (i.e., ewmh and xmonad) in polybar. Continuing our example, I only wish to add the current layout ("l") as defined in ppOrder. However, I would like polybar to assign the colors as it would for any module via "format-foreground". I also do not wish to wrap the current layout with anything (e.g. [Tall], >Tall<, etc.). Therefore, I set the text color of the layout information by defining the textColor variable, and ignoring wraps.
 ```haskell
 module Custom.MyPolybar where
 
@@ -591,8 +593,40 @@ polybarPP =
 textColor :: String -> String -> String
 textColor color = wrap ("%{F" <> color <> "}") " %{F-}"
 ```
+## Event Hook
+*Note: This section is a summary of the key points from the official documentation.*
 
-## Hyper Keys
+We will use this example/snippet to comprehend how to apply the windowed fullscreen hack to Chromium-based applications, onXPropertyChange, and the swallowEventHook.
+```haskell
+myEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myManageHook <> Hacks.windowedFullscreenFixEventHook
+```
+### SwallowEventHook
+XMonad.Hooks.WindowSwallowing is a module that provides a handleEventHook that enables window swallowing functionality. This feature allows for the reduction of unnecessary screen space usage by detecting and "swallowing" parent windows when a new window is opened from within them. The module utilizes the pstree command to analyze the process hierarchy, but it is important to note that this does not always work perfectly. Some applications that implement instance sharing, such as some terminal emulators and tmux, cannot be supported by window swallowing. Additionally, the module requires the _NET_WM_PID X-property to be set in order to check the process hierarchy, so some child programs may not be supported. To use this module, it must be imported into your xmonad.hs file and the swallowEventHook function can be added to your handleEventHook. The variant swallowEventHookSub can also be used if a layout from XMonad.Layouts.SubLayouts is employed, allowing for the merging of child windows with the parent instead of swallowing.
+
+### onXPropertyChange
+The XMonad.Hooks.OnPropertyChange module is designed to allow for the management of already-mapped windows based on changes in their properties. This is particularly useful for identifying and managing browser windows by title, as these properties may not be fully set until after the window has been mapped and all associated documents and scripts have loaded. Additionally, this module can be used in conjunction with Electron applications, such as Spotify, that set their WM_CLASS properties at a later stage, making it difficult for traditional window managers to properly map them. This module utilizes a handleEventHook that triggers on PropertyChange events, and currently does not take into account properties that may have been removed.
+
+### Windowed Fullscreen (Chromium) Hack
+The XMonad.Util.Hacks module provides a set of utility functions for customizing and optimizing the behavior of XMonad for certain applications. The windowed fullscreen hack is a feature provided by the XMonad.Util.Hacks module that addresses an issue with certain Chromium-based applications, such as Chrome, Discord, and others, when they request to be put into fullscreen mode. These applications may not correctly detect the size of the window when displaying fullscreen content, resulting in cut-off content.
+
+The windowed fullscreen hack works by forcing the window to recalculate its dimensions after initiating fullscreen mode. This allows Chromium-based applications to correctly display fullscreen content within their normal window dimensions.
+
+To utilize this feature, it can be added to the handleEventHook function in the xmonad config file (i.e., xmonad.hs), as shown in the example provided. It will apply and undo a resize quickly causing chromium to recalculate the fullscreen window dimensions to match the actual windowed fullscreen dimensions.
+
+## Java Hack
+The Java Hack is a feature provided by the XMonad.Util.Hacks module that addresses compatibility issues with certain Java-based applications that may not function correctly when used in conjunction with XMonad.
+
+A common workaround for this issue is to set the environment variable _JAVA_AWT_WM_NONREPARENTING to 1. The javaHack function in the XMonad.Util.Hacks module automatically sets this variable, providing a simple and convenient solution for users experiencing compatibility issues with Java applications.
+
+To utilize this feature, it can be added to main in the xmonad config file (i.e., xmonad.hs), as shown in the snippet provided. There is no longer a need to define it in your xinitrc.
+
+```haskell
+main =
+  do
+    xmonad
+    $ Hacks.javaHack
+```
+### Hyper Keys
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
 
 Required package: [xcape](https://archlinux.org/packages/community/x86_64/xcape/)
