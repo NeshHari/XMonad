@@ -1,7 +1,19 @@
 <h1 align="center">XMonad Starter Kit</h1>
+
+<div align="center">
+
+<a href="https://github.com/NeshHari/XMonad/stargazers">![GitHub Repo stars](https://img.shields.io/github/stars/NeshHari/XMonad?color=%23f2cdcd&label=STARS%20&logo=github&logoColor=%23f2cdcd&style=for-the-badge)</a>
+<a href="https://github.com/NeshHari/XMonad/issues">![GitHub issues](https://img.shields.io/github/issues/NeshHari/XMonad?color=%23b4befe&label=ISSUES&logo=GitBook&logoColor=%23b4befe&style=for-the-badge)<a>
+
+</div>
+
 <h2 align="center">~ The Stains of Purple ~</h2>
 
+<div align="center">
+
 ![IMAGE](./images/xmonad.png)
+
+</div>
 
 ## An Informal Intro...
 Are you tired of using the same old window manager? Want to elevate your computing experience to the next level? Look no further than XMonad - the dynamic, tiling window manager written in the powerful Haskell programming language. But don't let the fact that it's written in Haskell scare you away. Despite its intimidating reputation, XMonad is incredibly user-friendly and customizable to fit your specific needs. And trust me, the effort you put into learning it will be well worth it. Through blood, sweat, and tears (yes, literally), I present a comprehensive guide (i.e., Starter Kit) to ease your transition to using XMonad as your daily driver. From aesthetics to advanced workflow, I've got you covered with easy-to-digest information and tips. So what are you waiting for? Let's revolutionize the way you work and play with XMonad.
@@ -38,6 +50,67 @@ Are you tired of using the same old window manager? Want to elevate your computi
 
 ## Prerequisites
 The following guide requires the latest/git version of XMonad to be installed to avert recompilation errors from missing dependencies. For compatibility with the stable version (>= 0.17), consider removing [disableEwmhManageDesktopViewport](https://github.com/xmonad/xmonad-contrib/commit/cf13f8f9a7acddc1134be3f71097633def1476a8) in xmonad.hs, which is unavailable in said version at the time of writing.
+
+### Installation Notes
+
+#### Required Packages
+*Note: Paru is interchangeable with any AUR helper*
+```fish
+paru -Syu git stow ghc stack xorg-xmessage xorg-xinit fish zoxide starship fzf rofi neovim-git kitty alacritty polybar nodejs beautyline autorandr lxappearance cava catppuccin-gtk-theme-mocha terminus-font haskell-x11 haskell-utf8-string bat nerd-fonts-complete xcape picom dunst glava feh ttf-material-icons-git ttf-font-awesome libnotify flatpak unclutter python-pip
+```
+#### Fonts
+Recommended font (uppercase only): [Sugar Snow](https://www.dafont.com/sugar-snow.font)
+Alternate font: [Purple Smile](https://www.dafont.com/purple-smile.font)
+
+*Note: Downloaded fonts should be placed in ~/.local/share/fonts, before running fc-cache -f -v to update the font cache.*
+
+#### TUI/CLI Steps
+*Note: Avoid using "stow *" unless on a fresh install. By default, measures are in place so that you do not accidentally overwrite existing configurations. I suggest manually copying configurations to the correct directory, or selectively stowing only certain directories (e.g. stow fish) whilst in the root of the cloned folder.*
+```fish
+git clone https://github.com/NeshHari/XMonad.git
+mv XMonad dotfiles
+cd dotfiles
+rm README.md
+stow *
+cd ~/.config/xmonad
+rm -r xmonad xmonad-contrib
+git clone https://github.com/xmonad/xmonad.git
+git clone https://github.com/xmonad/xmonad-contrib.git
+stack init
+stack install
+sudo ln -s ~/.local/bin/xmonad /usr/bin
+xmonad --recompile && xmonad --restart
+```
+#### Wallpaper
+Link: [Stains of Purple](https://www.pixel4k.com/stains-purple-gradient-colorful-4k-50970.html)
+
+You may change the path to your wallpaper in ~/.config/xmonad/lib/Custom/MyStartupApps.hs
+
+#### Cursor
+You may optionally install a custom cursor theme. I use [Oreo]()
+
+
+#### Spotify
+I suggest using [Flatpak](https://flathub.org/apps/details/com.spotify.Client) to install and run spotify:
+```fish
+flatpak install flathub com.spotify.Client
+
+flatpak run com.spotify.Client
+```
+To integrate with polybar and avoid the traceback error, you need to run the following command:
+```fish
+pip install dbus-python
+```
+Configurations using Spicetify will be made available when ready.
+
+#### GTK
+For GTK applications, open lxappearance and select the Catppuccin theme of choice. In the Widget section, set the default font to Sugar Snow/Purple Smile. In the Icon Theme section, select BeautyLine.
+
+#### Neovim
+Launch Neovim and let it do its thing :) Watch out for those LSP/Treesitter prompts, and install what you need automatically.
+
+#### Pacman Specific Aliases
+Fish aliases such as "pacsi" and "parusi" help you fuzzy find official and AUR packages respectively with a preview panel consisting of all necessary information, right in your terminal. You can multi select or toggle select packages my marking or unmarking them using Tab. Likewise, you can remove existing packages in your system using "pacrem". Lastly, "pacupd" runs 'sudo pacman -Syu'.
 
 ## Recompilation Tips
 *Note: xorg-xmessage is installed to view compilation errors*
@@ -659,4 +732,5 @@ Files used (ensure xcape is installed):
     
     clear lock
 ```
+
 
