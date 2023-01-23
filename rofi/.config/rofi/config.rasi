@@ -11,8 +11,8 @@ configuration{
     window-format: " [{w}]\t\t{t:0}";
     sidebar-mode: true;
     display-run: "ﰌ Run  ﰌ ";
-    display-drun: "  Applications  ";
-    display-window: "  Tasks  ";
+    display-drun: "  Applications  ";
+    display-window: "   Tasks  ";
     show-match: false;
     kb-mode-previous: "Alt+h,Control+Shift+Tab";
     kb-mode-next: "Alt+l,Control+Tab";

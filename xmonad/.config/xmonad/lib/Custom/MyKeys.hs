@@ -4,7 +4,7 @@ module Custom.MyKeys where
 
 import Custom.MyDecorations
 import Custom.MyEasyMotion
-import Custom.MyMacAddresses
+-- import Custom.MyMacAddresses
 import Custom.MyScratchpads
 import Custom.MyWorkspaces
 import Data.Map qualified as M
@@ -54,9 +54,9 @@ myKeys =
     ("M-t", namedScratchpadAction myScratchpads "quick commands"),
     ("M-C-g", namedScratchpadAction myScratchpads "glava"),
     -- Bluetooth
-    ("<Page_Up>", spawn ("bluetoothctl connect " ++ mySpeakerMac)),
+    {- ("<Page_Up>", spawn ("bluetoothctl connect " ++ mySpeakerMac)),
     ("<Home>", spawn ("bluetoothctl connect " ++ myXMMac)),
-    ("<Page_Down>", spawn "bluetoothctl disconnect"),
+    ("<Page_Down>", spawn "bluetoothctl disconnect"), -}
     -- Close window(s)
     ("M-c", kill),
     ("M-S-c", killAll),
