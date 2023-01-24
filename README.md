@@ -66,7 +66,7 @@ Alternate font: [Purple Smile](https://www.dafont.com/purple-smile.font)
 *Note: Downloaded fonts should be placed in ~/.local/share/fonts, before running fc-cache -f -v to update the font cache.*
 
 ### TUI/CLI Steps
-*Note: Avoid using "stow <asterisk>" unless on a fresh install. By default, measures are in place so that you do not accidentally overwrite existing configurations. I suggest manually copying configurations to the correct directory, or selectively stowing only certain directories (e.g. stow fish) whilst in the root of the cloned folder.*
+*Note: Avoid using "stow \*\" unless on a fresh install. By default, measures are in place so that you do not accidentally overwrite existing configurations. I suggest manually copying configurations to the pertinent directory, or selectively stowing certain directories (e.g. stow fish) whilst in the root of the cloned folder.*
 ```fish
 git clone https://github.com/NeshHari/XMonad.git
 mv XMonad dotfiles
