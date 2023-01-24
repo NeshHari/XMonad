@@ -20,11 +20,11 @@ import XMonad.Hooks.WindowSwallowing (swallowEventHook)
 import XMonad.Util.EZConfig
 import XMonad.Util.Hacks as Hacks
 import XMonad.Util.NamedScratchpad (scratchpadWorkspaceTag)
-import XMonad.Util.SpawnOnce
 import XMonad.Util.WorkspaceCompare
 
 myEventHook = swallowEventHook (className =? "kitty") (return True) <> onXPropertyChange "WM_NAME" myManageHook <> Hacks.windowedFullscreenFixEventHook
 
+main :: IO ()
 main =
   do
     xmonad
