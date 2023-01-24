@@ -56,16 +56,17 @@ The following guide requires the latest/git version of XMonad to be installed to
 ### Required Packages
 *Note: Paru is interchangeable with any AUR helper*
 ```fish
-paru -Syu git stow ghc stack xorg-xmessage xorg-xinit fish zoxide starship fzf rofi neovim-git kitty alacritty polybar nodejs beautyline autorandr lxappearance cava catppuccin-gtk-theme-mocha terminus-font haskell-x11 haskell-utf8-string bat nerd-fonts-complete xcape picom dunst glava feh ttf-material-icons-git ttf-font-awesome libnotify flatpak unclutter python-pip
+paru -Syu git stow ghc ghcup-hs-bin stack xorg-xmessage xorg-xinit fish zoxide starship fzf rofi neovim-git kitty alacritty polybar nodejs beautyline autorandr lxappearance cava catppuccin-gtk-theme-mocha terminus-font haskell-x11 haskell-utf8-string bat nerd-fonts-complete xcape picom dunst glava feh ttf-material-icons-git ttf-font-awesome libnotify flatpak unclutter python-pip
 ```
 ### Fonts
 Recommended font (uppercase only): [Sugar Snow](https://www.dafont.com/sugar-snow.font)
+
 Alternate font: [Purple Smile](https://www.dafont.com/purple-smile.font)
 
 *Note: Downloaded fonts should be placed in ~/.local/share/fonts, before running fc-cache -f -v to update the font cache.*
 
 ### TUI/CLI Steps
-*Note: Avoid using "stow *" unless on a fresh install. By default, measures are in place so that you do not accidentally overwrite existing configurations. I suggest manually copying configurations to the correct directory, or selectively stowing only certain directories (e.g. stow fish) whilst in the root of the cloned folder.*
+*Note: Avoid using "stow <asterisk>" unless on a fresh install. By default, measures are in place so that you do not accidentally overwrite existing configurations. I suggest manually copying configurations to the correct directory, or selectively stowing only certain directories (e.g. stow fish) whilst in the root of the cloned folder.*
 ```fish
 git clone https://github.com/NeshHari/XMonad.git
 mv XMonad dotfiles
@@ -100,7 +101,7 @@ To integrate with polybar and avoid the traceback error, you need to run the fol
 ```fish
 pip install dbus-python
 ```
-*Note:Configurations using Spicetify will be made available when ready, or you can get them [here](https://github.com/catppuccin/spicetify).*
+*Note: Configurations using Spicetify will be made available when ready, or you can get them [here](https://github.com/catppuccin/spicetify).*
 
 ### GTK
 For GTK applications, open lxappearance and select the Catppuccin theme of choice. In the Widget section, set the default font to Sugar Snow/Purple Smile. In the Icon Theme section, select BeautyLine.
