@@ -56,7 +56,7 @@ The following guide requires the latest/git version of XMonad to be installed to
 ### Required Packages
 *Note: Paru is interchangeable with any AUR helper*
 ```fish
-paru -Syu git stow ghc ghcup-hs-bin stack xorg-xmessage xorg-xinit fish zoxide starship fzf rofi neovim-git kitty alacritty polybar nodejs beautyline autorandr lxappearance cava catppuccin-gtk-theme-mocha terminus-font haskell-x11 haskell-utf8-string bat nerd-fonts-complete xcape picom dunst glava feh ttf-material-icons-git ttf-font-awesome libnotify flatpak unclutter python-pip playerctl
+paru -Syu git stow ghc ghcup-hs-bin stack xorg-xmessage xorg-xinit fish zoxide starship fzf rofi neovim-git kitty alacritty polybar nodejs beautyline autorandr lxappearance cava catppuccin-gtk-theme-mocha terminus-font haskell-x11 haskell-utf8-string bat nerd-fonts-git xcape picom dunst glava feh ttf-material-icons-git ttf-font-awesome libnotify flatpak unclutter python-pip playerctl
 ```
 ### Fonts
 Recommended font (uppercase only): [Sugar Snow](https://www.dafont.com/sugar-snow.font)
