@@ -189,9 +189,7 @@ In order to ensure optimal compatibility between the Haskell Language Server (HL
 
 HLS offers a range of features including diagnostics, completions, code actions, and formatting. To avoid potential errors, I suggest installing HLS via "ghcup install hls," so that Mason can detect the executable when running ":MasonInstall haskell-language-server" in Neovim. A complete list of HLS features can be found at the website [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
 
-Personally, my formatter of choice is [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) due to its readability and consistency. It is also the default formatter for HLS.
-
-You may want to include a key mapping and/or autocommand for formatting in Neovim. 
+Personally, my formatter of choice is [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) due to its readability and consistency. It is also the default formatter for HLS. You may want to include a key mapping and/or autocommand for formatting in Neovim. 
 ```lua
 -- autocommand
 vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({async = false})]]
