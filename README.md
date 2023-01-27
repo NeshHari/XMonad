@@ -53,15 +53,16 @@ The following guide requires the latest/git version of XMonad to be installed to
 
 ## Installation Notes
 
-### Automated Installation (Arch Linux)
-*Note: Use at your own risk. This [script](./setup.sh) is provided as-is, and is not guaranteed to work on your system. It is recommended that you read through the script before running it.*
+### Automatic Installation (Arch Linux)
+*Note: Use at your own risk. This [script](./setup.sh) is provided as-is, and is not guaranteed to work on your system (**unstable**). It is recommended that you read through the script before running it.*
 ```fish
-...testing phase...
+wget https://raw.githubusercontent.com/NeshHari/XMonad/main/setup.sh
+bash setup.sh
 ```
 ### Manual Installation Dependencies 
 *Note: Paru is interchangeable with any AUR helper*
 ```fish
-paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst fd feh fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 lazygit libnotify lxappearance nerd-fonts-git neovim-git nodejs polybar picom playerctl python-pip rofi starship terminus-font ttf-font-awesome ttf-material-icons-git unclutter xcape xdo xorg-xinit xorg-xmessage xorg-xsetroot zoxide
+paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 kitty lazygit libnotify lxappearance nerd-fonts-git neovim-git nodejs polybar picom playerctl python-pip rofi stack starship stow terminus-font ttf-font-awesome ttf-material-icons-git unclutter xcape xdo xorg-xinit xorg-xmessage xorg-xsetroot zoxide
 ```
 ### Fonts
 Recommended font (uppercase only): [Sugar Snow](https://www.dafont.com/sugar-snow.font)
@@ -74,8 +75,8 @@ Alternate font: [Purple Smile](https://www.dafont.com/purple-smile.font)
 *Note: Avoid using "stow \*\" unless on a fresh install. By default, measures are in place so that you do not accidentally overwrite existing configurations. I suggest manually copying configurations to the pertinent directory, or selectively stowing certain directories (e.g. stow fish) whilst in the root of the cloned folder.*
 ```fish
 git clone https://github.com/NeshHari/XMonad.git
-mv XMonad dotfiles
-cd dotfiles
+mv XMonad starter_kit_dots
+cd starter_kit_dots
 rm README.md
 stow *
 cd ~/.config/xmonad

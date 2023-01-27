@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # Welcome message
 echo "Welcome to the dotfiles installation script!"
@@ -17,6 +17,12 @@ else
   exit 1
 fi
 
+# Check if AUR helper exists
+if ! command -v "$aur_helper" > /dev/null; then
+    echo "$aur_helper not found. Please install it first."
+    exit 1
+fi
+
 # Packages to install
 packages=(
   alacritty
@@ -29,6 +35,7 @@ packages=(
   dunst
   fd
   feh
+  fish
   fzf
   ghc
   ghcup-hs-bin
@@ -36,6 +43,7 @@ packages=(
   glava
   haskell-utf8-string
   haskell-x11
+  kitty
   lazygit
   libnotify
   lxappearance
@@ -47,7 +55,9 @@ packages=(
   playerctl
   python-pip
   rofi
+  stack
   starship
+  stow
   terminus-font
   ttf-font-awesome
   ttf-material-icons-git
@@ -65,9 +75,10 @@ $aur_helper -Syu ${packages[@]}
 
 # Clone dotfiles and stow
 echo "Cloning and stowing dotfiles..."
+cd $HOME
 git clone https://github.com/NeshHari/XMonad.git
-mv XMonad dotfiles
-cd dotfiles
+mv XMonad starter_kit_dots
+cd starter_kit_dots 
 rm README.md setup.sh
 stow_dirs=()
 for dir in *; do
@@ -110,18 +121,20 @@ if ! stack init; then
     stack init --force
   fi
 fi
+
 stack install
 
 if ! [ -x "$(command -v xmonad)" ]; then
-    echo "xmonad binary not found"
-    read -p "Do you want to symlink xmonad to /usr/bin or add it to PATH in .bashrc? (s/p) " link_choice
+   echo "xmonad binary not found"
+   read -p "Do you want to symlink xmonad to /usr/bin or add it to PATH in .bashrc? (s/p) " link_choice
    if [ "$link_choice" == "s" ]; then
-    sudo ln -s ~/.local/bin/xmonad /usr/bin
-elif [ "$link_choice" == "p" ]; then
-    echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
-    source ~/.bashrc
-else
-    echo "Invalid choice. xmonad binary will not be added to PATH. Please do it manually."
+   sudo ln -s ~/.local/bin/xmonad /usr/bin
+   elif [ "$link_choice" == "p" ]; then
+   echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
+   source ~/.bashrc
+   else
+   echo "Invalid choice. xmonad binary will not be added to PATH. Please do it manually."
+   fi
 fi
 
 xmonad --recompile
