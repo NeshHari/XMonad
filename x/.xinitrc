@@ -9,7 +9,7 @@ xsetroot -cursor_name left_ptr
 
 unclutter &
 
-~/scripts/fix-wifi.sh
+#~/scripts/fix-wifi.sh
 
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
 
