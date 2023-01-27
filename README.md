@@ -53,10 +53,15 @@ The following guide requires the latest/git version of XMonad to be installed to
 
 ## Installation Notes
 
-### Required Packages
+### Automated Installation (Arch Linux)
+*Note: Use at your own risk. This [script](./setup.sh) is provided as-is, and is not guaranteed to work on your system. It is recommended that you read through the script before running it.*
+```fish
+...testing phase...
+```
+### Manual Installation Dependencies 
 *Note: Paru is interchangeable with any AUR helper*
 ```fish
-paru -Syu git stow ghc ghcup-hs-bin stack xorg-xmessage xorg-xinit fish zoxide starship fzf rofi neovim-git kitty alacritty polybar nodejs beautyline autorandr lxappearance cava catppuccin-gtk-theme-mocha terminus-font haskell-x11 haskell-utf8-string bat nerd-fonts-complete xcape picom dunst glava feh ttf-material-icons-git ttf-font-awesome libnotify flatpak unclutter python-pip playerctl
+paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst fd feh fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 lazygit libnotify lxappearance nerd-fonts-git neovim-git nodejs polybar picom playerctl python-pip rofi starship terminus-font ttf-font-awesome ttf-material-icons-git unclutter xcape xdo xorg-xinit xorg-xmessage xorg-xsetroot zoxide
 ```
 ### Fonts
 Recommended font (uppercase only): [Sugar Snow](https://www.dafont.com/sugar-snow.font)
@@ -180,7 +185,11 @@ Managing LSP servers in Neovim can be made easier by using the [Mason](https://g
 ```
 *Note: My [lsp.lua](./nvim/.config/nvim/after/plugin/lsp.lua) file contains configuration information post-installation.*
 
-In order to ensure optimal compatibility between the Haskell Language Server (HLS) and Neovim, it is recommended to set up XMonad using stack (what I use) or cabal. Installing it via Pacman/AUR may result in errors such as "could not find module" or "unknown package" on import of modules, even if HLS is successfully attached and running on the Neovim buffer. HLS offers a range of features including diagnostics, completions, code actions, and formatting. A complete list of features can be found [here](https://haskell-language-server.readthedocs.io/en/latest/features.html). My formatter of choice is [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) due to its readability and consistency, which I believe is the default formatter for HLS. 
+In order to ensure optimal compatibility between the Haskell Language Server (HLS) and Neovim, it is recommended to set up XMonad using the package manager stack or cabal. Installing HLS via Pacman or AUR may result in errors, such as "could not find module" or "unknown package" on import of modules, even if HLS is successfully attached and running on the Neovim buffer.
+
+HLS offers a range of features including diagnostics, completions, code actions, and formatting. To avoid potential errors, I suggest installing HLS via "ghcup install hls," so that Mason can detect the executable when running ":MasonInstall haskell-language-server" in Neovim. A complete list of HLS features can be found at the website [here](https://haskell-language-server.readthedocs.io/en/latest/features.html).
+
+Personally, my formatter of choice is [Ormolu](https://haskell-language-server.readthedocs.io/en/latest/features.html) due to its readability and consistency. It is also the default formatter for HLS.
 
 You may want to include a key mapping and/or autocommand for formatting in Neovim. 
 ```lua
