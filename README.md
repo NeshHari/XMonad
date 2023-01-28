@@ -64,6 +64,9 @@ bash setup.sh
 ```fish
 paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 kitty lazygit libnotify lxappearance nerd-fonts-git neovim-git nodejs polybar picom playerctl python-pip rofi stack starship stow terminus-font ttf-font-awesome ttf-material-icons-git unclutter xcape xdo xorg-xinit xorg-xmessage xorg-xsetroot zoxide
 ```
+
+*Note: Polybar will not automatically launch after installation. This is expected behavior. The [polybar launch script](./polybar/.config/polybar/startup.sh) is deliberately tied to autorandr, which is used for hot-plugging. Refer to the section on MyRescreen.hs to see how they all come together.*
+
 ### Fonts
 Recommended font (uppercase only): [Sugar Snow](https://www.dafont.com/sugar-snow.font)
 
@@ -77,7 +80,7 @@ Alternate font: [Purple Smile](https://www.dafont.com/purple-smile.font)
 git clone https://github.com/NeshHari/XMonad.git
 mv XMonad starter_kit_dots
 cd starter_kit_dots
-rm README.md
+rm README.md setup.sh
 stow *
 cd ~/.config/xmonad
 rm -r xmonad xmonad-contrib
@@ -197,6 +200,7 @@ vim.cmd [[autocmd BufWritePre * lua vim.lsp.buf.format({async = false})]]
 -- manual format in normal mode (assuming vim.g.mapleader is set)
 vim.keymap.set("n", "<leader>fo", vim.lsp.buf.format)
 ```
+You may also include other formatters (e.g., fourmolu, brittany) by first installing them with Mason, and integrating them with null-ls as shown [here](./nvim/.config/nvim/after/plugin/nullls.lua).
 
 Moving on, a minimal hie.yaml must be defined for HLS to function.
 ```yaml
