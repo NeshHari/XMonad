@@ -31,6 +31,8 @@ require("catppuccin").setup({
                 information = { "underline" },
             },
         },
+        which_key = true,
+        markdown = true,
     },
 })
 

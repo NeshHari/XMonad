@@ -34,6 +34,8 @@ return {
         }
     },
 
+    'jose-elias-alvarez/null-ls.nvim',
+
     'lukas-reineke/indent-blankline.nvim',
 
     'numToStr/Comment.nvim',
@@ -68,5 +70,7 @@ return {
         build = function() vim.fn["mkdp#util#install"]() end
     },
 
-    'zbirenbaum/copilot.lua'
+    'zbirenbaum/copilot.lua',
+
+    "folke/which-key.nvim",
 }
