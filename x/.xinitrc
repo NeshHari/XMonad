@@ -9,11 +9,7 @@ xsetroot -cursor_name left_ptr
 
 unclutter &
 
-#~/scripts/fix-wifi.sh
-
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
-
-export _JAVA_AWT_WM_NONREPARENTING=1
 
 systemctl --user import-environment DISPLAY XAUTHORITY;
 dbus-update-activation-environment --systemd --all
