@@ -35,7 +35,7 @@ myKeys =
   [ -- Terminal
     ("M-<Return>", spawn "kitty"),
     -- Browser
-    ("M-b", spawn "microsoft-edge-stable"),
+    ("M-b", spawn "microsoft-edge-beta"),
     -- Rofi
     ("M-p", spawn "rofi -show drun"),
     ("M1-<Tab>", spawn "rofi -show window"),

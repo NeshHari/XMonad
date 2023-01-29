@@ -17,7 +17,7 @@
     horizontal_padding = 15
     text_icon_padding = 0
     frame_width = 3
-    frame_color = "#11111b"
+    frame_color = "#050508"
     separator_color = frame
     sort = yes
     font = Sugar Snow 12
@@ -54,19 +54,19 @@
     per_monitor_dpi = true
 
 [urgency_low]
-    background = "#11111b"
+    background = "#050508"
     foreground = "#cdd6f4"
     highlight  = "#cdd6f4"
     timeout = 10
 
 [urgency_normal]
-    background = "#11111b"
+    background = "#050508"
     foreground = "#cdd6f4"
     highlight  = "#cdd6f4"
     timeout = 10
 
 [urgency_critical]
-    background = "#11111b"
+    background = "#050508"
     foreground = "#cdd6f4"
     highlight  = "#cdd6f4"
     timeout = 10

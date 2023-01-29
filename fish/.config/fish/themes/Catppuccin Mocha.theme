@@ -1,6 +1,6 @@
 # name: 'Catppuccin mocha'
 # url: 'https://github.com/catppuccin/fish'
-# preferred_background: 1e1e2e
+# preferred_background: 050508
 
 fish_color_normal cdd6f4
 fish_color_command 89b4fa

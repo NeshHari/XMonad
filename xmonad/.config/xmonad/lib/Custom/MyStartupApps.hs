@@ -5,7 +5,7 @@ import XMonad.Util.SpawnOnce
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "feh --bg-scale ~/wallpapers/stains_of_purple.jpg"
+  spawn "feh --bg-scale ~/wallpapers/dark_arts_custom.png"
   spawn "~/scripts/feh-blur.sh -s; ~/scripts/feh-blur.sh -d"
   spawnOnce "xmodmap ~/.Xmodmap"
   spawnOnce "dunst &"

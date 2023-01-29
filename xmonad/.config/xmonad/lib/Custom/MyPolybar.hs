@@ -10,7 +10,7 @@ myPolybar =
     { sbLogHook =
         xmonadPropLog
           =<< dynamicLogString polybarPP,
-      sbStartupHook = spawn "~/.config/polybar/startup.sh",
+      sbStartupHook = spawn "~/.config/polybar/launch.sh",
       sbCleanupHook = spawn "killall polybar"
     }
 

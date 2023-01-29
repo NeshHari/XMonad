@@ -16,7 +16,4 @@ close_on_child_death yes
 
 background_opacity 0.7
 
-# BEGIN_KITTY_THEME
-# Dark Arts
-include current-theme.conf
-# END_KITTY_THEME
+include themes/mocha.conf

@@ -10,10 +10,10 @@ myBorderWidth :: XMonad.Dimension
 myBorderWidth = 3
 
 myNormalBorderColor :: String
-myNormalBorderColor = catMantle
+myNormalBorderColor = catBase
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = catMauve
+myFocusedBorderColor = catGreen
 
 myPromptConfig :: XPConfig
 myPromptConfig =
@@ -29,7 +29,7 @@ myPromptConfig =
       defaultText = "",
       alwaysHighlight = True,
       height = 55,
-      font = "xft:Sugar Snow:style=Regular:size=12",
+      font = "xft:Vanilla Caramel:style=Regular:size=12",
       autoComplete = Nothing,
       showCompletionOnTab = False
     }
@@ -37,8 +37,8 @@ myPromptConfig =
 myShowWNameConfig :: SWNConfig
 myShowWNameConfig =
   def
-    { swn_font = "xft:Sugar Snow:size=60",
-      swn_color = catFlamingo,
+    { swn_font = "xft:Vanilla Caramel:size=60",
+      swn_color = catGreen,
       swn_bgcolor = catBase,
       swn_fade = 0.8
     }
@@ -46,7 +46,7 @@ myShowWNameConfig =
 myTabConfig :: Theme
 myTabConfig =
   def
-    { activeColor = catMauve,
+    { activeColor = catGreen,
       inactiveColor = catBase,
       urgentColor = catRed,
       activeBorderColor = catBase,
@@ -55,5 +55,5 @@ myTabConfig =
       activeTextColor = catBase,
       inactiveTextColor = catFlamingo,
       urgentTextColor = catBase,
-      fontName = "xft:Sugar Snow:size=12"
+      fontName = "xft:Vanilla Caramel:size=12"
     }

@@ -5,7 +5,7 @@ window:
 
 colors:
     primary:
-        background: "#1E1E2E" # base
+        background: "#050508" # base
         foreground: "#CDD6F4" # text
         # Bright and dim foreground colors
         dim_foreground: "#CDD6F4" # text
@@ -13,36 +13,36 @@ colors:
 
     # Cursor colors
     cursor:
-        text: "#1E1E2E" # base
+        text: "#050508" # base
         cursor: "#F5E0DC" # rosewater
     vi_mode_cursor:
-        text: "#1E1E2E" # base
+        text: "#050508" # base
         cursor: "#B4BEFE" # lavender
 
     # Search colors
     search:
         matches:
-            foreground: "#1E1E2E" # base
+            foreground: "#050508" # base
             background: "#A6ADC8" # subtext0
         focused_match:
-            foreground: "#1E1E2E" # base
+            foreground: "#050508" # base
             background: "#A6E3A1" # green
         footer_bar:
-            foreground: "#1E1E2E" # base
+            foreground: "#050508" # base
             background: "#A6ADC8" # subtext0
 
     # Keyboard regex hints
     hints:
         start:
-            foreground: "#1E1E2E" # base
+            foreground: "#050508" # base
             background: "#F9E2AF" # yellow
         end:
-            foreground: "#1E1E2E" # base
+            foreground: "#050508" # base
             background: "#A6ADC8" # subtext0
 
     # Selection colors
     selection:
-        text: "#1E1E2E" # base
+        text: "#050508" # base
         background: "#F5E0DC" # rosewater
 
     # Normal colors
@@ -81,3 +81,18 @@ colors:
     indexed_colors:
         - { index: 16, color: "#FAB387" }
         - { index: 17, color: "#F5E0DC" }
+
+font:
+    normal:
+        family: "JetBrainsMono Nerd Font"
+        style: Regular
+    bold:
+        family: "JetBrainsMono Nerd Font"
+        style: Bold
+    italic:
+        family: "JetBrainsMono Nerd Font"
+        style: Italic
+    bold_italic:
+        family: "JetBrainsMono Nerd Font"
+        style: Bold Italic
+    size: 10.0
