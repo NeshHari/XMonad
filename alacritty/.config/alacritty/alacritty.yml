@@ -2,6 +2,7 @@ window:
   padding:
     x: 20
     y: 10
+  opacity: 0.8
 
 colors:
     primary:
