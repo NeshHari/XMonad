@@ -3,7 +3,6 @@
 module Custom.MyKeys where
 
 import Custom.MyDecorations
-import Custom.MyEasyMotion
 -- import Custom.MyMacAddresses
 import Custom.MyScratchpads
 import Custom.MyWorkspaces
@@ -30,12 +29,15 @@ import XMonad.Prompt.XMonad
 import XMonad.StackSet qualified as W
 import XMonad.Util.NamedScratchpad
 
+myBrowser :: String
+myBrowser = "microsoft-edge-beta"
+
 myKeys :: [(String, X ())]
 myKeys =
   [ -- Terminal
     ("M-<Return>", spawn "kitty"),
     -- Browser
-    ("M-b", spawn "microsoft-edge-beta"),
+    ("M-b", spawn myBrowser),
     -- Rofi
     ("M-p", spawn "rofi -show drun"),
     ("M1-<Tab>", spawn "rofi -show window"),
@@ -49,7 +51,7 @@ myKeys =
     -- Scrot
     ("C-<Print>", spawn "scrot -q 100 ~/Desktop/reddit/%Y-%m-%d-%T.png"),
     -- Search commands (wait for next keypress)
-    ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig "microsoft-edge-stable"),
+    ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig myBrowser),
     -- NamedScratchpads
     ("M-t", namedScratchpadAction myScratchpads "quick commands"),
     ("M-C-g", namedScratchpadAction myScratchpads "glava"),

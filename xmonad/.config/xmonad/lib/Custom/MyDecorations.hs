@@ -1,7 +1,9 @@
 module Custom.MyDecorations where
 
 import Custom.MyCatppuccin
+import XMonad (xK_Escape)
 import XMonad qualified
+import XMonad.Actions.EasyMotion
 import XMonad.Layout.ShowWName
 import XMonad.Layout.Tabbed
 import XMonad.Prompt
@@ -56,4 +58,16 @@ myTabConfig =
       inactiveTextColor = catFlamingo,
       urgentTextColor = catBase,
       fontName = "xft:Vanilla Caramel:size=12"
+    }
+
+emConf :: EasyMotionConfig
+emConf =
+  def
+    { txtCol = catGreen,
+      bgCol = catCrust,
+      borderCol = catCrust,
+      cancelKey = xK_Escape,
+      emFont = "xft: Vanilla Caramel-60",
+      overlayF = textSize,
+      borderPx = 30
     }
