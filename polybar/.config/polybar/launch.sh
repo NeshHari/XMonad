@@ -24,6 +24,7 @@ elif [ "$PATH_TO_CONFIG" = "$THEDARKARTS" ]; then
 		# polybar -c $PATH_TO_CONFIG main-middle &
 		polybar -c $PATH_TO_CONFIG main-right &
 		polybar -c $PATH_TO_CONFIG main-right-extended &
+		polybar -c $PATH_TO_CONFIG main-tray &
 	elif autorandr --detected | grep -q "dual"; then
 		polybar -c $PATH_TO_CONFIG main-left &
 		polybar -c $PATH_TO_CONFIG main-left-extended &
@@ -31,6 +32,7 @@ elif [ "$PATH_TO_CONFIG" = "$THEDARKARTS" ]; then
 		# polybar -c $PATH_TO_CONFIG main-middle &
 		polybar -c $PATH_TO_CONFIG main-right &
 		polybar -c $PATH_TO_CONFIG main-right-extended &
+		polybar -c $PATH_TO_CONFIG main-tray &
 		polybar -c $PATH_TO_CONFIG left &
 	fi
 else
