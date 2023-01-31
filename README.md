@@ -711,38 +711,44 @@ main =
     xmonad
     $ Hacks.javaHack
 ```
+
 ### Hyper Keys
+
 Inspired by Ethan Schoonover's [video](https://www.youtube.com/watch?v=70IxjLEmomg)...
 
 Required package: [xcape](https://archlinux.org/packages/community/x86_64/xcape/)
 
 The following is achieved:
-- Caps to Escape (for vim use). 
-- Holding down Caps (i.e., Esc) acts as Ctrl (easy to Ctrl-f for shell completion etc.)
+
+- Caps to Escape (for vim use)
+
+- Holding down Caps (i.e., Esc) acts as Ctrl (easy to Ctrl-f for completion etc.)
+
 - Holding down either Tab or Backslash acts as Windows key (i.e., Mod4Mask).
 
-Files used (ensure xcape is installed):
+Files:
+
 1. .xinitrc
+
+```sh
+[[ -f ~/.Xmodmap ]] && xmodmap ~/.Xmodmap
+xcape -e 'Control_L=Escape'
 ```
-    xmodmap ~/.Xmodmap
 
-    setxkbmap -option "caps:ctrl_modifier" &
+2. .Xmodmap
 
-    xcape -e 'Caps_Lock=Escape' &
-```
-2. .Xmodmap (also called in MyStartupApps)
-```
-    ! Tab as modifier
+```sh
+remove Lock = Caps_Lock
+keycode 66 = Control_L
+add Control = Control_L
 
-    keycode 23 = Tab Hyper_L
-    
-    ! Backslash(\) as modifier + preserve bar(|)
+! Tab as modifier
+keycode 23 = Tab Hyper_L
 
-    keycode 51 = backslash bar Hyper_L
-    
-    add mod4 = Hyper_L
-    
-    clear lock
+! Backslash(\) as modifier + preserve bar(|)
+keycode 51 = backslash bar Hyper_L
+
+add mod4 = Hyper_L
 ```
 
 

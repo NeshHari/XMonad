@@ -1,9 +1,7 @@
-! Tab as modifier
+remove Lock = Caps_Lock
+keycode 66 = Control_L
+add Control = Control_L
+
 keycode 23 = Tab Hyper_L
-
-! Backslash(\) as modifier + preserve bar(|)
 keycode 51 = backslash bar Hyper_L
-
 add mod4 = Hyper_L
-
-clear lock
