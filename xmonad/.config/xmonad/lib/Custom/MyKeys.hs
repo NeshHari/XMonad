@@ -16,6 +16,7 @@ import XMonad.Actions.Search qualified as S
 import XMonad.Actions.Submap qualified as SM
 import XMonad.Actions.WithAll
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.BinarySpacePartition as BSP
 import XMonad.Layout.BoringWindows
 import XMonad.Layout.MultiToggle
 import XMonad.Layout.MultiToggle.Instances
@@ -118,7 +119,20 @@ myKeys =
     ("M-C-S-u", withFocused (sendMessage . UnMergeAll)),
     ("M-C-S-m", withFocused (sendMessage . MergeAll)),
     ("M-C-.", onGroup W.focusUp'),
-    ("M-C-,", onGroup W.focusDown')
+    ("M-C-,", onGroup W.focusDown'),
+    -- BSP
+    ("M-M1-<Left>", sendMessage $ ExpandTowards L),
+    ("M-M1-<Right>", sendMessage $ ShrinkFrom L),
+    ("M-M1-<Up>", sendMessage $ ExpandTowards U),
+    ("M-M1-<Down>", sendMessage $ ShrinkFrom U),
+    ("M-M1-C-<Left>", sendMessage $ ShrinkFrom R),
+    ("M-M1-C-<Right>", sendMessage $ ExpandTowards R),
+    ("M-M1-C-<Up>", sendMessage $ ShrinkFrom D),
+    ("M-M1-C-<Down>", sendMessage $ ExpandTowards D),
+    ("M-M1-<Return>", sendMessage BSP.Swap),
+    ("M-M1-r", sendMessage Rotate),
+    ("M-M1-j", sendMessage $ SplitShift Prev),
+    ("M-M1-k", sendMessage $ SplitShift Next)
   ]
 
 myAdditionalKeys conf@XConfig {XMonad.modMask = modm} =

@@ -5,6 +5,8 @@ module Custom.MyLayouts where
 import Custom.MyDecorations
 import XMonad
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Accordion
+import XMonad.Layout.BinarySpacePartition
 import XMonad.Layout.BoringWindows
 import XMonad.Layout.Column
 import XMonad.Layout.MultiToggle
@@ -50,9 +52,25 @@ column =
             mySpacing 7 $
               Column 1.0
 
+accordion =
+  renamed [XLR.Replace "Accordion"] $
+    avoidStruts $
+      windowNavigation $
+        addTabs shrinkText myTabConfig $
+          subLayout [] tabs $
+            mySpacing 7 Accordion
+
+bsp =
+  renamed [XLR.Replace "BSP"] $
+    avoidStruts $
+      windowNavigation $
+        addTabs shrinkText myTabConfig $
+          subLayout [] tabs $
+            mySpacing 7 emptyBSP
+
 full = renamed [XLR.Replace "Monocle"] $ noBorders Full
 
-myLayout = boringWindows (ifWider 1080 tall column ||| full)
+myLayout = boringWindows (ifWider 1080 (tall ||| bsp) (column ||| accordion) ||| full)
 
 myLayoutHook =
   showWName' myShowWNameConfig $
