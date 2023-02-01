@@ -39,6 +39,7 @@
   - [Cursor](#cursor)
   - [Spotify](#spotify)
   - [GTK](#gtk)
+  - [Discord](#discord)
   - [Neovim](#neovim)
   - [Pacman Command Aliases](#pacman-command-aliases)
 - [Compilation Advice and Troubleshooting](#compilation-advice-and-troubleshooting)
@@ -218,6 +219,10 @@ _Note: Configurations using Spicetify will be made available when ready, or you 
 ### GTK
 
 For GTK applications, open lxappearance and select the Catppuccin theme of choice. In the Widget section, set the default font to Sugar Snow/Purple Smile. In the Icon Theme section, select BeautyLine.
+
+### Discord
+
+Install [betterdiscord](https://aur.archlinux.org/packages/betterdiscord-installer) and inject the [CSS](./betterdiscord/darkarts_discord.css).
 
 ### Neovim
 
@@ -442,10 +447,8 @@ import XMonad.Util.SpawnOnce
 
 myStartupHook :: X ()
 myStartupHook = do
-  spawn "feh --bg-scale ~/wallpapers/stains_of_purple.jpg"
+  spawn "feh --bg-scale ~/wallpapers/dark_arts_custom.png"
   spawn "~/scripts/feh-blur.sh -s; ~/scripts/feh-blur.sh -d"
-  spawnOnce "xmodmap ~/.Xmodmap"
-  spawnOnce "dunst &"
   spawn "killall picom; picom -b"
   spawnOnce "easyeffects --gapplication-service &"
 ```
@@ -881,7 +884,7 @@ myPolybar =
     { sbLogHook =
         xmonadPropLog
           =<< dynamicLogString polybarPP,
-      sbStartupHook = spawn "~/.config/polybar/startup.sh",
+      sbStartupHook = spawn "~/.config/polybar/launch.sh",
       sbCleanupHook = spawn "killall polybar"
     }
 
