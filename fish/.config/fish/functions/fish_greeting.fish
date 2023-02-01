@@ -10,7 +10,6 @@ function fish_greeting
 	"We've all got both light and dark inside us. What matters is the part we choose to act on. That's who we really are."\
 	"It is important to fight, and fight again, and keep fighting, for only then can evil be kept at bay, though never quite eradicated."\
 	"The best of us sometimes eat our words."\
-	"There are all kinds of courage, said Dumbledore, as he placed his hand on the boy’s shoulder. It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."\
 	"Wit beyond measure is man’s greatest treasure."\
 	"Youth cannot know how age thinks and feels. But old men are guilty if they forget what it was to be young."\
 	"We do not need magic to change the world, we carry all the power we need inside ourselves already."\
@@ -35,7 +34,6 @@ function fish_greeting
 	"Time will not slow down when something unpleasant lies ahead."\
 	"Life is difficult, my dear. And complicated."\
 	"One can never have enough socks."\
-	"I'm the king of the world!"\
 	"The mind is not a book, to be opened at will and examined at leisure."\
 	"The wand chooses the wizard."\
 	"We do not need magic to transform our world. We carry all the power we need inside ourselves already."\
@@ -106,14 +104,28 @@ function fish_greeting
 	"No good can come of hurting others, only pain."\
 	"The ones who mind don't matter, and the ones who matter don't mind."\
 	"We can face anything as long as we have each other."\
-	"In the end, we will remember not the words of our enemies, but the silence of our friends."
-        
+	"In the end, we will remember not the words of our enemies, but the silence of our friends."\
+    "Books! And cleverness! There are more important things - friendship and bravery." \
+    "I hope you're pleased with yourselves. We could all have been killed - or worse, expelled."\
+    "It's not everyday you meet someone who's proud they're related to you."\
+    "It's LeviOsa, not LeviosAR." \
+    "I don't go looking for trouble. Trouble usually finds me."\
+    "I’m going to keep going until I succeed—or die. Don’t think I don’t know how this might end. I’ve known it for years."\
+    "I won't let you do it. I’ll...I'll fight you!"\
+    "I'm not going to stop the wheel. I'm going to break the wheel."\
+    "Knowledge is power."\
+    "Just because you have the emotional range of a teaspoon doesn't mean we all have."\
+    "We do not need magic to change the world, we carry all the power we need inside ourselves already."\
+    "There's no need to call me sir, Professor."\
+    "I’m Ron Weasley. Have you seen my family around here?"\
+    "Just because it's taken you three years to notice, Ron, doesn't mean no one else has spotted I'm a witch."\
+    "It takes a great deal of bravery to stand up to our enemies, but just as much to stand up to our friends."\
+    "I’m not going to be murdered."\
+    "You're a prefect? Oh Ronnie! That's everyone in the family!"\
+    "She needs to sort out her priorities. I’ve been really nice about it so far. I’ve just said she’s a busy person."
 
-    	# Randomly pick a message
 	set to_show (random)"%"(count $quotes)
 	set to_show $quotes[(math $to_show"+1")]
-
-	# Output it to the console
 	printf "%s\n" $to_show
 
 end
