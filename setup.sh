@@ -47,7 +47,6 @@ packages=(
 	lazygit
 	libnotify
 	lxappearance
-	nerd-fonts-git
 	neovim-git
 	nodejs
 	polybar
@@ -60,6 +59,7 @@ packages=(
 	stow
 	terminus-font
 	ttf-font-awesome
+	ttf-iosevka-nerd
 	ttf-material-icons-git
 	unclutter
 	xcape
