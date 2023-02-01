@@ -1,76 +1,86 @@
 return {
-    { 'catppuccin/nvim',
-        as = 'catppuccin',
-        dependencies = {
-            'akinsho/bufferline.nvim',
-            dependencies = { 'nvim-tree/nvim-web-devicons' },
-        }
-    },
-    'goolord/alpha-nvim',
-    { 'nvim-telescope/telescope.nvim', dependencies = { 'nvim-lua/plenary.nvim' } },
-    'nvim-telescope/telescope-file-browser.nvim',
-    { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-    'jvgrootveld/telescope-zoxide',
-    { 'nvim-treesitter/nvim-treesitter', build = ':TSUpdate' },
-    'nvim-treesitter/nvim-treesitter-context',
-    'ThePrimeagen/harpoon',
-    'mbbill/undotree',
-    { 'VonHeikemen/lsp-zero.nvim',
-        dependencies = {
-            -- LSP Support
-            { 'neovim/nvim-lspconfig' },
-            { 'williamboman/mason.nvim' },
-            { 'williamboman/mason-lspconfig.nvim' },
-            -- Autocompletion
-            { 'hrsh7th/nvim-cmp' },
-            { 'hrsh7th/cmp-buffer' },
-            { 'hrsh7th/cmp-path' },
-            { 'saadparwaiz1/cmp_luasnip' },
-            { 'hrsh7th/cmp-nvim-lsp' },
-            { 'hrsh7th/cmp-nvim-lua' },
-            -- Snippets
-            { 'L3MON4D3/LuaSnip' },
-            { 'rafamadriz/friendly-snippets' },
-        }
-    },
+	{
+		"catppuccin/nvim",
+		as = "catppuccin",
+		dependencies = {
+			"akinsho/bufferline.nvim",
+			dependencies = { "nvim-tree/nvim-web-devicons" },
+		},
+	},
 
-    'jose-elias-alvarez/null-ls.nvim',
+	"goolord/alpha-nvim",
 
-    'lukas-reineke/indent-blankline.nvim',
+	{ "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
+	"nvim-telescope/telescope-file-browser.nvim",
+	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+	"jvgrootveld/telescope-zoxide",
 
-    'numToStr/Comment.nvim',
+	{ "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" },
+	"nvim-treesitter/nvim-treesitter-context",
+	"nvim-treesitter/nvim-treesitter-textobjects",
+	"nvim-treesitter/nvim-treesitter-refactor",
 
-    'ggandor/leap.nvim',
+	"ThePrimeagen/harpoon",
 
-    'windwp/nvim-autopairs',
+	"mbbill/undotree",
 
-    'folke/twilight.nvim',
+	{
+		"VonHeikemen/lsp-zero.nvim",
+		dependencies = {
+			-- LSP Support
+			{ "neovim/nvim-lspconfig" },
+			{ "williamboman/mason.nvim" },
+			{ "williamboman/mason-lspconfig.nvim" },
+			-- Autocompletion
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-nvim-lua" },
+			-- Snippets
+			{ "L3MON4D3/LuaSnip" },
+			{ "rafamadriz/friendly-snippets" },
+		},
+	},
 
-    'folke/zen-mode.nvim',
+	"jose-elias-alvarez/null-ls.nvim",
 
-    { 'nvim-lualine/lualine.nvim',
-        dependencies = { 'nvim-tree/nvim-web-devicons' },
-    },
+	"lukas-reineke/indent-blankline.nvim",
 
-    'onsails/lspkind-nvim',
+	"numToStr/Comment.nvim",
 
-    'lewis6991/gitsigns.nvim',
+	"ggandor/leap.nvim",
 
-    'akinsho/toggleterm.nvim',
+	"windwp/nvim-autopairs",
 
-    'kylechui/nvim-surround',
+	"folke/twilight.nvim",
 
-    'epwalsh/obsidian.nvim',
+	"folke/zen-mode.nvim",
 
+	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
 
-    'lewis6991/impatient.nvim',
-    'rcarriga/nvim-notify',
+	"onsails/lspkind-nvim",
 
-    { 'iamcco/markdown-preview.nvim',
-        build = function() vim.fn["mkdp#util#install"]() end
-    },
+	"lewis6991/gitsigns.nvim",
 
-    'zbirenbaum/copilot.lua',
+	"akinsho/toggleterm.nvim",
 
-    "folke/which-key.nvim",
+	"kylechui/nvim-surround",
+
+	"epwalsh/obsidian.nvim",
+
+	"lewis6991/impatient.nvim",
+	"rcarriga/nvim-notify",
+
+	{
+		"iamcco/markdown-preview.nvim",
+		build = function()
+			vim.fn["mkdp#util#install"]()
+		end,
+	},
+
+	"zbirenbaum/copilot.lua",
+
+	"folke/which-key.nvim",
 }
