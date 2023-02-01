@@ -21,12 +21,12 @@
     + **Plugin Manager**: [lazy](https://github.com/folke/lazy.nvim)
 + **File Manager**: [Thunar](https://git.xfce.org/xfce/thunar/)
 + **Launcher**: [rofi](https://github.com/davatorium/rofi/)
+
 ---
 
-## Table of Contents
+## Contents
 
 <!--toc:start-->
-- [Table of Contents](#table-of-contents)
 - [Introduction](#introduction)
 - [Scope of Coverage](#scope-of-coverage)
 - [Preparatory Requirements](#preparatory-requirements)
@@ -60,6 +60,7 @@
   - [PerScreen](#perscreen)
   - [SubLayouts and BoringWindows](#sublayouts-and-boringwindows)
   - [Enhanced Borders](#enhanced-borders)
+  - [Gaps Gaps Gaps](#gaps-gaps-gaps)
 - [Polybar Integration](#polybar-integration)
   - [EWMH Module](#ewmh-module)
   - [XMonad Module](#xmonad-module)
@@ -70,7 +71,11 @@
   - [Fullscreen Hack for Windowed Applications (Chromium)](#fullscreen-hack-for-windowed-applications-chromium)
 - [Java Application Hack](#java-application-hack)
 - [Hyper Keys](#hyper-keys)
+- [Emacs-Like Key Bindings](#emacs-like-key-bindings)
+- [Vim-Like Easy Motion](#vim-like-easy-motion)
+- [Cycle Through Workspaces](#cycle-through-workspaces)
 - [Flexible Mouse Resize](#flexible-mouse-resize)
+- [Search Engine & Other Prompts](#search-engine-other-prompts)
 <!--toc:end-->
 
 ---
@@ -98,8 +103,8 @@ Unleash the power of XMonad, the dynamic tiling window manager that will leave y
 | ResizableTile (Tall and Resizable, and Possible Grid Replacement) | Completed |
 | Per-Screen (Different Layouts for Varied Screen Dimensions)       | Completed |
 | Sub-Layouts (Custom Tabs) & Window Navigation                     | Completed |
-| CycleWS (Cycling Through Workspaces and Screens)                  | WIP       |
-| EasyMotion (Focus and Kill Any Visible Window)                    | WIP       |
+| CycleWS (Cycling Through Workspaces and Screens)                  | Completed |
+| EasyMotion (Focus and Kill Any Visible Window)                    | Completed |
 | Rescreen (Monitor Hot-Plugging)                                   | Completed |
 | WindowSwallowing (Hide Terminal Instance Which Launches GUI)      | Completed |
 | Java Hack (Better Support for Java Apps)                          | Completed |
@@ -107,10 +112,10 @@ Unleash the power of XMonad, the dynamic tiling window manager that will leave y
 | EwmhDesktops (Communicate with Polybar)                           | Completed |
 | NamedScratchpads (Quick Commands, Glava, etc.)                    | Completed |
 | ShowWMName (Display Workspace Name When Switching Workspaces)     | Completed |
-| Custom Prompts (Man Pages, Search Engines, etc.)                  | WIP       |
-| Spacing/Gaps on the Fly                                           | WIP       |
+| Custom Prompts (Man Pages, Search Engines, etc.)                  | Completed |
+| Spacing/Gaps on the Fly                                           | Completed |
 | Managehelpers (Center Float, Shift to Workspace, etc.)            | Completed |
-| Sane Keybindings with mkKeymap (Emacs-Style)                      | WIP       |
+| Sane Keybindings with mkKeymap (Emacs-Style)                      | Completed |
 | Catppuccin Color Scheme                                           | Completed |
 | Better Borders (Single Open Window, Fullscreen, etc.)             | Completed |
 | Flexible Mouse Resize                                             | Completed |
@@ -787,6 +792,25 @@ _Note: EOT simply marks the end of transformer_
 
 The [XMonad.Layout.NoBorders](https://hackage.haskell.org/package/xmonad-contrib-0.17.1/docs/XMonad-Layout-NoBorders.html) package provides more information on how to configure and use these transformers
 
+### Gaps Gaps Gaps
+
+Snippet of reference: 
+
+```haskell
+mySpacing i = spacingRaw False (Border 10 10 30 30) True (Border i i i i) True
+```
+
+"XMonad.Layout.Spacing" is a Haskell module for the XMonad Window Manager. It provides the functionality to add a configurable amount of space around windows. You can use this module by importing it into your xmonad.hs configuration file and then using the spacing or spacingWithEdge commands to specify the amount of spacing you want to add around your windows.
+
+The spacingWithEdge command adds spacing around both windows and the edges of the screen, while spacing only adds spacing around windows. There is also the spacingRaw command, which provides more fine-grained control over the spacing. The spacingRaw command takes 5 arguments:
+
+- A Boolean indicating whether to enable the smartBorder, which ensures that borders are not applied if there is only one window on the screen.
+- The screenBorder, which specifies the amount of space to add around the edges of the screen.
+- A Boolean indicating whether the screenBorder is enabled.
+- The windowBorder, which specifies the amount of space to add around each window.
+- A Boolean indicating whether the windowBorder is enabled.
+- It is important to note that if you use the avoidStruts layout modifier, it must come before any of the spacing modifiers.
+
 ## Polybar Integration
 
 The integration of Polybar with XMonad has been greatly simplified with the release of the [XMonad.Hooks.StatusBar](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar.html) and [XMonad.Hooks.StatusBar.PP](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Hooks-StatusBar-PP.html), modules. These modules provide a convenient way to display important information such as the current workspace and layout in Polybar. Let us analyse these module separately.
@@ -950,6 +974,51 @@ keycode 51 = backslash bar Hyper_L
 add mod4 = Hyper_L
 ```
 
+## Emacs-Like Key Bindings
+
+The XMonad.Util.EZConfig module is a potent enabler of customization for the XMonad window manager. Its functions, such as additionalKeysP and additionalMouseBindings, empower users to effortlessly augment their XMonad configuration with new, personally tailored key and mouse bindings. These functions offer an intuitive means of sculpting XMonad's behavior to perfectly align with the user's preferences. Moreover, the mkKeymap function in this module provides an effortless way to amalgamate multiple existing keymaps, leading to an XMonad experience that is uniquely attuned to the user's needs. The XMonad.Util.EZConfig module is therefore a vital component in the pursuit of an optimally personalized XMonad window management experience. Refer to [MyKeys.hs](./xmonad/.config/xmonad/lib/Custom/MyKeys.hs) for a more technical perspective.
+
+## Vim-Like Easy Motion
+
+The XMonad.Actions.EasyMotion module is a component of the XMonad window manager that simplifies navigation between windows. The module provides the selectWindow function which allows the user to quickly select a window from a list of all windows currently present on the screen. The function takes an input pattern and highlights all windows that match the pattern, allowing the user to select the desired window and move the focus to it. By offering a fast and efficient way to navigate between windows, the selectWindow function of the XMonad.Actions.EasyMotion module provides a convenient alternative to traditional methods of window navigation in XMonad.
+
+Snippet of bindings:
+
+```haskell
+("M-g", selectWindow emConf >>= (`whenJust` windows . W.focusWindow)),
+("M-x", selectWindow emConf >>= (`whenJust` killWindow)),
+```
+
+## Cycle Through Workspaces
+
+The XMonad.Actions.CycleWS module provides functionality for cycling between workspaces in the XMonad window manager. The module provides the cycleRecentWS and cycleRecentWSUp functions, which allow the user to switch between workspaces in a cyclical manner, moving forward and backward through the list of workspaces, respectively. The module also provides the nextScreen and prevScreen functions, which allow the user to cycle between physical screens connected to the system. The module offers a convenient way to manage workspaces and navigate between physical screens in XMonad, streamlining the process of organizing windows and tasks.
+
+Snippet of bindings:
+
+```haskell
+    ("M-<Down>", nextWS),
+    ("M-<Up>", prevWS),
+    ("M-S-<Down>", shiftToNext),
+    ("M-S-<Up>", shiftToPrev),
+    ("M-<Right>", nextScreen),
+    ("M-<Left>", prevScreen),
+    ("M-S-<Right>", shiftNextScreen),
+    ("M-S-<Left>", shiftPrevScreen),
+    ("M-S-z", toggleWS),
+    ("M-S-<Down>", shiftToNext >> nextWS),
+    ("M-S-<Up>", shiftToPrev >> prevWS),
+    -- Focus
+    ("M-<Tab>", windows W.focusDown),
+    ("M-S-<Tab>", windows W.focusUp),
+    ("M-k", focusUp),
+    ("M-j", focusDown),
+    ("M-m", focusMaster),
+    ("M-S-<Return>", windows W.swapMaster),
+    ("M-S-j", swapDown),
+    ("M-S-k", swapUp),
+
+```
+
 ## Flexible Mouse Resize
 
 XMonad.Actions.FlexibleResize provides a convenient method for resizing floating windows in XMonad, allowing the user to resize from any corner of the floating window. With this module, instead of being limited to resizing from a specific edge or corner (i.e., bottom-right), the user can click and drag any part of the window to resize it, making the resizing process more flexible and intuitive.
@@ -972,3 +1041,46 @@ myMouseBindings XConfig {XMonad.modMask = modm} =
       )
     ]
 ```
+
+## Search Engine & Other Prompts
+
+The XMonad.Actions.Search module provides a way to efficiently search the web by launching queries via XMonad.
+
+Snippets of search engine bindings:
+
+``
+
+```haskell
+-- Search commands (wait for next keypress)
+("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig myBrowser),
+``````
+
+```haskell
+searchEngineMap method =
+  M.fromList
+    [ ((0, xK_a), method $ S.searchEngine "archwiki" "http://wiki.archlinux.org/index.php/Special:Search?search="),
+      ((0, xK_g), method S.google),
+      ((0, xK_h), method S.hoogle),
+      ((0, xK_i), method S.imdb),
+      ((0, xK_p), method S.aur),
+      ((0, xK_s), method $ S.searchEngine "stackoverflow" "https://stackoverflow.com/search?q="),
+      ((0, xK_w), method S.wikipedia),
+      ((0, xK_y), method S.youtube)
+    ]
+```
+
+This code sets up a keyboard shortcut "Mod + s" in Xmonad. When this shortcut is pressed, a search prompt will appear, allowing you to search various websites. The behavior of the search prompt and the search process is defined by the "myPromptConfig" and "myBrowser" parameters passed to the "S.promptSearchBrowser" function.
+
+The "searchEngineMap" method maps specific key presses to specific search engines. For example, when you press "Mod + s" **then** "g", you'll be searching Google. And if you press "Mod + s" **then** "w", you'll be searching Wikipedia. The "S.searchEngine" function takes two arguments: the name of the search engine and the URL format used to search that engine. Those undefind are provided by XMonad. You may view them [here](https://xmonad.github.io/xmonad-docs/xmonad-contrib/XMonad-Actions-Search.html).
+
+So, to put it simply, this code sets up a keyboard shortcut "Mod + s" in Xmonad that opens a search prompt. By pressing different keys after the initial "Mod + s" shortcut, you can search various websites.
+
+Snippet of prompt bindings:
+
+```haskell
+("M-s-m", manPrompt myPromptConfig),
+("M-s-x", xmonadPrompt myPromptConfig),
+("M-S-q", confirmPrompt myPromptConfig "exit" $ io exitSuccess),
+```
+
+Similarly, the XMonad-Prompt library provides functions for creating interactive prompts in Xmonad. It offers support for input fields, selection lists, and password inputs. Customization options for the look and behavior of prompts are available in [MyDecorations.hs](./xmonad/.config/xmonad/lib/Custom/MyDecorations.hs).
