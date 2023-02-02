@@ -9,6 +9,7 @@ null_ls.setup({
 	sources = {
 		formatting.stylua,
 		formatting.shfmt,
+		formatting.prettierd,
 		--formatting.fourmolu, <-- (ormolu alternative)
 		diagnostics.markdownlint,
 		diagnostics.luacheck,

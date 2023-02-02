@@ -1,10 +1,11 @@
 return {
+	{ "nvim-tree/nvim-web-devicons" },
+
 	{
 		"catppuccin/nvim",
 		as = "catppuccin",
 		dependencies = {
 			"akinsho/bufferline.nvim",
-			dependencies = { "nvim-tree/nvim-web-devicons" },
 		},
 	},
 
@@ -26,6 +27,7 @@ return {
 
 	{
 		"VonHeikemen/lsp-zero.nvim",
+		branch = "v1.x",
 		dependencies = {
 			-- LSP Support
 			{ "neovim/nvim-lspconfig" },
@@ -44,6 +46,14 @@ return {
 		},
 	},
 
+	"onsails/lspkind-nvim",
+
+	{ "glepnir/lspsaga.nvim", event = "BufRead" },
+
+	{ "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
+
+	"ray-x/lsp_signature.nvim",
+
 	"jose-elias-alvarez/null-ls.nvim",
 
 	"lukas-reineke/indent-blankline.nvim",
@@ -58,9 +68,7 @@ return {
 
 	"folke/zen-mode.nvim",
 
-	{ "nvim-lualine/lualine.nvim", dependencies = { "nvim-tree/nvim-web-devicons" } },
-
-	"onsails/lspkind-nvim",
+	{ "nvim-lualine/lualine.nvim" },
 
 	"lewis6991/gitsigns.nvim",
 
