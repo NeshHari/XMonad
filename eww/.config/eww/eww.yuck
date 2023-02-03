@@ -1,0 +1,16 @@
+(defpoll calendar_day :interval "10h" "date '+%d'")
+(defpoll calendar_year :interval "10h" "date '+%Y'")
+
+(defwidget cal []
+	(box :class "cal-container" 
+	(box :class "cal-inner"
+	(calendar :class "cal-elems" 
+			  :day calendar_day 
+			  :year calendar_year))))
+
+(defwindow calendar
+	:geometry (geometry :x "1780px" 
+						:y "55px" 
+						:width "380px" 
+						:height "60px")
+(cal))
