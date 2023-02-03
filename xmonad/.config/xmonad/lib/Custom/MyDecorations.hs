@@ -9,7 +9,7 @@ import XMonad.Layout.Tabbed
 import XMonad.Prompt
 
 myBorderWidth :: XMonad.Dimension
-myBorderWidth = 3
+myBorderWidth = 2
 
 myNormalBorderColor :: String
 myNormalBorderColor = catBase

@@ -1,5 +1,6 @@
+-- luacheck: globals vim
 require("catppuccin").setup({
-	flavour = "mocha", -- latte, frappe, macchiato, mocha
+	flavour = "mocha",
 	term_colors = true,
 	integrations = {
 		cmp = true,

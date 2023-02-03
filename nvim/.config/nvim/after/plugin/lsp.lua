@@ -56,7 +56,7 @@ local on_attach = function(bufnr)
 	key("n", "<leader>wl", function()
 		print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
 	end, bufopts)
-	lspsig.on_attach(signature_setup, bufnr)
+	lspsig.on_attach(bufnr)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
@@ -128,7 +128,12 @@ if not ok_saga then
 	return
 end
 
-saga.setup()
+saga.setup({
+	ui = {
+		colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
+		kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
+	},
+})
 
 key("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")
 key({ "n", "v" }, "<leader>ca", "<cmd>Lspsaga code_action<CR>")
