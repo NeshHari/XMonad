@@ -1,0 +1,957 @@
+{
+  "nightTab": true,
+  "version": "7.3.0",
+  "state": {
+    "layout": {
+      "area": {
+        "header": { "width": 80, "justify": "center" },
+        "bookmark": { "width": 100, "justify": "center" }
+      },
+      "alignment": "center-center",
+      "order": "header-bookmark",
+      "direction": "horizontal",
+      "size": 66,
+      "width": 72,
+      "padding": 60,
+      "gutter": 30,
+      "breakpoint": "md",
+      "scrollbar": "none",
+      "title": "Marauder's Map",
+      "favicon": "",
+      "overscroll": false
+    },
+    "header": {
+      "item": { "justify": "center" },
+      "greeting": {
+        "show": true,
+        "type": "custom",
+        "custom": "I solemly swear that I am up to no good",
+        "name": "",
+        "size": 276,
+        "newLine": false
+      },
+      "transitional": {
+        "show": false,
+        "type": "its",
+        "size": 430,
+        "newLine": false
+      },
+      "clock": {
+        "hour": { "show": false, "display": "number" },
+        "minute": { "show": false, "display": "number" },
+        "second": { "show": false, "display": "number" },
+        "separator": { "show": true, "text": "" },
+        "meridiem": { "show": true },
+        "hour24": { "show": false },
+        "size": 100,
+        "newLine": true
+      },
+      "date": {
+        "day": {
+          "show": false,
+          "display": "word",
+          "weekStart": "monday",
+          "length": "long"
+        },
+        "date": { "show": false, "display": "number", "ordinal": true },
+        "month": {
+          "show": false,
+          "display": "word",
+          "length": "short",
+          "ordinal": true
+        },
+        "year": { "show": false, "display": "number" },
+        "separator": { "show": true, "text": "" },
+        "format": "date-month",
+        "size": 100,
+        "newLine": true
+      },
+      "search": {
+        "show": false,
+        "width": { "by": "auto", "size": 30 },
+        "engine": {
+          "selected": "google",
+          "custom": { "name": "", "url": "", "queryName": "" }
+        },
+        "text": { "justify": "center" },
+        "size": 100,
+        "newLine": false,
+        "newTab": false
+      },
+      "order": ["greeting"],
+      "edit": false
+    },
+    "bookmark": {
+      "size": 100,
+      "url": { "show": true },
+      "line": { "show": true },
+      "shadow": { "show": true },
+      "hoverScale": { "show": true },
+      "orientation": "top",
+      "style": "block",
+      "newTab": false,
+      "edit": false,
+      "add": false,
+      "show": true,
+      "item": {}
+    },
+    "group": {
+      "area": { "justify": "center" },
+      "order": "header-body",
+      "name": { "size": 150 },
+      "toolbar": { "size": 100 },
+      "edit": false,
+      "add": false
+    },
+    "toolbar": {
+      "location": "corner",
+      "position": "top-right",
+      "size": 100,
+      "accent": { "show": false },
+      "add": { "show": false },
+      "edit": { "show": false },
+      "newLine": false
+    },
+    "theme": {
+      "color": {
+        "range": { "primary": { "h": 115, "s": 14 } },
+        "contrast": { "start": 4, "end": 40 },
+        "shades": 14
+      },
+      "accent": {
+        "hsl": { "h": 115, "s": 54, "l": 76 },
+        "rgb": { "r": 166, "g": 227, "b": 161 },
+        "random": { "active": false, "style": "any" },
+        "cycle": { "active": false, "speed": 300, "step": 10 }
+      },
+      "font": {
+        "display": { "name": "rebecca", "weight": 700, "style": "normal" },
+        "ui": { "name": "", "weight": 700, "style": "normal" }
+      },
+      "background": {
+        "type": "color",
+        "color": {
+          "hsl": { "h": 240, "s": 23, "l": 3 },
+          "rgb": { "r": 5, "g": 5, "b": 8 }
+        },
+        "gradient": {
+          "angle": 160,
+          "start": {
+            "hsl": { "h": 206, "s": 16, "l": 40 },
+            "rgb": { "r": 86, "g": 104, "b": 118 }
+          },
+          "end": {
+            "hsl": { "h": 219, "s": 28, "l": 12 },
+            "rgb": { "r": 22, "g": 28, "b": 39 }
+          }
+        },
+        "image": {
+          "url": "",
+          "blur": 0,
+          "grayscale": 0,
+          "scale": 100,
+          "accent": 0,
+          "opacity": 100,
+          "vignette": { "opacity": 0, "start": 90, "end": 70 }
+        },
+        "video": {
+          "url": "",
+          "blur": 0,
+          "grayscale": 0,
+          "scale": 100,
+          "accent": 0,
+          "opacity": 100,
+          "vignette": { "opacity": 0, "start": 90, "end": 70 }
+        }
+      },
+      "opacity": { "general": 40 },
+      "layout": {
+        "color": {
+          "by": "custom",
+          "hsl": { "h": 115, "s": 54, "l": 76 },
+          "rgb": { "r": 166, "g": 227, "b": 161 },
+          "blur": 0,
+          "opacity": 2
+        },
+        "divider": { "size": 10 }
+      },
+      "header": {
+        "color": {
+          "by": "custom",
+          "hsl": { "h": 115, "s": 54, "l": 76 },
+          "rgb": { "r": 166, "g": 227, "b": 161 },
+          "opacity": 0
+        },
+        "search": { "opacity": 40 }
+      },
+      "bookmark": {
+        "color": {
+          "by": "custom",
+          "opacity": 100,
+          "hsl": { "h": 240, "s": 23, "l": 3 },
+          "rgb": { "r": 5, "g": 5, "b": 8 }
+        },
+        "item": { "border": 0, "opacity": 40 }
+      },
+      "group": { "toolbar": { "opacity": 40 } },
+      "toolbar": { "opacity": 40 },
+      "style": "dark",
+      "radius": 300,
+      "shadow": 75,
+      "shade": { "opacity": 0, "blur": 0 },
+      "custom": {
+        "all": [
+          {
+            "name": "darkarts",
+            "color": {
+              "range": { "primary": { "h": 115, "s": 14, "l": 6 } },
+              "contrast": { "start": 4, "end": 40 }
+            },
+            "accent": {
+              "hsl": { "h": 115, "s": 54, "l": 76 },
+              "rgb": { "r": 166, "g": 227, "b": 161 }
+            },
+            "font": {
+              "display": {
+                "name": "rebecca",
+                "weight": 700,
+                "style": "normal"
+              },
+              "ui": { "name": "", "weight": 700, "style": "normal" }
+            },
+            "background": {
+              "type": "color",
+              "color": {
+                "hsl": { "h": 240, "s": 23, "l": 3 },
+                "rgb": { "r": 5, "g": 5, "b": 8 }
+              },
+              "gradient": {
+                "angle": 160,
+                "start": {
+                  "hsl": { "h": 206, "s": 16, "l": 40 },
+                  "rgb": { "r": 86, "g": 104, "b": 118 }
+                },
+                "end": {
+                  "hsl": { "h": 219, "s": 28, "l": 12 },
+                  "rgb": { "r": 22, "g": 28, "b": 39 }
+                }
+              },
+              "image": {
+                "url": "",
+                "blur": 0,
+                "grayscale": 0,
+                "scale": 100,
+                "accent": 0,
+                "opacity": 100,
+                "vignette": { "opacity": 0, "start": 90, "end": 70 }
+              },
+              "video": {
+                "url": "",
+                "blur": 0,
+                "grayscale": 0,
+                "scale": 100,
+                "accent": 0,
+                "opacity": 100,
+                "vignette": { "opacity": 0, "start": 90, "end": 70 }
+              }
+            },
+            "radius": 300,
+            "shadow": 75,
+            "style": "dark",
+            "shade": { "opacity": 0, "blur": 0 },
+            "opacity": { "general": 40 },
+            "layout": {
+              "color": {
+                "by": "custom",
+                "hsl": { "h": 115, "s": 54, "l": 76 },
+                "rgb": { "r": 166, "g": 227, "b": 161 },
+                "blur": 0,
+                "opacity": 2
+              },
+              "divider": { "size": 10 }
+            },
+            "header": {
+              "color": {
+                "by": "custom",
+                "hsl": { "h": 115, "s": 54, "l": 76 },
+                "rgb": { "r": 166, "g": 227, "b": 161 },
+                "opacity": 0
+              },
+              "search": { "opacity": 40 }
+            },
+            "bookmark": {
+              "color": {
+                "by": "custom",
+                "opacity": 100,
+                "hsl": { "h": 240, "s": 23, "l": 3 },
+                "rgb": { "r": 5, "g": 5, "b": 8 }
+              },
+              "item": { "border": 1, "opacity": 40 }
+            },
+            "group": { "toolbar": { "opacity": 40 } },
+            "toolbar": { "opacity": 40 }
+          }
+        ],
+        "edit": false
+      }
+    },
+    "search": false,
+    "modal": false,
+    "menu": true
+  },
+  "bookmark": [
+    {
+      "name": { "text": "Muggle Twats", "show": true },
+      "collapse": false,
+      "toolbar": {
+        "openAll": { "show": false },
+        "collapse": { "show": false }
+      },
+      "items": [
+        {
+          "url": "https://www.amazon.sg",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "Amazon", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "icon",
+              "size": 38,
+              "letter": { "text": "AZ" },
+              "icon": { "name": "amazon", "prefix": "fab", "label": "Amazon" },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1626297999213
+        },
+        {
+          "url": "https://chat.openai.com/chat",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "ChatGPT", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "image",
+              "size": 38,
+              "letter": { "text": "" },
+              "icon": {
+                "name": "cannabis",
+                "prefix": "fas",
+                "label": "Cannabis"
+              },
+              "image": {
+                "url": "https://brandlogovector.com/wp-content/uploads/2023/01/ChatGPT-Icon-Logo-PNG.png"
+              },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1675343693673
+        },
+        {
+          "url": "https://mail.google.com/",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "Gmail", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "icon",
+              "size": 38,
+              "letter": { "text": "GM" },
+              "icon": { "name": "inbox", "prefix": "fas", "label": "inbox" },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1626298011293
+        },
+        {
+          "url": "https://www.netflix.com/",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "Netflix", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "icon",
+              "size": 38,
+              "letter": { "text": "N" },
+              "icon": { "name": "film", "prefix": "fas", "label": "Film" },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1626298022303
+        },
+        {
+          "url": "https://www.primevideo.com/",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "Prime Video", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "image",
+              "size": 38,
+              "letter": { "text": "" },
+              "icon": { "name": "", "prefix": "", "label": "" },
+              "image": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Amazon_Prime_Logo.svg/2560px-Amazon_Prime_Logo.svg.png"
+              },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 100
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1675395912609
+        },
+        {
+          "url": "http://www.yoututbe.com",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "YouTube", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "icon",
+              "size": 38,
+              "letter": { "text": "" },
+              "icon": {
+                "name": "youtube",
+                "prefix": "fab",
+                "label": "YouTube"
+              },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 100
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1675484045010
+        }
+      ]
+    },
+    {
+      "name": { "text": "Half-bloods ...", "show": true },
+      "collapse": false,
+      "toolbar": {
+        "openAll": { "show": false },
+        "collapse": { "show": false }
+      },
+      "items": [
+        {
+          "url": "https://drive.google.com/drive/",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "ArchWiki", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "image",
+              "size": 38,
+              "letter": { "text": "AW" },
+              "icon": {
+                "name": "google-drive",
+                "prefix": "fab",
+                "label": "arch"
+              },
+              "image": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/a/a5/Archlinux-icon-crystal-64.svg"
+              },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1626298028996
+        },
+        {
+          "url": "https://github.com/",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "Github", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "icon",
+              "size": 38,
+              "letter": { "text": "GIT" },
+              "icon": { "name": "github", "prefix": "fab", "label": "GitHub" },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1626298038470
+        },
+        {
+          "url": "https://www.gitlab.com",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "GitLab", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "icon",
+              "size": 38,
+              "letter": { "text": "" },
+              "icon": { "name": "gitlab", "prefix": "fab", "label": "GitLab" },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1675343585387
+        },
+        {
+          "url": "https://hackage.haskell.org/package/xmonad-contrib",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "XMonad", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "image",
+              "size": 38,
+              "letter": { "text": "DEV" },
+              "icon": { "name": "code", "prefix": "fas", "label": "Code" },
+              "image": {
+                "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Xmonad-2022-new-logo.svg/1200px-Xmonad-2022-new-logo.svg.png"
+              },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1626298034209
+        },
+        {
+          "url": "https://elkowar.github.io/eww/configuration.html",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "eww Docs", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "letter",
+              "size": 38,
+              "letter": { "text": "EWW" },
+              "icon": { "name": "", "prefix": "", "label": "" },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 100
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1675483640562
+        }
+      ]
+    },
+    {
+      "name": { "text": "Dumbledore's Daddy", "show": true },
+      "collapse": false,
+      "toolbar": {
+        "size": 100,
+        "openAll": { "show": false },
+        "collapse": { "show": false }
+      },
+      "items": [
+        {
+          "url": "https://www.reddit.com/",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "Reddit", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "icon",
+              "size": 38,
+              "letter": { "text": "R" },
+              "icon": {
+                "name": "reddit-alien",
+                "prefix": "fab",
+                "label": "reddit Alien"
+              },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1626298017175
+        },
+        {
+          "url": "https://www.reddit.com/r/unixporn/",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "r/unixporn", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "image",
+              "size": 38,
+              "letter": { "text": "" },
+              "icon": {
+                "name": "",
+                "prefix": "",
+                "label": "https://styles.redditmedia.com/t5_2sx2i/styles/communityIcon_7fixeonxbxd41.png?width=256&v=enabled&s=09e1c0d643c91e5dada2c7f73adb4effdb0bdf7d"
+              },
+              "image": {
+                "url": "https://styles.redditmedia.com/t5_2sx2i/styles/communityIcon_7fixeonxbxd41.png?width=256&v=enabled&s=09e1c0d643c91e5dada2c7f73adb4effdb0bdf7d"
+              },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 40
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1675343277246
+        },
+        {
+          "url": "https://www.github.com/NeshHari/XMonad",
+          "display": {
+            "alignment": "center-center",
+            "direction": "vertical",
+            "order": "visual-name",
+            "rotate": 0,
+            "translate": { "x": 0, "y": 0 },
+            "gutter": 25,
+            "name": { "show": true, "text": "Starter Kit", "size": 14 },
+            "visual": {
+              "show": true,
+              "type": "icon",
+              "size": 38,
+              "letter": { "text": "" },
+              "icon": {
+                "name": "hands-helping",
+                "prefix": "fas",
+                "label": "Helping Hands"
+              },
+              "image": { "url": "" },
+              "shadow": { "size": 0 }
+            }
+          },
+          "accent": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 }
+          },
+          "color": {
+            "by": "theme",
+            "hsl": { "h": 0, "s": 0, "l": 0 },
+            "rgb": { "r": 0, "g": 0, "b": 0 },
+            "opacity": 100
+          },
+          "background": {
+            "show": false,
+            "type": "image",
+            "opacity": 100,
+            "image": { "url": "" },
+            "video": { "url": "" }
+          },
+          "border": 0,
+          "shape": { "wide": false, "tall": false },
+          "timestamp": 1675421484515
+        }
+      ]
+    }
+  ]
+}
