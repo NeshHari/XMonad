@@ -9,7 +9,9 @@
 
 <h2 align="center"> ⚡ The Dark Arts ⚡</h2>
 
-<img src="./wallpapers/dark_arts_custom.png" alt="img" align="right" width="400px">
+<img src="./images/xmonad.png" alt="img" align="center">
+
+## Tool Overview
 
 - **WM**: [xmonad](https://github.com/xmonad/xmonad)
   - **Extensions**: [xmonad-contrib](https://github.com/xmonad/xmonad-contrib)
@@ -21,8 +23,8 @@
   - **Plugin Manager**: [lazy](https://github.com/folke/lazy.nvim)
 - **File Manager**: [Thunar](https://git.xfce.org/xfce/thunar/)
 - **Launcher**: [rofi](https://github.com/davatorium/rofi/)
-
----
+- **Browser**: [Microsoft Edge Beta](https://aur.archlinux.org/packages/microsoft-edge-beta-bin)
+  - **Extension**: [nightTab](https://github.com/zombieFox/nightTab)
 
 ## Contents
 
@@ -80,14 +82,12 @@
 - [Search Engine & Other Prompts](#search-engine-other-prompts)
 <!--toc:end-->
 
----
+<h2 align="center"> IMPORTANT </h2>
 
 **_This document serves as a supplementary resource to provide insights and
 understanding into the code of the dotfiles. It is not intended to be used
 as a copy-paste solution and should not replace careful review and customization
 of the actual dotfiles._**
-
----
 
 ## Introduction
 
@@ -133,7 +133,7 @@ The following guide requires the latest/git version of XMonad to be installed to
 
 ### Automatic Installation (Arch Linux)
 
-_Note: Use at your own risk. This [script](./setup.sh) is provided as-is, and is not guaranteed to work on your system (**unstable**). It is recommended that you read through the script before running it._
+_This [setup script](./setup.sh) is offered as a convenience, but its use is at your own discretion (**unstable**). Manual installation is recommended for a safer and more controlled process, as it eliminates the risk of accidental overwrites or incongruous symlinks. As the author, I suggest manual installations to better respect the user's file structure. Please review before use._
 
 ```fish
 wget https://raw.githubusercontent.com/NeshHari/XMonad/main/setup.sh
