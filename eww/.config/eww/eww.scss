@@ -30,17 +30,32 @@ $flamingo: #f2cdcd;
 $rosewater: #f5e0dc;
 $transparent: #ff0000;
 
-.cal-container {
+.cal-inner-container,
+.cal-outer-container {
   font-family: Sugar Snow;
   font-size: 1em;
   color: $text;
   background-color: $base;
   border-radius: 10px;
-  padding: 0.4em;
+  padding: 0em;
 }
 
-.cal-elems {
+.cal-inner-elems {
   padding: 1em;
+}
+
+.cal-outer-elems {
+  padding: 1em;
+}
+
+.cal-date {
+  font-family: Sugar Snow;
+  font-size: 1.1em;
+  color: $base;
+  background-color: $green;
+  border-radius: 2em;
+  padding: 0.8em;
+  margin: 1em;
 }
 
 calendar.button {
@@ -57,4 +72,26 @@ calendar:selected {
 
 calendar:indeterminate {
   color: $surface1;
+}
+
+.profile-container {
+  background-color: $base;
+  border-radius: 8px;
+  padding: 1em;
+}
+
+.profile-pic {
+  background-repeat: no-repeat;
+  background-size: 250px;
+  min-height: 250px;
+  min-width: 250px;
+  border-radius: 2em;
+}
+
+.quote {
+  font-family: Vanilla Caramel;
+  font-size: 24px;
+  font-style: italic;
+  font-weight: bold;
+  color: $green;
 }

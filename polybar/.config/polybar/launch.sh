@@ -25,6 +25,7 @@ elif [ "$PATH_TO_CONFIG" = "$THEDARKARTS" ]; then
 		polybar -c $PATH_TO_CONFIG main-right &
 		polybar -c $PATH_TO_CONFIG main-right-extended &
 		polybar -c $PATH_TO_CONFIG main-tray &
+		polybar -c $PATH_TO_CONFIG main-profile &
 	elif autorandr --detected | grep -q "dual"; then
 		polybar -c $PATH_TO_CONFIG main-left &
 		polybar -c $PATH_TO_CONFIG main-left-extended &
@@ -34,6 +35,7 @@ elif [ "$PATH_TO_CONFIG" = "$THEDARKARTS" ]; then
 		polybar -c $PATH_TO_CONFIG main-right-extended &
 		polybar -c $PATH_TO_CONFIG main-tray &
 		polybar -c $PATH_TO_CONFIG left &
+		polybar -c $PATH_TO_CONFIG main-profile &
 	fi
 else
 	notify-send -u low "Failed to launch polybar."

@@ -11,22 +11,23 @@
 
 <img src="./wallpapers/dark_arts_custom.png" alt="img" align="right" width="400px">
 
-+ **WM**: [xmonad](https://github.com/xmonad/xmonad)
-    + **Extensions**: [xmonad-contrib](https://github.com/xmonad/xmonad-contrib)
-+ **OS**: [Arch Linux](https://archlinux.org/)
-+ **Shell**: [fish](https://wiki.archlinux.org/title/fish)
-    + **Plugin Manager**: [fisher](https://github.com/jorgebucaran/fisher)
-+ **Terminal**: [kitty](https://github.com/kovidgoyal/kitty/)
-+ **Editor**: [Neovim](https://github.com/neovim/neovim/)
-    + **Plugin Manager**: [lazy](https://github.com/folke/lazy.nvim)
-+ **File Manager**: [Thunar](https://git.xfce.org/xfce/thunar/)
-+ **Launcher**: [rofi](https://github.com/davatorium/rofi/)
+- **WM**: [xmonad](https://github.com/xmonad/xmonad)
+  - **Extensions**: [xmonad-contrib](https://github.com/xmonad/xmonad-contrib)
+- **OS**: [Arch Linux](https://archlinux.org/)
+- **Shell**: [fish](https://wiki.archlinux.org/title/fish)
+  - **Plugin Manager**: [fisher](https://github.com/jorgebucaran/fisher)
+- **Terminal**: [kitty](https://github.com/kovidgoyal/kitty/)
+- **Editor**: [Neovim](https://github.com/neovim/neovim/)
+  - **Plugin Manager**: [lazy](https://github.com/folke/lazy.nvim)
+- **File Manager**: [Thunar](https://git.xfce.org/xfce/thunar/)
+- **Launcher**: [rofi](https://github.com/davatorium/rofi/)
 
 ---
 
 ## Contents
 
 <!--toc:start-->
+
 - [Introduction](#introduction)
 - [Scope of Coverage](#scope-of-coverage)
 - [Preparatory Requirements](#preparatory-requirements)
@@ -144,7 +145,7 @@ bash setup.sh
 _Note: Paru is interchangeable with any AUR helper_
 
 ```fish
-paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 kitty lazygit libnotify lxappearance ttf-iosevka-nerd neovim-git nodejs polybar picom playerctl python-pip rofi stack starship stow terminus-font ttf-font-awesome ttf-material-icons-git unclutter xcape xdo xorg-xinit xorg-xmessage xorg-xsetroot zoxide
+paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst eww fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 kitty lazygit libnotify lxappearance ttf-iosevka-nerd neovim-git nodejs polybar picom playerctl python-pip rofi stack starship stow terminus-font ttf-font-awesome ttf-material-icons-git unclutter xcape xdo xorg-xinit xorg-xmessage xorg-xsetroot zoxide
 ```
 
 _Note: Polybar will not automatically launch after installation. This is expected behavior. The [polybar launch script](./polybar/.config/polybar/startup.sh) is deliberately tied to autorandr, which is used for hot-plugging. Refer to the section on MyRescreen.hs to see how they all come together._
@@ -333,7 +334,7 @@ Moving on, a minimal hie.yaml must be defined for HLS to function.
 
 ```yaml
 cradle:
-    stack:
+  stack:
 ```
 
 Expected High-Level Structure
@@ -797,7 +798,7 @@ The [XMonad.Layout.NoBorders](https://hackage.haskell.org/package/xmonad-contrib
 
 ### Gaps Gaps Gaps
 
-Snippet of reference: 
+Snippet of reference:
 
 ```haskell
 mySpacing i = spacingRaw False (Border 10 10 30 30) True (Border i i i i) True
@@ -1056,7 +1057,7 @@ Snippets of search engine bindings:
 ```haskell
 -- Search commands (wait for next keypress)
 ("M-s", SM.submap $ searchEngineMap $ S.promptSearchBrowser myPromptConfig myBrowser),
-``````
+```
 
 ```haskell
 searchEngineMap method =

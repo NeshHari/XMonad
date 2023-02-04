@@ -1,16 +1,42 @@
+;; profile
+(defvar image "images/profile.png")
+(defpoll qt :interval "24h" `quotes/quotes.sh`)
+
+(defwidget wizard []
+	(box :class "profile-container" :orientation "h"
+		(box :style "background-image: url('${image}');" :class "profile-pic" :halign "center")
+		(label :class "quote" :halign "center" :wrap "true" :limit-width 200 :text qt)))
+
+(defwindow profile
+	    :geometry (geometry :x 36
+                            :y 62
+                            :width 600 
+                            :height 30)
+(wizard))
+
+;; calendar
 (defpoll calendar_day :interval "10h" "date '+%d'")
 (defpoll calendar_year :interval "10h" "date '+%Y'")
+(defpoll calendar_date :interval "24h" "date '+%A, %d %B'")
 
 (defwidget cal []
 	(box :class "cal-container" 
 	(box :class "cal-inner"
-	(calendar :class "cal-elems" 
+	(calendar :class "cal-inner-elems" 
 			  :day calendar_day 
 			  :year calendar_year))))
 
-(defwindow calendar
-	:geometry (geometry :x "1780px" 
-						:y "55px" 
+(defwidget fullcal[]
+  (box :orientation "v" :space-evenly "false" :class "cal-outer-container"
+    (box :class "cal-date" "${calendar_date}")
+    (cal)
+  )
+)
+  
+(defwindow mycal
+	:geometry (geometry :x "1790px" 
+						:y "62px" 
 						:width "380px" 
 						:height "60px")
-(cal))
+(fullcal))
+

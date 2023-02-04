@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+#https://github.com/NeshHari/XMonad
 
 quotes=(
 	"Fear of a name only increases fear of the thing itself."

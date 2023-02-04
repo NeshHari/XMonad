@@ -33,6 +33,7 @@ packages=(
 	catppuccin-gtk-theme-mocha
 	cava
 	dunst
+	eww
 	fd
 	feh
 	fish
