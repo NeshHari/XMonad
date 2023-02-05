@@ -215,7 +215,19 @@ To integrate with polybar and avoid the traceback error, you may need to run the
 pip install dbus-python
 ```
 
-_Note: Configurations using Spicetify will be made available when ready, or you can get them [here](https://github.com/catppuccin/spicetify)._
+Additionally, to ensure polybar (main-middle) launches only when spotify is used and closes when it is not, please modify the desktop entry:
+
+```shell
+# ~/usr/share/applications/spotify.desktop (modify the path accordingly)
+[Desktop Entry]
+Type=Application
+Name=Spotify
+...
+Exec=$HOME/scripts/poly_spoti.sh
+...
+```
+
+_Note: Configurations using [Spicetify](https://aur.archlinux.org/packages/spicetify-cli) are available [here](./spicetify/.config/spicetify/Themes/darkarts/) and [here](./spicetify/.config/spicetify/config-xput.ini) but require manual configuration on your end. Refer to the [official docs](https://spicetify.app/docs/getting-started) for more information._
 
 ### GTK
 
