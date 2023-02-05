@@ -1,0 +1,8 @@
+gui:
+  theme:
+    selectedLineBgColor:
+      - bold
+      - default
+  showIcons: false
+  showRandomTip: false
+  showBottomLine: false
