@@ -1,9 +1,3 @@
-<head>
-  
-  <meta name="google-site-verification" content="7cjgLFdZ5h3yLipkeJu02JIZZxT3uWPVk6N7kViZqFg" />
-
-</head>
-  
 <div align="center">
 
 <h1 align="center">XMonad Starter Kit</h1>
