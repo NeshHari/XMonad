@@ -81,7 +81,7 @@ cd $HOME
 git clone https://github.com/NeshHari/XMonad.git
 mv XMonad starter_kit_dots
 cd starter_kit_dots
-rm README.md setup.sh
+rm README.md setup.sh google*
 stow_dirs=()
 for dir in *; do
 	if ! stow $dir; then
