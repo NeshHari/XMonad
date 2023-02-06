@@ -170,7 +170,7 @@ whilst in the root of the cloned folder._
 git clone https://github.com/NeshHari/XMonad.git
 mv XMonad starter_kit_dots
 cd starter_kit_dots
-rm README.md setup.sh google*
+rm README.md setup.sh index.html
 stow *
 cd ~/.config/xmonad
 rm -r xmonad xmonad-contrib
