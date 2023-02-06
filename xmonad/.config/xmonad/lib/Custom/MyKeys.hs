@@ -98,7 +98,7 @@ myKeys =
     ("M-,", sendMessage (IncMasterN 1)),
     ("M-.", sendMessage (IncMasterN (-1))),
     -- XMonad
-    ("M-q", spawn "xmonad --recompile; xmonad --restart"),
+    ("M-q", spawn "xmonad --recompile && xmonad --restart"),
     -- Volume
     ("<XF86AudioLowerVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ -1%"),
     ("<XF86AudioRaiseVolume>", spawn "pactl set-sink-volume @DEFAULT_SINK@ +1%"),

@@ -41,5 +41,6 @@ else
 	notify-send -u low "Failed to launch polybar."
 fi
 
-sleep 1
+# adjust sleep duration as required to ensure polybar is hidden (i.e., lowered) after restart in monocle layout
+sleep 3
 xdo lower -N "Polybar"

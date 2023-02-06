@@ -63,6 +63,7 @@ packages=(
 	ttf-iosevka-nerd
 	ttf-material-icons-git
 	unclutter
+	wmctrl
 	xcape
 	xdo
 	xorg-xinit
