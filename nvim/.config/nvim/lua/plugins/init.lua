@@ -1,4 +1,5 @@
 return {
+
 	{ "nvim-tree/nvim-web-devicons" },
 
 	{
@@ -72,6 +73,8 @@ return {
 
 	"lewis6991/gitsigns.nvim",
 
+	"sindrets/diffview.nvim",
+
 	"akinsho/toggleterm.nvim",
 
 	"kylechui/nvim-surround",
@@ -91,4 +94,6 @@ return {
 	"zbirenbaum/copilot.lua",
 
 	"folke/which-key.nvim",
+
+	"norcalli/nvim-colorizer.lua",
 }
