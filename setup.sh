@@ -68,6 +68,7 @@ packages=(
 	xdo
 	xorg-xinit
 	xorg-xmessage
+	xorg-xmodmap
 	xorg-xsetroot
 	zoxide
 )
