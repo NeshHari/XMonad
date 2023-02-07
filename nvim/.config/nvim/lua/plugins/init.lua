@@ -82,7 +82,8 @@ return {
 	"epwalsh/obsidian.nvim",
 
 	"lewis6991/impatient.nvim",
-	"rcarriga/nvim-notify",
+
+	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } },
 
 	{
 		"iamcco/markdown-preview.nvim",
