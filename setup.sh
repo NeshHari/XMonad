@@ -44,6 +44,7 @@ packages=(
 	glava
 	haskell-utf8-string
 	haskell-x11
+	jgmenu
 	kitty
 	lazygit
 	libnotify
