@@ -218,12 +218,13 @@ pip install dbus-python
 Additionally, to ensure polybar (main-middle) launches only when spotify is used and closes when it is not, please modify the desktop entry:
 
 ```shell
-# ~/usr/share/applications/spotify.desktop (modify the path accordingly)
+# PATH: ~/.local/share/applications/spotify.desktop (copy and modify /usr/share/applications/spotify.desktop so it persist after updates)
+
 [Desktop Entry]
 Type=Application
 Name=Spotify
 ...
-Exec=$HOME/scripts/poly_spoti.sh
+Exec=/home/myusername/scripts/poly_spoti.sh
 ...
 ```
 
