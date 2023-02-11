@@ -1,4 +1,5 @@
 -- luacheck: globals vim
+
 require("catppuccin").setup({
 	flavour = "mocha",
 	term_colors = true,
@@ -39,6 +40,12 @@ require("catppuccin").setup({
 		mocha = {
 			base = "#050508",
 		},
+	},
+	transparent_background = true,
+	dim_inactive = {
+		enabled = false,
+		shade = "dark",
+		percentage = 0.15,
 	},
 })
 

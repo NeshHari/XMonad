@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local builtin = require("telescope.builtin")
 local z_utils = require("telescope._extensions.zoxide.utils")
 local trouble = require("trouble.providers.telescope")
@@ -73,3 +74,4 @@ keymap("n", "<leader>fh", builtin.help_tags, {})
 keymap("n", "<leader>bf", builtin.buffers, {})
 keymap("n", "<leader>di", "<cmd>Telescope diagnostics<CR>", {})
 keymap("n", "<leader>cd", telescope.extensions.zoxide.list)
+keymap("n", "<leader>h", telescope.extensions.notify.notify)
