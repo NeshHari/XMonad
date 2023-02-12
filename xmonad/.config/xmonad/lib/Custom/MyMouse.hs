@@ -12,7 +12,7 @@ myMouseBindings XConfig {XMonad.modMask = modm} =
         \w -> focus w >> mouseMoveWindow w >> windows W.shiftMaster
       ),
       ((modm, button2), \w -> focus w >> windows W.shiftMaster),
-      ( (modm, button3),
+      ( (modm .|. shiftMask, button3),
         \w -> focus w >> Flex.mouseResizeWindow w >> windows W.shiftMaster
       ),
       ((modm, button3), const (spawn "jgmenu_run"))
