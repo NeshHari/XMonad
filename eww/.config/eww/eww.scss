@@ -95,3 +95,58 @@ calendar:indeterminate {
   font-weight: bold;
   color: $green;
 }
+
+.spotify-container {
+  font-family: Sugar Snow;
+  background-color: $base;
+  padding: 1em;
+}
+
+.spotify-img {
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 240px;
+  min-width: 280px;
+  border-radius: 0.3em;
+  margin-left: 1.2em;
+}
+
+.spotify-inner-right-container {
+  padding: 1em;
+}
+
+.spotify-inner-right-container * {
+  margin: 0.2em;
+}
+
+.spotify-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $blue;
+}
+
+.spotify-singer {
+  font-size: 1em;
+  color: $lavender;
+}
+
+.spotify-controls button {
+  font-family: Iosevka Nerd Font;
+  font-weight: bold;
+  font-size: 1.2em;
+  color: $surface2;
+}
+
+.spotify-controls button:hover {
+  font-size: 1.3em;
+  color: $green;
+}
+
+.powermenu-container {
+  font-family: Iosevka Nerd Font;
+  font-size: 1em;
+  font-weight: bold;
+  color: $red;
+  background-color: $base;
+  padding: 1em;
+}

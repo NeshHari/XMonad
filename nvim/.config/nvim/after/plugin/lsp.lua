@@ -28,8 +28,10 @@ if not ok_masonlspconf then
 	return
 end
 
+local lsp_services = { "bashls", "hls", "jdtls", "marksman", "lua_ls", "pyright" }
+
 masonlspconf.setup({
-	ensure_installed = { "bashls", "hls", "jdtls", "marksman", "sumneko_lua" },
+	ensure_installed = lsp_services,
 })
 
 local ok_sig, lspsig = pcall(require, "lsp_signature")
@@ -60,15 +62,12 @@ local on_attach = function(bufnr)
 end
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
-local lsp_services = { "bashls", "hls", "jdtls", "marksman", "sumneko_lua" }
 
 for _, service in ipairs(lsp_services) do
 	myLsp[service] = { on_attach = on_attach }
 	myLsp[service] = { capabilities = capabilities }
-	if service == "sumneko_lua" then
-		myLsp[service].settings = {
-			Lua = { diagnostics = { globals = { "vim" } } },
-		}
+	if myLsp[service] == "lua_ls" then
+		myLsp[service] = { settings = { Lua = { diagnostics = { globals = { "vim" } } } } }
 	end
 end
 

@@ -1,3 +1,4 @@
+-- luacheck: globals vim
 local opt = vim.opt
 
 opt.nu = true
@@ -18,25 +19,23 @@ opt.incsearch = true
 opt.termguicolors = true
 
 opt.scrolloff = 8
-opt.signcolumn = 'yes'
+opt.signcolumn = "yes"
 
 opt.updatetime = 50
 
-opt.mouse = 'a'
+opt.mouse = "a"
 opt.swapfile = false
 
--- opt.lazyredraw = true
+opt.completeopt = "menu,menuone,noselect,noinsert"
 
-opt.completeopt = 'menu,menuone,noselect,noinsert'
-
-opt.clipboard = 'unnamedplus'
+opt.clipboard = "unnamedplus"
 
 opt.list = true
 
 opt.timeoutlen = 1000
 opt.ttimeoutlen = 1000
 
-opt.listchars:append "space:⋅"
-opt.listchars:append "eol:↴"
+opt.listchars:append("space:⋅")
+opt.listchars:append("eol:↴")
 
 opt.spelllang = "en_uk"

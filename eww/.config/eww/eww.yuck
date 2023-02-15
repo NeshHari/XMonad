@@ -40,3 +40,52 @@
 						:height "60px")
 (fullcal))
 
+;; spotify
+(defpoll playpause :interval "1s"  "scripts/playpause --icon")
+(defpoll songtitle :interval "1s" "scripts/playpause --status")
+(defpoll singer :interval "1s" "scripts/artist")
+(defpoll coverart :interval "1s" "scripts/coverart --art")
+
+;; spotify
+(defwidget spotify []
+  (box :class "spotify-container" :orientation "h" :space-evenly "true" :spacing 1
+    (box :class "spotify-img" :style "background-image: url('${coverart}');")
+    (box :class "spotify-inner-right-container" :orientation "v" :valign "center" :halign "center" :space-evenly "true" 
+      (box :orientation "v" :spacing 25
+        (label :class "spotify-title" :text "${songtitle}" :limit-width "24")
+        (label :class "spotify-singer" :text "${singer}" :limit-width "20")
+      )
+      (box :class "spotify-controls" :orientation "h" :halign "center" :space-evenly "false" :spacing 40
+        (button :onclick "playerctl previous" "󰒮")
+        (button :onclick "playerctl -p spotify play-pause" "${playpause}")
+        (button :onclick "playerctl -p spotify next" "󰒭")
+      )
+    )
+  )
+)
+
+
+(defwindow spotify
+	:geometry (geometry :x "1000px" 
+						:y "55px" 
+						:width "570px" 
+						:height "220px")
+(spotify))
+
+(defwidget poweroptions []
+  (box :class "powermenu-container" :orientation "h" :spacing 30
+    (button :class "lock" :onclick "betterlockscreen -l dim" "")
+    (button :class "logout" :onclick "pkill xmonad" "󰍃")
+    (button :class "suspend" :onclick "systemctl suspend" "⏾")
+    (button :class "restart" :onclick "reboot" "↺")
+    (button :class "shutdown" :onclick "shutdown -h now" "")
+  )
+)
+
+(defwindow powermenu
+	:geometry (geometry :x "2283px" 
+						:y "55px" 
+						:width "200px" 
+						:height "30px")
+    (poweroptions)
+)

@@ -6,36 +6,42 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 
 THEDARKARTS="$HOME/.config/polybar/TheDarkArts/config.ini"
 THESTAINSOFPURPLE="$HOME/.config/polybar/TheStainsOfPurple/config.ini"
+THEEXPANSION="$HOME/.config/polybar/TheExpansion/config.ini"
 
-PATH_TO_CONFIG=$THEDARKARTS
+PATH_TO_CONFIG=$THEEXPANSION
 
 if [ "$PATH_TO_CONFIG" = "$THESTAINSOFPURPLE" ]; then
 	if autorandr --detected | grep -q "single"; then
-		polybar -c $PATH_TO_CONFIG main &
+		polybar -c $PATH_TO_CONFIG -r main &
 	elif autorandr --detected | grep -q "dual"; then
-		polybar -c $PATH_TO_CONFIG main &
-		polybar -c $PATH_TO_CONFIG left &
+		polybar -c $PATH_TO_CONFIG -r main &
+		polybar -c $PATH_TO_CONFIG -r left &
 	fi
 elif [ "$PATH_TO_CONFIG" = "$THEDARKARTS" ]; then
 	if autorandr --detected | grep -q "single"; then
-		polybar -c $PATH_TO_CONFIG main-left &
-		polybar -c $PATH_TO_CONFIG main-left-extended &
-		polybar -c $PATH_TO_CONFIG main-left-links &
+		polybar -c $PATH_TO_CONFIG -r main-left &
+		polybar -c $PATH_TO_CONFIG -r main-left-extended &
+		polybar -c $PATH_TO_CONFIG -r main-left-links &
 		# polybar -c $PATH_TO_CONFIG main-middle &
-		polybar -c $PATH_TO_CONFIG main-right &
-		polybar -c $PATH_TO_CONFIG main-right-extended &
-		polybar -c $PATH_TO_CONFIG main-tray &
-		polybar -c $PATH_TO_CONFIG main-profile &
+		polybar -c $PATH_TO_CONFIG -r main-right &
+		polybar -c $PATH_TO_CONFIG -r main-right-extended &
+		polybar -c $PATH_TO_CONFIG -r main-tray &
+		polybar -c $PATH_TO_CONFIG -r main-profile &
 	elif autorandr --detected | grep -q "dual"; then
-		polybar -c $PATH_TO_CONFIG main-left &
-		polybar -c $PATH_TO_CONFIG main-left-extended &
-		polybar -c $PATH_TO_CONFIG main-left-links &
+		polybar -c $PATH_TO_CONFIG -r main-left &
+		polybar -c $PATH_TO_CONFIG -r main-left-extended &
+		polybar -c $PATH_TO_CONFIG -r main-left-links &
 		# polybar -c $PATH_TO_CONFIG main-middle &
-		polybar -c $PATH_TO_CONFIG main-right &
-		polybar -c $PATH_TO_CONFIG main-right-extended &
-		polybar -c $PATH_TO_CONFIG main-tray &
-		polybar -c $PATH_TO_CONFIG left &
-		polybar -c $PATH_TO_CONFIG main-profile &
+		polybar -c $PATH_TO_CONFIG -r main-right &
+		polybar -c $PATH_TO_CONFIG -r main-right-extended &
+		polybar -c $PATH_TO_CONFIG -r main-tray &
+		polybar -c $PATH_TO_CONFIG -r left &
+		polybar -c $PATH_TO_CONFIG -r main-profile &
+	fi
+elif [ "$PATH_TO_CONFIG" = "$THEEXPANSION" ]; then
+	if autorandr --detected | grep -q "single"; then
+		polybar -c $PATH_TO_CONFIG -r workspaces &
+		polybar -c $PATH_TO_CONFIG -r sysdata &
 	fi
 else
 	notify-send -u low "Failed to launch polybar."
