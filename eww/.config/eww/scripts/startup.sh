@@ -4,4 +4,4 @@ killall -9 eww
 eww daemon
 sleep 1
 
-eww open-many showlayout showfocusedclass powertoggler datetoggler
+eww open-many showlayout showfocusedclass datetoggler sysdatatoggler powertoggler

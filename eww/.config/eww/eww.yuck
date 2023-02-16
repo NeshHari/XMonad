@@ -36,8 +36,8 @@
   
 (defwindow mycal
     :stacking "fg"
-	:geometry (geometry :x "1720px" 
-						:y "62px" 
+	:geometry (geometry :x "74.5%" 
+						:y "4%" 
 						:width "380px" 
 						:height "20px")
 (fullcal))
@@ -71,7 +71,7 @@
 (defwindow spotify
     :stacking "fg"
 	:geometry (geometry :x "1000px" 
-						:y "62px" 
+						:y "4%" 
 						:width "570px" 
 						)
 (spotify))
@@ -89,7 +89,7 @@
 (defwindow powermenu
     :stacking "fg"
 	:geometry (geometry :x "2480px" 
-						:y "62px" 
+						:y "4%" 
 						:width "40px" )
     (poweroptions)
 )
@@ -127,7 +127,7 @@
 
 (defwindow datetoggler
     :stacking "fg"
-	:geometry (geometry :x "1850px" 
+	:geometry (geometry :x "79.6%" 
 						:y "8px" 
                         :height "40px"
 			   )
@@ -138,27 +138,122 @@
 
 (defwidget currentlayout []
 	(box :class "xmonad-layout-container" :orientation "h"
-		(label :halign "center" :limit-width 10 :text xmonad-layout)))
+		(label :halign "center" :limit-width 5 :text xmonad-layout)))
 
 (defwindow showlayout
     :stacking "fg"
-	:geometry (geometry :x 330
-                        :y 8
-                        :width 60 
+	:geometry (geometry :x "13.3%"
+                        :y "0.6%"
                         :height 40)
 (currentlayout))
 
 (defpoll wmclass :interval "0.5s" `scripts/get_wm_class`)
 
 (defwidget focusedclass []
-	(box :class "wmclass-container" :orientation "h"
-		(label :halign "center" :limit-width 10 :text wmclass)))
+	(box :class "wmclass-container" :hexpand "true" :tooltip "${wmclass}"
+		(label :halign "center" :text wmclass :limit-width 20 :show-truncated "true" ))) 
 
 (defwindow showfocusedclass
     :stacking "fg"
-	:geometry (geometry :x 410
-                        :y 8
-                        :width 100 
+	:geometry (geometry :x "16.2%"
+                        :y "0.6%"
                         :height 40)
 (focusedclass))
 
+
+(defpoll volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1")
+
+(defwidget showvol []
+  (box :class "metric" 
+       :orientation "h" 
+       :space-evenly "false"
+       :tooltip volume
+    (button :onclick "amixer -D pulse set Master 1+ toggle" "")
+    (scale :min 0
+           :max 100
+           :value volume
+           :onchange "amixer -D pulse sset Master {}%"
+    )
+  )
+)
+
+
+(defpoll wifi-signal :interval "10s" "nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\*/{if (NR!=1) {print $2}}'")
+
+(defwidget showwifi []
+  (box :class "metric"
+       :orientation "h"
+       :space-evenly "false"
+       :active "false"
+      (box "󰖩")
+      (scale :min 0
+             :max 100
+             :active "false"
+             :value {wifi-signal != "" ? wifi-signal : "0.0"}
+      )
+  )
+)           
+
+(defpoll ram :interval "3s" "printf $(free -m | grep Mem | awk '{print ($3/$2)*100}')")
+
+(defwidget showmemory []
+  (box :class "metric"
+       :orientation "h"
+       :space-evenly "false"
+       :active "false"
+      (box "󰍛")
+      (scale :min 0
+             :max 100
+             :value ram
+      )
+  )
+)           
+
+(defpoll cpu :interval "3s" "top -b -n 1 | grep 'Cpu(s)' | awk '{print $2}'")
+
+(defwidget showcpu []
+  (box :class "metric"
+       :orientation "h"
+       :space-evenly "false"
+       :active "false"
+      (box "")
+      (scale :min 0
+             :max 100
+             :value cpu
+      )
+  )
+)           
+
+(defwidget sysdata []
+  (box :class "metric"
+       :orientation "v"
+       :space-evenly "false"
+       (showvol)
+       (showwifi)
+       (showcpu)
+       (showmemory)
+  )
+)           
+
+(defwindow showsysdata
+    :stacking "fg"
+	:geometry (geometry :x "91.3%"
+                        :y "4%"
+                        :height 40)
+(sysdata))
+
+(defwidget togglesysdata []
+  (box :class "sysdatatoggler"
+    (button :class "toggle" :onclick "eww open --toggle showsysdata" "SYS " )
+  )
+)
+
+(defwindow sysdatatoggler
+    :stacking "fg"
+	:geometry (geometry :x "2344px" 
+						:y "8px" 
+                        :width "100px"
+                        :height "40px"
+			   )
+    (togglesysdata)
+)

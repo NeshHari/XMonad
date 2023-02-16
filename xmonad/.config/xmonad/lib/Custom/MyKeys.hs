@@ -68,7 +68,7 @@ myKeys =
     ("M-<Space>", sendMessage NextLayout),
     ("M-C-<Space>", spawn "polybar-msg cmd toggle" >> sendMessage ToggleStruts),
     ("M-C-b", sendMessage $ Toggle NOBORDERS),
-    ("M-f", sendMessage $ JumpToLayout "Monocle"),
+    ("M-f", sendMessage $ JumpToLayout "Full"),
     -- Cycle workspaces
     ("M-<Down>", nextWS),
     ("M-<Up>", prevWS),

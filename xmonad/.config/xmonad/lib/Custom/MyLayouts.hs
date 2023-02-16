@@ -68,7 +68,7 @@ bsp =
           subLayout [] tabs $
             mySpacing 7 emptyBSP
 
-full = renamed [XLR.Replace "Monocle"] $ noBorders Full
+full = renamed [XLR.Replace "Full"] $ noBorders Full
 
 myLayout = boringWindows (ifWider 1080 (tall ||| bsp) (column ||| accordion) ||| full)
 

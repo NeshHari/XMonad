@@ -34,6 +34,7 @@ $transparent: #ff0000;
 .cal-outer-container {
   font-family: CascaydiaCode Nerd Font;
   font-size: 1em;
+  font-weight: bold;
   color: $text;
   background-color: $base;
   border-radius: 0.5em;
@@ -49,8 +50,8 @@ $transparent: #ff0000;
 }
 
 .cal-date {
-  font-weight: bold;
-  font-size: 1em;
+  font-family: Cream Cake;
+  font-size: 2em;
   color: $base;
   background-color: $mauve;
   border-radius: 0.5em;
@@ -59,15 +60,18 @@ $transparent: #ff0000;
 }
 
 calendar.button {
-  color: $rosewater;
-  font-weight: bold;
+  color: $text;
 }
 
 calendar.header,
-calendar.highlight,
-calendar:selected {
+calendar.highlight {
   color: $mauve;
-  font-weight: bold;
+}
+
+calendar:selected {
+  color: $base;
+  background-color: $mauve;
+  border-radius: 5em;
 }
 
 calendar:indeterminate {
@@ -207,4 +211,45 @@ calendar:indeterminate {
   color: $lavender;
   background-color: $base;
   padding: 0.3em;
+}
+
+tooltip {
+  font-family: CaskaydiaCove Nerd Font;
+  font-size: 1em;
+  font-weight: bold;
+  color: $lavender;
+  background-color: $base;
+  padding: 0.3em;
+}
+
+.metric {
+  font-family: CaskaydiaCove Nerd Font;
+  font-size: 1em;
+  font-weight: bold;
+  background-color: $base;
+  color: $peach;
+  padding: 0.4em;
+}
+
+.metric scale trough highlight {
+  all: unset;
+  background-color: $peach;
+  border-radius: 10px;
+}
+.metric scale trough {
+  all: unset;
+  background-color: $mantle;
+  border-radius: 2em;
+  min-height: 0.3em;
+  min-width: 4em;
+  margin-left: 0.8em;
+  margin-right: 0.2em;
+}
+
+.sysdatatoggler {
+  font-family: CaskaydiaCove Nerd Font;
+  font-size: 1em;
+  font-weight: bold;
+  color: $peach;
+  background-color: $base;
 }
