@@ -32,16 +32,16 @@ $transparent: #ff0000;
 
 .cal-inner-container,
 .cal-outer-container {
-  font-family: CascaydiaCode Nerd Font;
+  font-family: SpaceMono Nerd Font;
   font-size: 1em;
   color: $text;
   background-color: $base;
-  border-radius: 0.5em;
-  padding: 0.4em;
+  border-radius: 10px;
+  padding: 0em;
 }
 
 .cal-inner-elems {
-  padding: 0.4em;
+  padding: 1em;
 }
 
 .cal-outer-elems {
@@ -49,12 +49,12 @@ $transparent: #ff0000;
 }
 
 .cal-date {
-  font-weight: bold;
-  font-size: 1em;
+  font-family: SpaceMono Nerd Font;
+  font-size: 1.1em;
   color: $base;
-  background-color: $mauve;
-  border-radius: 0.5em;
-  padding: 0.1em;
+  background-color: $green;
+  border-radius: 2em;
+  padding: 0.8em;
   margin: 1em;
 }
 
@@ -66,7 +66,7 @@ calendar.button {
 calendar.header,
 calendar.highlight,
 calendar:selected {
-  color: $mauve;
+  color: $green;
   font-weight: bold;
 }
 
@@ -89,7 +89,7 @@ calendar:indeterminate {
 }
 
 .quote {
-  font-family: CaskaydiaCove Nerd Font;
+  font-family: SpaceMono Nerd Font;
   font-size: 22px;
   font-style: italic;
   font-weight: bold;
@@ -97,6 +97,7 @@ calendar:indeterminate {
 }
 
 .spotify-container {
+  font-family: SpaceMono Nerd Font;
   background-color: $base;
   padding: 1em;
 }
@@ -119,26 +120,18 @@ calendar:indeterminate {
 }
 
 .spotify-title {
-  font-family: Sugar Snow;
-  font-size: 1.2em;
+  font-size: 1.4em;
   font-weight: bold;
   color: $blue;
 }
 
 .spotify-singer {
-  font-size: 1.1em;
-  color: $sapphire;
-}
-
-.spotify-album {
   font-size: 1em;
-  color: $sky;
-  font-style: italic;
-  margin-bottom: 1em;
+  color: $lavender;
 }
 
 .spotify-controls button {
-  font-family: CaskaydiaCove Nerd Font;
+  font-family: SpaceMono Nerd Font;
   font-weight: bold;
   font-size: 1.2em;
   color: $surface2;
@@ -146,12 +139,12 @@ calendar:indeterminate {
 
 .spotify-controls button:hover {
   color: $green;
-  transition: ease 0.7s;
+  transition: ease 0.5s;
 }
 
 .powermenu-container,
 .powertoggler {
-  font-family: CaskaydiaCove Nerd Font;
+  font-family: SpaceMono Nerd Font;
   font-size: 1em;
   font-weight: bold;
   color: $red;
@@ -166,27 +159,27 @@ calendar:indeterminate {
   color: $base;
   background-color: $red;
   border-radius: 0.3em;
-  transition: ease 0.7s;
+  transition: ease 0.5s;
 }
 
 .powertoggler :hover {
   color: $base;
   background-color: $red;
   border-radius: 0.3em;
-  transition: ease 0.7s;
+  transition: ease 0.5s;
 }
 
 .timedisplay {
-  font-family: CaskaydiaCove Nerd Font;
+  font-family: SpaceMono Nerd Font;
   font-size: 1em;
   font-weight: bold;
-  color: $mauve;
+  color: $red;
   background-color: $base;
 }
 
-.timedisplay :hover {
+.timebutton :hover {
   color: $base;
-  background-color: $mauve;
+  background-color: $red;
   border-radius: 0.3em;
-  transition: ease 0.7s;
+  transition: ease 0.5s;
 }
