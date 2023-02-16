@@ -12,4 +12,5 @@ myStartupHook = do
       blurCmd = "~/scripts/feh-blur.sh -s; ~/scripts/feh-blur.sh -d"
       picomCmd = "killall -9 picom; sleep 2 && picom -b &"
       easyeffectsCmd = "easyeffects --gapplication-service &"
-  sequence_ [spawn wallpaperCmd, spawn blurCmd, spawn picomCmd, spawnOnce easyeffectsCmd]
+      ewwCmd = "~/.config/eww/scripts/startup.sh"
+  sequence_ [spawn wallpaperCmd, spawn blurCmd, spawn picomCmd, spawnOnce easyeffectsCmd, spawn ewwCmd]

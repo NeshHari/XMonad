@@ -134,3 +134,31 @@
     (datetime)
 )
 
+(defpoll xmonad-layout :interval "0.5s" `scripts/xmonad_layout`)
+
+(defwidget currentlayout []
+	(box :class "xmonad-layout-container" :orientation "h"
+		(label :halign "center" :limit-width 10 :text xmonad-layout)))
+
+(defwindow showlayout
+    :stacking "fg"
+	:geometry (geometry :x 330
+                        :y 8
+                        :width 60 
+                        :height 40)
+(currentlayout))
+
+(defpoll wmclass :interval "0.5s" `scripts/get_wm_class`)
+
+(defwidget focusedclass []
+	(box :class "wmclass-container" :orientation "h"
+		(label :halign "center" :limit-width 10 :text wmclass)))
+
+(defwindow showfocusedclass
+    :stacking "fg"
+	:geometry (geometry :x 410
+                        :y 8
+                        :width 100 
+                        :height 40)
+(focusedclass))
+

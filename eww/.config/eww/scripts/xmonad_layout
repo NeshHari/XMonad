@@ -1,0 +1,14 @@
+#!/usr/bin/env python3
+# Author: github.com/NeshHari
+
+import subprocess
+
+cmd = ["/home/nesh/.config/xmonad/xmonad-contrib/scripts/xmonadpropread.hs"]
+p = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True)
+
+for line in p.stdout:
+    print(line.strip())
+    p.kill()
+    break
+
+p.wait()

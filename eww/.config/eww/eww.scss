@@ -190,3 +190,21 @@ calendar:indeterminate {
   border-radius: 0.3em;
   transition: ease 0.7s;
 }
+
+.xmonad-layout-container {
+  font-family: CaskaydiaCove Nerd Font;
+  font-size: 1em;
+  font-weight: bold;
+  color: $flamingo;
+  background-color: $base;
+  padding: 0.3em;
+}
+
+.wmclass-container {
+  font-family: CaskaydiaCove Nerd Font;
+  font-size: 1em;
+  font-weight: bold;
+  color: $lavender;
+  background-color: $base;
+  padding: 0.3em;
+}
