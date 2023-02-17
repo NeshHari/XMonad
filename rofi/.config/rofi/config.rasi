@@ -1,4 +1,4 @@
-@theme "darkarts"
+@theme "custom"
 
 configuration{
     font: "Sugar Snow 14";
@@ -34,7 +34,7 @@ button {
 
 button selected {
     background-color: @bg-col;
-    text-color: @green;
+    text-color: @randomcolor;
 }
 
 element {
@@ -83,7 +83,7 @@ mode-switcher {
 }
 
 prompt {
-    background-color: @green;
+    background-color: @randomcolor;
     border-radius: 3px;
     margin: 20px 0px 0px 20px;
     padding: 6px;

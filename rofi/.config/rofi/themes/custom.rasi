@@ -3,7 +3,7 @@
     bg-col-light: #050508;
     border-col: #050508;
     selected-col: #050508;
-    green: #a6e3a1;
+    randomcolor: #a6e3a1;
     fg-col: #cdd6f4;
     fg-col2: #a6e3a1;
     subtext: #6c7086;
