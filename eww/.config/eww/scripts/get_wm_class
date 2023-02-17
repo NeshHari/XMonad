@@ -32,3 +32,5 @@ if [ -z "$output" ]; then
 else
 	echo "$output"
 fi
+
+xdo lower -n eww-showfocusedclass

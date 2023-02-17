@@ -1,21 +1,38 @@
-;; profile
-(defvar image "images/profile.png")
-(defpoll qt :interval "24h" `quotes/quotes.sh`)
+;; Author: github.com/NeshHari
 
-(defwidget wizard []
-	(box :class "profile-container" :orientation "h"
-		(box :style "background-image: url('${image}');" :class "profile-pic" :halign "center")
-		(label :class "quote" :halign "center" :wrap "true" :limit-width 200 :text qt)))
+(defpoll quote :interval "24h" "scripts/quotes --quote")
+(defpoll bywho :interval "24h" "scripts/quotes --bywho")
 
-(defwindow profile
+(defwidget quote []
+	(box :class "quote-container" :orientation "v" :hexpand "false"
+        (button :style "background-image :url('images/quote.svg');" :class "quote-img" :halign "center") 
+	    (label :class "quote" :halign "center" :wrap "true" :limit-width 100 :text quote)
+		(label :class "bywho" :halign "center" :wrap "true" :limit-width 100 :text bywho)))
+
+(defwindow showquote
     :stacking "fg"
-	:geometry (geometry :x 36
-                        :y 62
-                        :width 600 
-                        :height 30)
-(wizard))
+	:geometry (geometry :x "13.5%"
+                        :y "4%"
+                        :width 350)
+(quote))
 
-;; calendar
+(defwidget togglequote []
+  (box :class "quotetoggler"
+    (button :class "showquote" :onclick "eww open --toggle showquote" "" )
+  )
+)
+
+
+(defwindow quotetoggler
+    :stacking "fg"
+	:geometry (geometry :x "13.5%" 
+						:y "0.6%"
+                        :width 40
+                        :height 40
+			   )
+    (togglequote)
+)
+
 (defpoll calendar_day :interval "10h" "date '+%d'")
 (defpoll calendar_year :interval "10h" "date '+%Y'")
 (defpoll calendar_date :interval "24h" "date '+%A, %d %B'")
@@ -43,11 +60,11 @@
 (fullcal))
 
 ;; spotify
-(defpoll playpause :interval "1s"  "scripts/playpause --icon")
-(defpoll songtitle :interval "1s" "scripts/playpause --status")
-(defpoll singer :interval "1s" "scripts/artist")
-(defpoll album :interval "1s" "scripts/album")
-(defpoll coverart :interval "1s" "scripts/coverart --art")
+(defpoll playpause :interval "0.5s"  "scripts/playpause --icon")
+(defpoll songtitle :interval "0.5s" "scripts/playpause --status")
+(defpoll singer :interval "0.5s" "scripts/artist")
+(defpoll album :interval "0.5s" "scripts/album")
+(defpoll coverart :interval "0.5s" "scripts/coverart --art")
 
 ;; spotify
 (defwidget spotify []
@@ -88,14 +105,14 @@
 
 (defwindow powermenu
     :stacking "fg"
-	:geometry (geometry :x "2480px" 
+	:geometry (geometry :x "96.8%"
 						:y "4%" 
-						:width "40px" )
+						:width 50)
     (poweroptions)
 )
 
 
-(defwidget togglebutton []
+(defwidget togglepower []
   (box :class "powertoggler"
     (button :class "toggle" :onclick "eww open --toggle powermenu" "󰐦" )
   )
@@ -109,7 +126,7 @@
                         :width "40px"
                         :height "40px"
 			   )
-    (togglebutton)
+    (togglepower)
 )
 
 (defvar time-visible false)
@@ -121,7 +138,7 @@
 
 (defwidget datetime []
   (box :class "timedisplay"
-    (button :onclick "eww open --toggle mycal" "${time}" )
+    (button :class "timebtn" :onclick "eww open --toggle mycal" "${time}" )
   )
 )
 
@@ -134,7 +151,7 @@
     (datetime)
 )
 
-(defpoll xmonad-layout :interval "0.5s" `scripts/xmonad_layout`)
+(defpoll xmonad-layout :interval "1s" `scripts/xmonad_layout`)
 
 (defwidget currentlayout []
 	(box :class "xmonad-layout-container" :orientation "h"
@@ -142,12 +159,12 @@
 
 (defwindow showlayout
     :stacking "fg"
-	:geometry (geometry :x "13.3%"
+	:geometry (geometry :x "16.3%"
                         :y "0.6%"
                         :height 40)
 (currentlayout))
 
-(defpoll wmclass :interval "0.5s" `scripts/get_wm_class`)
+(defpoll wmclass :interval "1s" `scripts/get_wm_class`)
 
 (defwidget focusedclass []
 	(box :class "wmclass-container" :hexpand "true" :tooltip "${wmclass}"
@@ -155,7 +172,7 @@
 
 (defwindow showfocusedclass
     :stacking "fg"
-	:geometry (geometry :x "16.2%"
+	:geometry (geometry :x "19.5%"
                         :y "0.6%"
                         :height 40)
 (focusedclass))
@@ -257,3 +274,22 @@
 			   )
     (togglesysdata)
 )
+
+(defwidget applications []
+  (box :orientation "v" :space-evenly "false" :class "app-outer-container"
+    (box :orientation "v" :space-evenly "false" :class "app-inner-container" :vexpand "false" :hexpand "false" :valign "center" :spacing 40
+    (box :orientation "h" :space-evenly "false" :class "app-inner-container-top" :vexpand "false" :hexpand "false" :valign "center" :spacing 24
+      (button :tooltip "Launch Edge" :style "background-image :url('images/edge.svg');" :class "edge" :onclick "scripts/applauncher.sh --edge")
+      (button :tooltip "Launch Terminal" :style "background-image :url('images/kitty.svg');" :class "kitty" :onclick "scripts/applauncher.sh --kitty")
+      (button :tooltip "Launch Thunar" :style "background-image :url('images/files.svg');" :class "thunar" :onclick "scripts/applauncher.sh --files"))
+    (box :orientation "h" :space-evenly "false" :class "app-inner-container-bottom" :vexpand "false" :hexpand "false" :valign "center" :spacing 24
+      (button :tooltip "Launch Spotify" :style "background-image :url('images/spotify.svg');" :class "spotify" :onclick "scripts/applauncher.sh --spotify")
+      (button :tooltip "Launch Discord" :style "background-image :url('images/discord.svg');" :class "discord" :onclick "scripts/applauncher.sh --discord")
+      (button :tooltip "Launch GitHub" :style "background-image :url('images/git.svg');" :class "git" :onclick "scripts/applauncher.sh --git")))))
+
+(defwindow applications
+    :stacking "fg"
+	:geometry (geometry :x "1.4%"
+                        :y "4%"
+                        :height 150)
+(applications))

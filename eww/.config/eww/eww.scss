@@ -1,3 +1,4 @@
+// Author: github.com/NeshHari
 * {
   all: unset;
 }
@@ -78,26 +79,46 @@ calendar:indeterminate {
   color: $surface1;
 }
 
-.profile-container {
+.quote-container {
   background-color: $base;
-  border-radius: 8px;
   padding: 1em;
 }
 
-.profile-pic {
+.quote-img {
   background-repeat: no-repeat;
-  background-size: 250px;
-  min-height: 250px;
-  min-width: 250px;
+  background-size: 50px;
+  min-height: 50px;
+  min-width: 50px;
   border-radius: 2em;
+  margin-bottom: 1em;
 }
 
 .quote {
-  font-family: CaskaydiaCove Nerd Font;
-  font-size: 22px;
-  font-style: italic;
+  font-family: Vanilla Caramel;
+  font-size: 1.2em;
+  font-weight: bold;
+  color: $text;
+}
+
+.bywho {
+  font-family: Vanilla Caramel;
+  font-size: 1em;
   font-weight: bold;
   color: $green;
+}
+
+.quotetoggler {
+  font-family: CaskaydiaCove Nerd Font;
+  font-size: 1em;
+  font-weight: bold;
+  color: $green;
+  background-color: $base;
+}
+
+.quotetoggler :hover {
+  color: $base;
+  background-color: $green;
+  transition: ease 0.7s;
 }
 
 .spotify-container {
@@ -208,16 +229,16 @@ calendar:indeterminate {
   font-family: CaskaydiaCove Nerd Font;
   font-size: 1em;
   font-weight: bold;
-  color: $lavender;
+  color: $teal;
   background-color: $base;
   padding: 0.3em;
 }
 
 tooltip {
-  font-family: CaskaydiaCove Nerd Font;
+  font-family: Vanilla Caramel;
   font-size: 1em;
   font-weight: bold;
-  color: $lavender;
+  color: $maroon;
   background-color: $base;
   padding: 0.3em;
 }
@@ -252,4 +273,45 @@ tooltip {
   font-weight: bold;
   color: $peach;
   background-color: $base;
+}
+
+.sysdatatoggler :hover {
+  color: $base;
+  background-color: $peach;
+  transition: ease 0.7s;
+}
+
+.app-outer-container {
+  background-color: $base;
+}
+
+.app-inner-container {
+  padding: 1.5em;
+}
+
+.app-inner-container-top > * {
+  padding: 0.2em;
+  background-repeat: no-repeat;
+  background-size: 40px;
+  min-height: 40px;
+  min-width: 40px;
+  margin: 0 7 0 7;
+}
+.app-inner-container-bottom > * {
+  padding: 0.2em;
+  background-repeat: no-repeat;
+  background-size: 38px;
+  min-height: 38px;
+  min-width: 38px;
+  margin: 0 7 0 7;
+}
+
+.app-inner-container-top > *:hover {
+  background-size: 42px;
+  transition: ease 0.3s;
+}
+
+.app-inner-container-bottom > *:hover {
+  background-size: 40px;
+  transition: ease 0.3s;
 }
