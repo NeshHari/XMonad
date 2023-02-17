@@ -4,7 +4,7 @@ import XMonad
 import XMonad.Util.SpawnOnce
 
 myWallpaperPath :: String
-myWallpaperPath = "~/wallpapers/digital_blend.jpg"
+myWallpaperPath = "~/wallpapers/pots.jpg"
 
 myStartupHook :: X ()
 myStartupHook = do

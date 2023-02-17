@@ -40,8 +40,8 @@ myKeys =
     -- Browser
     ("M-b", spawn myBrowser),
     -- Rofi
-    ("M-p", spawn "rofi -show drun"),
-    ("M-y", spawn "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"),
+    ("M-p", spawn "~/.config/rofi/themes/randomiser.sh; rofi -show drun"),
+    ("M-y", spawn "~/.config/rofi/themes/randomiser.sh; rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"),
     ("M1-<Tab>", spawn "rofi -show window"),
     -- XPrompts
     ("M-s-m", manPrompt myPromptConfig),

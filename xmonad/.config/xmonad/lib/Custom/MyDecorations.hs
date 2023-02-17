@@ -15,7 +15,7 @@ myNormalBorderColor :: String
 myNormalBorderColor = catBase
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = catGreen
+myFocusedBorderColor = catBlue
 
 myPromptConfig :: XPConfig
 myPromptConfig =
@@ -40,7 +40,7 @@ myShowWNameConfig :: SWNConfig
 myShowWNameConfig =
   def
     { swn_font = "xft:Vanilla Caramel:size=60",
-      swn_color = catGreen,
+      swn_color = catLavender,
       swn_bgcolor = catBase,
       swn_fade = 0.8
     }
@@ -48,7 +48,7 @@ myShowWNameConfig =
 myTabConfig :: Theme
 myTabConfig =
   def
-    { activeColor = catGreen,
+    { activeColor = catLavender,
       inactiveColor = catBase,
       urgentColor = catRed,
       activeBorderColor = catBase,
@@ -63,7 +63,7 @@ myTabConfig =
 emConf :: EasyMotionConfig
 emConf =
   def
-    { txtCol = catGreen,
+    { txtCol = catLavender,
       bgCol = catCrust,
       borderCol = catCrust,
       cancelKey = xK_Escape,
