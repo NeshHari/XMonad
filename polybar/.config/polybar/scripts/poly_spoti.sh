@@ -5,9 +5,9 @@ pid_spotify=$!
 
 THEDARKARTS="$HOME/.config/polybar/TheDarkArts/config.ini"
 THESTAINSOFPURPLE="$HOME/.config/polybar/TheStainsOfPurple/config.ini"
-THEEXPANSION="$HOME/.config/polybar/TheExpansion/config.ini"
+EWWIFICATION="$HOME/.config/polybar/Ewwification/config.ini"
 
-PATH_TO_CONFIG=$THEEXPANSION
+PATH_TO_CONFIG=$EWWIFICATION
 
 polybar -c $PATH_TO_CONFIG -r spotify &
 pid_polybar=$!

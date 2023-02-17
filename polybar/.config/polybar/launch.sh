@@ -6,9 +6,9 @@ while pgrep -x polybar >/dev/null; do sleep 1; done
 
 THEDARKARTS="$HOME/.config/polybar/TheDarkArts/config.ini"
 THESTAINSOFPURPLE="$HOME/.config/polybar/TheStainsOfPurple/config.ini"
-THEEXPANSION="$HOME/.config/polybar/TheExpansion/config.ini"
+EWWIFICATION="$HOME/.config/polybar/Ewwification/config.ini"
 
-PATH_TO_CONFIG=$THEEXPANSION
+PATH_TO_CONFIG=$EWWIFICATION
 
 if [ "$PATH_TO_CONFIG" = "$THESTAINSOFPURPLE" ]; then
 	if autorandr --detected | grep -q "single"; then
@@ -38,7 +38,7 @@ elif [ "$PATH_TO_CONFIG" = "$THEDARKARTS" ]; then
 		polybar -c $PATH_TO_CONFIG -r left &
 		polybar -c $PATH_TO_CONFIG -r main-profile &
 	fi
-elif [ "$PATH_TO_CONFIG" = "$THEEXPANSION" ]; then
+elif [ "$PATH_TO_CONFIG" = "$EWWIFICATION" ]; then
 	if autorandr --detected | grep -q "single"; then
 		polybar -c $PATH_TO_CONFIG -r workspaces &
 		polybar -c $PATH_TO_CONFIG -r updates &

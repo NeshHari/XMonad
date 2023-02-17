@@ -7,23 +7,25 @@
 
 </div>
 
-<h2 align="center"> ⚡ The Dark Arts ⚡</h2>
+<h2 align="center">Ewwification</h2>
 
-<img src="./images/xmonad.png" alt="img" align="center">
+<img src="./images/ewwification.png" alt="img" align="center">
 
 ## Tool Overview
 
 - **WM**: [xmonad](https://github.com/xmonad/xmonad)
   - **Extensions**: [xmonad-contrib](https://github.com/xmonad/xmonad-contrib)
 - **OS**: [Arch Linux](https://archlinux.org/)
+- **Compositior**: [picom-pjulius-git](https://github.com/pijulius/picom)
 - **Shell**: [fish](https://wiki.archlinux.org/title/fish)
   - **Plugin Manager**: [fisher](https://github.com/jorgebucaran/fisher)
 - **Terminal**: [kitty](https://github.com/kovidgoyal/kitty/)
 - **Editor**: [Neovim](https://github.com/neovim/neovim/)
   - **Plugin Manager**: [lazy](https://github.com/folke/lazy.nvim)
 - **File Manager**: [Thunar](https://git.xfce.org/xfce/thunar/)
-- **Launcher**: [rofi](https://github.com/davatorium/rofi/)
-- **Browser**: [Microsoft Edge Beta](https://aur.archlinux.org/packages/microsoft-edge-beta-bin)
+- **Launcher**: [Rofi](https://github.com/davatorium/rofi/) + [jgmenu](https://github.com/jgmenu/jgmenu)
+- **Multipurpose**: [eww](https://github.com/elkowar/eww)
+- **Browser**: [Microsoft Edge Beta/Dev](https://aur.archlinux.org/packages/microsoft-edge-beta-bin)
   - **Extension**: [nightTab](https://github.com/zombieFox/nightTab)
 
 ## Contents
@@ -36,7 +38,7 @@
 - [Installation Guidelines](#installation-guidelines)
   - [Automatic Installation (Arch Linux)](#automatic-installation-arch-linux)
   - [Dependencies for Manual Installation](#dependencies-for-manual-installation)
-  - [Fonts](#fonts)
+  - [Additional Fonts](#additional-fonts)
   - [TUI/CLI Steps](#tuicli-steps)
   - [Wallpaper](#wallpaper)
   - [Cursor](#cursor)
@@ -145,14 +147,15 @@ bash setup.sh
 _Note: Paru is interchangeable with any AUR helper_
 
 ```fish
-paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst eww fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 jgmenu kitty lazygit libnotify lxappearance ttf-iosevka-nerd neovim-git nodejs polybar picom playerctl python-pip rofi stack starship stow terminus-font ttf-font-awesome ttf-material-icons-git unclutter wmctrl xcape xdo xorg-xinit xorg-xmessage xorg-xmodmap xorg-xsetroot zoxide
+paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst eww-git fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 jgmenu kitty lazygit libnotify lxappearance ttf-iosevka-nerd neovim nodejs polybar picom-pijulius-git playerctl python-pip rofi stack starship stow terminus-font ttf-font-awesome unclutter wmctrl xcape xdo xorg-xinit xorg-xmessage xorg-xmodmap xorg-xsetroot zoxide
 ```
 
 _Note: Polybar will not automatically launch after installation. This is expected behavior. The [polybar launch script](./polybar/.config/polybar/startup.sh) is deliberately tied to autorandr, which is used for hot-plugging. Refer to the section on MyRescreen.hs to see how they all come together._
 
-### Fonts
+### Additional Fonts
 
 - [Vanilla Caramel](https://www.dafont.com/vanilla-caramel.font)
+- [Cream Cake](https://www.dafont.com/cream-cake.font)
 - [Sugar Snow](https://www.dafont.com/sugar-snow.font)
 - [Purple Smile](https://www.dafont.com/purple-smile.font)
 
@@ -184,9 +187,11 @@ xmonad --recompile && xmonad --restart
 
 ### Wallpaper
 
-[Original](https://www.reddit.com/r/wallpaper/comments/wxxd6i/3840x2160_hogwarts_legacy_dark_edition/)
+[Pots](./wallpapers/pots.jpg)
 
-[Custom (multi-filtered)](./wallpapers/dark_arts_custom.png)
+[Pots ~ Custom (multi-filtered)](./wallpapers/pots_custom.png)
+
+[Dark Arts ~ Custom (multi-filtered)](./wallpapers/dark_arts_custom.png)
 
 You may change the path to your wallpaper in ~/.config/xmonad/lib/Custom/MyStartupApps.hs
 
@@ -224,7 +229,7 @@ Additionally, to ensure polybar (main-middle) launches only when spotify is used
 Type=Application
 Name=Spotify
 ...
-Exec=/home/myusername/scripts/poly_spoti.sh
+Exec=/home/myusername/.config/polybar/scripts/poly_spoti.sh
 ...
 ```
 

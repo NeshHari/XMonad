@@ -87,7 +87,7 @@
 
 (defwindow spotify
     :stacking "fg"
-	:geometry (geometry :x "1000px" 
+	:geometry (geometry :x "37.2%"
 						:y "4%" 
 						:width "570px" 
 						)
