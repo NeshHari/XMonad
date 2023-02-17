@@ -41,7 +41,8 @@ elif [ "$PATH_TO_CONFIG" = "$THEDARKARTS" ]; then
 elif [ "$PATH_TO_CONFIG" = "$THEEXPANSION" ]; then
 	if autorandr --detected | grep -q "single"; then
 		polybar -c $PATH_TO_CONFIG -r workspaces &
-		polybar -c $PATH_TO_CONFIG -r sysdata &
+		polybar -c $PATH_TO_CONFIG -r updates &
+		polybar -c $PATH_TO_CONFIG -r bluetooth &
 	fi
 else
 	notify-send -u low "Failed to launch polybar."
