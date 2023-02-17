@@ -49,20 +49,18 @@ packages=(
 	lazygit
 	libnotify
 	lxappearance
-	neovim-git
+	neovim
+	nerd-fonts-git
 	nodejs
 	polybar
-	picom
+	picom-pijulius-git
 	playerctl
 	python-pip
 	rofi
 	stack
 	starship
 	stow
-	terminus-font
 	ttf-font-awesome
-	ttf-iosevka-nerd
-	ttf-material-icons-git
 	unclutter
 	wmctrl
 	xcape
