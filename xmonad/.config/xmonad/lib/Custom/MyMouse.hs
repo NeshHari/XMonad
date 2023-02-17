@@ -15,5 +15,5 @@ myMouseBindings XConfig {XMonad.modMask = modm} =
       ( (modm .|. shiftMask, button3),
         \w -> focus w >> Flex.mouseResizeWindow w >> windows W.shiftMaster
       ),
-      ((modm, button3), const (spawn "jgmenu_run"))
+      ((modm, button3), const (spawn "~/.config/jgmenu/randomiser.sh; jgmenu_run"))
     ]
