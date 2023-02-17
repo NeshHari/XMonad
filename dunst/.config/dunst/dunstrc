@@ -1,7 +1,7 @@
 [global]
     monitor = 0
     width =  (300,600)
-    origin = top-right
+    origin = bottom-right
     offset = 33x66
     notification_limit = 0
     progress_bar = true
