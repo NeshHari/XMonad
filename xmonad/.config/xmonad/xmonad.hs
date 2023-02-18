@@ -40,7 +40,7 @@ main =
       . ewmh
     $ def
       { terminal = "kitty --single instance",
-        focusFollowsMouse = True,
+        focusFollowsMouse = False,
         borderWidth = myBorderWidth,
         modMask = mod4Mask,
         workspaces = myWorkspaces,
