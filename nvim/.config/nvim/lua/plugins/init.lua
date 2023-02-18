@@ -50,7 +50,6 @@ return {
 	"onsails/lspkind-nvim",
 
 	{ "glepnir/lspsaga.nvim", event = "BufRead" },
-
 	{ "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
 	"ray-x/lsp_signature.nvim",
@@ -82,7 +81,6 @@ return {
 	"epwalsh/obsidian.nvim",
 
 	"lewis6991/impatient.nvim",
-
 	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } },
 
 	{

@@ -38,4 +38,4 @@ opt.ttimeoutlen = 1000
 opt.listchars:append("space:⋅")
 opt.listchars:append("eol:↴")
 
-opt.spelllang = "en_uk"
+opt.spelllang = "en_gb"
