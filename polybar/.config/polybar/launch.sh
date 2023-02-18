@@ -47,6 +47,7 @@ elif [ "$PATH_TO_CONFIG" = "$EWWIFICATION" ]; then
 		polybar -c $PATH_TO_CONFIG -r workspaces &
 		polybar -c $PATH_TO_CONFIG -r updates &
 		polybar -c $PATH_TO_CONFIG -r bluetooth &
+		polybar -c $PATH_TO_CONFIG -r left &
 	fi
 else
 	notify-send -u low "Failed to launch polybar."
