@@ -1,19 +1,17 @@
 ;; Author: github.com/NeshHari
 
-(defpoll quote :interval "24h" "scripts/quotes --quote")
-(defpoll bywho :interval "24h" "scripts/quotes --bywho")
+(defpoll quote :interval "24h" "scripts/quotes --quote-and-quotee")
 
 (defwidget quote []
-	(box :class "quote-container" :orientation "v" :hexpand "false"
+	(box :class "quote-container" :orientation "v" :hexpand "false" :vexpand "true" :space-evenly "false"
         (button :style "background-image :url('images/quote.svg');" :class "quote-img" :halign "center") 
-	    (label :class "quote" :halign "center" :wrap "true" :limit-width 100 :text quote)
-		(label :class "bywho" :halign "center" :wrap "true" :limit-width 100 :text bywho)))
+	    (label :class "quote" :halign "center" :wrap "true" :limit-width 300 :text quote)))
 
 (defwindow showquote
     :stacking "fg"
 	:geometry (geometry :x "13.5%"
                         :y "4%"
-                        :width 350)
+                        :width 300)
 (quote))
 
 (defwidget togglequote []
