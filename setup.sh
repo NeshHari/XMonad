@@ -98,17 +98,18 @@ cd ~/.config/xmonad
 rm -r xmonad xmonad-contrib
 git clone https://github.com/xmonad/xmonad.git
 git clone https://github.com/xmonad/xmonad-contrib.git
-if pacman -Qi xmonad &>/dev/null; then
-	read -p "xmonad binary already exists. Do you want to remove it to continue? (y/n) " remove_xmonad
-	if [ "$remove_xmonad" == "y" ]; then
-		sudo pacman -Rns xmonad
-	fi
-fi
 
 if pacman -Qi xmonad-contrib &>/dev/null; then
 	read -p "xmonad-contrib already exists. Do you want to remove it to continue? (y/n) " remove_xmonad_contrib
 	if [ "$remove_xmonad_contrib" == "y" ]; then
 		sudo pacman -Rns xmonad-contrib
+	fi
+fi
+
+if pacman -Qi xmonad &>/dev/null; then
+	read -p "xmonad binary already exists. Do you want to remove it to continue? (y/n) " remove_xmonad
+	if [ "$remove_xmonad" == "y" ]; then
+		sudo pacman -Rns xmonad
 	fi
 fi
 
@@ -128,7 +129,7 @@ stack install
 
 if ! [ -x "$(command -v xmonad)" ]; then
 	echo "xmonad binary not found"
-	read -p "Do you want to symlink xmonad to /usr/bin or add it to PATH in .bashrc? (s/p) " link_choice
+	read -p "Do you want to symlink (s) xmonad to /usr/bin or add it to PATH (p) in .bashrc? (s/p) " link_choice
 	if [ "$link_choice" == "s" ]; then
 		sudo ln -s ~/.local/bin/xmonad /usr/bin
 	elif [ "$link_choice" == "p" ]; then
