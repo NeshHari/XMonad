@@ -103,7 +103,7 @@
 
 (defwindow powermenu
     :stacking "fg"
-	:geometry (geometry :x "96.8%"
+	:geometry (geometry :x "96.7%"
 						:y "4%" 
 						:width 50)
     (poweroptions)
@@ -119,7 +119,7 @@
 
 (defwindow powertoggler
     :stacking "fg"
-	:geometry (geometry :x "2480px" 
+	:geometry (geometry :x "96.8%"
 						:y "8px" 
                         :width "40px"
                         :height "40px"
@@ -252,7 +252,7 @@
 
 (defwindow showsysdata
     :stacking "fg"
-	:geometry (geometry :x "91.3%"
+	:geometry (geometry :x "91.6%"
                         :y "4%"
                         :height 40)
 (sysdata))
@@ -265,7 +265,7 @@
 
 (defwindow sysdatatoggler
     :stacking "fg"
-	:geometry (geometry :x "2344px" 
+	:geometry (geometry :x "91.5%"
 						:y "8px" 
                         :width "100px"
                         :height "40px"
