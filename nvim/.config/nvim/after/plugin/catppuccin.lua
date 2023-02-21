@@ -38,7 +38,7 @@ require("catppuccin").setup({
 	},
 	color_overrides = {
 		mocha = {
-			base = "#050508",
+			base = "#1e1e2e",
 		},
 	},
 	transparent_background = true,

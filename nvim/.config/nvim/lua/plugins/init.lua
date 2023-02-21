@@ -2,13 +2,8 @@ return {
 	"nvim-tree/nvim-web-devicons",
 	"nvim-tree/nvim-tree.lua",
 
-	{
-		"catppuccin/nvim",
-		as = "catppuccin",
-		dependencies = {
-			"akinsho/bufferline.nvim",
-		},
-	},
+	{ "catppuccin/nvim", name = "catppuccin" },
+	"akinsho/bufferline.nvim",
 
 	"goolord/alpha-nvim",
 

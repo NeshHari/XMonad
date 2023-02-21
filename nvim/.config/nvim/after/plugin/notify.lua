@@ -6,8 +6,8 @@ end
 
 notify.setup({
 	stages = "fade_in_slide_out",
-	timeout = 3000,
-	background_colour = "#050508",
+	timeout = 2000,
+	background_colour = "#1e1e2e",
 })
 
 vim.notify = notify

@@ -16,6 +16,7 @@ import XMonad.Layout.PerScreen
 import XMonad.Layout.Renamed as XLR
 import XMonad.Layout.ResizableTile
 import XMonad.Layout.ShowWName
+import XMonad.Layout.SimplestFloat
 import XMonad.Layout.Spacing
 import XMonad.Layout.SubLayouts
 import XMonad.Layout.Tabbed
@@ -70,7 +71,9 @@ bsp =
 
 full = renamed [XLR.Replace "Full"] $ noBorders Full
 
-myLayout = boringWindows (ifWider 1080 (tall ||| bsp) (column ||| accordion) ||| full)
+sf = renamed [XLR.Replace "Float"] $ noBorders simplestFloat
+
+myLayout = boringWindows (ifWider 1080 (tall ||| bsp) (column ||| accordion) ||| sf ||| full)
 
 myLayoutHook =
   showWName' myShowWNameConfig $

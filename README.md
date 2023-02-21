@@ -138,6 +138,7 @@ The following guide requires the latest/git version of XMonad to be installed to
 _This [setup script](./setup.sh) is offered as a convenience, but its use is at your own discretion (**unstable**). Manual installation is recommended for a safer and more controlled process, as it eliminates the risk of accidental overwrites or incongruous symlinks. As the author, I suggest manual installations to better respect the user's file structure. Please review before use._
 
 ```fish
+cd ~
 wget https://raw.githubusercontent.com/NeshHari/XMonad/main/setup.sh
 bash setup.sh
 ```

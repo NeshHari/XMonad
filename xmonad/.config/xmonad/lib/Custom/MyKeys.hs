@@ -31,7 +31,7 @@ import XMonad.StackSet qualified as W
 import XMonad.Util.NamedScratchpad
 
 myBrowser :: String
-myBrowser = "microsoft-edge-beta"
+myBrowser = "brave-browser-nightly"
 
 myKeys :: [(String, X ())]
 myKeys =
