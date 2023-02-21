@@ -23,11 +23,6 @@ if [ "$output" != "$last_output" ]; then
 	echo "$output" >"$OUTPUT_FILE"
 	if [ "${#output}" -lt "${#last_output}" ]; then
 		echo "$output" >"$OUTPUT_FILE"
-		eww close showfocusedclass
-		eww open showfocusedclass
-		sleep 1
-		eww close showfocusedclass
-		eww open showfocusedclass
 	fi
 fi
 
@@ -36,5 +31,3 @@ if [ -z "$output" ]; then
 else
 	echo "$output"
 fi
-
-xdo lower -n eww-showfocusedclass

@@ -7,7 +7,20 @@ cmd = ["/home/nesh/.config/xmonad/xmonad-contrib/scripts/xmonadpropread.hs"]
 p = subprocess.Popen(cmd, stdout=subprocess.PIPE, text=True)
 
 for line in p.stdout:
-    print(line.strip())
+    if line.strip() == "Tall":
+        print("")
+    elif line.strip() == "BSP":
+        print("")
+    elif line.strip() == "Float":
+        print("")
+    elif line.strip() == "Full":
+        print("")
+    elif line.strip() == "Column":
+        print("")
+    elif line.strip() == "Accordion":
+        print("")
+    else:
+        print(line.strip())
     p.kill()
     break
 
