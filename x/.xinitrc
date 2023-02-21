@@ -4,7 +4,9 @@ unclutter &
 dunst &
 openrazer-daemon &
 eww daemon &
+greenclip daemon &
 /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1 &
+motrix &
 
 xset r rate 350 35
 xsetroot -cursor_name left_ptr
