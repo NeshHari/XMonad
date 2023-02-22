@@ -44,7 +44,7 @@ def truncate(name, trunclen):
 
 
 # Default parameters
-output = fix_string(" {artist} {song}")
+output = fix_string("{artist} ~ {song}")
 trunclen = 35
 
 label_with_font = "%{{T{font}}}{label}%{{T-}}"
