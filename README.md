@@ -2,6 +2,8 @@
 
 <h1 align="center">XMonad Starter Kit</h1>
 
+<p align="center"> <img src="images/starter_kit.gif" align="center" width="600"> </p>
+
 <a href="https://github.com/NeshHari/XMonad/stargazers">![GitHub Repo stars](https://img.shields.io/github/stars/NeshHari/XMonad?color=%23f2cdcd&label=STARS%20&logo=github&logoColor=%23f2cdcd&style=for-the-badge)</a>
 <a href="https://github.com/NeshHari/XMonad/issues">![GitHub issues](https://img.shields.io/github/issues/NeshHari/XMonad?color=%23b4befe&label=ISSUES&logo=GitBook&logoColor=%23b4befe&style=for-the-badge)<a>
 
