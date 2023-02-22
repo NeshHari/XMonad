@@ -1,7 +1,7 @@
 [global]
     monitor = 0
     width =  (300,600)
-    origin = bottom-right
+    origin = top-right
     offset = 33x66
     notification_limit = 0
     progress_bar = true
@@ -17,7 +17,7 @@
     horizontal_padding = 15
     text_icon_padding = 0
     frame_width = 3
-    frame_color = "#050508"
+    frame_color = "#1e1e2e"
     separator_color = frame
     sort = yes
     font = Sugar Snow 12
@@ -54,19 +54,19 @@
     per_monitor_dpi = true
 
 [urgency_low]
-    background = "#050508"
+    background = "#1e1e2e"
     foreground = "#cdd6f4"
     highlight  = "#cdd6f4"
     timeout = 10
 
 [urgency_normal]
-    background = "#050508"
+    background = "#1e1e2e"
     foreground = "#cdd6f4"
     highlight  = "#cdd6f4"
     timeout = 10
 
 [urgency_critical]
-    background = "#050508"
+    background = "#1e1e2e"
     foreground = "#cdd6f4"
     highlight  = "#cdd6f4"
     timeout = 10
