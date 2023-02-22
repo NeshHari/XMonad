@@ -6,7 +6,7 @@
 (defwidget quote []
 	(box :class "quote-container" :orientation "v" :hexpand "false" :vexpand "true" :space-evenly "false"
         (button :style "background-image :url('images/quote.svg');" :class "quote-img" :halign "center") 
-	    (label :class "quote" :halign "center" :wrap "true" :limit-width 300 :text quote)))
+	    (label :class "quote" :halign "center" :wrap "true" :limit-width 300 :text quote :xalign "0.5")))
 (defwindow showquote
     :stacking "fg"
 	:geometry (geometry :x "13.5%"
@@ -50,6 +50,7 @@
 
 ;;;;;;;;;;;;;;;;;;;;;;;; SPOTIFY ;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defpoll spotify :interval "1s" "scripts/spotify.py")
 (defpoll playpause :interval "0.5s"  "scripts/playpause --icon")
 (defpoll songtitle :interval "0.5s" "scripts/playpause --status")
 (defpoll singer :interval "0.5s" "scripts/artist")
@@ -127,12 +128,6 @@
 	(box :class "xmonad-layout-container" :orientation "h"
 		(label :halign "center" :limit-width 5 :text xmonad-layout)))
 
-(defwindow showlayout
-    :stacking "fg"
-	:geometry (geometry :x "16.3%"
-                        :y "0.6%"
-                        :height 40)
-(currentlayout))
 
 (defpoll wmclass :interval "1s" `scripts/get_wm_class`)
 
@@ -255,14 +250,15 @@
 
 (defwindow applications
     :stacking "fg"
-	:geometry (geometry :x "1.4%"
-                        :y "4%"
+	:geometry (geometry :x "0.5%"
+                        :y "83.5%"
                         :height 150)
 (applications))
 
+
 (defwidget bar []
-  (box :orientation "h" :class "bar" :space-evenly "true" 
-    (box :orientation "h" :space-evenly "false" :class "leftofbar"
+  (box :orientation "h" :class "bar" :space-evenly "true"  :vexpand "false" :hexpand "false" :valign "center"
+    (box :orientation "h" :space-evenly "false" :class "left-of-bar"
       (box :class "bar-launcher" :halign "center" :tooltip "Applications"
           (button :class "btn-launcher" :onclick "scripts/customtoggle.sh applications" "" ))
       (box :class "bar-quote" :halign "center" :tooltip "Quote"
@@ -274,17 +270,17 @@
           (button :class "btn-wmclass"
 	        (label :class "label-wmclass" :halign "start" :text wmclass :limit-width 30 :show-truncated "true" )))
       )
-    (box :orientation "h" :space-evenly "true" :class "middleofbar"
-      (box :class " bar-spotify"
-          (button :class "btn-spotify" :onclick "eww open --toggle spotify" "spotify" )))
-    (box :orientation "h" :space-evenly "true" :class "rightofbar"
-      (box :class "date"
-        (button :class "timebtn" :onclick "eww open --toggle mycal" "${time}" ))
+    (box :orientation "h" :space-evenly "false" :class "middle-of-bar" :hexpand "true" :vexpand "false" :valign "center" :halign "center"
+      (box :class "bar-spotify"
+          (button :class "btn-spotify" :onclick "eww open --toggle spotify" "${spotify}" )))
+    (box :orientation "h" :space-evenly "false" :class "right-of-bar" :hexpand "false" :vexpand "false" :valign "center" :halign "end"
+      (box :class "bar-time" 
+        (button :class "btn-time" :onclick "eww open --toggle mycal" "${time}"))
       (box :class "bar-update"
         (button :class "btn-update" :onclick "scripts/update.sh" :tooltip "${upd} updates available"
           (label :class "label-update" :halign "center" :text "")))
-      (box :class "sysdatatoggler"
-        (button :class "toggle" :onclick "eww open --toggle showsysdata" "" ))
+      (box :class "bar-sysdata"
+        (button :class "btn-sysdata" :onclick "eww open --toggle showsysdata" "" ))
       (box :class "powertoggler"
         (button :class "toggle" :onclick "eww open --toggle powermenu" "󰐦" ))
     )))
@@ -293,11 +289,11 @@
 (defwindow bar
     :stacking "fg"
     :windowtype "dock"
-	:geometry (geometry :x "1.4%"
-                        :y "95%"
-                        :width "97.2%"
-                        :height 40)
-    :reserve (struts :side "bottom" :distance "5%")
+	:geometry (geometry :x "0.5%"
+                        :y "96%"
+                        :width "99%"
+                        )
+    :reserve (struts :side "bottom" :distance "3.8%")
 (bar))
 
 

@@ -114,27 +114,36 @@ calendar:indeterminate {
   padding: 0.5em;
 }
 
+.left-of-bar,
+.middle-of-bar,
+.right-of-bar {
+  margin-left: 0.3em;
+  margin-right: 0.3em;
+}
+
 .btn-launcher,
 .btn-quote,
 .btn-layout,
 .btn-wmclass,
-.btn-update {
+.btn-update,
+.btn-time,
+.btn-sysdata,
+.btn-spotify {
   font-family: "Font Awesome 6 Free Solid";
   font-size: 1.3em;
   color: $base;
   border-radius: 0.3em;
-  padding-left: 0.6em;
-  padding-right: 0.6em;
-  margin-top: 0.3em;
-  margin-bottom: 0.3em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
   margin-left: 0.6em;
   margin-right: 0.6em;
 }
 
 .btn-update {
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 1.2em;
   background-color: $sky;
+  border: 2px solid $sky;
 }
 
 .btn-update:hover {
@@ -143,9 +152,34 @@ calendar:indeterminate {
   transition: ease 0.5s;
 }
 
+.btn-spotify {
+  font-family: Vanilla Caramel;
+  font-size: 1.3em;
+  color: $rosewater;
+  background-color: $base;
+  border: 2px solid $base;
+}
+
+.btn-spotify:hover {
+  color: $base;
+  background-color: $rosewater;
+  transition: ease 0.5s;
+}
+
+.btn-sysdata {
+  background-color: $peach;
+  border: 2px solid $peach;
+}
+
+.btn-sysdata:hover {
+  color: $peach;
+  background-color: $base;
+  transition: ease 0.5s;
+}
+
 .btn-launcher {
   background-color: $red;
-  border: 3px solid $red;
+  border: 2px solid $red;
 }
 
 .btn-launcher:hover {
@@ -156,7 +190,7 @@ calendar:indeterminate {
 
 .btn-quote {
   background-color: $green;
-  border: 3px solid $green;
+  border: 2px solid $green;
 }
 
 .btn-quote:hover {
@@ -167,7 +201,7 @@ calendar:indeterminate {
 
 .btn-layout {
   background-color: $blue;
-  border: 3px solid $blue;
+  border: 2px solid $blue;
 }
 
 .btn-layout:hover {
@@ -178,7 +212,7 @@ calendar:indeterminate {
 
 .btn-wmclass {
   font-family: Vanilla Caramel;
-  font-size: 1.6em;
+  font-size: 1.3em;
   color: $yellow;
 }
 
@@ -262,19 +296,17 @@ calendar:indeterminate {
   transition: ease 0.5s;
 }
 
-.date {
+.btn-time {
   font-family: Vanilla Caramel;
   font-size: 1.3em;
-  color: $mauve;
-  background-color: $base;
-  border-radius: 1em;
+  color: $base;
+  background-color: $mauve;
   border: 0.1em solid $mauve;
 }
 
-.timedisplay :hover {
-  color: $base;
-  background-color: $mauve;
-  border-radius: 0.3em;
+.btn-time:hover {
+  color: $mauve;
+  background-color: $base;
   transition: ease 0.5s;
 }
 
