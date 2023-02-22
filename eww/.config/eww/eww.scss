@@ -122,6 +122,7 @@ calendar:indeterminate {
 }
 
 .btn-launcher,
+.btn-notifications,
 .btn-quote,
 .btn-layout,
 .btn-wmclass,
@@ -142,6 +143,26 @@ calendar:indeterminate {
   margin-bottom: 0.1em;
   margin-left: 0.6em;
   margin-right: 0.6em;
+}
+
+.btn-notifications {
+  background-color: $teal;
+  border: 2px solid $teal;
+  margin: 0em;
+}
+
+.btn-notifications-label {
+  font-family: Vanilla Caramel;
+  font-size: 1.3em;
+  color: $teal;
+  background-color: $base;
+  padding: 0.3em;
+}
+
+.btn-notifications:hover {
+  color: $teal;
+  background-color: $base;
+  transition: ease 0.5s;
 }
 
 .btn-bluetooth {
@@ -442,4 +463,54 @@ tooltip {
 .app-inner-container-bottom > *:hover {
   background-size: 40px;
   transition: ease 0.3s;
+}
+
+.notifications-container {
+  background-color: $base;
+}
+
+.notifications-header-container {
+  font-family: Vanilla Caramel;
+  font-size: 1.3em;
+  background-color: $blue;
+  color: $base;
+  padding: 0.3em;
+  margin-bottom: 1em;
+}
+
+.notifications-header {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: $base;
+}
+
+.notifications-scroll {
+  background-color: $base;
+  padding: 0.3em;
+}
+
+.notifications-footer {
+  font-family: Vanilla Caramel;
+  font-size: 1.3em;
+  background-color: $surface2;
+  color: $base;
+  color: $base;
+  padding: 1em;
+  margin-top: 1em;
+}
+
+.notifications-close-container {
+  background-color: $red;
+  border-radius: 0.3em;
+  padding: 0.2em 0.6em 0.2em 0.6em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.notifications-clear-container {
+  background-color: $yellow;
+  border-radius: 0.3em;
+  padding: 0.2em 0.6em 0.2em 0.6em;
+  margin-left: 1em;
+  margin-right: 1em;
 }

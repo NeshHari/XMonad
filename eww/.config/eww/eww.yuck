@@ -283,15 +283,27 @@
     :reserve (struts :side "bottom" :distance "3.8%")
 (bar))
 
+(defwidget mynotifications []
+  (box :class "bar-notifications" :space-evenly "false"
+     (button :class "btn-notifications" :onclick "scripts/customtoggle.sh notifications" "" )
+     (label  :class "btn-notifications-label" :text "NOTIFICATIONS")))
+
+(defwindow mynotifications
+    :stacking "fg"
+	:geometry (geometry :x "1.35%"
+                        :y "0.75%"
+                        :height "2.5%")
+(mynotifications))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; NOTIFICAITONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Variables
 (defpoll notifications_stats :interval "5s" "scripts/logger.py stats")
-(deflisten notifications_sub "scripts/logger.py subscribe")
+(deflisten notications_scroll_pane "scripts/logger.py subscribe")
 (defpoll notifications_dnd_state :interval "1s" "dunstctl is-paused")
 (defpoll dunst_displayed :interval "10s" "dunstctl count displayed")
 (defpoll dunst_history :interval "10s" "dunstctl count history")
 (defpoll dunst_waiting :interval "10s" "dunstctl count waiting")
-(defvar background "/home/syndrizzle/.config/eww/images/texture.png")
+
 ;; Widgets
 (defwidget dnd [total total_label label dnd_icon state action]
   (box :vexpand false
@@ -320,27 +332,16 @@
         :valign "end"
       :class "notifications-dnd-toggle notifications-dnd-toggle-${state}" state))))
 
+
 (defwidget notifications_layout []
-  (box :orientation "vertical"
-    :space-evenly false
-    :class "notifications-layout-box"
-    :style "background-image: url('${background}');"
-    (box :space-evenly false
-      :class "notifications-headers"
-      :spacing 6
-      (label :text "Notifications"
-        :class "notifications-headers-label"
-        :halign "start"
-      :hexpand true)
-      (button :onclick "scripts/combine.sh cls" :class "notifications-headers-clear" "")
-      (button :onclick "eww close notifications" :class "notifications-headers-close" ""))
-    (scroll :hscroll false
-      :vscroll true
-      :vexpand true
-      :hexpand true
-      :class "notifications-scroll"
-      (literal :content notifications_sub))
-    (label :class "notifications-separator" :text "")))
+  (box :orientation "v" :space-evenly "false" :class "notifications-container"
+    (box :class "notifications-header-container" :space-evenly "true" :orientation "v"
+      (label :text "NOTIFICATIONS" :class "notifications-header" :hexpand true :halign "center"))
+    (scroll :hscroll false :vscroll true :vexpand "true" :hexpand "true" :class "notifications-scroll"
+      (literal :content notications_scroll_pane))
+      (box :class "notifications-footer" :space-evenly "true" :orientation "h"
+        (button :onclick "scripts/combine.sh cls" :class "notifications-clear-container" "CLEAR ALL")
+        (button :onclick "eww close notifications" :class "notifications-close-container" "CLOSE"))))
 
 (defwidget cardimage [summary body ?limit_summary ?limit_body appname icon icon_width icon_height close ?close_action image image_width image_height timestamp urgency]
   (eventbox :class "notifications-cardimage-eventbox notifications-cardimage-eventbox-${urgency}"
@@ -548,10 +549,9 @@
           (label :text "Delete"
           :class "notifications-cardscr-delete-label notifications-cardscr-delete-label-${urgency}"))))))
 
-;; Windows
-(defwindow notifications :stacking "fg"
-  :windowtype "dock"
+(defwindow notifications :stacking "fg" 
+  :stacking "fg"
   :wm-ignore true
-  :geometry (geometry :x 18 :y 40 :width "26%" :height "90%" :anchor "left center")
+  :geometry (geometry :x "1%" :width "24%" :height "60%" :anchor "left center")
   (notifications_layout))
 
