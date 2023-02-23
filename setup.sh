@@ -50,7 +50,6 @@ packages=(
 	libnotify
 	lxappearance
 	neovim
-	nerd-fonts-git
 	nodejs
 	polybar
 	picom-pijulius-git
@@ -61,6 +60,7 @@ packages=(
 	starship
 	stow
 	ttf-font-awesome
+	ttf-jetbrains-mono-nerd
 	unclutter
 	wmctrl
 	xcape
