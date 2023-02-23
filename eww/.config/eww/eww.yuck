@@ -8,11 +8,24 @@
         (button :style "background-image :url('images/quote.svg');" :class "quote-img" :halign "center") 
 	    (label :class "quote" :halign "center" :wrap "true" :limit-width 300 :text quote :xalign "0.5")))
 
+(defwidget quotetoggler []
+      (box :class "bar-quote" :tooltip "Quote" :space-evenly "false"
+          (button :class "btn-quote" :onclick "scripts/customtoggle.sh showquote" "" )
+          (label  :class "btn-quote-label" :text "QUOTE")))
+
+(defwindow quotetoggler
+    :stacking "fg"
+    :windowtype "dock"
+	:geometry (geometry :x "8.5%"
+                        :y "0.75%"
+                        :height "2.5%")
+(quotetoggler))
+
 (defwindow showquote
     :stacking "fg"
-	:geometry (geometry :x "1.5%"
-                        :y "5%"
-                        :width 300)
+	:geometry (geometry :x "8.5%"
+                        :y "4%"
+                        :width "10%")
 (quote))
 
 ;;;;;;;;;;;;;;;;;;;;;;;; CALENDAR ;;;;;;;;;;;;;;;;;;;;;;;;
@@ -238,8 +251,8 @@
     (box :orientation "h" :space-evenly "false" :class "left-of-bar"
       (box :class "bar-launcher" :halign "center" :tooltip "Applications"
           (button :class "btn-launcher" :onclick "scripts/customtoggle.sh applications" "" ))
-      (box :class "bar-quote" :halign "center" :tooltip "Quote"
-          (button :class "btn-quote" :onclick "scripts/customtoggle.sh showquote" "" ))
+      (box :class "bar-search" :halign "center" :tooltip "Search Engines"
+          (button :class "btn-search" :onclick "scripts/search.sh &" "" ))
       (box :class "bar-layout" :halign "center" :tooltip "Layout"
           (button :class "btn-layout"
       	      (label :class "label-layout" :halign "center" :limit-width 5 :text xmonad-layout)))

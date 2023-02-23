@@ -1,12 +1,17 @@
 #!/usr/bin/env bash
 
+modules=("bar" "showvolume" "quotetoggler" "mynotifications")
+
 killall -9 eww
 rm ~/.cache/eww*
+
 eww daemon
-eww open bar
-eww open showvolume
-eww open mynotifications
+for module in "${modules[@]}"; do
+	eww open "$module"
+done
+
 sleep 3
-xdo lower -n eww-bar
-xdo lower -n eww-showvolume
-xdo lower -n eww-mynotifications
+
+for module in "${modules[@]}"; do
+	xdo lower -n "eww-$module"
+done

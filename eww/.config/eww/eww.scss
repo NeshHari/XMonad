@@ -130,6 +130,7 @@ calendar:indeterminate {
 .btn-update,
 .btn-update-num,
 .btn-time,
+.btn-search,
 .btn-sysdata,
 .btn-spotify,
 .btn-power {
@@ -145,22 +146,34 @@ calendar:indeterminate {
   margin-right: 0.6em;
 }
 
+.btn-search {
+  background-color: $yellow;
+  border: 2px solid $yellow;
+}
+
+.btn-search:hover {
+  color: $yellow;
+  background-color: $base;
+  transition: ease 0.5s;
+}
+
 .btn-notifications {
-  background-color: $teal;
-  border: 2px solid $teal;
+  background-color: $rosewater;
+  border: 2px solid $rosewater;
+  border-radius: 0.3em 0em 0em 0.3em;
   margin: 0em;
 }
 
 .btn-notifications-label {
   font-family: Vanilla Caramel;
   font-size: 1.3em;
-  color: $teal;
+  color: $rosewater;
   background-color: $base;
   padding: 0.3em;
 }
 
 .btn-notifications:hover {
-  color: $teal;
+  color: $rosewater;
   background-color: $base;
   transition: ease 0.5s;
 }
@@ -168,7 +181,8 @@ calendar:indeterminate {
 .btn-bluetooth {
   background-color: $lavender;
   border: 2px solid $lavender;
-  border-radius: 0.3em 0.1em 0.1em 0.3em;
+  border-radius: 0.3em 0em 0em 0.3em;
+  padding-right: 0.5em;
 }
 
 .btn-bluetooth-status {
@@ -180,6 +194,7 @@ calendar:indeterminate {
   border-radius: 0.1em 0.3em 0.3em 0.1em;
   margin-right: 0.5em;
   margin-left: -0.7em;
+  padding-left: 0em;
 }
 
 .btn-bluetooth:hover {
@@ -202,7 +217,7 @@ calendar:indeterminate {
 .btn-update {
   background-color: $sky;
   border: 2px solid $sky;
-  border-radius: 0.3em 0.1em 0.1em 0.3em;
+  border-radius: 0.3em 0em 0em 0.3em;
 }
 
 .btn-update-num {
@@ -211,7 +226,7 @@ calendar:indeterminate {
   color: $sky;
   background-color: $base;
   border: 2px solid $sky;
-  border-radius: 0.1em 0.3em 0.3em 0.1em;
+  border-radius: 0.3em 0em 0em 0.3em;
   margin-right: 0.5em;
   margin-left: -0.7em;
 }
@@ -261,6 +276,16 @@ calendar:indeterminate {
 .btn-quote {
   background-color: $green;
   border: 2px solid $green;
+  margin: 0;
+  border-radius: 0.3em 0em 0em 0.3em;
+}
+
+.btn-quote-label {
+  font-family: Vanilla Caramel;
+  font-size: 1.3em;
+  color: $green;
+  background-color: $base;
+  padding: 0.3em;
 }
 
 .btn-quote:hover {
