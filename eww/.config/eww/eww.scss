@@ -161,7 +161,7 @@ calendar:indeterminate {
   background-color: $rosewater;
   border: 2px solid $rosewater;
   border-radius: 0.3em 0em 0em 0.3em;
-  margin: 0em;
+  margin: 0;
 }
 
 .btn-notifications-label {
@@ -169,7 +169,8 @@ calendar:indeterminate {
   font-size: 1.3em;
   color: $rosewater;
   background-color: $base;
-  padding: 0.3em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .btn-notifications:hover {
@@ -185,16 +186,16 @@ calendar:indeterminate {
   padding-right: 0.5em;
 }
 
-.btn-bluetooth-status {
+.btn-bluetooth-device {
   font-family: Vanilla Caramel;
   font-size: 1.3em;
   color: $lavender;
   background-color: $base;
-  border: 2px solid $lavender;
-  border-radius: 0.1em 0.3em 0.3em 0.1em;
+  border: 1px solid $lavender;
+  border-radius: 0em 0.3em 0.3em 0em;
   margin-right: 0.5em;
-  margin-left: -0.7em;
-  padding-left: 0em;
+  margin-left: -0.6em;
+  padding: 0.2em;
 }
 
 .btn-bluetooth:hover {
@@ -215,18 +216,18 @@ calendar:indeterminate {
 }
 
 .btn-update {
-  background-color: $sky;
-  border: 2px solid $sky;
+  background-color: $teal;
+  border: 2px solid $teal;
   border-radius: 0.3em 0em 0em 0.3em;
 }
 
 .btn-update-num {
   font-family: Vanilla Caramel;
   font-size: 1.3em;
-  color: $sky;
+  color: $teal;
   background-color: $base;
-  border: 2px solid $sky;
-  border-radius: 0.3em 0em 0em 0.3em;
+  border: 2px solid $teal;
+  border-radius: 0em 0.3em 0.3em 0em;
   margin-right: 0.5em;
   margin-left: -0.7em;
 }
@@ -285,7 +286,8 @@ calendar:indeterminate {
   font-size: 1.3em;
   color: $green;
   background-color: $base;
-  padding: 0.3em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .btn-quote:hover {
@@ -497,10 +499,9 @@ tooltip {
 .notifications-header-container {
   font-family: Vanilla Caramel;
   font-size: 1.3em;
-  background-color: $blue;
+  background-color: $rosewater;
   color: $base;
   padding: 0.3em;
-  margin-bottom: 1em;
 }
 
 .notifications-header {
@@ -510,22 +511,21 @@ tooltip {
 }
 
 .notifications-scroll {
-  background-color: $base;
-  padding: 0.3em;
+  background-color: $rosewater;
+  padding: 1em 1.5em 1em 1.5em;
 }
 
 .notifications-footer {
   font-family: Vanilla Caramel;
   font-size: 1.3em;
-  background-color: $surface2;
-  color: $base;
+  background-color: $rosewater;
   color: $base;
   padding: 1em;
-  margin-top: 1em;
 }
 
 .notifications-close-container {
   background-color: $red;
+  border: 0.1em solid $red;
   border-radius: 0.3em;
   padding: 0.2em 0.6em 0.2em 0.6em;
   margin-left: 1em;
@@ -533,9 +533,91 @@ tooltip {
 }
 
 .notifications-clear-container {
-  background-color: $yellow;
+  background-color: $peach;
+  border: 0.1em solid $peach;
   border-radius: 0.3em;
   padding: 0.2em 0.6em 0.2em 0.6em;
   margin-left: 1em;
   margin-right: 1em;
+}
+
+.notifications-cards {
+  background-color: $flamingo;
+  color: $base;
+  font-size: 1.2em;
+  border-radius: 0.3em;
+}
+
+.notifications-cards-header {
+  font-family: Vanilla Caramel;
+  font-size: 1.3em;
+  background-color: $base;
+  color: $mauve;
+  padding: 0.8em;
+  border-radius: 0.3em 0.3em 0 0;
+}
+
+.notifications-card-appname {
+  font-weight: bold;
+  padding-left: 2em;
+}
+
+.btn-card-close {
+  font-family: "Font Awesome 6 Free Solid";
+  font-size: 0.8em;
+  color: $base;
+  background-color: $red;
+  border-radius: 0.3em;
+  padding-left: 0.8em;
+  padding-right: 0.8em;
+  border: 0.1em solid $red;
+}
+
+.btn-card-close:hover {
+  color: $red;
+  background-color: $base;
+  transition: ease 0.5s;
+}
+
+.notifications-card-body {
+  background-color: $flamingo;
+  font-weight: bold;
+  border-radius: 0.3em;
+}
+
+.notifications-card-image {
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 100px;
+  min-width: 100px;
+  border-radius: 0.3em;
+  padding: 0.5em;
+}
+
+.summary-header {
+  font-family: Cream Cake;
+  font-size: 1.6em;
+  background-color: $peach;
+  color: $base;
+  padding: 0.2em;
+  margin-bottom: 0.2em;
+}
+
+.notifications-card-timestamp {
+  font-size: 1em;
+  background-color: $mauve;
+  color: $base;
+  margin-top: 0.5em;
+  padding: 0.5em;
+  border-radius: 1em;
+}
+
+.notifications-body-text {
+  color: $base;
+  border-radius: 1em;
+}
+
+.notifications-card-body-content {
+  color: $base;
+  padding: 0.5em;
 }

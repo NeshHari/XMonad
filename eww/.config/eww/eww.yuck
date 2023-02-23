@@ -56,7 +56,7 @@
 
 (defwindow mycal
     :stacking "fg"
-	:geometry (geometry :x "80.5%" 
+	:geometry (geometry :x "72%" 
 						:y "64.5%" 
 						:width "380px" 
 						:height "20px")
@@ -219,7 +219,7 @@
                         :height "8%")
 (sysdata))
 
-(defpoll upd :interval "1h" "paru -Qu 2>/dev/null | wc -l")
+(defpoll upd :interval "10m" "paru -Qu 2>/dev/null | wc -l")
 
 (defwidget applications []
   (box :orientation "v" :space-evenly "false" :class "app-outer-container"
@@ -241,7 +241,7 @@
 (applications))
 
 
-(defpoll btstatus :interval "3s" `scripts/checkbluetoothstatus.sh`)
+;; (defpoll btstatus :interval "3s" `scripts/checkbluetoothstatus.sh`)
 (defpoll btdevice :interval "5s" `scripts/checkbluetoothdevice.sh`)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; BAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -267,18 +267,18 @@
         (button :class "btn-time" :onclick "scripts/customtoggle.sh mycal" "${time}"))
       (box :class "bar-update" :space-evenly "false"
         (box :class "bar-update-left"
-          (button :class "btn-update" :onclick "scripts/update.sh" :tooltip "${upd} updates available"
+          (button :class "btn-update" :onclick "scripts/update.sh &" :tooltip "${upd} updates available"
             (label :class "label-update" :halign "center" :text "")))
         (box :class "bar-update-right"
           (button :class "btn-update-num" :onclick "scripts/update.sh" :tooltip "${upd} updates available"
             (label :class "label-update" :halign "center" :text "${upd}"))))
-      (box :class "bar-bluetooth"
+      (box :class "bar-bluetooth" :space-evenly "false"
         (box :class "bar-bluetooh-left"
           (button :class "btn-bluetooth" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
-            (label :class "label-bluetooth" :halign "center" :text "")))
+          (label :class "label-bluetooth" :halign "center" :text "")))
         (box :class "bar-bluetooth-right"
-          (button :class "btn-bluetooth-status" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
-            (label :class "label-bluetooth" :halign "center" :text "${btstatus}"))))
+          (button :class "btn-bluetooth-device" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
+            (label :class "label-bluetooth" :halign "center" :text "${btdevice}"))))
       (box :class "bar-sysdata" :tooltip "System Resources"
         (button :class "btn-sysdata" :onclick "scripts/customtoggle.sh showsysdata" "" ))
       (box :class "bar-power"
@@ -296,6 +296,7 @@
     :reserve (struts :side "bottom" :distance "3.8%")
 (bar))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;; NOTIFICAITONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defwidget mynotifications []
   (box :class "bar-notifications" :space-evenly "false"
      (button :class "btn-notifications" :onclick "scripts/customtoggle.sh notifications" "" )
@@ -308,8 +309,7 @@
                         :height "2.5%")
 (mynotifications))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;; NOTIFICAITONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; Variables
+;;;;; tweak of github.com/syndrizzle/hotfiles ;;;;;
 (defpoll notifications_stats :interval "5s" "scripts/logger.py stats")
 (deflisten notications_scroll_pane "scripts/logger.py subscribe")
 (defpoll notifications_dnd_state :interval "1s" "dunstctl is-paused")
@@ -317,12 +317,8 @@
 (defpoll dunst_history :interval "10s" "dunstctl count history")
 (defpoll dunst_waiting :interval "10s" "dunstctl count waiting")
 
-;; Widgets
 (defwidget dnd [total total_label label dnd_icon state action]
-  (box :vexpand false
-    :hexpand true
-    :class "notifications-dnd-box"
-    :space-evenly false
+  (box :vexpand false :hexpand true :class "notifications-dnd-box" :space-evenly false
     (box :class "notifications-dnd-labels"
       :hexpand true
       :orientation "h"
@@ -353,63 +349,28 @@
     (scroll :hscroll false :vscroll true :vexpand "true" :hexpand "true" :class "notifications-scroll"
       (literal :content notications_scroll_pane))
       (box :class "notifications-footer" :space-evenly "true" :orientation "h"
-        (button :onclick "scripts/combine.sh cls" :class "notifications-clear-container" "CLEAR ALL")
+        (button :onclick "" :class "notifications-clear-container" "CLEAR ALL")
         (button :onclick "eww close notifications" :class "notifications-close-container" "CLOSE"))))
 
 (defwidget cardimage [summary body ?limit_summary ?limit_body appname icon icon_width icon_height close ?close_action image image_width image_height timestamp urgency]
-  (eventbox :class "notifications-cardimage-eventbox notifications-cardimage-eventbox-${urgency}"
-    (box :orientation "vertical"
-      :space-evenly false
-      :class "notifications-cardimage-container-box notifications-cardimage-container-box-${urgency}"
-      (box :class "notifications-cardimage-summary-box notifications-cardimage-summary-box-${urgency}"
-        :space-evenly false
-        :spacing 6
-        (label :text appname
-          :hexpand true
-          :halign "start"
-        :class "notifications-cardimage-appname-label notifications-cardimage-appname-label-${urgency}")
-        (button :class "notifications-cardimage-close-button notifications-cardimage-close-button-${urgency}"
-          :onclick close_action
-          :timeout "2s"
-          (label :text close
-          :class "notifications-cardimage-close-icon notifications-cardimage-close-icon-${urgency}")))
+  (eventbox :class "notifications-cards"
+    (box :orientation "v" :space-evenly false :class "notifications-cards-outer"
+      (box :class "notifications-cards-header" :space-evenly false :hexpand true :valign "center" :vexpand false
+        (label :text appname :hexpand true :halign "center" :class "notifications-card-appname")
+        (button :class "btn-card-close" :onclick close_action :timeout "1s" ""))
       
-      (box :class "notifications-cardimage-separator notifications-cardimage-separator-${urgency}"
+      (box :class "notifications-cardimage-separator"
       :space-evenly false)
       
-      (box :class "notifications-cardimage-body-box notifications-cardimage-body-box-${urgency}"
-        :space-evenly false
-        (box :halign "center"
-          :valign "center"
-          :class "notifications-cardimage-image-box notifications-cardimage-image-box-${urgency}"
-          (box :style "background-image: url('${image}')"
-            :hexpand false
-            :vexpand false
-            :width image_width
-            :height image_height
-            :space-evenly false
-          :class "notifications-cardimage-image notifications-cardimage-image-${urgency}"))
+      (box :space-evenly false :halign "fill"
         
-        (box :hexpand true
-          :vexpand true
-          :valign "center"
-          :orientation "vertical"
-          :spacing 5
-          :class "notifications-cardimage-body-outer notifications-cardimage-body-outer-${urgency}"
-          :space-evenly false
-          (label :text summary
-            :limit-width "${limit_summary != "" ? limit_summary : 25}"
-            :halign "start"
-          :class "notifications-cardimage-summary-label notifications-cardimage-summary-label-${urgency}")
-          (label :text body
-            :halign "start"
-            :limit-width "${limit_body != "" ? limit_body : 110}"
-            :xalign 0.0
-            :wrap true
-          :class "notifications-cardimage-body-label notifications-cardimage-body-${urgency}")
-          (label :text timestamp
-            :halign "end"
-          :class "notifications-cardimage-timestamp notifications-cardimage-timestamp-${urgency}"))))))
+        (box :hexpand true :vexpand true :valign "fill" :orientation "v" :spacing 0 :class "notifications-card-body" :space-evenly false
+          (label :text summary :limit-width "${limit_summary != "" ? limit_summary : 30}" :halign "fill" :class "summary-header" :show-truncated "true" :wrap "true")
+      (box :space-evenly true :halign "fill" :class "notifications-card-body-content" :valign "center"
+          (label :text body :limit-width "${limit_body != "" ? limit_body : 50}" :wrap true :halign "center" :class "notifications-body-text")
+        (box :class "notifications-card-image-container" :halign "end"
+         (box :style "background-image: url('${image}')" :hexpand true :vexpand true :width image_width :height image_height :class "notifications-card-image")))
+          (label :text "@${timestamp}" :halign "center" :class "notifications-card-timestamp"))))))
 
 (defwidget cardprog [summary body ?limit_summary ?limit_body appname icon icon_width icon_height close ?close_action image image_width image_height timestamp urgency progress]
   (eventbox :class "notifications-cardprog-eventbox notifications-cardprog-eventbox-${urgency}"
@@ -475,96 +436,10 @@
             (label :class "notifications-cardprog-value-label notifications-cardprog-value-label-${urgency}"
             :text progress)))))))
 
-(defwidget cardradial [ summary body ?limit_summary ?limit_body appname close ?close_action timestamp urgency progress thickness total done]
-  (eventbox :class "notifications-cardradial-eventbox notifications-cardradial-eventbox-${urgency}"
-    (box :orientation "vertical"
-      :space-evenly false
-      :class "notifications-cardradial-container-box notifications-cardradial-container-box-${urgency}"
-      (box :class "notifications-cardradial-summary-box notifications-cardradial-summary-box-${urgency}"
-        :space-evenly false
-        (label :text appname
-          :hexpand true
-          :halign "start"
-        :class "notifications-cardradial-appname-label notifications-cardradial-appname-label-${urgency}")
-        (button :class "notifications-cardradial-close-button notifications-cardradial-close-button-${urgency}"
-          :onclick close_action
-          :timeout "2s"
-          (label :text close
-          :class "notifications-cardradial-close-icon notifications-cardradial-close-icon-${urgency}")))
-      (box :class "notifications-cardradial-separator notifications-cardradial-separator-${urgency}"
-      :space-evenly false)
-      (box :class "notifications-cardradial-body-box notifications-cardradial-body-box-${urgency}"
-        :space-evenly false
-        (box :halign "center"
-          :valign "center"
-          :class "notifications-cardradial-circle-box notifications-cardradial-circle-box-${urgency}"
-          (circular-progress :value progress
-            :thickness thickness
-            :class "notifications-cardradial-circle notifications-cardradial-circle-${urgency}"
-            (label :class "notifications-cardradial-tasks notifications-cardradial-tasks-${urgency}"
-            :text "${done}/${total}")))
-        (box :hexpand true
-          :vexpand true
-          :valign "center"
-          :spacing 5
-          :orientation "vertical"
-          :class "notifications-cardradial-body-outer notifications-cardradial-body-outer-${urgency}"
-          :space-evenly false
-          (label :limit-width "${limit_summary != "" ? limit_summary : 25}"
-            :text summary
-            :halign "start"
-          :class "notifications-cardradial-summary-label notifications-cardradial-summary-label-${urgency}")
-          (label :limit-width "${limit_body != "" ? limit_body : 110}"
-            :text body
-            :xalign 0.0
-            :halign "start"
-            :wrap true
-          :class "notifications-cardradial-body-label notifications-cardradial-body-${urgency}")
-          (label :text timestamp
-            :halign "end"
-          :class "notifications-cardradial-timestamp notifications-cardradial-timestamp-${urgency}"))))))
-
-(defwidget cardscr [ summary ?limit_summary close ?close_action image image_width image_height timestamp urgency delete open]
-  (eventbox :class "notifications-cardscr-eventbox notifications-cardscr-eventbox-${urgency}"
-    (box :orientation "vertical"
-      :space-evenly false
-      :class "notifications-cardscr-container-box notifications-cardscr-container-box-${urgency}"
-      (box :space-evenly false
-        :class "notifications-cardscr-summary-box notifications-cardscr-summary-box-${urgency}"
-        (label :hexpand true
-          :limit-width "${limit_summary != "" ? limit_summary : 25}"
-          :halign "start"
-          :class "notifications-cardscr-summary-label notifications-cardscr-summary-label-${urgency}"
-        :text summary)
-        (label :class "notifications-cardscr-timestamp notifications-cardscr-timestamp-${urgency}"
-        :text timestamp)
-        (button :class "notifications-cardscr-close-button notifications-cardscr-close-button-${urgency}"
-          :onclick close_action
-          :timeout "2s"
-          (label :text close
-          :class "notifications-cardscr-close-icon notifications-cardscr-close-icon-${urgency}")))
-      (box :class "notifications-cardscr-image"
-        :style "background-image: url('${image}')"
-        :width image_width
-        :height image_height
-      :space-evenly false)
-      (box :spacing 20
-        :space-evenly true
-        :class "notifications-cardscr-action-box notifications-cardscr-action-box-${urgency}"
-        :hexpand true
-        :halign "center"
-        (button :class "notifications-cardscr-open-button notifications-cardscr-open-button-${urgency}"
-          :onclick open :timeout "2s"
-          (label :text "Open"
-          :class "notifications-cardscr-open-label notifications-cardscr-open-label-${urgency}"))
-        (button :class "notifications-cardscr-delete-button notifications-cardscr-delete-button-${urgency}"
-          :onclick delete :timeout "2s"
-          (label :text "Delete"
-          :class "notifications-cardscr-delete-label notifications-cardscr-delete-label-${urgency}"))))))
 
 (defwindow notifications :stacking "fg" 
   :stacking "fg"
   :wm-ignore true
-  :geometry (geometry :x "1%" :width "24%" :height "60%" :anchor "left center")
+  :geometry (geometry :x "2%" :width "18%" :height "80%" :anchor "left center")
   (notifications_layout))
 
