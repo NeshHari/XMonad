@@ -41,12 +41,10 @@ elif [ "$PATH_TO_CONFIG" = "$THEDARKARTS" ]; then
 elif [ "$PATH_TO_CONFIG" = "$EWWIFICATION" ]; then
 	if autorandr --detected | grep -q "single"; then
 		polybar -c $PATH_TO_CONFIG -r workspaces &
-		polybar -c $PATH_TO_CONFIG -r updates &
-		polybar -c $PATH_TO_CONFIG -r bluetooth &
+		polybar -c $PATH_TO_CONFIG -r tray &
 	elif autorandr --detected | grep -q "dual"; then
 		polybar -c $PATH_TO_CONFIG -r workspaces &
-		polybar -c $PATH_TO_CONFIG -r updates &
-		polybar -c $PATH_TO_CONFIG -r bluetooth &
+		polybar -c $PATH_TO_CONFIG -r tray &
 		polybar -c $PATH_TO_CONFIG -r left &
 	fi
 else
