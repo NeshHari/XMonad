@@ -10,7 +10,7 @@ if [[ $1 == "--spotify" ]]; then
 fi
 
 if [[ $1 == "--git" ]]; then
-	microsoft-edge-beta -e "https://github.com/NeshHari/XMonad#xmonad-starter-kit"
+	brave-nightly -e "https://github.com/NeshHari/XMonad#xmonad-starter-kit"
 fi
 
 if [[ $1 == "--edge" ]]; then
@@ -23,4 +23,8 @@ fi
 
 if [[ $1 == "--discord" ]]; then
 	discord
+fi
+
+if [[ $1 == "--brave" ]]; then
+	brave-nightly
 fi
