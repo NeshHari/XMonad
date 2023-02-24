@@ -16,8 +16,8 @@
     padding = 15
     horizontal_padding = 15
     text_icon_padding = 0
-    frame_width = 3
-    frame_color = "#f2cdcd"
+    frame_width = 8
+    frame_color = "#eba0ac"
     separator_color = frame
     sort = yes
     font = Sugar Snow 12

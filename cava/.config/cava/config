@@ -145,14 +145,15 @@ alacritty_sync = 1
 
 gradient = 1
 
-gradient_color_1 = '#050508'
-gradient_color_2 = '#a6e3a1'
-gradient_color_3 = '#050508'
-gradient_color_4 = '#a6e3a1'
-gradient_color_5 = '#050508'
-gradient_color_6 = '#a6e3a1'
-gradient_color_7 = '#050508'
-gradient_color_8 = '#a6e3a1'
+gradient_color_1 = '#f5e0dc'
+gradient_color_2 = '#f2cdcd'
+gradient_color_3 = '#eba0ac'
+gradient_color_4 = '#f38ba8'
+gradient_color_5 = '#f5e0dc'
+gradient_color_6 = '#f2cdcd'
+gradient_color_7 = '#eba0ac'
+gradient_color_8 = '#f38ba8'
+
 
 
 [smoothing]
