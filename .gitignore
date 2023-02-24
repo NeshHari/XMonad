@@ -6,3 +6,5 @@ spicetify/.config/spicetify/Backup
 spicetify/.config/spicetify/Extracted
 lazygit/.config/lazygit/state.yml
 eww/.config/eww/images/temp.png
+eww/.config/eww/\$XDG_CACHE_HOME/
+eww/.config/eww/scripts/*.pyc

@@ -6,13 +6,13 @@ if [[ "$1" != "--worker" ]]; then
 	export CACHE_DIR="/tmp/feh-blur.$$"
 
 	# How much to blur (--blur N)
-	export BLUR_STRENGTH="32"
+	export BLUR_STRENGTH="0"
 
 	# Contrast (--uncontrast)
 	export REDUCE_CONTRAST="0"
 
 	# How much to dim (--dim N)
-	export DIM_STRENGTH="32"
+	export DIM_STRENGTH="30"
 
 	# Dimmer
 	export DIM_COLOR="#050508"

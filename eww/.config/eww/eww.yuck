@@ -16,14 +16,14 @@
 (defwindow quotetoggler
     :stacking "fg"
     :windowtype "dock"
-	:geometry (geometry :x "8.5%"
+	:geometry (geometry :x "9.75%"
                         :y "0.75%"
-                        :height "2.5%")
+                        :height "2.8%")
 (quotetoggler))
 
 (defwindow showquote
     :stacking "fg"
-	:geometry (geometry :x "8.5%"
+	:geometry (geometry :x "6.5%"
                         :y "4%"
                         :width "10%")
 (quote))
@@ -56,8 +56,8 @@
 
 (defwindow mycal
     :stacking "fg"
-	:geometry (geometry :x "72%" 
-						:y "64.5%" 
+	:geometry (geometry :x "70%" 
+						:y "60%" 
 						:width "380px" 
 						:height "20px")
 (fullcal))
@@ -92,7 +92,7 @@
 (defwindow spotify
     :stacking "fg"
 	:geometry (geometry :x "38%"
-						:y "74%" 
+						:y "73%" 
 						)
 (spotify))
 
@@ -111,7 +111,7 @@
 (defwindow powermenu
     :stacking "fg"
 	:geometry (geometry :x "91.4%"
-						:y "86%" 
+						:y "84%" 
 						:width "8%"
                         :height "8%")
     (poweroptions)
@@ -131,11 +131,7 @@
 (defpoll volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1")
 
 (defwidget showvol []
-  (box :class "metric" 
-       :orientation "h" 
-       :space-evenly "false"
-       :spacing "8"
-       :tooltip volume
+  (box :class "metric" :orientation "h" :space-evenly "false":spacing "8" :tooltip volume
     (button :onclick "amixer -D pulse set Master 1+ toggle" "")
     (scale :min 0
            :max 100
@@ -147,10 +143,10 @@
 
 (defwindow showvolume
     :stacking "fg"
-    :geometry (geometry :x "92.8%"
+    :geometry (geometry :x "91.8%"
                         :y "0.75%" 
                         :width "5%" 
-                        :height "2.5%")
+                        :height "2.8%")
 (showvol))
 
 
@@ -214,8 +210,8 @@
 
 (defwindow showsysdata
     :stacking "fg"
-	:geometry (geometry :x "91%"
-                        :y "86%"
+	:geometry (geometry :x "90%"
+                        :y "84.5%"
                         :height "8%")
 (sysdata))
 
@@ -225,7 +221,7 @@
   (box :orientation "v" :space-evenly "false" :class "app-outer-container"
     (box :orientation "v" :space-evenly "false" :class "app-inner-container" :vexpand "false" :hexpand "false" :valign "center" :spacing 40
     (box :orientation "h" :space-evenly "false" :class "app-inner-container-top" :vexpand "false" :hexpand "false" :valign "center" :spacing 24
-      (button :tooltip "Launch Edge" :style "background-image :url('images/edge.svg');" :class "edge" :onclick "scripts/applauncher.sh --edge")
+      (button :tooltip "Launch Brave" :style "background-image :url('images/brave.svg');" :class "brave" :onclick "scripts/applauncher.sh --brave")
       (button :tooltip "Launch Terminal" :style "background-image :url('images/kitty.svg');" :class "kitty" :onclick "scripts/applauncher.sh --kitty")
       (button :tooltip "Launch Thunar" :style "background-image :url('images/files.svg');" :class "thunar" :onclick "scripts/applauncher.sh --files"))
     (box :orientation "h" :space-evenly "false" :class "app-inner-container-bottom" :vexpand "false" :hexpand "false" :valign "center" :spacing 24
@@ -235,14 +231,14 @@
 
 (defwindow applications
     :stacking "fg"
-	:geometry (geometry :x "0.5%"
-                        :y "83.5%"
+	:geometry (geometry :x "1.4%"
+                        :y "82.5%"
                         :height 150)
 (applications))
 
 
 ;; (defpoll btstatus :interval "3s" `scripts/checkbluetoothstatus.sh`)
-(defpoll btdevice :interval "5s" `scripts/checkbluetoothdevice.sh`)
+(defpoll btdevice :interval "2s" `scripts/checkbluetoothdevice.sh`)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; BAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -275,7 +271,7 @@
       (box :class "bar-bluetooth" :space-evenly "false"
         (box :class "bar-bluetooh-left"
           (button :class "btn-bluetooth" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
-          (label :class "label-bluetooth" :halign "center" :text "")))
+            (label :class "label-bluetooth" :halign "center" :text "")))
         (box :class "bar-bluetooth-right"
           (button :class "btn-bluetooth-device" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
             (label :class "label-bluetooth" :halign "center" :text "${btdevice}"))))
@@ -290,7 +286,7 @@
     :stacking "fg"
     :windowtype "dock"
 	:geometry (geometry :x "1.35%"
-                        :y "96%"
+                        :y "95.8%"
                         :width "97.3%"
                         )
     :reserve (struts :side "bottom" :distance "3.8%")
@@ -306,7 +302,7 @@
     :stacking "fg"
 	:geometry (geometry :x "1.35%"
                         :y "0.75%"
-                        :height "2.5%")
+                        :height "2.8%")
 (mynotifications))
 
 ;;;;; custom rewrite of github.com/syndrizzle/hotfiles ;;;;;
