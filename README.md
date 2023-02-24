@@ -13,8 +13,9 @@
 
 <img src="./images/eww.png" alt="img" align="center">
 
-<h3 align="center">EWW Demo</h3>
-<video src="./video/demo.mp4" width="100%" height="100%" controls preload></video>
+<h3 align="left">EWW Demo</h3>
+
+https://user-images.githubusercontent.com/122670990/221211055-4e67cac3-51fd-4bfd-9aa5-202c80388b61.mp4
 
 ## Tool Overview
 
