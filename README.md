@@ -194,11 +194,11 @@ xmonad --recompile && xmonad --restart
 
 ### Wallpaper
 
-Current: [Out The Window ~ Custom (multi-filtered)](./wallpapers/out_the_window_darker.png)
+Current: [Out The Window ~ Custom (multi-filtered)](./wallpapers/wallpapers/out_the_window_darker.png)
 
-Old: [Pots ~ Custom (multi-filtered)](./wallpapers/pots_custom.png)
+Old: [Pots ~ Custom (multi-filtered)](./wallpapers/wallpapers/pots_custom.png)
 
-Old: [Dark Arts ~ Custom (multi-filtered)](./wallpapers/dark_arts_custom.png)
+Old: [Dark Arts ~ Custom (multi-filtered)](./wallpapers/wallpapers/dark_arts_custom.png)
 
 You may change the path to your wallpaper in ~/.config/xmonad/lib/Custom/MyStartupApps.hs
 
