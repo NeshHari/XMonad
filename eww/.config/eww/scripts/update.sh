@@ -11,9 +11,11 @@ if [ -z "${selected_packages}" ]; then
 fi
 
 if [[ "$selected_packages" == *"$update_all_option"* ]]; then
-	update_cmd="paru -S --noconfirm $(echo ${packages})"
+	# update_cmd="paru -S --noconfirm $(echo ${packages})"
+	update_cmd="paru -S $(echo ${packages})"
 else
-	update_cmd="paru -S --noconfirm $(echo ${selected_packages})"
+	# update_cmd="paru -S --noconfirm $(echo ${selected_packages})"
+	update_cmd="paru -S $(echo ${selected_packages})"
 fi
 
 echo "Updating packages: ${selected_packages}"
