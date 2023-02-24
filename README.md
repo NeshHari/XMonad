@@ -194,11 +194,11 @@ xmonad --recompile && xmonad --restart
 
 ### Wallpaper
 
-[Pots](./wallpapers/pots.jpg)
+Current: [Out The Window ~ Custom (multi-filtered)](./wallpapers/out_the_window_darker.png)
 
-[Pots ~ Custom (multi-filtered)](./wallpapers/pots_custom.png)
+Old: [Pots ~ Custom (multi-filtered)](./wallpapers/pots_custom.png)
 
-[Dark Arts ~ Custom (multi-filtered)](./wallpapers/dark_arts_custom.png)
+Old: [Dark Arts ~ Custom (multi-filtered)](./wallpapers/dark_arts_custom.png)
 
 You may change the path to your wallpaper in ~/.config/xmonad/lib/Custom/MyStartupApps.hs
 
@@ -207,7 +207,7 @@ You may change the path to your wallpaper in ~/.config/xmonad/lib/Custom/MyStart
 You may optionally install a custom cursor theme.
 I alternate between [Oreo](https://aur.archlinux.org/packages/oreo-cursors-git),
 which provides a handful of catppuccin-like colors with a little more contrast,
-and the [Catppuccin Mocha Dark Cursors](https://aur.archlinux.org/packages/catppuccin-mocha-dark-cursors).
+and [Catppuccin Mocha Dark Cursors](https://aur.archlinux.org/packages/catppuccin-mocha-dark-cursors).
 Once installed, the new cursor can be set with lxappearance.
 
 ### Spotify
