@@ -50,6 +50,7 @@ packages=(
 	libnotify
 	lxappearance
 	neovim
+	nerd-fonts-sarasa-mono
 	nodejs
 	npm
 	polybar

@@ -11,7 +11,7 @@
 
 <h2 align="center">Ewwification</h2>
 
-<img src="./images/ewwification.png" alt="img" align="center">
+<img src="./images/eww.png" alt="img" align="center">
 
 ## Tool Overview
 
@@ -27,7 +27,7 @@
 - **File Manager**: [Thunar](https://git.xfce.org/xfce/thunar/)
 - **Launcher**: [Rofi](https://github.com/davatorium/rofi/) + [jgmenu](https://github.com/jgmenu/jgmenu)
 - **Multipurpose**: [eww](https://github.com/elkowar/eww)
-- **Browser**: [Microsoft Edge Beta/Dev](https://aur.archlinux.org/packages/microsoft-edge-beta-bin)
+- **Browser**: [Brave Nightly](https://aur.archlinux.org/packages/brave-nightly-bin)
   - **Extension**: [nightTab](https://github.com/zombieFox/nightTab)
 
 ## Contents
@@ -150,7 +150,7 @@ bash setup.sh
 _Note: Paru is interchangeable with any AUR helper_
 
 ```fish
-paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst eww-git fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 jgmenu kitty lazygit libnotify lxappearance neovim nodejs npm polybar picom-pijulius-git playerctl python-pip rofi stack starship stow ttf-font-awesome ttf-jetbrains-mono-nerd unclutter wmctrl xcape xdo xorg-xinit xorg-xmessage xorg-xmodmap xorg-xsetroot zoxide
+paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst eww-git fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 jgmenu kitty lazygit libnotify lxappearance neovim nerd-fonts-sarasa-mono nodejs npm polybar picom-pijulius-git playerctl python-pip rofi stack starship stow ttf-font-awesome ttf-jetbrains-mono-nerd unclutter wmctrl xcape xdo xorg-xinit xorg-xmessage xorg-xmodmap xorg-xsetroot zoxide
 ```
 
 _Note: Polybar will not automatically launch after installation. This is expected behavior. The [polybar launch script](./polybar/.config/polybar/startup.sh) is deliberately tied to autorandr, which is used for hot-plugging. Refer to the section on MyRescreen.hs to see how they all come together._
@@ -223,7 +223,7 @@ To integrate with polybar and avoid the traceback error, you may need to run the
 pip install dbus-python
 ```
 
-Additionally, to ensure polybar (main-middle) launches only when spotify is used and closes when it is not, please modify the desktop entry:
+Additionally for non-eww based configurations, to ensure polybar (main-middle) launches only when spotify is used and closes when it is not, please modify the desktop entry:
 
 ```shell
 # PATH: ~/.local/share/applications/spotify.desktop (copy and modify /usr/share/applications/spotify.desktop so it persist after updates)
