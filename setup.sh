@@ -51,6 +51,7 @@ packages=(
 	lxappearance
 	neovim
 	nodejs
+	npm
 	polybar
 	picom-pijulius-git
 	playerctl
