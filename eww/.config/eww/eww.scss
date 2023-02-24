@@ -508,6 +508,10 @@ tooltip {
   font-size: 2.5em;
   font-weight: bold;
   color: $base;
+  background-color: $maroon;
+  border-radius: 5em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 .notifications-scroll {
@@ -592,6 +596,7 @@ tooltip {
   min-width: 100px;
   border-radius: 0.3em;
   padding: 0.5em;
+  margin-right: 0.8em;
 }
 
 .summary-header {
@@ -599,7 +604,7 @@ tooltip {
   font-size: 1.6em;
   background-color: $peach;
   color: $base;
-  padding: 0.2em;
+  padding: 0.5em;
   margin-bottom: 0.2em;
 }
 
@@ -610,14 +615,16 @@ tooltip {
   margin-top: 0.5em;
   padding: 0.5em;
   border-radius: 1em;
+  margin-bottom: 0.3em;
 }
 
 .notifications-body-text {
   color: $base;
   border-radius: 1em;
+  padding: 0.5em;
 }
 
 .notifications-card-body-content {
   color: $base;
-  padding: 0.5em;
+  padding: 0.8em;
 }
