@@ -13,6 +13,9 @@
 
 <img src="./images/eww.png" alt="img" align="center">
 
+<h3 align="center">EWW Demo</h3>
+<video src="./video/demo.mp4" width="100%" height="100%" controls preload></video>
+
 ## Tool Overview
 
 - **WM**: [xmonad](https://github.com/xmonad/xmonad)
