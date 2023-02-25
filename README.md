@@ -4,8 +4,10 @@
 
 <p align="center"> <img src="images/starter_kit.gif" align="center" width="600"> </p>
 
-<a href="https://github.com/NeshHari/XMonad/stargazers">![GitHub Repo stars](https://img.shields.io/github/stars/NeshHari/XMonad?color=%23f2cdcd&label=STARS%20&logo=github&logoColor=%23f2cdcd&style=for-the-badge)</a>
-<a href="https://github.com/NeshHari/XMonad/issues">![GitHub issues](https://img.shields.io/github/issues/NeshHari/XMonad?color=%23b4befe&label=ISSUES&logo=GitBook&logoColor=%23b4befe&style=for-the-badge)<a>
+<a href="https://github.com/NeshHari/XMonad/stargazers">![GitHub Repo stars](https://img.shields.io/github/stars/NeshHari/XMonad?color=f2cdcd&label=STARS%20&logo=github&logoColor=f2cdcd&style=for-the-badge)</a>
+<img alt="GitHub forks" src="https://img.shields.io/github/forks/NeshHari/XMonad?color=a6e3a1&logo=Git&logoColor=a6e3a1&style=for-the-badge">
+<a href="https://github.com/NeshHari/XMonad/issues">![GitHub issues](https://img.shields.io/github/issues/NeshHari/XMonad?color=b4befe&label=ISSUES&logo=GitBook&logoColor=b4befe&style=for-the-badge)<a>
+<img alt="Maintained" src="https://img.shields.io/badge/MAINTAINED-DUH!-purple?color=cba6f7&logo=Git&logoColor=cba6f7&style=for-the-badge">
 
 </div>
 
