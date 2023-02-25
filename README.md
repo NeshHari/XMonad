@@ -137,6 +137,8 @@ The following guide requires the latest/git version of XMonad to be installed to
 
 ## Installation Guidelines
 
+**IMPORTANT**: Please manually install the [additional fonts](#additional-fonts) and run `autorandr --save single` for polybar-based modules to appear. The latter is mandatory since polybar launch is integrated with hotplugging support.
+
 ### Automatic Installation (Arch Linux)
 
 _This [setup script](./setup.sh) is offered as a convenience, but its use is at your own discretion (**unstable**). Manual installation is recommended for a safer and more controlled process, as it eliminates the risk of accidental overwrites or incongruous symlinks. As the author, I suggest manual installations to better respect the user's file structure. Please review before use._
@@ -162,7 +164,7 @@ _Note: Polybar will not automatically launch after installation. This is expecte
 - [Vanilla Caramel](https://www.dafont.com/vanilla-caramel.font)
 - [Cream Cake](https://www.dafont.com/cream-cake.font)
 - [Sugar Snow](https://www.dafont.com/sugar-snow.font)
-- [Purple Smile](https://www.dafont.com/purple-smile.font)
+- [Purple Smile](https://www.dafont.com/purple-smile.font) -- _Optional_
 
 _Note: Downloaded fonts should be placed in ~/.local/share/fonts, before running fc-cache -f -v to update the font cache._
 
