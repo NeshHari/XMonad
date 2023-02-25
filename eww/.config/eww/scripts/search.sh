@@ -1,43 +1,34 @@
 #!/usr/bin/env bash
 # Author: github.com/NeshHari
 
-duckduckgo="https://duckduckgo.com/?q="
+ddg="https://duckduckgo.com/?q="
 google="https://www.google.com/search?q="
-wikipedia="https://en.wikipedia.org/w/index.php?title=Special:Search&search="
+wiki="https://en.wikipedia.org/w/index.php?title=Special:Search&search="
 bing="https://www.bing.com/search?q="
-archwiki="https://wiki.archlinux.org/index.php?search="
+arch="https://wiki.archlinux.org/index.php?search="
 aur="https://aur.archlinux.org/packages/?O=0&K="
 hackage="https://hackage.haskell.org/packages/search?terms="
-stackoverflow="https://stackoverflow.com/search?q="
+so="https://stackoverflow.com/search?q="
+reddit="https://www.reddit.com/search/?q="
+protondb="https://www.protondb.com/search?q="
+steamdb="https://steamdb.info/search/?a=app&q="
 
-back_button="<-- Change search engine"
+back="<-- Change search engine"
 
 while true; do
-	engine=$(echo -e "DuckDuckGo\nGoogle\nWikipedia\nBing\nArchWiki\nAUR\nHackage\nStack Overflow" | rofi -dmenu -i -matching fuzzy -p "Select search engine:")
-
-	if [ -z "$engine" ]; then
-		exit 0
-	fi
-
-	if [ "$engine" == "$back_button" ]; then
-		continue
-	fi
+	engine=$(echo -e "DuckDuckGo\nGoogle\nWikipedia\nBing\nArchWiki\nAUR\nHackage\nStack Overflow\nReddit\nProtonDB\nSteamDB" | rofi -dmenu -i -matching fuzzy -p "Select search engine:")
+	if [ -z "$engine" ]; then exit 0; fi
+	if [ "$engine" == "$back" ]; then continue; fi
 
 	query=""
 	while true; do
-		query=$(echo -e "$back_button" | rofi -dmenu -p "Search on $engine:")
-
-		if [ "$query" == "$back_button" ]; then
-			break
-		fi
-
-		if [ -z "$query" ]; then
-			continue
-		fi
+		query=$(echo -e "$back" | rofi -dmenu -p "Search on $engine:")
+		if [ "$query" == "$back" ]; then break; fi
+		if [ -z "$query" ]; then continue; fi
 
 		case $engine in
 		"DuckDuckGo")
-			xdg-open "$duckduckgo$query"
+			xdg-open "$ddg$query"
 			exit
 			;;
 		"Google")
@@ -45,7 +36,7 @@ while true; do
 			exit
 			;;
 		"Wikipedia")
-			xdg-open "$wikipedia$query"
+			xdg-open "$wiki$query"
 			exit
 			;;
 		"Bing")
@@ -53,7 +44,7 @@ while true; do
 			exit
 			;;
 		"ArchWiki")
-			xdg-open "$archwiki$query"
+			xdg-open "$arch$query"
 			exit
 			;;
 		"AUR")
@@ -65,7 +56,19 @@ while true; do
 			exit
 			;;
 		"Stack Overflow")
-			xdg-open "$stackoverflow$query"
+			xdg-open "$so$query"
+			exit
+			;;
+		"Reddit")
+			xdg-open "$reddit$query"
+			exit
+			;;
+		"ProtonDB")
+			xdg-open "$protondb$query"
+			exit
+			;;
+		"SteamDB")
+			xdg-open "$steamdb$query"
 			exit
 			;;
 		esac
