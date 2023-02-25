@@ -13,9 +13,7 @@
 
 <img src="./images/eww.png" alt="img" align="center">
 
-<h3 align="left">EWW Demo</h3>
-
-https://user-images.githubusercontent.com/122670990/221211055-4e67cac3-51fd-4bfd-9aa5-202c80388b61.mp4
+#### Eww Demo [:tv:](https://drive.google.com/file/d/11PxnIAS2XuoX4IYAaHGmamPKprNHiiPy/view?usp=sharing)
 
 ## Tool Overview
 
