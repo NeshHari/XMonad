@@ -85,7 +85,7 @@ return {
 		end,
 	},
 
-	"zbirenbaum/copilot.lua",
+	"github/copilot.vim",
 
 	"folke/which-key.nvim",
 
