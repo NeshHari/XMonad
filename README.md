@@ -156,7 +156,7 @@ bash setup.sh
 _Note: Paru is interchangeable with any AUR helper_
 
 ```fish
-paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst eww-git fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 jgmenu kitty lazygit libnotify lxappearance neovim nerd-fonts-sarasa-mono nodejs npm polybar picom-pijulius-git playerctl python-pip rofi stack starship stow ttf-font-awesome ttf-jetbrains-mono-nerd unclutter wmctrl xcape xdo xorg-xinit xorg-xmessage xorg-xmodmap xorg-xsetroot zoxide
+paru -Syu alacritty autorandr bat beautyline catppuccin-cursors-mocha catppuccin-gtk-theme-mocha cava dunst eww-git fd feh fish fzf ghc ghcup-hs-bin git glava haskell-utf8-string haskell-x11 jgmenu kitty lazygit libnotify lxappearance neovim nodejs npm polybar picom-pijulius-git playerctl python-pip rofi stack starship stow ttf-fira-code ttf-font-awesome ttf-jetbrains-mono-nerd unclutter wmctrl xcape xdo xorg-xinit xorg-xmessage xorg-xmodmap xorg-xsetroot zoxide
 ```
 
 _Note: Polybar will not automatically launch after installation. This is expected behavior. The [polybar launch script](./polybar/.config/polybar/startup.sh) is deliberately tied to autorandr, which is used for hot-plugging. Refer to the section on MyRescreen.hs to see how they all come together._

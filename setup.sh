@@ -50,7 +50,6 @@ packages=(
 	libnotify
 	lxappearance
 	neovim
-	nerd-fonts-sarasa-mono
 	nodejs
 	npm
 	polybar
@@ -61,6 +60,7 @@ packages=(
 	stack
 	starship
 	stow
+	ttf-fira-code
 	ttf-font-awesome
 	ttf-jetbrains-mono-nerd
 	unclutter
