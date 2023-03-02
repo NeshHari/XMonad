@@ -128,10 +128,10 @@ if not ok_saga then
 end
 
 saga.setup({
-	ui = {
+	--[[ ui = {
 		colors = require("catppuccin.groups.integrations.lsp_saga").custom_colors(),
 		kind = require("catppuccin.groups.integrations.lsp_saga").custom_kind(),
-	},
+	}, ]]
 })
 
 key("n", "gh", "<cmd>Lspsaga lsp_finder<CR>")

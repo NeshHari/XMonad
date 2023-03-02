@@ -1,4 +1,4 @@
--- luacheck: globals vim
+--[[ -- luacheck: globals vim
 
 require("catppuccin").setup({
 	flavour = "mocha",
@@ -49,4 +49,4 @@ require("catppuccin").setup({
 	},
 })
 
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("catppuccin") ]]

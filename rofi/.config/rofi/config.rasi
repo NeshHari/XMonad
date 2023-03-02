@@ -1,7 +1,7 @@
 @theme "custom"
 
 configuration{
-    font: "Sugar Snow 14";
+    font: "Vanilla Caramel 14";
     show-icons: true;
     terminal: "kitty";
     drun-display-format: "{icon} {name}";

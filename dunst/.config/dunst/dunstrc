@@ -16,11 +16,11 @@
     padding = 15
     horizontal_padding = 15
     text_icon_padding = 0
-    frame_width = 8
-    frame_color = "#eba0ac"
+    frame_width = 10
+    frame_color = "#dca561"
     separator_color = frame
     sort = yes
-    font = Sugar Snow 12
+    font = Vanilla Caramel 14
     line_height = 4
     markup = full
     # default
@@ -54,19 +54,19 @@
     per_monitor_dpi = true
 
 [urgency_low]
-    background = "#f2cdcd"
-    foreground = "#1e1e2e"
-    highlight  = "#1e1e2e"
+    background = "#e6c384"
+    foreground = "#16161d"
+    highlight  = "#16161d"
     timeout = 10
 
 [urgency_normal]
-    background = "#f2cdcd"
-    foreground = "#1e1e2e"
-    highlight  = "#1e1e2e"
+    background = "#e6c384"
+    foreground = "#16161d"
+    highlight  = "#16161d"
     timeout = 10
 
 [urgency_critical]
-    background = "#f2cdcd"
-    foreground = "#1e1e2e"
-    highlight  = "#1e1e2e"
+    background = "#e6c384"
+    foreground = "#16161d"
+    highlight  = "#16161d"
     timeout = 10

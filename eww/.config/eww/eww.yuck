@@ -80,7 +80,7 @@
         (label :class "spotify-singer" :text "~ ${singer} ~" :limit-width "20")
         (label :class "spotify-album" :text "${album}" :limit-width "20")
       )
-      (box :class "spotify-controls" :orientation "h" :halign "center" :space-evenly "false" :spacing 30
+      (box :class "spotify-controls" :orientation "h" :halign "fill" :space-evenly "true" :valign "center"
         (button :onclick "playerctl previous" "󰒮")
         (button :onclick "playerctl -p spotify play-pause" "${playpause}")
         (button :onclick "playerctl -p spotify next" "󰒭")
@@ -238,7 +238,7 @@
 
 
 ;; (defpoll btstatus :interval "3s" `scripts/checkbluetoothstatus.sh`)
-(defpoll btdevice :interval "2s" `scripts/checkbluetoothdevice.sh`)
+(defpoll btdevice :interval "10s" `scripts/checkbluetoothdevice.sh`)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; BAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
@@ -249,7 +249,9 @@
           (button :class "btn-launcher" :onclick "scripts/customtoggle.sh applications" "" ))
       (box :class "bar-search" :halign "center" :tooltip "Search Engines"
           (button :class "btn-search" :onclick "scripts/search.sh &" "" ))
-      (box :class "bar-layout" :halign "center" :tooltip "Layout"
+      (box :class "bar-notifications" :halign "center" :tooltip "Notifications"
+          (button :class "btn-notifications" :onclick "scripts/customtoggle.sh notifications" "" ))
+      (box :class "bar-layout" :halign "center" :tooltip "${xmonad-layout}"
           (button :class "btn-layout"
       	      (label :class "label-layout" :halign "center" :limit-width 5 :text xmonad-layout)))
 	  (box :class "bar-wmclass" :hexpand "true" :tooltip "${wmclass}"
@@ -259,37 +261,35 @@
       (box :class "bar-spotify"
           (button :class "btn-spotify" :onclick "scripts/customtoggle.sh spotify" "${spotify}" )))
     (box :orientation "h" :space-evenly "false" :class "right-of-bar" :hexpand "false" :vexpand "false" :valign "center" :halign "end"
-      (box :class "bar-time" 
-        (button :class "btn-time" :onclick "scripts/customtoggle.sh mycal" "${time}"))
-      (box :class "bar-update" :space-evenly "false"
-        (box :class "bar-update-left"
+        (box :class "metric" :orientation "h" :space-evenly "false":spacing "8" :tooltip volume
+          (button :onclick "amixer -D pulse set Master 1+ toggle" "")
+          (scale :min 0
+                 :max 100
+                 :value volume
+                 :onchange "amixer -D pulse sset Master {}%"))
+         (box :class "bar-sysdata" :tooltip "System Resources"
+          (button :class "btn-sysdata" :onclick "scripts/customtoggle.sh showsysdata" "" ))
+      (box 
+        (box 
           (button :class "btn-update" :onclick "scripts/update.sh &" :tooltip "${upd} updates available"
-            (label :class "label-update" :halign "center" :text "")))
-        (box :class "bar-update-right"
-          (button :class "btn-update-num" :onclick "scripts/update.sh" :tooltip "${upd} updates available"
-            (label :class "label-update" :halign "center" :text "${upd}"))))
-      (box :class "bar-bluetooth" :space-evenly "false"
-        (box :class "bar-bluetooh-left"
-          (button :class "btn-bluetooth" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
-            (label :class "label-bluetooth" :halign "center" :text "")))
-        (box :class "bar-bluetooth-right"
-          (button :class "btn-bluetooth-device" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
-            (label :class "label-bluetooth" :halign "center" :text "${btdevice}"))))
-      (box :class "bar-sysdata" :tooltip "System Resources"
-        (button :class "btn-sysdata" :onclick "scripts/customtoggle.sh showsysdata" "" ))
+            (label :class "label-update" :halign "center" :text ""))))
+      (box 
+        (button :class "btn-bluetooth" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
+          (label :class "label-bluetooth" :halign "center" :text "")))
       (box :class "bar-power"
         (button :class "btn-power" :onclick "scripts/customtoggle.sh powermenu" "" ))
+      (box 
+        (button :class "btn-time" :onclick "scripts/customtoggle.sh mycal" "${time}"))
     )))
 
 
 (defwindow bar
     :stacking "fg"
     :windowtype "dock"
-	:geometry (geometry :x "1.35%"
-                        :y "95.8%"
-                        :width "97.3%"
-                        )
-    :reserve (struts :side "bottom" :distance "3.8%")
+	:geometry (geometry :x "10%"
+                        :y "0.75%"
+                        :width "88.5%")
+    :reserve (struts :side "top" :distance "3%")
 (bar))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; NOTIFICAITONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;

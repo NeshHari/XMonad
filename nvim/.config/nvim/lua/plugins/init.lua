@@ -2,7 +2,10 @@ return {
 	"nvim-tree/nvim-web-devicons",
 	"nvim-tree/nvim-tree.lua",
 
-	{ "catppuccin/nvim", name = "catppuccin" },
+	-- { "catppuccin/nvim", name = "catppuccin" },
+	"rebelot/kanagawa.nvim",
+	-- "folke/tokyonight.nvim",
+
 	"akinsho/bufferline.nvim",
 
 	"goolord/alpha-nvim",

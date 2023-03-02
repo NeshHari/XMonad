@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-modules=("bar" "showvolume" "quotetoggler" "mynotifications")
+modules=("bar")
 
 killall -9 eww
 rm ~/.cache/eww*

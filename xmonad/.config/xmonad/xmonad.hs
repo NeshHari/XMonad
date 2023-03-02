@@ -1,5 +1,4 @@
 -- import modules in ./lib/Custom/
-import Custom.MyCatppuccin
 import Custom.MyDecorations (myBorderWidth, myFocusedBorderColor, myNormalBorderColor)
 import Custom.MyKeys
 import Custom.MyLayouts (myLayoutHook)
