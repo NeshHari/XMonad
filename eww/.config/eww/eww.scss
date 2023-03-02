@@ -44,7 +44,7 @@ $katanaGray: #717c7c;
 .cal-inner-container,
 .cal-outer-container {
   font-family: Vanilla Caramel;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   color: $fujiWhite;
   background-color: $sumiInk0;
@@ -53,21 +53,17 @@ $katanaGray: #717c7c;
 }
 
 .cal-inner-elems {
-  padding: 0.4em;
-}
-
-.cal-outer-elems {
-  padding: 1em;
+  padding: 0.7em;
 }
 
 .cal-date {
   font-family: Cream Cake;
   font-size: 2em;
   color: $sumiInk0;
-  background-color: $oniViolet;
-  border-radius: 0.5em;
-  padding: 0.1em;
-  margin: 1em;
+  background-color: $springViolet1;
+  border-radius: 0.1em;
+  padding: 0.2em;
+  margin: 0.5em;
 }
 
 calendar.button {
@@ -82,7 +78,7 @@ calendar.highlight {
 calendar:selected {
   color: $sumiInk0;
   background-color: $oniViolet;
-  border-radius: 5em;
+  border-radius: 10em;
 }
 
 calendar:indeterminate {
@@ -96,30 +92,23 @@ calendar:indeterminate {
 
 .quote-img {
   background-repeat: no-repeat;
-  background-size: 50px;
-  min-height: 50px;
-  min-width: 50px;
+  background-size: 30px;
+  min-height: 30px;
+  min-width: 30px;
   border-radius: 2em;
   margin-bottom: 1em;
 }
 
 .quote {
   font-family: Vanilla Caramel;
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
   color: $fujiWhite;
 }
 
-.quotetoggler {
-  font-family: JetBrainsMono Nerd Font;
-  font-size: 1em;
-  font-weight: bold;
-  color: $springGreen;
-  background-color: $sumiInk0;
-}
-
 .bar {
   background-color: $sumiInk0;
+  padding: 0.3em;
 }
 
 .left-of-bar,
@@ -134,6 +123,7 @@ calendar:indeterminate {
 .btn-quote,
 .btn-layout,
 .btn-wmclass,
+.btn-pomodoro,
 .btn-bluetooth,
 .btn-update,
 .btn-update-num,
@@ -152,6 +142,10 @@ calendar:indeterminate {
   margin-right: 0.6em;
 }
 
+.btn-pomodoro {
+  color: $samuraiRed;
+}
+
 .btn-search {
   color: $autumnGreen;
 }
@@ -162,6 +156,15 @@ calendar:indeterminate {
 
 .btn-bluetooth {
   color: $springViolet2;
+  margin-right: -1em;
+}
+
+.label-bluetooth {
+  color: $springViolet2;
+  padding-right: 0.5em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  margin-right: 0.6em;
 }
 
 .btn-power {
@@ -170,6 +173,18 @@ calendar:indeterminate {
 
 .btn-update {
   color: $lightBlue;
+  margin-right: 0em;
+}
+
+.label-update {
+  color: $lightBlue;
+  font-family: "FiraCode Nerd Font";
+  font-size: 1em;
+  font-weight: bold;
+  padding-right: 0.5em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  margin-right: 0.6em;
 }
 
 .bar-spotify {
@@ -178,15 +193,15 @@ calendar:indeterminate {
 
 .btn-spotify {
   font-family: Vanilla Caramel;
-  font-size: 1em;
-  color: $sumiInk0;
-  background-color: $peachRed;
+  font-size: 1.2em;
+  color: $peachRed;
+  background-color: $sumiInk0;
   border-radius: 0.6em;
 }
 
 .btn-spotify:hover {
-  color: $peachRed;
-  background-color: $sumiInk0;
+  color: $sumiInk0;
+  background-color: $peachRed;
   transition: ease 0.5s;
 }
 
@@ -205,7 +220,7 @@ calendar:indeterminate {
 }
 
 .btn-quote {
-  color: $springGreen;
+  color: $boatYellow1;
 }
 
 .btn-layout {
@@ -214,7 +229,8 @@ calendar:indeterminate {
 
 .btn-wmclass {
   font-family: FiraCode Nerd Font;
-  font-size: 0.8em;
+  font-weight: bold;
+  font-size: 1em;
   color: $sumiInk4;
 }
 
@@ -226,18 +242,19 @@ calendar:indeterminate {
 .spotify-img {
   background-repeat: no-repeat;
   background-size: contain;
-  min-height: 280px;
-  min-width: 280px;
-  border-radius: 10em;
+  min-height: 220px;
+  min-width: 220px;
+  border-radius: 8em;
   border: 5px solid $waveRed;
-  margin-left: 1.2em;
+  margin-left: 1em;
+  margin-right: 1em;
 }
 
 .spotify-inner-right-container {
-  margin: 0.2em;
+  margin: 0.3em;
   background-color: $winterRed;
   border-radius: 1em;
-  padding: 1.8em;
+  padding: 2em;
 }
 
 .spotify-title {
@@ -268,7 +285,7 @@ calendar:indeterminate {
 }
 
 .spotify-controls button {
-  font-family: JetBrainsMono Nerd Font;
+  font-family: FiraCode Nerd Font;
   font-weight: bold;
   font-size: 1.2em;
 }
@@ -280,7 +297,7 @@ calendar:indeterminate {
 
 .powermenu-container {
   font-family: "Font Awesome 6 Free Solid";
-  font-size: 1.2em;
+  font-size: 1em;
   font-weight: bold;
 }
 
@@ -309,8 +326,9 @@ calendar:indeterminate {
 
 .btn-time {
   font-family: FiraCode Nerd Font;
+  font-weight: bold;
   font-size: 1em;
-  color: $oniViolet;
+  color: $springViolet1;
 }
 
 tooltip {
@@ -337,7 +355,7 @@ tooltip {
 .metric scale trough highlight {
   all: unset;
   background-color: $surimiOrange;
-  border-radius: 10px;
+  border-radius: 2em;
 }
 
 .metric scale trough {
@@ -360,18 +378,18 @@ tooltip {
 .app-inner-container-top > * {
   padding: 0.2em;
   background-repeat: no-repeat;
-  background-size: 40px;
-  min-height: 40px;
-  min-width: 40px;
-  margin: 0 7 0 7;
+  background-size: 30px;
+  min-height: 30px;
+  min-width: 30px;
+  margin: 0 3 0 3;
 }
 .app-inner-container-bottom > * {
   padding: 0.2em;
   background-repeat: no-repeat;
-  background-size: 38px;
-  min-height: 38px;
-  min-width: 38px;
-  margin: 0 7 0 7;
+  background-size: 30px;
+  min-height: 30px;
+  min-width: 30px;
+  margin: 0 3 0 3;
 }
 
 .app-inner-container-top > *:hover {
@@ -393,7 +411,6 @@ tooltip {
   font-family: Vanilla Caramel;
   font-size: 1em;
   color: $sumiInk0;
-  padding: 0.3em;
 }
 
 .notifications-header {
@@ -506,7 +523,7 @@ tooltip {
 .summary-header {
   font-family: Cream Cake;
   font-size: 1.6em;
-  background-color: $surimiOrange;
+  background-color: $boatYellow1;
   color: $sumiInk0;
   padding: 0.5em;
   margin-bottom: 0.2em;
@@ -515,10 +532,10 @@ tooltip {
 .notifications-card-timestamp {
   font-family: Fira Code;
   font-size: 0.8em;
-  background-color: $surimiOrange;
+  background-color: $boatYellow1;
   color: $sumiInk0;
   margin-top: 0.5em;
-  padding: 0.5em;
+  padding: 0.5em 1em 0.5em 1em;
   border-radius: 1em;
   margin-bottom: 0.5em;
 }

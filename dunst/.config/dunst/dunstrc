@@ -23,7 +23,6 @@
     font = Vanilla Caramel 14
     line_height = 4
     markup = full
-    # default
     format = "<b>%s</b>\n%b"
     alignment = center
     vertical_alignment = center

@@ -8,22 +8,9 @@
         (button :style "background-image :url('images/quote.svg');" :class "quote-img" :halign "center") 
 	    (label :class "quote" :halign "center" :wrap "true" :limit-width 300 :text quote :xalign "0.5")))
 
-(defwidget quotetoggler []
-      (box :class "bar-quote" :tooltip "Quote" :space-evenly "false"
-          (button :class "btn-quote" :onclick "scripts/customtoggle.sh showquote" "" )
-          (label  :class "btn-quote-label" :text "QUOTE")))
-
-(defwindow quotetoggler
-    :stacking "fg"
-    :windowtype "dock"
-	:geometry (geometry :x "9.75%"
-                        :y "0.75%"
-                        :height "2.8%")
-(quotetoggler))
-
 (defwindow showquote
     :stacking "fg"
-	:geometry (geometry :x "6.5%"
+	:geometry (geometry :x "11.4%"
                         :y "4%"
                         :width "10%")
 (quote))
@@ -56,8 +43,8 @@
 
 (defwindow mycal
     :stacking "fg"
-	:geometry (geometry :x "70%" 
-						:y "60%" 
+	:geometry (geometry :x "81.5%" 
+						:y "4%" 
 						:width "380px" 
 						:height "20px")
 (fullcal))
@@ -110,8 +97,8 @@
 
 (defwindow powermenu
     :stacking "fg"
-	:geometry (geometry :x "91.4%"
-						:y "84%" 
+	:geometry (geometry :x "90.6%"
+						:y "4%" 
 						:width "8%"
                         :height "8%")
     (poweroptions)
@@ -202,6 +189,8 @@
   (box :class "metric"
        :orientation "v"
        :space-evenly "false"
+       :halign "center"
+       :valign "center"
        (showwifi)
        (showcpu)
        (showmemory)
@@ -210,9 +199,8 @@
 
 (defwindow showsysdata
     :stacking "fg"
-	:geometry (geometry :x "90%"
-                        :y "84.5%"
-                        :height "8%")
+	:geometry (geometry :x "83%"
+                        :y "4%")
 (sysdata))
 
 (defpoll upd :interval "10m" "paru -Qu 2>/dev/null | wc -l")
@@ -231,8 +219,8 @@
 
 (defwindow applications
     :stacking "fg"
-	:geometry (geometry :x "1.4%"
-                        :y "82.5%"
+	:geometry (geometry :x "7.2%"
+                        :y "4%"
                         :height 150)
 (applications))
 
@@ -240,46 +228,56 @@
 ;; (defpoll btstatus :interval "3s" `scripts/checkbluetoothstatus.sh`)
 (defpoll btdevice :interval "10s" `scripts/checkbluetoothdevice.sh`)
 
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; BAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (defwidget bar []
   (box :orientation "h" :class "bar" :space-evenly "true"  :vexpand "false" :hexpand "false" :valign "center"
     (box :orientation "h" :space-evenly "false" :class "left-of-bar"
-      (box :class "bar-launcher" :halign "center" :tooltip "Applications"
+      (box :tooltip "Applications"
           (button :class "btn-launcher" :onclick "scripts/customtoggle.sh applications" "" ))
-      (box :class "bar-search" :halign "center" :tooltip "Search Engines"
-          (button :class "btn-search" :onclick "scripts/search.sh &" "" ))
-      (box :class "bar-notifications" :halign "center" :tooltip "Notifications"
+      (box :tooltip "Notifications"
           (button :class "btn-notifications" :onclick "scripts/customtoggle.sh notifications" "" ))
-      (box :class "bar-layout" :halign "center" :tooltip "${xmonad-layout}"
+      (box :tooltip "Search Engines"
+          (button :class "btn-search" :onclick "scripts/search.sh &" "" ))
+      (box :tooltip "Random Quote" :space-evenly "false"
+          (button :class "btn-quote" :onclick "scripts/customtoggle.sh showquote" "" ))
+      (box 
+          (button :class "btn-pomodoro" :onclick "scripts/customtoggle.sh pomodoro" ""))
+      (box :class "bar-layout" :tooltip "${xmonad-layout}"
           (button :class "btn-layout"
-      	      (label :class "label-layout" :halign "center" :limit-width 5 :text xmonad-layout)))
+      	    (label :class "label-layout" :halign "center" :limit-width 5 :text xmonad-layout)))
 	  (box :class "bar-wmclass" :hexpand "true" :tooltip "${wmclass}"
           (button :class "btn-wmclass"
-	        (label :class "label-wmclass" :halign "start" :text "${wmclass}" :limit-width 30 :show-truncated "true" ))))
+	        (label :class "label-wmclass" :halign "start" :text " ${wmclass}" :limit-width 30 :show-truncated "true" ))))
     (box :orientation "h" :space-evenly "false" :class "middle-of-bar" :hexpand "true" :vexpand "false" :valign "center" :halign "center"
       (box :class "bar-spotify"
           (button :class "btn-spotify" :onclick "scripts/customtoggle.sh spotify" "${spotify}" )))
     (box :orientation "h" :space-evenly "false" :class "right-of-bar" :hexpand "false" :vexpand "false" :valign "center" :halign "end"
+        (box 
+          (button :class "btn-update" :onclick "scripts/update.sh &" :tooltip "${upd} updates available"
+            (label :halign "center" :text "")))
+        (box 
+          (button :onclick "scripts/update.sh" :tooltip "${upd} updates available"
+            (label :class "label-update" :halign "center" :text "${upd}")))
         (box :class "metric" :orientation "h" :space-evenly "false":spacing "8" :tooltip volume
           (button :onclick "amixer -D pulse set Master 1+ toggle" "")
           (scale :min 0
                  :max 100
                  :value volume
                  :onchange "amixer -D pulse sset Master {}%"))
-         (box :class "bar-sysdata" :tooltip "System Resources"
+         (box :class "bar-sysdata" :tooltip "System Resources" 
           (button :class "btn-sysdata" :onclick "scripts/customtoggle.sh showsysdata" "" ))
-      (box 
-        (box 
-          (button :class "btn-update" :onclick "scripts/update.sh &" :tooltip "${upd} updates available"
-            (label :class "label-update" :halign "center" :text ""))))
       (box 
         (button :class "btn-bluetooth" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
           (label :class "label-bluetooth" :halign "center" :text "")))
-      (box :class "bar-power"
-        (button :class "btn-power" :onclick "scripts/customtoggle.sh powermenu" "" ))
+      (box 
+          (button :class "btn-bluetooth-device" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
+            (label :class "label-bluetooth" :halign "center" :text "${btdevice}" :limit-width 10 :show-truncated false)))
       (box 
         (button :class "btn-time" :onclick "scripts/customtoggle.sh mycal" "${time}"))
+      (box 
+        (button :class "btn-power" :onclick "scripts/customtoggle.sh powermenu" "" ))
     )))
 
 
@@ -288,7 +286,8 @@
     :windowtype "dock"
 	:geometry (geometry :x "10%"
                         :y "0.75%"
-                        :width "88.5%")
+                        :width "88.5%"
+                        :height "2.2%")
     :reserve (struts :side "top" :distance "3%")
 (bar))
 
