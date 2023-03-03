@@ -15,7 +15,7 @@ myNormalBorderColor :: String
 myNormalBorderColor = sumiInk0
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = oldWhite
+myFocusedBorderColor = crystalBlue
 
 myPromptConfig :: XPConfig
 myPromptConfig =

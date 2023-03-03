@@ -2,7 +2,7 @@
 # Author: github.com/NeshHari
 
 # Define the list of modules to close
-modules=(applications showquote showfocusedclass spotify mycal showsysdata powermenu bluetooth notifications)
+modules=(applications showquote showfocusedclass spotify mycal showsysdata powermenu bluetooth)
 
 # Get the argument passed to the script
 module="$1"

@@ -78,29 +78,26 @@
 
 (defwindow spotify
     :stacking "fg"
-	:geometry (geometry :x "38%"
-						:y "73%" 
+	:geometry (geometry :x "39%"
+						:y "4%" 
 						)
 (spotify))
 
 ;;;;;;;;;;;;;;;;;;; POWER MENU ;;;;;;;;;;;;;;;;;;;
 (defwidget poweroptions []
-  (box :class "powermenu-container" :orientation "v" :spacing 0
-    (box :class "powermenu-inner-container" :orientation "h" :spacing 30
+  (box :class "powermenu-container" :orientation "h" :space-evenly "true"
       (button :class "lock" :onclick "betterlockscreen -l dim" "")
       (button :class "logout" :onclick "pkill xmonad" "")
-      (button :class "suspend" :onclick "systemctl suspend" ""))
-    (box :class "powermenu-inner-container" :orientation "h" :spacing 30
+      (button :class "suspend" :onclick "systemctl suspend" "")
       (button :class "restart" :onclick "reboot" "")
-      (button :class "shutdown" :onclick "shutdown -h now" "")
-    )))
+      (button :class "shutdown" :onclick "shutdown -h now" "")))
 
 (defwindow powermenu
     :stacking "fg"
-	:geometry (geometry :x "90.6%"
-						:y "4%" 
-						:width "8%"
-                        :height "8%")
+	:geometry (geometry :x "35%"
+						:y "45%" 
+						:width "30%"
+                        :height "10%")
     (poweroptions)
 )
 
@@ -240,7 +237,7 @@
       (box :tooltip "Applications"
           (button :class "btn-launcher" :onclick "scripts/customtoggle.sh applications" "" ))
       (box :tooltip "Notifications"
-          (button :class "btn-notifications" :onclick "scripts/customtoggle.sh notifications" "" ))
+          (button :class "btn-notifications" :onclick "eww open --toggle notifications" "" ))
       (box :tooltip "Search Engines"
           (button :class "btn-search" :onclick "scripts/search.sh &" "" ))
       (box :tooltip "Random Quote" :space-evenly "false"

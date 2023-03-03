@@ -309,29 +309,21 @@ calendar:indeterminate {
 
 .powermenu-container {
   font-family: "Font Awesome 6 Free Solid";
-  font-size: 1em;
+  font-size: 3em;
+  color: $peachRed;
+  background-color: $sumiInk0;
+  padding: 0.3em;
+  border: 5px solid $peachRed;
 }
 
 .powermenu-container > * {
   padding: 1em;
 }
 
-.powermenu-inner-container {
-  color: $peachRed;
-  background-color: $sumiInk0;
-}
-
-.powermenu-inner-container > * {
-  padding: 0.3em;
+.powermenu-container > *:hover {
   color: $sumiInk0;
   background-color: $peachRed;
-  border: 2px solid $peachRed;
-  border-radius: 5em;
-}
-
-.powermenu-inner-container > *:hover {
-  color: $peachRed;
-  background-color: $sumiInk0;
+  border-radius: 0.5em;
   transition: ease 0.5s;
 }
 
@@ -414,21 +406,21 @@ tooltip {
 }
 
 .notifications-container {
-  background-color: $autumnYellow;
-  padding: 0.8em;
+  background-color: $sumiInk0;
+  padding: 1.8em;
 }
 
 .notifications-header-container {
   font-family: Vanilla Caramel;
   font-size: 1em;
+  margin-bottom: 0.5em;
   color: $sumiInk0;
 }
 
 .notifications-header {
   font-size: 2.5em;
   font-weight: bold;
-  color: $sumiInk0;
-  background-color: $carpYellow;
+  background-color: $autumnYellow;
   border-radius: 5em;
   padding-left: 0.5em;
   padding-right: 0.5em;
@@ -438,12 +430,13 @@ tooltip {
 .notifications-scroll {
   background-color: $carpYellow;
   padding: 1em 1.5em 1em 1.5em;
+  border-radius: 0.4em;
 }
 
 .notifications-footer {
   font-family: Vanilla Caramel;
   font-size: 1.3em;
-  background-color: $autumnYellow;
+  background-color: $sumiInk0;
   color: $sumiInk0;
   padding: 1em;
 }
@@ -490,7 +483,7 @@ tooltip {
   font-family: Vanilla Caramel;
   font-size: 1.3em;
   background-color: $sumiInk0;
-  color: $oldWhite;
+  color: $autumnYellow;
   padding: 0.8em;
   border-radius: 0.3em 0.3em 0 0;
 }
