@@ -11,11 +11,22 @@
 
 </div>
 
-<h2 align="center">Ewwification</h2>
+<h2 align="center">Ewwification (Catppuccin Mocha)</h2>
+
+<p align="center">CURRENT BRANCH (MAIN)</p>
 
 <img src="./images/eww.png" alt="img" align="center">
 
 #### Eww Demo [:tv:](https://drive.google.com/file/d/11PxnIAS2XuoX4IYAaHGmamPKprNHiiPy/view?usp=sharing)
+
+<h2 align="center">Ewwification (Kanagawa)</h2>
+
+<div align="center">
+<a href="https://github.com/NeshHari/XMonad/tree/kanagawa">GO TO KANAGAWA BRANCH</a>
+
+<img src="./images/kanagawa.jpg" alt="img" align="center">
+
+</div>
 
 ## Tool Overview
 
