@@ -199,7 +199,7 @@
 
 (defwindow showsysdata
     :stacking "fg"
-	:geometry (geometry :x "83%"
+	:geometry (geometry :x "88.5%"
                         :y "4%")
 (sysdata))
 
@@ -227,6 +227,9 @@
 
 ;; (defpoll btstatus :interval "3s" `scripts/checkbluetoothstatus.sh`)
 (defpoll btdevice :interval "10s" `scripts/checkbluetoothdevice.sh`)
+(defpoll unreadmail :interval "10m" `$HOME/Mail/mail`)
+;; uncomment this and comment the above to fill in your mail credentials 
+;; (defpoll unreadmail :interval "10m" `scripts/mail.py`)
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; BAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -242,8 +245,6 @@
           (button :class "btn-search" :onclick "scripts/search.sh &" "" ))
       (box :tooltip "Random Quote" :space-evenly "false"
           (button :class "btn-quote" :onclick "scripts/customtoggle.sh showquote" "" ))
-      (box 
-          (button :class "btn-pomodoro" :onclick "scripts/customtoggle.sh pomodoro" ""))
       (box :class "bar-layout" :tooltip "${xmonad-layout}"
           (button :class "btn-layout"
       	    (label :class "label-layout" :halign "center" :limit-width 5 :text xmonad-layout)))
@@ -260,20 +261,26 @@
         (box 
           (button :onclick "scripts/update.sh" :tooltip "${upd} updates available"
             (label :class "label-update" :halign "center" :text "${upd}")))
-        (box :class "metric" :orientation "h" :space-evenly "false":spacing "8" :tooltip volume
-          (button :onclick "amixer -D pulse set Master 1+ toggle" "")
-          (scale :min 0
-                 :max 100
-                 :value volume
-                 :onchange "amixer -D pulse sset Master {}%"))
-         (box :class "bar-sysdata" :tooltip "System Resources" 
-          (button :class "btn-sysdata" :onclick "scripts/customtoggle.sh showsysdata" "" ))
+        (box 
+          (button :class "btn-mail" :onclick "thunderbird &" :tooltip "${unreadmail} unread mails"
+            (label :halign "center" :text "")))
+        (box 
+          (button :onclick "thunderbird &":tooltip "${unreadmail} unread mails"
+            (label :class "label-mail" :halign "center" :text "${unreadmail}")))
       (box 
         (button :class "btn-bluetooth" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
           (label :class "label-bluetooth" :halign "center" :text "")))
       (box 
           (button :class "btn-bluetooth-device" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
             (label :class "label-bluetooth" :halign "center" :text "${btdevice}" :limit-width 10 :show-truncated false)))
+      (box :class "metric" :orientation "h" :space-evenly "false":spacing "8" :tooltip volume
+          (button :onclick "amixer -D pulse set Master 1+ toggle" "")
+          (scale :min 0
+                 :max 100
+                 :value volume
+                 :onchange "amixer -D pulse sset Master {}%"))
+      (box :class "bar-sysdata" :tooltip "System Resources" 
+          (button :class "btn-sysdata" :onclick "scripts/customtoggle.sh showsysdata" "" ))
       (box 
         (button :class "btn-time" :onclick "scripts/customtoggle.sh mycal" "${time}"))
       (box 

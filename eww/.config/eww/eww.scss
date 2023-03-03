@@ -121,9 +121,9 @@ calendar:indeterminate {
 .btn-launcher,
 .btn-notifications,
 .btn-quote,
+.btn-mail,
 .btn-layout,
 .btn-wmclass,
-.btn-pomodoro,
 .btn-bluetooth,
 .btn-update,
 .btn-update-num,
@@ -142,8 +142,18 @@ calendar:indeterminate {
   margin-right: 0.6em;
 }
 
-.btn-pomodoro {
-  color: $samuraiRed;
+.btn-mail {
+  color: $boatYellow2;
+  margin-right: 0em;
+}
+
+.label-mail {
+  font-family: "FiraCode Nerd Font";
+  color: $boatYellow2;
+  padding-right: 0.5em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  margin-right: 0.6em;
 }
 
 .btn-search {
@@ -160,6 +170,8 @@ calendar:indeterminate {
 }
 
 .label-bluetooth {
+  font-family: "FiraCode Nerd Font";
+  font-weight: bold;
   color: $springViolet2;
   padding-right: 0.5em;
   margin-top: 0.1em;
@@ -172,12 +184,12 @@ calendar:indeterminate {
 }
 
 .btn-update {
-  color: $lightBlue;
+  color: $springBlue;
   margin-right: 0em;
 }
 
 .label-update {
-  color: $lightBlue;
+  color: $springBlue;
   font-family: "FiraCode Nerd Font";
   font-size: 1em;
   font-weight: bold;
@@ -220,7 +232,7 @@ calendar:indeterminate {
 }
 
 .btn-quote {
-  color: $boatYellow1;
+  color: $oldWhite;
 }
 
 .btn-layout {
@@ -298,7 +310,6 @@ calendar:indeterminate {
 .powermenu-container {
   font-family: "Font Awesome 6 Free Solid";
   font-size: 1em;
-  font-weight: bold;
 }
 
 .powermenu-container > * {
@@ -328,7 +339,7 @@ calendar:indeterminate {
   font-family: FiraCode Nerd Font;
   font-weight: bold;
   font-size: 1em;
-  color: $springViolet1;
+  color: $oniViolet;
 }
 
 tooltip {
