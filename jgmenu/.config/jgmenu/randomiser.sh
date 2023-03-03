@@ -3,7 +3,7 @@
 
 file_path="$HOME/.config/jgmenu/jgmenurc"
 
-colors=("#f38ba8" "#f9e2af" "#a6e3a1" "#89b4fa" "#cba6f7" "#fab387" "#b4befe" "#eba0ac")
+colors=("#d27e99" "#e6c384" "#97bb6c" "#7fb4ca" "#957fb8" "#ffa066" "#9cabca" "#ff5d62" "#a3d4d5")
 
 # Get the last color used from the file
 last_color=$(grep -oP 'color_sel_bg\s*=\s*#\K[0-9a-f]{6}\s*100' "$file_path" | tail -n 1 | cut -d ' ' -f 1)

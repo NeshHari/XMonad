@@ -15,14 +15,14 @@ myNormalBorderColor :: String
 myNormalBorderColor = sumiInk0
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = crystalBlue
+myFocusedBorderColor = oldWhite
 
 myPromptConfig :: XPConfig
 myPromptConfig =
   def
     { bgColor = sumiInk0,
-      fgColor = springViolet2,
-      bgHLight = springViolet2,
+      fgColor = oldWhite,
+      bgHLight = oldWhite,
       fgHLight = sumiInk0,
       historySize = 0,
       position = Top,
@@ -30,8 +30,8 @@ myPromptConfig =
       promptBorderWidth = 0,
       defaultText = "",
       alwaysHighlight = True,
-      height = 55,
-      font = "xft:Vanilla Caramel:style=Regular:size=12",
+      height = 60,
+      font = "xft:FiraCode Nerd Font:style=Regular:size=12",
       autoComplete = Nothing,
       showCompletionOnTab = False
     }
@@ -40,7 +40,7 @@ myShowWNameConfig :: SWNConfig
 myShowWNameConfig =
   def
     { swn_font = "xft:Vanilla Caramel:size=60",
-      swn_color = springViolet2,
+      swn_color = oldWhite,
       swn_bgcolor = sumiInk0,
       swn_fade = 0.8
     }
@@ -48,7 +48,7 @@ myShowWNameConfig =
 myTabConfig :: Theme
 myTabConfig =
   def
-    { activeColor = springViolet2,
+    { activeColor = oldWhite,
       inactiveColor = sumiInk0,
       urgentColor = peachRed,
       activeBorderColor = sumiInk0,
@@ -57,17 +57,17 @@ myTabConfig =
       activeTextColor = sumiInk0,
       inactiveTextColor = roninYellow,
       urgentTextColor = sumiInk0,
-      fontName = "xft:Vanilla Caramel:size=12"
+      fontName = "xft:FiraCode Nerd Font:size=12"
     }
 
 emConf :: EasyMotionConfig
 emConf =
   def
-    { txtCol = springViolet2,
+    { txtCol = oldWhite,
       bgCol = sumiInk0,
       borderCol = sumiInk0,
       cancelKey = xK_Escape,
-      emFont = "xft: Vanilla Caramel-60",
+      emFont = "xft: FiraCode Nerd Font-60",
       overlayF = textSize,
       borderPx = 30
     }
