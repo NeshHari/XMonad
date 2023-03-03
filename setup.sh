@@ -28,9 +28,6 @@ packages=(
 	alacritty
 	autorandr
 	bat
-	beautyline
-	catppuccin-cursors-mocha
-	catppuccin-gtk-theme-mocha
 	cava
 	dunst
 	eww-git
@@ -46,6 +43,7 @@ packages=(
 	haskell-x11
 	jgmenu
 	kitty
+	kora-icon-theme
 	lazygit
 	libnotify
 	lxappearance
@@ -60,7 +58,7 @@ packages=(
 	stack
 	starship
 	stow
-	ttf-fira-code
+	ttf-firacode-nerd
 	ttf-font-awesome
 	ttf-jetbrains-mono-nerd
 	unclutter
