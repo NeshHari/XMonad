@@ -3,6 +3,7 @@
 <h1 align="center">XMonad Starter Kit</h1>
 
 <p align="center"> <img src="images/starter_kit.gif" align="center" width="600"> </p>
+<p align="center"> <img src="images/expansion.gif" align="center" width="600"> </p>
 
 <a href="https://github.com/NeshHari/XMonad/stargazers">![GitHub Repo stars](https://img.shields.io/github/stars/NeshHari/XMonad?color=f2cdcd&label=STARS%20&logo=github&logoColor=f2cdcd&style=for-the-badge)</a>
 <img alt="GitHub forks" src="https://img.shields.io/github/forks/NeshHari/XMonad?color=a6e3a1&logo=Git&logoColor=a6e3a1&style=for-the-badge">
@@ -380,7 +381,7 @@ Expected High-Level Structure
 ```
 .
 ├── hie.yaml
-├── lib
+���── lib
 ├── stack.yaml
 ├── stack.yaml.lock
 ├── xmonad
