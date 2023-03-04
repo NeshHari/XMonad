@@ -2,8 +2,10 @@
 
 <h1 align="center">XMonad Starter Kit</h1>
 
-<p align="center"> <img src="images/starter_kit.gif" align="center" width="600"> </p>
-<p align="center"> <img src="images/expansion.gif" align="center" width="600"> </p>
+<p align="center">
+    <img src="images/starter_kit.gif" align="center" width="400">
+    <img src="images/expansion.gif" align="center" width="400"> 
+</p>
 
 <a href="https://github.com/NeshHari/XMonad/stargazers">![GitHub Repo stars](https://img.shields.io/github/stars/NeshHari/XMonad?color=f2cdcd&label=STARS%20&logo=github&logoColor=f2cdcd&style=for-the-badge)</a>
 <img alt="GitHub forks" src="https://img.shields.io/github/forks/NeshHari/XMonad?color=a6e3a1&logo=Git&logoColor=a6e3a1&style=for-the-badge">
@@ -12,22 +14,21 @@
 
 </div>
 
-<h2 align="center">Ewwification (Catppuccin Mocha)</h2>
+<h2 align="center">Catppuccin Mocha</h2>
 
-<p align="center">CURRENT BRANCH (MAIN)</p>
+<p align="center">~ DEFAULT MAIN BRANCH ~</p>
 
 <img src="./images/eww.png" alt="img" align="center">
 
 #### Eww Demo [:tv:](https://drive.google.com/file/d/11PxnIAS2XuoX4IYAaHGmamPKprNHiiPy/view?usp=sharing)
 
-<h2 align="center">Ewwification (Kanagawa)</h2>
+<h2 align="center">Kanagawa</h2>
 
 <div align="center">
-<a href="https://github.com/NeshHari/XMonad/tree/kanagawa">GO TO KANAGAWA BRANCH</a>
+   <a href="https://github.com/NeshHari/XMonad/tree/kanagawa">~ LINK TO KANAGAWA BRANCH ~</a>
+</div>
 
 <img src="./images/kanagawa.jpg" alt="img" align="center">
-
-</div>
 
 ## Tool Overview
 
