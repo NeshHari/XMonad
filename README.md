@@ -11,8 +11,6 @@
 
 </div>
 
-<h2 align="center">Ewwification (Kanagawa)</h2>
-
 <img src="./images/kanagawa.jpg" alt="img" align="center">
 
 ## Tool Overview
