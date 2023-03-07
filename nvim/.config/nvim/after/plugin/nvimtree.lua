@@ -25,4 +25,4 @@ require("nvim-tree").setup({
 local keys = vim.keymap.set
 local opts = { noremap = true, silent = true }
 
-keys("n", "<C-t>", ":NvimTreeToggle<CR>", opts)
+keys("n", "<leader>t", ":NvimTreeToggle<CR>", opts)
