@@ -9,5 +9,5 @@ spicetify/.config/spicetify/Extensions
 lazygit/.config/lazygit/state.yml
 eww/.config/eww/\$XDG_CACHE_HOME/
 eww/.config/eww/scripts/__pycache__
-polybar/.config/polybar
+polybar/
 video/
