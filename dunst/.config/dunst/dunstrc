@@ -16,8 +16,8 @@
     padding = 15
     horizontal_padding = 15
     text_icon_padding = 0
-    frame_width = 10
-    frame_color = "#dca561"
+    frame_width = 8
+    frame_color = "#181825"
     separator_color = frame
     sort = yes
     font = Vanilla Caramel 14
@@ -53,19 +53,19 @@
     per_monitor_dpi = true
 
 [urgency_low]
-    background = "#e6c384"
-    foreground = "#16161d"
-    highlight  = "#16161d"
+    background = "#11111b"
+    foreground = "#cdd6f4"
+    highlight  = "#cdd6f4" 
     timeout = 10
 
 [urgency_normal]
-    background = "#e6c384"
-    foreground = "#16161d"
-    highlight  = "#16161d"
+    background = "#11111b"
+    foreground = "#cdd6f4"
+    highlight  = "#cdd6f4" 
     timeout = 10
 
 [urgency_critical]
-    background = "#e6c384"
-    foreground = "#16161d"
-    highlight  = "#16161d"
+    background = "#11111b"
+    foreground = "#cdd6f4"
+    highlight  = "#cdd6f4" 
     timeout = 10

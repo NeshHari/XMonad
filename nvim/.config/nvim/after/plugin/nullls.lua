@@ -11,6 +11,7 @@ null_ls.setup({
 		formatting.shfmt,
 		formatting.prettierd,
 		formatting.black,
+		formatting.google_java_format,
 		--formatting.fourmolu, <-- (ormolu alternative)
 		diagnostics.markdownlint,
 		diagnostics.luacheck,

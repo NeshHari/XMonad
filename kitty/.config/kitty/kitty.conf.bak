@@ -1,8 +1,8 @@
-font_family Ubuntu Mono Nerd Font
+font_family CaskaydiaCove Nerd Font
 bold_font auto
 italic font auto
 bold_italic_font auto
-font_size 11
+font_size 13
 
 window_padding_width 12
 
@@ -17,6 +17,6 @@ close_on_child_death yes
 background_opacity 1
 
 # BEGIN_KITTY_THEME
-# Tokyo Night Moon
+# Catppuccin Kitty Mocha
 include current-theme.conf
 # END_KITTY_THEME

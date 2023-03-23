@@ -31,7 +31,7 @@ end
 local lsp_services = { "bashls", "hls", "jdtls", "marksman", "lua_ls", "pyright" }
 
 masonlspconf.setup({
-	ensure_installed = lsp_services,
+	-- ensure_installed = lsp_services,
 })
 
 local ok_sig, lspsig = pcall(require, "lsp_signature")
@@ -46,7 +46,9 @@ lspsig.setup({
 	},
 })
 
-local on_attach = function(bufnr)
+local lsp_status = {}
+local on_attach = function(bufnr, client)
+	lsp_status.on_attach(client)
 	-- Enable completion triggered by <c-x><c-o>
 	vim.api.nvim_buf_set_option(bufnr, "omnifunc", "v:lua.vim.lsp.omnifunc")
 
@@ -71,30 +73,29 @@ for _, service in ipairs(lsp_services) do
 	end
 end
 
-require("lspkind").init()
+local ok_lspkind, lspkind = pcall(require, "lspkind")
+if not ok_lspkind then
+	return
+end
 
-local lspkind = require("lspkind")
-require("cmp").setup({
-	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol",
-			maxwidth = 50,
-			ellipsis_char = "...",
-		}),
-	},
-})
+lspkind.init()
 
 local ok_cmp, cmp = pcall(require, "cmp")
 if not ok_cmp then
 	return
 end
 
+-- local ok_luasnip, luasnip = pcall(require, "luasnip")
+-- if not ok_luasnip then
+-- 	return
+-- end
+
 cmp.setup({
-	snippet = {
-		expand = function(args)
-			require("luasnip").lsp_expand(args.body)
-		end,
-	},
+	-- snippet = {
+	-- 	expand = function(args)
+	-- 		luasnip.lsp_expand(args.body)
+	-- 	end,
+	-- },
 	window = {
 		completion = cmp.config.window.bordered(),
 		documentation = cmp.config.window.bordered(),
@@ -104,14 +105,14 @@ cmp.setup({
 		["<C-f>"] = cmp.mapping.scroll_docs(4),
 		["<C-Space>"] = cmp.mapping.complete(),
 		["<C-e>"] = cmp.mapping.abort(),
-		["<CR>"] = cmp.mapping.confirm({ select = true }),
+		["<CR>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Insert, select = true }),
+		["<C-y>"] = cmp.mapping.confirm({ behavior = cmp.ConfirmBehavior.Replace, select = true }),
 	}),
 	sources = cmp.config.sources({
 		{ name = "copilot" },
 		{ name = "nvim_lsp" },
-		{ name = "luasnip" },
+		-- { name = "luasnip" },
 		{ name = "buffer" },
-		{ name = "obsidian" },
 	}),
 	formatting = {
 		format = lspkind.cmp_format({

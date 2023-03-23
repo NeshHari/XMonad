@@ -1,15 +1,19 @@
+-- luacheck: globals vim
 return {
+	{ "echasnovski/mini.nvim", version = false },
+
+	------------------------- UI -------------------------
+	{ "catppuccin/nvim", name = "catppuccin" },
 	"nvim-tree/nvim-web-devicons",
 	"nvim-tree/nvim-tree.lua",
-
-	-- { "catppuccin/nvim", name = "catppuccin" },
-	"rebelot/kanagawa.nvim",
-	-- "folke/tokyonight.nvim",
-
 	"akinsho/bufferline.nvim",
-
 	"goolord/alpha-nvim",
+	"lewis6991/impatient.nvim",
+	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } },
 
+	--------------------------- UTILITIES ---------------------------
+
+	------------------------- TELESCOPE -------------------------
 	{ "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
 	"nvim-telescope/telescope-file-browser.nvim",
 	{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -24,6 +28,7 @@ return {
 
 	"mbbill/undotree",
 
+	------------------------- LSP -------------------------
 	{
 		"VonHeikemen/lsp-zero.nvim",
 		branch = "v1.x",
@@ -36,17 +41,15 @@ return {
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
+			-- { "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 			-- Snippets
-			{ "L3MON4D3/LuaSnip" },
-			{ "rafamadriz/friendly-snippets" },
+			-- { "L3MON4D3/LuaSnip" },
+			-- { "rafamadriz/friendly-snippets" },
 		},
 	},
-
 	"onsails/lspkind-nvim",
-
 	{ "glepnir/lspsaga.nvim", event = "BufRead" },
 	{ "folke/trouble.nvim", dependencies = "nvim-tree/nvim-web-devicons" },
 
@@ -56,11 +59,8 @@ return {
 
 	"lukas-reineke/indent-blankline.nvim",
 
-	"numToStr/Comment.nvim",
-
 	"ggandor/leap.nvim",
 
-	"windwp/nvim-autopairs",
 	"windwp/nvim-ts-autotag",
 
 	"folke/twilight.nvim",
@@ -74,13 +74,6 @@ return {
 	"sindrets/diffview.nvim",
 
 	"akinsho/toggleterm.nvim",
-
-	"kylechui/nvim-surround",
-
-	"epwalsh/obsidian.nvim",
-
-	"lewis6991/impatient.nvim",
-	{ "folke/noice.nvim", dependencies = { "MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } },
 
 	{
 		"iamcco/markdown-preview.nvim",

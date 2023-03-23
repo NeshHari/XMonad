@@ -1,17 +1,21 @@
 ;; Author: github.com/NeshHari
 
+(deflisten workspace "scripts/workspaces.sh")
+(defwidget workspaces []
+    (literal :content workspace))
+
 ;;;;;;;;;;;;;;;;;;;;;;;; QUOTES ;;;;;;;;;;;;;;;;;;;;;;;;
 (defpoll quote :interval "24h" "scripts/quotes --quote-and-quotee")
 
 (defwidget quote []
-	(box :class "quote-container" :orientation "v" :hexpand "false" :vexpand "true" :space-evenly "false"
+    (box :class "quote-container" :orientation "v" :hexpand "false" :vexpand "true" :space-evenly "false"
         (button :style "background-image :url('images/quote.svg');" :class "quote-img" :halign "center") 
-	    (label :class "quote" :halign "center" :wrap "true" :limit-width 300 :text quote :xalign "0.5")))
+        (label :class "quote" :halign "center" :wrap "true" :limit-width 300 :text quote :xalign "0.5")))
 
 (defwindow showquote
     :stacking "fg"
-	:geometry (geometry :x "11.4%"
-                        :y "4%"
+    :geometry (geometry :x "3%"
+                        :y "46%"
                         :width "10%")
 (quote))
 
@@ -34,23 +38,15 @@
   )
 )
 
-(defvar time-visible false)
-
-(defpoll time :interval "60s"
-              :initial "initial-value" 
-              :run-while time-visible 
-  `date +%H:%M' '%p`)
-
 (defwindow mycal
     :stacking "fg"
-	:geometry (geometry :x "81.5%" 
-						:y "4%" 
+	:geometry (geometry :x "3%" 
+						:y "70%" 
 						:width "380px" 
 						:height "20px")
 (fullcal))
 
 ;;;;;;;;;;;;;;;;;;;;;;;; SPOTIFY ;;;;;;;;;;;;;;;;;;;;;;;;
-
 (defpoll spotify :interval "1s" "scripts/spotify.py")
 (defpoll playpause :interval "0.5s"  "scripts/playpause --icon")
 (defpoll songtitle :interval "0.5s" "scripts/playpause --status")
@@ -59,13 +55,14 @@
 (defpoll coverart :interval "0.5s" "scripts/coverart --art")
 
 (defwidget spotify []
-  (box :class "spotify-container" :orientation "h" :space-evenly "true"
+  (box :class "spotify-container" :orientation "h" :space-evenly "true" :halign "fill" :valign "center"
+  :hexpand "false" :vexpand "true"
     (box :class "spotify-img" :style "background-image: url('${coverart}');")
-    (box :class "spotify-inner-right-container" :orientation "v" :valign "center" :halign "center" :space-evenly "false" 
+    (box :class "spotify-inner-right-container" :orientation "v" :valign "center" :halign "center" :space-evenly "false" :spacing 0
       (box :orientation "v" :spacing 20
-        (label :class "spotify-title" :text "${songtitle}" :limit-width "24")
-        (label :class "spotify-singer" :text "~ ${singer} ~" :limit-width "20")
-        (label :class "spotify-album" :text "${album}" :limit-width "20")
+        (label :class "spotify-title" :text "${songtitle}" :limit-width "20")
+        (label :class "spotify-singer" :text "~ ${singer} ~" :limit-width "18")
+        (label :class "spotify-album" :text "${album}" :limit-width "18")
       )
       (box :class "spotify-controls" :orientation "h" :halign "fill" :space-evenly "true" :valign "center"
         (button :onclick "playerctl previous" "󰒮")
@@ -78,14 +75,35 @@
 
 (defwindow spotify
     :stacking "fg"
-	:geometry (geometry :x "39%"
-						:y "4%" 
-						)
+	:geometry (geometry :x "38%"
+						:y "4%"
+                        :width "24%")
 (spotify))
+
+(defwidget spotify_standalone []
+    (button :class "btn-spotify" :onclick "scripts/customtoggle.sh spotify"
+    (label :class "label-spotify" :text "${spotify}" :limit-width 35 :show-truncated true)))
+
+(defwindow spotify_standalone
+    :stacking "fg"
+    :geometry (geometry :x "42.5%"
+                        :y "0%"
+                        :width "15%"
+                        :height "3%")
+    :reserve (struts :side "top" :distance "2.5%")
+(spotify_standalone))
 
 ;;;;;;;;;;;;;;;;;;; POWER MENU ;;;;;;;;;;;;;;;;;;;
 (defwidget poweroptions []
   (box :class "powermenu-container" :orientation "h" :space-evenly "true"
+      (button :class "lock" :onclick "betterlockscreen -l dim" "")
+      (button :class "logout" :onclick "pkill xmonad" "")
+      (button :class "suspend" :onclick "systemctl suspend" "")
+      (button :class "restart" :onclick "reboot" "")
+      (button :class "shutdown" :onclick "shutdown -h now" "")))
+
+(defwidget poweroptions_vertical []
+  (box :class "powermenu-container-vertical" :orientation "v" :space-evenly "false" :spacing 10
       (button :class "lock" :onclick "betterlockscreen -l dim" "")
       (button :class "logout" :onclick "pkill xmonad" "")
       (button :class "suspend" :onclick "systemctl suspend" "")
@@ -98,8 +116,9 @@
 						:y "45%" 
 						:width "30%"
                         :height "10%")
-    (poweroptions)
-)
+    (poweroptions))
+
+
 
 (defpoll xmonad-layout :interval "1s" `scripts/xmonad_layout`)
 
@@ -110,30 +129,6 @@
 
 (defpoll wmclass :interval "1s" `scripts/get_wm_class`)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;; VOLUME ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(defpoll volume :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1")
-
-(defwidget showvol []
-  (box :class "metric" :orientation "h" :space-evenly "false":spacing "8" :tooltip volume
-    (button :onclick "amixer -D pulse set Master 1+ toggle" "")
-    (scale :min 0
-           :max 100
-           :value volume
-           :onchange "amixer -D pulse sset Master {}%"
-    )
-  )
-)
-
-(defwindow showvolume
-    :stacking "fg"
-    :geometry (geometry :x "91.8%"
-                        :y "0.75%" 
-                        :width "5%" 
-                        :height "2.8%")
-(showvol))
-
-
 (defpoll wifi-signal :interval "10s" "nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\*/{if (NR!=1) {print $2}}'")
 
 (defwidget showwifi []
@@ -141,14 +136,12 @@
        :orientation "h"
        :space-evenly "false"
        :active "false"
+       :spacing 3
       (box "")
       (scale :min 0
              :max 100
              :active "false"
-             :value {wifi-signal != "" ? wifi-signal : "0.0"}
-      )
-  )
-)           
+             :value {wifi-signal != "" ? wifi-signal : "0.0"})))
 
 (defpoll ram :interval "3s" "printf $(free -m | grep Mem | awk '{print ($3/$2)*100}')")
 
@@ -196,119 +189,153 @@
 
 (defwindow showsysdata
     :stacking "fg"
-	:geometry (geometry :x "88.5%"
-                        :y "4%")
+	:geometry (geometry :x "3%"
+                        :y "89%")
 (sysdata))
 
 (defpoll upd :interval "10m" "paru -Qu 2>/dev/null | wc -l")
 
 (defwidget applications []
-  (box :orientation "v" :space-evenly "false" :class "app-outer-container"
-    (box :orientation "v" :space-evenly "false" :class "app-inner-container" :vexpand "false" :hexpand "false" :valign "center" :spacing 40
-    (box :orientation "h" :space-evenly "false" :class "app-inner-container-top" :vexpand "false" :hexpand "false" :valign "center" :spacing 24
-      (button :tooltip "Launch Brave" :style "background-image :url('images/brave.svg');" :class "brave" :onclick "scripts/applauncher.sh --brave")
-      (button :tooltip "Launch Terminal" :style "background-image :url('images/kitty.svg');" :class "kitty" :onclick "scripts/applauncher.sh --kitty")
-      (button :tooltip "Launch Thunar" :style "background-image :url('images/files.svg');" :class "thunar" :onclick "scripts/applauncher.sh --files"))
-    (box :orientation "h" :space-evenly "false" :class "app-inner-container-bottom" :vexpand "false" :hexpand "false" :valign "center" :spacing 24
-      (button :tooltip "Launch Spotify" :style "background-image :url('images/spotify.svg');" :class "spotify" :onclick "scripts/applauncher.sh --spotify")
-      (button :tooltip "Launch Discord" :style "background-image :url('images/discord.svg');" :class "discord" :onclick "scripts/applauncher.sh --discord")
-      (button :tooltip "Launch GitHub" :style "background-image :url('images/git.svg');" :class "git" :onclick "scripts/applauncher.sh --git")))))
-
-(defwindow applications
-    :stacking "fg"
-	:geometry (geometry :x "7.2%"
-                        :y "4%"
-                        :height 150)
-(applications))
+    (box :orientation "v" :space-evenly "false" :class "app-container"
+      (button :tooltip "Launch Brave" :style "background-image :url('images/brave.svg');" :onclick "scripts/applauncher.sh --brave")
+      (button :tooltip "Launch Terminal" :style "background-image :url('images/kitty.svg');" :onclick "scripts/applauncher.sh --kitty")
+      (button :tooltip "Launch Thunar" :style "background-image :url('images/files.svg');" :onclick "scripts/applauncher.sh --files")
+      (button :tooltip "Launch Spotify" :style "background-image :url('images/spotify.svg');" :onclick "scripts/spotify_launch.sh &")
+      (button :tooltip "Launch Discord" :style "background-image :url('images/discord.svg');" :onclick "scripts/applauncher.sh --discord")
+      (button :tooltip "Launch GitHub" :style "background-image :url('images/git.svg');" :class "git" :onclick "scripts/applauncher.sh --git")))
 
 
-;; (defpoll btstatus :interval "3s" `scripts/checkbluetoothstatus.sh`)
 (defpoll btdevice :interval "10s" `scripts/checkbluetoothdevice.sh`)
 (defpoll unreadmail :interval "10m" `$HOME/Mail/mail`)
 ;; uncomment this and comment the above to fill in your mail credentials 
 ;; (defpoll unreadmail :interval "10m" `scripts/mail.py`)
 
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;; BAR ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+; applications
+(defvar app_rev false)
+
+; notifications
+(defvar noti_rev false)
+
+;volume
+(defpoll vol_cur :interval "1s" "amixer -D pulse sget Master | grep 'Left:' | awk -F'[][]' '{ print $2 }' | tr -d '%' | head -1")
+(defvar vol_rev false)
+
+;update
+(defvar upd_rev false)
+
+;mail
+(defvar mail_rev false)
+
+;bluetooth
+(defvar bt_rev false)
+
+;time
+(defpoll hour :interval "3600s" "date '+%H'")
+(defpoll min :interval "60s" "date '+%M'")
+
+;sysdata
+(defvar sys_rev false)
+
+;power
+(defvar power_rev false)
 
 (defwidget bar []
-  (box :orientation "h" :class "bar" :space-evenly "true"  :vexpand "false" :hexpand "false" :valign "center"
-    (box :orientation "h" :space-evenly "false" :class "left-of-bar"
-      (box :tooltip "Applications"
-          (button :class "btn-launcher" :onclick "scripts/customtoggle.sh applications" "" ))
-      (box :tooltip "Notifications"
-          (button :class "btn-notifications" :onclick "eww open --toggle notifications" "" ))
-      (box :tooltip "Search Engines"
-          (button :class "btn-search" :onclick "scripts/search.sh &" "" ))
-      (box :tooltip "Random Quote" :space-evenly "false"
-          (button :class "btn-quote" :onclick "scripts/customtoggle.sh showquote" "" ))
-      (box :class "bar-layout" :tooltip "${xmonad-layout}"
-          (button :class "btn-layout"
-      	    (label :class "label-layout" :halign "center" :limit-width 5 :text xmonad-layout)))
-	  (box :class "bar-wmclass" :hexpand "true" :tooltip "${wmclass}"
-          (button :class "btn-wmclass"
-	        (label :class "label-wmclass" :halign "start" :text " ${wmclass}" :limit-width 30 :show-truncated "true" ))))
-    (box :orientation "h" :space-evenly "false" :class "middle-of-bar" :hexpand "true" :vexpand "false" :valign "center" :halign "center"
-      (box :class "bar-spotify"
-          (button :class "btn-spotify" :onclick "scripts/customtoggle.sh spotify" "${spotify}" )))
-    (box :orientation "h" :space-evenly "false" :class "right-of-bar" :hexpand "false" :vexpand "false" :valign "center" :halign "end"
-        (box 
+  (box :orientation "v" :space-evenly "true" :class "bar" :valign "fill" :vexpand "false" :hexpand "false" :halign "center"
+    (box :orientation "v" :space-evenly "false" :class "top-of-bar" :spacing 15 :valign "start"
+      (button :active "false" :class "btn-xmonad" "" )
+      (workspaces)
+      (button :class "btn-layout" 
+         (label :class "label-layout" :limit-width 5 :text xmonad-layout))
+      (box :orientation "v" :space-evenly false :spacing 10
+         (label :class "btn-wmclass" :text "" :limit-width 3 :show-truncated false :angle 90 )
+         (button :class "btn-wmclass" :active "false"
+            (label :class "label-wmclass" :text "${wmclass}" :limit-width 13 :show-truncated false :angle 90 ))))
+    (box :orientation "v" :space-evenly "false" :class "middle-of-bar" :spacing 15 :valign "center"
+      (eventbox :onhover "eww update app_rev=true"
+                :onhoverlost "eww update app_rev=false"
+            (box :space-evenly "false" :orientation "v" :halign "center"
+            (revealer :transition "slidedown"
+                 :reveal app_rev
+                 :duration "500ms"
+            (applications))
+          (button :class "btn-launcher" :active false "")))
+      (button :class "btn-search" :onclick "scripts/search.sh &" "" )
+      (button :class "btn-quote" :onclick "scripts/customtoggle.sh showquote" "" )
+      (button :class "btn-notifications" :onclick "eww open --toggle notifications" "" ))
+    (box :orientation "v" :space-evenly "false" :class "bottom-of-bar" :spacing 15 :valign "end" :vexpand "false" :hexpand "false"
+      (eventbox :onhover "eww update upd_rev=true"
+                :onhoverlost "eww update upd_rev=false"
+            (box :space-evenly "false" :orientation "h" :spacing 2 :halign "center"
+            (revealer :transition "slideleft"
+                 :reveal upd_rev
+                 :duration "500ms"
+            (label :class "label-update" :text "${upd}"))
           (button :class "btn-update" :onclick "scripts/update.sh &" :tooltip "${upd} updates available"
-            (label :halign "center" :text "")))
-        (box 
-          (button :onclick "scripts/update.sh" :tooltip "${upd} updates available"
-            (label :class "label-update" :halign "center" :text "${upd}")))
-        (box 
+            (label :text ""))))
+      (eventbox :onhover "eww update mail_rev=true"
+                :onhoverlost "eww update mail_rev=false"
+            (box :space-evenly "false" :orientation "h" :spacing 2 :halign "center"
+            (revealer :transition "slideleft"
+                 :reveal mail_rev
+                 :duration "500ms"
+            (label :class "label-mail" :text "${unreadmail}"))
           (button :class "btn-mail" :onclick "thunderbird &" :tooltip "${unreadmail} unread mails"
-            (label :halign "center" :text "")))
-        (box 
-          (button :onclick "thunderbird &":tooltip "${unreadmail} unread mails"
-            (label :class "label-mail" :halign "center" :text "${unreadmail}")))
-      (box 
-        (button :class "btn-bluetooth" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
-          (label :class "label-bluetooth" :halign "center" :text "")))
-      (box 
-          (button :class "btn-bluetooth-device" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
-            (label :class "label-bluetooth" :halign "center" :text "${btdevice}" :limit-width 10 :show-truncated false)))
-      (box :class "metric" :orientation "h" :space-evenly "false":spacing "8" :tooltip volume
-          (button :onclick "amixer -D pulse set Master 1+ toggle" "")
-          (scale :min 0
-                 :max 100
-                 :value volume
-                 :onchange "amixer -D pulse sset Master {}%"))
-      (box :class "bar-sysdata" :tooltip "System Resources" 
-          (button :class "btn-sysdata" :onclick "scripts/customtoggle.sh showsysdata" "" ))
-      (box 
-        (button :class "btn-time" :onclick "scripts/customtoggle.sh mycal" "${time}"))
-      (box 
-        (button :class "btn-power" :onclick "scripts/customtoggle.sh powermenu" "" ))
-    )))
-
+            (label :halign "center" :text ""))))
+      (eventbox :onhover "eww update bt_rev=true"
+                :onhoverlost "eww update bt_rev=false"
+            (box :space-evenly "false" :orientation "v" :spacing 2
+            (revealer :transition "slideup"
+                 :reveal bt_rev
+                 :duration "500ms"
+            (label :halign "center" :valign "center" :class "label-bluetooth" :text "${btdevice}" :show-truncated false :angle 90))
+            (button :class "btn-bluetooth" :onclick "scripts/bluetooth.sh" :tooltip "${btdevice}"
+              (label :halign "center" :class "label-bluetooth" :text "")
+            )))
+      (eventbox :onhover "eww update vol_rev=true"
+                :onhoverlost "eww update vol_rev=false"
+          (box :space-evenly "false" :orientation "v" :spacing 2  :class "volume"
+          (revealer :transition "slideup"
+               :reveal vol_rev
+               :duration "500ms"
+          (scale :class "volbar"
+               :value vol_cur
+               :orientation "v"
+               :flipped "true"
+               :tooltip "${vol_cur}%"
+               :max 100
+               :min 0
+               :onchange "amixer -D pulse sset Master {}%" ))
+          (button :class "btn-volume" :onclick "amixer -D pulse set Master 1+ toggle" "")))
+      (eventbox :onhover "eww update sys_rev=true"
+                :onhoverlost "eww update sys_rev=false"
+          (box :space-evenly "false" :orientation "v" :spacing 2
+          (revealer :transition "slideup"
+               :reveal sys_rev
+               :duration "500ms"
+          (sysdata))
+      (button :class "btn-sysdata" :onclick "scripts/customtoggle.sh showsysdata" "" )))
+      (box	:orientation "v" :class "btn-time" 
+            (button	:onclick "scripts/customtoggle.sh mycal" :class "btn-time-hour" hour)
+            (button	:onclick "scripts/customtoggle.sh mycal" :class "btn-time-min" min))
+      (eventbox :onhover "eww update power_rev=true"
+                :onhoverlost "eww update power_rev=false"
+          (box :space-evenly "false" :orientation "v" :spacing 2
+          (revealer :transition "slideup"
+               :reveal power_rev
+               :duration "500ms"
+          (poweroptions_vertical))
+      (button :class "btn-power" :onclick "scripts/customtoggle.sh powermenu" ""))))))
 
 (defwindow bar
-    :stacking "fg"
-    :windowtype "dock"
-	:geometry (geometry :x "10%"
-                        :y "0.75%"
-                        :width "88.5%"
-                        :height "2.2%")
-    :reserve (struts :side "top" :distance "3%")
+	:geometry (geometry :x "0.3%"
+                        :y "1.2%"
+                        :height "97.6%")
+    :reserve (struts :side "left" :distance "1.3%")
 (bar))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;; NOTIFICAITONS ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defwidget mynotifications []
-  (box :class "bar-notifications" :space-evenly "false"
-     (button :class "btn-notifications" :onclick "scripts/customtoggle.sh notifications" "" )
-     (label  :class "btn-notifications-label" :text "NOTIFICATIONS")))
-
-(defwindow mynotifications
-    :stacking "fg"
-	:geometry (geometry :x "1.35%"
-                        :y "0.75%"
-                        :height "2.8%")
-(mynotifications))
-
-;;;;; custom rewrite of github.com/syndrizzle/hotfiles ;;;;;
+; custom rewrite of github.com/syndrizzle/hotfiles
 (defpoll notifications_stats :interval "5s" "scripts/logger.py stats")
 (deflisten notications_scroll_pane "scripts/logger.py subscribe")
 
@@ -340,6 +367,6 @@
 (defwindow notifications :stacking "fg" 
   :stacking "fg"
   :wm-ignore true
-  :geometry (geometry :x "2%" :width "18%" :height "80%" :anchor "left center")
+  :geometry (geometry :x "3%" :width "18%" :height "50%" :anchor "left center")
   (notifications_layout))
 

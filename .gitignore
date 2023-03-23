@@ -4,7 +4,10 @@ xmonad/.config/xmonad/lib/Custom/MyMacAddresses.hs
 nvim/.config/nvim/lazy-lock.json
 spicetify/.config/spicetify/Backup
 spicetify/.config/spicetify/Extracted
+spicetify/.config/spicetify/CustomApps
+spicetify/.config/spicetify/Extensions
 lazygit/.config/lazygit/state.yml
 eww/.config/eww/\$XDG_CACHE_HOME/
 eww/.config/eww/scripts/__pycache__
+polybar/.config/polybar
 video/

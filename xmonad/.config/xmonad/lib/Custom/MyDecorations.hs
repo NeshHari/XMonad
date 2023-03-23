@@ -1,6 +1,6 @@
 module Custom.MyDecorations where
 
-import Custom.MyKanagawa
+import Custom.MyCatppuccin
 import XMonad (xK_Escape)
 import XMonad qualified
 import XMonad.Actions.EasyMotion
@@ -12,21 +12,21 @@ myBorderWidth :: XMonad.Dimension
 myBorderWidth = 2
 
 myNormalBorderColor :: String
-myNormalBorderColor = sumiInk0
+myNormalBorderColor = catCrust
 
 myFocusedBorderColor :: String
-myFocusedBorderColor = crystalBlue
+myFocusedBorderColor = catText
 
 myPromptConfig :: XPConfig
 myPromptConfig =
   def
-    { bgColor = sumiInk0,
-      fgColor = oldWhite,
-      bgHLight = oldWhite,
-      fgHLight = sumiInk0,
+    { bgColor = catCrust,
+      fgColor = catText,
+      bgHLight = catText,
+      fgHLight = catCrust,
       historySize = 0,
       position = Top,
-      borderColor = sumiInk0,
+      borderColor = catCrust,
       promptBorderWidth = 0,
       defaultText = "",
       alwaysHighlight = True,
@@ -40,34 +40,34 @@ myShowWNameConfig :: SWNConfig
 myShowWNameConfig =
   def
     { swn_font = "xft:Vanilla Caramel:size=60",
-      swn_color = oldWhite,
-      swn_bgcolor = sumiInk0,
+      swn_color = catText,
+      swn_bgcolor = catCrust,
       swn_fade = 0.8
     }
 
 myTabConfig :: Theme
 myTabConfig =
   def
-    { activeColor = oldWhite,
-      inactiveColor = sumiInk0,
-      urgentColor = peachRed,
-      activeBorderColor = sumiInk0,
-      inactiveBorderColor = sumiInk0,
-      urgentBorderColor = peachRed,
-      activeTextColor = sumiInk0,
-      inactiveTextColor = roninYellow,
-      urgentTextColor = sumiInk0,
+    { activeColor = catText,
+      inactiveColor = catCrust,
+      urgentColor = catRed,
+      activeBorderColor = catCrust,
+      inactiveBorderColor = catCrust,
+      urgentBorderColor = catRed,
+      activeTextColor = catCrust,
+      inactiveTextColor = catFlamingo,
+      urgentTextColor = catCrust,
       fontName = "xft:FiraCode Nerd Font:size=12"
     }
 
 emConf :: EasyMotionConfig
 emConf =
   def
-    { txtCol = oldWhite,
-      bgCol = sumiInk0,
-      borderCol = sumiInk0,
+    { txtCol = catCrust,
+      bgCol = catText,
+      borderCol = catText,
       cancelKey = xK_Escape,
-      emFont = "xft: FiraCode Nerd Font-60",
+      emFont = "xft:Vanilla Caramel:size=60",
       overlayF = textSize,
       borderPx = 30
     }

@@ -6,49 +6,95 @@ window:
 
 font:
   normal:
-    family: "FiraCode Nerd Font"
+    family: "CaskaydiaCove Nerd Font"
     style: Regular
   bold:
-    family: "FiraCode Nerd Font"
+    family: "CaskaydiaCove Nerd Font"
     style: Bold
   italic:
-    family: "FiraCode Nerd Font"
+    family: "CaskaydiaCove Nerd Font"
     style: Italic
   bold_italic:
-    family: "FiraCode Nerd Font"
+    family: "CaskaydiaCove Nerd Font"
     style: Bold Italic
   size: 9.5
 
-# Kanagawa Alacritty Colors
+# Catppuccin Mocha (crusted)
 colors:
   primary:
-    background: "0x1f1f28"
-    foreground: "0xdcd7ba"
+    background: "#11111b" # base
+    foreground: "#CDD6F4" # text
+    # Bright and dim foreground colors
+    dim_foreground: "#CDD6F4" # text
+    bright_foreground: "#CDD6F4" # text
 
-  normal:
-    black: "0x090618"
-    red: "0xc34043"
-    green: "0x76946a"
-    yellow: "0xc0a36e"
-    blue: "0x7e9cd8"
-    magenta: "0x957fb8"
-    cyan: "0x6a9589"
-    white: "0xc8c093"
+  # Cursor colors
+  cursor:
+    text: "#11111b" # base
+    cursor: "#F5E0DC" # rosewater
+  vi_mode_cursor:
+    text: "#11111b" # base
+    cursor: "#B4BEFE" # lavender
 
-  bright:
-    black: "0x727169"
-    red: "0xe82424"
-    green: "0x98bb6c"
-    yellow: "0xe6c384"
-    blue: "0x7fb4ca"
-    magenta: "0x938aa9"
-    cyan: "0x7aa89f"
-    white: "0xdcd7ba"
+  # Search colors
+  search:
+    matches:
+      foreground: "#11111b" # base
+      background: "#A6ADC8" # subtext0
+    focused_match:
+      foreground: "#11111b" # base
+      background: "#A6E3A1" # green
+    footer_bar:
+      foreground: "#11111b" # base
+      background: "#A6ADC8" # subtext0
 
+  # Keyboard regex hints
+  hints:
+    start:
+      foreground: "#11111b" # base
+      background: "#F9E2AF" # yellow
+    end:
+      foreground: "#11111b" # base
+      background: "#A6ADC8" # subtext0
+
+  # Selection colors
   selection:
-    background: "0x2d4f67"
-    foreground: "0xc8c093"
+    text: "#11111b" # base
+    background: "#F5E0DC" # rosewater
+
+  # Normal colors
+  normal:
+    black: "#45475A" # surface1
+    red: "#F38BA8" # red
+    green: "#A6E3A1" # green
+    yellow: "#F9E2AF" # yellow
+    blue: "#89B4FA" # blue
+    magenta: "#F5C2E7" # pink
+    cyan: "#94E2D5" # teal
+    white: "#BAC2DE" # subtext1
+
+  # Bright colors
+  bright:
+    black: "#585B70" # surface2
+    red: "#F38BA8" # red
+    green: "#A6E3A1" # green
+    yellow: "#F9E2AF" # yellow
+    blue: "#89B4FA" # blue
+    magenta: "#F5C2E7" # pink
+    cyan: "#94E2D5" # teal
+    white: "#A6ADC8" # subtext0
+
+  # Dim colors
+  dim:
+    black: "#45475A" # surface1
+    red: "#F38BA8" # red
+    green: "#A6E3A1" # green
+    yellow: "#F9E2AF" # yellow
+    blue: "#89B4FA" # blue
+    magenta: "#F5C2E7" # pink
+    cyan: "#94E2D5" # teal
+    white: "#BAC2DE" # subtext1
 
   indexed_colors:
-    - { index: 16, color: "0xffa066" }
-    - { index: 17, color: "0xff5d62" }
+    - { index: 16, color: "#FAB387" }
+    - { index: 17, color: "#F5E0DC" }
