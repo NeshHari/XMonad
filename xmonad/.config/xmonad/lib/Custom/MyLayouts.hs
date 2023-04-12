@@ -73,7 +73,8 @@ full = renamed [XLR.Replace "Full"] $ noBorders Full
 
 sf = renamed [XLR.Replace "Float"] $ noBorders simplestFloat
 
-myLayout = boringWindows (ifWider 1080 (tall ||| bsp) (column ||| accordion) ||| sf ||| full)
+-- myLayout = boringWindows (ifWider 1080 (tall ||| bsp) (column ||| accordion) ||| sf ||| full)
+myLayout = boringWindows (ifWider 1080 tall (column ||| accordion) ||| sf ||| full)
 
 myLayoutHook =
   showWName' myShowWNameConfig $
