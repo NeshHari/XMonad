@@ -4,6 +4,10 @@
 (defwidget workspaces []
     (literal :content workspace))
 
+(deflisten classname "scripts/class_names.sh")
+(defwidget classnames []
+    (literal :content classname))
+
 ;;;;;;;;;;;;;;;;;;;;;;;; QUOTES ;;;;;;;;;;;;;;;;;;;;;;;;
 (defpoll quote :interval "24h" "scripts/quotes --quote-and-quotee")
 
@@ -127,8 +131,6 @@
 		(label :halign "center" :limit-width 5 :text xmonad-layout)))
 
 
-(defpoll wmclass :interval "1s" `scripts/get_wm_class`)
-
 (defpoll wifi-signal :interval "10s" "nmcli -f IN-USE,SIGNAL,SSID device wifi | awk '/^\*/{if (NR!=1) {print $2}}'")
 
 (defwidget showwifi []
@@ -247,10 +249,7 @@
       (workspaces)
       (button :class "btn-layout" 
          (label :class "label-layout" :limit-width 5 :text xmonad-layout))
-      (box :orientation "v" :space-evenly false :spacing 10
-         (label :class "btn-wmclass" :text "" :limit-width 3 :show-truncated false :angle 90 )
-         (button :class "btn-wmclass" :active "false"
-            (label :class "label-wmclass" :text "${wmclass}" :limit-width 13 :show-truncated false :angle 90 ))))
+      (classnames))
     (box :orientation "v" :space-evenly "false" :class "middle-of-bar" :spacing 15 :valign "center"
       (eventbox :onhover "eww update app_rev=true"
                 :onhoverlost "eww update app_rev=false"
@@ -261,7 +260,10 @@
             (applications))
           (button :class "btn-launcher" :active false "")))
       (button :class "btn-search" :onclick "scripts/search.sh &" "" )
-      (button :class "btn-quote" :onclick "scripts/customtoggle.sh showquote" "" )
+      (eventbox :onhover "eww open --toggle showquote"
+                :onhoverlost "eww open --toggle showquote"
+            (box :space-evenly "false" :orientation "v" :halign "center"
+            (button :class "btn-quote" ""))) 
       (button :class "btn-notifications" :onclick "eww open --toggle notifications" "" ))
     (box :orientation "v" :space-evenly "false" :class "bottom-of-bar" :spacing 15 :valign "end" :vexpand "false" :hexpand "false"
       (eventbox :onhover "eww update upd_rev=true"
