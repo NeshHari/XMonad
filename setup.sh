@@ -78,7 +78,7 @@ $aur_helper -Syu ${packages[@]}
 # Clone dotfiles and stow
 echo "Cloning and stowing dotfiles..."
 cd $HOME
-git clone https://github.com/NeshHari/XMonad.git
+git clone -b kanagawa https://github.com/NeshHari/XMonad.git
 mv XMonad starter_kit_dots
 cd starter_kit_dots
 rm README.md setup.sh
