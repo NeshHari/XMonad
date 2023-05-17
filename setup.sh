@@ -50,7 +50,6 @@ packages=(
 	neovim
 	nodejs
 	npm
-	polybar
 	picom-pijulius-git
 	playerctl
 	python-pip
@@ -78,7 +77,7 @@ $aur_helper -Syu ${packages[@]}
 # Clone dotfiles and stow
 echo "Cloning and stowing dotfiles..."
 cd $HOME
-git clone https://github.com/NeshHari/XMonad.git
+git clone -b vertical https://github.com/NeshHari/XMonad.git
 mv XMonad starter_kit_dots
 cd starter_kit_dots
 rm README.md setup.sh
